@@ -21,7 +21,7 @@ describe('Home', () => {
     expect(screen.getByText('Search our database for Bay Area loans')).toBeInTheDocument();
   });
 
-  it('renders a select element with an empty string value and calls onChange if change event fired',  () => {  
+  it('displays a business type dropdown that changes values on different options',  () => {  
     const businessTypeSelect = screen.getByTestId('business-type-select')
     expect(businessTypeSelect).toHaveValue('')
     
