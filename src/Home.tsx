@@ -13,14 +13,22 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Section = styled.div`
-  flex: 1 1 auto;
+const ImageSection = styled.div`
+  flex: 1 1 0;
 `;
 
-const StyledFormControl = styled(FormControl)`
+const SearchSection = styled.div`
+  flex: 1 1 0;
   display: flex;
   flex-direction: column;
-  width: 40%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const SearchFormFields = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 328px;
 `;
 
 const PlaceholderIllustration = styled(CoolIllustration)`
@@ -46,12 +54,13 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <Section><PlaceholderIllustration/></Section>
-      <Section>
+      <ImageSection><PlaceholderIllustration/></ImageSection>
+      <SearchSection>
         <h1>Find Loans & Grants</h1>
         <p>Search our database for Bay Area loans</p>
 
-        <StyledFormControl variant="outlined">
+        <SearchFormFields>
+          <FormControl variant="outlined">
           <InputLabel htmlFor='business-type-select'>I am a...</InputLabel>
           <Select
             native
@@ -63,16 +72,17 @@ const Home: React.FC = () => {
               id: 'business-type-select',
               'data-testid': 'business-type-select'
             }}
+            fullWidth
           >
             <option aria-label="None" value='' />
             <option value='small-business'>Small business</option>
             <option value='non-profit'>Non-profit</option>
           </Select>
+        </FormControl>
+        </SearchFormFields>
 
-          <Button variant="contained" onClick={goToResults}>Search</Button>
-        </StyledFormControl>
-
-      </Section>
+        <Button variant="contained" onClick={goToResults}>Search</Button>
+      </SearchSection>
     </Container>
   );
 }
