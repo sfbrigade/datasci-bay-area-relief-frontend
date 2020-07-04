@@ -7,6 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import search from "./api";
+import {BusinessType, County} from './types';
 
 const Container = styled.div`
   display: flex;
@@ -40,16 +41,15 @@ const PlaceholderIllustration = styled(CoolIllustration)`
 `;
 
 const Home: React.FC = () => {
-  const [ businessType, setBusinessType ] = useState<string>('');
+  const [ businessType, setBusinessType ] = useState<BusinessType | ''>('');
+  const [ county, setCounty ] = useState<County | ''>('');
   const history = useHistory();
 
-  const handleBusinessTypeChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setBusinessType(event.target.value as string);
-  };
-
   const goToResults = () => {
-    search(businessType);
-    history.push('/results');
+    if(businessType !== '' && county !== '') {
+      search({ businessType, county });
+      history.push('/results');
+    }
   };
 
   return (
@@ -61,24 +61,42 @@ const Home: React.FC = () => {
 
         <SearchFormFields>
           <FormControl variant="outlined">
-          <InputLabel htmlFor='business-type-select'>I am a...</InputLabel>
-          <Select
-            native
-            value={businessType}
-            onChange={handleBusinessTypeChange}
-            name='business-type'
-            inputProps={{
-              name: 'business-type',
-              id: 'business-type-select',
-              'data-testid': 'business-type-select'
-            }}
-            fullWidth
-          >
-            <option aria-label="None" value='' />
-            <option value='small-business'>Small business</option>
-            <option value='non-profit'>Non-profit</option>
-          </Select>
-        </FormControl>
+            <InputLabel htmlFor='business-type-select'>I am a...</InputLabel>
+            <Select
+              native
+              value={businessType}
+              onChange={event => setBusinessType(event.target.value as BusinessType)}
+              inputProps={{
+                name: 'business-type',
+                id: 'business-type-select',
+              }}
+            >
+              <option aria-label="None" value='' />
+              <option value={BusinessType.SmallBusiness}>Small business</option>
+              <option value={BusinessType.NonProfit}>Non-profit</option>
+            </Select>
+          </FormControl>
+          <FormControl variant="outlined">
+            <InputLabel htmlFor='county-select'>County</InputLabel>
+            <Select
+              native
+              value={county}
+              onChange={event => setCounty(event.target.value as County)}
+              inputProps={{
+                name: 'county',
+                id: 'county-select'
+              }}
+            >
+              <option aria-label="None" value='' />
+              <option value={County.SanFrancisco}>San Francisco</option>
+              <option value={County.Alameda}>Alameda</option>
+              <option value={County.SanMateo}>San Mateo</option>
+              <option value={County.ContraCosta}>Conta Costa</option>
+              <option value={County.SantaClara}>Santa Clara</option>
+              <option value={County.Any}>Any</option>
+            </Select>
+
+          </FormControl>
         </SearchFormFields>
 
         <Button variant="contained" onClick={goToResults}>Search</Button>

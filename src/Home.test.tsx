@@ -4,6 +4,8 @@ import Home from "./Home";
 import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
 import search from "./api";
+import {BusinessType, County} from './types';
+
 jest.mock("./api");
 
 describe('Home', () => {
@@ -24,29 +26,37 @@ describe('Home', () => {
   });
 
   it('displays a business type dropdown that changes values on different options', () => {
-    const businessTypeSelect = screen.getByTestId('business-type-select');
+    const businessTypeSelect = screen.getByLabelText('I am a...');
     expect(businessTypeSelect).toHaveValue('');
 
-    fireEvent.change(businessTypeSelect, {target: {value: 'small-business'}});
-    expect(businessTypeSelect).toHaveValue('small-business')
+    fireEvent.change(businessTypeSelect, {target: {value: BusinessType.SmallBusiness}});
+    expect(businessTypeSelect).toHaveValue(BusinessType.SmallBusiness)
+  });
 
+  it('has a dropdown for county that changes value when the user selects a different option', () => {
+    const countySelect = screen.getByLabelText('County');
+    expect(countySelect).toHaveValue('')
+
+    fireEvent.change(countySelect, {target: {value: County.Alameda }})
+    expect(countySelect).toHaveValue(County.Alameda)
   });
 
   describe('Search Button', () => {
-    it('should have a Search button that takes the user to the results page', () => {
+    it('searches with the filter options the user has selected', () => {
       const searchButton = screen.getByText("Search");
+      const businessTypeSelect = screen.getByLabelText('I am a...');
+      const countySelect = screen.getByLabelText('County');
 
+
+      fireEvent.change(businessTypeSelect, {target: {value: BusinessType.SmallBusiness}});
+      fireEvent.change(countySelect, {target: {value: County.Alameda }})
       fireEvent.click(searchButton);
+
+      expect(search).toHaveBeenCalledWith({
+        businessType: BusinessType.SmallBusiness,
+        county: County.Alameda
+      });
       expect(history.push).toHaveBeenCalledWith("/results");
-    });
-
-    it('searches with the form data', () => {
-      const searchButton = screen.getByText("Search");
-      const businessTypeSelect = screen.getByTestId('business-type-select');
-
-      fireEvent.change(businessTypeSelect, {target: {value: 'small-business'}});
-      fireEvent.click(searchButton);
-      expect(search).toHaveBeenCalledWith('small-business');
     });
   });
 });
