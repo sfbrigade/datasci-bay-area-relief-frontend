@@ -30,15 +30,15 @@ describe('Home', () => {
     expect(businessTypeSelect).toHaveValue('');
 
     fireEvent.change(businessTypeSelect, {target: {value: BusinessType.SmallBusiness}});
-    expect(businessTypeSelect).toHaveValue(BusinessType.SmallBusiness)
+    expect(businessTypeSelect).toHaveValue(BusinessType.SmallBusiness);
   });
 
   it('has a dropdown for county that changes value when the user selects a different option', () => {
     const countySelect = screen.getByLabelText('County');
-    expect(countySelect).toHaveValue('')
+    expect(countySelect).toHaveValue('');
 
-    fireEvent.change(countySelect, {target: {value: County.Alameda }})
-    expect(countySelect).toHaveValue(County.Alameda)
+    fireEvent.change(countySelect, {target: {value: County.Alameda }});
+    expect(countySelect).toHaveValue(County.Alameda);
   });
 
   describe('Search Button', () => {
@@ -49,7 +49,7 @@ describe('Home', () => {
 
 
       fireEvent.change(businessTypeSelect, {target: {value: BusinessType.SmallBusiness}});
-      fireEvent.change(countySelect, {target: {value: County.Alameda }})
+      fireEvent.change(countySelect, {target: {value: County.Alameda }});
       fireEvent.click(searchButton);
 
       expect(search).toHaveBeenCalledWith({
