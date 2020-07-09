@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as CoolIllustration } from "./assets/CoolIllustration.svg"
+import { ReactComponent as CoolIllustration } from "./assets/CoolIllustration.svg";
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -103,6 +103,6 @@ const Home: React.FC = () => {
       </SearchSection>
     </Container>
   );
-}
+};
 
 export default Home;

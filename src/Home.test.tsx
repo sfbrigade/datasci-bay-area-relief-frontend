@@ -17,7 +17,7 @@ describe('Home', () => {
       <Router history={history}>
         <Home/>
       </Router>
-    )
+    );
   });
 
   it('renders a homepage title with description', () => {
