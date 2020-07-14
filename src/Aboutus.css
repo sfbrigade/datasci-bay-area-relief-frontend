@@ -1,0 +1,52 @@
+.AboutUsContainer{
+    height: 1024px;
+    
+    
+}
+
+.AboutHeader{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-family: Bree Serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    padding:0px;
+    padding-bottom: 23px;
+    margin: 0px;
+
+}
+
+.AboutP{
+    position: static;
+    width: 433px;
+    height: 168px;
+    left: 0px;
+    top: 0px;
+
+/* Body 1 / Source Sans Pro */
+
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+/* or 156% */
+
+    letter-spacing: 0.5px;
+    color: #000000;
+
+
+/* Inside Auto Layout */
+
+   flex: none;
+   order: 0;
+   align-self: center;
+   text-align: justify;
+   padding: 0px;
+   margin: 0px;
+   padding-bottom: 23px;
+
+}
+
