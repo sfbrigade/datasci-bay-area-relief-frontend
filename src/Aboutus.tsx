@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as About } from "./assets/About.svg"
+import { ReactComponent as About } from "./assets/About.svg";
 
 import "./Aboutus.css";
 
@@ -79,6 +78,6 @@ const Aboutus: React.FC = () => {
 
     
   );
-}
+};
 
 export default Aboutus;
