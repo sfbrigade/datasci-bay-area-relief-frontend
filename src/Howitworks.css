@@ -1,0 +1,77 @@
+.HowItWorksContainer{
+    height: 1024px;
+}
+
+.HowitWorksHeader{
+
+/* H3 / Source Sans Pro */
+
+    font-family: Bree Serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 65px;
+/* identical to box height */
+
+/* Black — High Emphasis */
+
+    color: rgba(0, 0, 0, 0.87);
+    mix-blend-mode: normal;
+    margin-top: 200px;
+
+}
+
+.HowitWorksH5{
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 30px;
+    color: #000000;
+
+/* Inside Auto Layout */
+    align-self: center;
+    margin: 10px 10px;
+    padding: 10px 0px;
+    text-align: left;
+
+}
+
+.HowitWorksP{
+    align-self: center;
+    margin: 0px 10px;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+    color: #000000;
+    text-align: left;
+
+}
+
+.ImgLeft{
+    width: 272.26px;
+    height: 253px;
+    padding: 0px;
+  
+  
+}
+
+.ImgMiddle{
+    width: 272.26px;
+    height: 253px;
+    padding: 0px;
+   
+  
+}
+
+.ImgRight{
+    width: 252px;
+    height: 253px;
+    padding: 0px;
+  
+  
+}
+
