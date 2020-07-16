@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Home";
 import Aboutus from './Aboutus';
 import Results from "./components/Results";
-import Howitworks from './Howitworks';
+import HowItWorks from './HowItWorks';
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/Aboutus" component={Aboutus}/>
-          <Route exact path="/Howitworks" component={Howitworks}/>
+          <Route exact path="/Howitworks" component={HowItWorks}/>
 
           <Route exact path="/results" component={Results} />
         </Switch>

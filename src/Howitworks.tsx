@@ -4,7 +4,7 @@ import ImgLeft from "./assets/ImgLeft.svg";
 import ImgMiddle from "./assets/ImgMiddle.svg";
 import ImgRight from "./assets/ImgRight.svg";
 
-import "./Howitworks.css";
+import "./HowItWorks.css";
 
 
 const Container = styled.div`
@@ -33,7 +33,7 @@ const RightSection = styled.div`
 `;
 
 
-const Howitworks: React.FC = () => {
+const HowItWorks: React.FC = () => {
   
   return (
 
@@ -72,4 +72,4 @@ const Howitworks: React.FC = () => {
   );
 };
 
-export default Howitworks;
+export default HowItWorks;
