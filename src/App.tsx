@@ -6,14 +6,15 @@ import Aboutus from './Aboutus';
 import Results from "./components/Results";
 import HowItWorks from './HowItWorks';
 
+
 const App = () => {
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/Aboutus" component={Aboutus}/>
-          <Route exact path="/HowItWorks" component={HowItWorks}/>
+          <Route exact path="/Aboutus.tsx" component={Aboutus}/>
+          <Route exact path="/HowItWorks.tsx" component={HowItWorks}/>
 
           <Route exact path="/results" component={Results} />
         </Switch>
