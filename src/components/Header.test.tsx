@@ -6,7 +6,7 @@ import {createMemoryHistory} from "history";
 import {act} from "react-dom/test-utils";
 
 describe("Header", () => {
-  let history = createMemoryHistory();
+  const history = createMemoryHistory();
 
   it("renders a logo", () => {
     const {getByRole} = render(
