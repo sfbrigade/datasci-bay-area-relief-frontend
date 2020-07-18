@@ -15,7 +15,10 @@ const Results: React.FC = () => {
 
   const renderResults = () => {
     if (results.length === 0) {
-      return <NoResults />;
+      return <>
+        <NoResults />
+        <p>Try clearing some filters! There are still {results.length} loans out there.</p>
+      </>;
     }
     return (
       <ul>

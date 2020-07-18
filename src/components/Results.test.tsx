@@ -8,7 +8,7 @@ import * as api from "../api/axiosApi";
 
 describe("Results", () => {
   const history = createMemoryHistory();
-  it("renders a no results image", async () => {
+  it("renders a no results image and message", async () => {
     jest.spyOn(api, 'getResults').mockResolvedValueOnce([]);
     const { container } = render(
       <Router history={history}>
@@ -17,6 +17,7 @@ describe("Results", () => {
     );
     await idleForIO();
     expect(container.querySelector("svg")?.textContent).toBe("NoResults.svg");
+    expect(screen.getByText(/Try clearing some filters/))
   });
 
   it('fetches all results on load', async () => {
