@@ -16,3 +16,7 @@ export interface FilterOptions {
     businessType: BusinessType;
     county: County;
 }
+
+export interface Result {
+    name: string
+}
