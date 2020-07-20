@@ -1,5 +1,7 @@
-import axios from 'axios';
+/* eslint @typescript-eslint/camelcase: 0 */
+import axios from "axios";
 import { getResults } from "./axiosApi";
+import { Result } from "../types";
 
 jest.mock("axios");
 
@@ -49,10 +51,12 @@ describe("getResults", () => {
         ]
       }
     };
-    (axios.get as jest.Mock).mockImplementationOnce(() => Promise.resolve(response));
+    (axios.get as jest.Mock).mockImplementationOnce(() =>
+      Promise.resolve(response)
+    );
 
-    const actualResponse: any = await getResults();
+    const actualResponse: Result[] = await getResults();
 
-    await expect(actualResponse).toEqual(response);
+    await expect(actualResponse).toEqual(response.data.json_list);
   });
 });

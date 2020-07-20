@@ -8,7 +8,6 @@ const Results: React.FC = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     getResults().then(response => {
-      console.log("response: ", response);
       setResults(response);
       setLoading(false);
     });
@@ -16,7 +15,10 @@ const Results: React.FC = () => {
 
   const renderResults = () => {
     if (results.length === 0) {
-      return <NoResults />;
+      return <>
+        <NoResults />
+        <p>Try clearing some filters! There are still {results.length} loans out there.</p>
+      </>;
     }
     return (
       <ul>
