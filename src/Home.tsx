@@ -8,6 +8,10 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import search from "./api";
 import {BusinessType, County} from './types';
+import AboutUs from './AboutUs';
+import HowItWorks from './HowItWorks';
+
+
 
 const Container = styled.div`
   display: flex;
@@ -53,6 +57,9 @@ const Home: React.FC = () => {
   };
 
   return (
+    <div>
+
+    
     <Container>
       <ImageSection><PlaceholderIllustration/></ImageSection>
       <SearchSection>
@@ -102,7 +109,15 @@ const Home: React.FC = () => {
         <Button variant="contained" onClick={goToResults}>Search</Button>
       </SearchSection>
     </Container>
+
+<AboutUs>About us</AboutUs>
+<HowItWorks></HowItWorks>
+</div>
   );
+  
+      
+
 };
+
 
 export default Home;
