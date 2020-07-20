@@ -17,7 +17,7 @@ describe("Results", () => {
     );
     await idleForIO();
     expect(container.querySelector("svg")?.textContent).toBe("NoResults.svg");
-    expect(screen.getByText(/Try clearing some filters/))
+    expect(screen.getByText(/Try clearing some filters/));
   });
 
   it('fetches all results on load', async () => {
