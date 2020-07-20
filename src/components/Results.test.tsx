@@ -1,21 +1,21 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Results from "./Results";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import { idleForIO } from "../testUtils";
-import { getResults } from "../api/axiosApi";
 import * as api from "../api/axiosApi";
 
 describe("Results", () => {
   const history = createMemoryHistory();
-  it("renders a no results image", () => {
+  it("renders a no results image", async () => {
     jest.spyOn(api, 'getResults').mockResolvedValueOnce([]);
     const { container } = render(
       <Router history={history}>
         <Results />
       </Router>
     );
+    await idleForIO();
     expect(container.querySelector("svg")?.textContent).toBe("NoResults.svg");
   });
 
@@ -30,7 +30,7 @@ describe("Results", () => {
     );
     await idleForIO();
     expect(container.querySelector("svg")?.textContent).toBeUndefined();
-    expect(screen.getByText('result 1'))
-    expect(screen.getByText('result 2'))
+    expect(screen.getByText('result 1'));
+    expect(screen.getByText('result 2'));
   });
 });

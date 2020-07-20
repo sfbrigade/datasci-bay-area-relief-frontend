@@ -18,5 +18,5 @@ export interface FilterOptions {
 }
 
 export interface Result {
-    name: string
+    name: string;
 }

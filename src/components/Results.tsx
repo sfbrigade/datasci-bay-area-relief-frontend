@@ -8,7 +8,6 @@ const Results: React.FC = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     getResults().then(response => {
-      console.log("response: ", response);
       setResults(response);
       setLoading(false);
     });
