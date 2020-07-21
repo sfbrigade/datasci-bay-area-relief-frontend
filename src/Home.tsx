@@ -57,9 +57,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div>
 
-    
     <Container>
       <ImageSection><PlaceholderIllustration/></ImageSection>
       <SearchSection>
@@ -110,13 +108,7 @@ const Home: React.FC = () => {
       </SearchSection>
     </Container>
 
-<AboutUs>About us</AboutUs>
-<HowItWorks></HowItWorks>
-</div>
   );
-  
-      
-
 };
 
 

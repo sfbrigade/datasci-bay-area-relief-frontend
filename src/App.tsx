@@ -5,6 +5,7 @@ import Home from "./Home";
 import AboutUs from "./AboutUs";
 import Results from "./components/Results";
 import HowItWorks from './HowItWorks';
+import ThankYou from './ThankYou';
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/aboutus" component={AboutUs}/>
           <Route exact path="/howitworks" component={HowItWorks} />
+          <Route exact path="/thankyou" component={ThankYou} />
           <Route exact path="/results" component={Results} />
         </Switch>
       </Router>
