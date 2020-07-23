@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import  ImgLeft from "./assets/ImgLeft.svg";
-import ImgMiddle from "./assets/ImgMiddle.svg";
-import ImgRight from "./assets/ImgRight.svg";
+import  ImgLeft from "../../assets/ImgLeft.svg";
+import ImgMiddle from "../../assets/ImgMiddle.svg";
+import ImgRight from "../../assets/ImgRight.svg";
 
 
 
@@ -84,17 +84,17 @@ const RightImg = styled.img`
 
 
 const HowItWorks: React.FC = () => {
-  
+
   return (
 
     <div className="HowItWorksContainer">
-    
 
-       
-        
+
+
+
     <HowItWorksHeader>How it works</HowItWorksHeader>
         <Container>
-       
+
 
         <LeftSection><LeftImg  alt="ImgLeft" className="ImgLeft" src={ImgLeft}  />
         <HowItWorksH5>We scrape the internet</HowItWorksH5>
@@ -105,7 +105,7 @@ const HowItWorks: React.FC = () => {
        <HowItWorksH5>Search our database</HowItWorksH5>
        <HowItWorksP>Here you can filter by grant qualifications. Once you find a loan or grant, you can apply through the original website.</HowItWorksP>
        </MiddleSection>
-     
+
 
 
        <RightSection><RightImg alt="ImgRight" className="ImgRight" src={ImgRight} />
@@ -119,7 +119,7 @@ const HowItWorks: React.FC = () => {
 
     </div>
 
-    
+
   );
 };
 

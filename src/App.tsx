@@ -2,9 +2,9 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Home";
-import AboutUs from "./AboutUs";
-import Results from "./components/Results";
-import HowItWorks from './HowItWorks';
+import AboutUs from "./components/about/AboutUs";
+import Results from "./components/results/Results";
+import HowItWorks from './components/how/HowItWorks';
 
 
 const App = () => {

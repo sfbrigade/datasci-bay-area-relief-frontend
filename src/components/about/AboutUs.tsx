@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as About } from "./assets/About.svg";
+import { ReactComponent as About } from "../../assets/About.svg";
 
 const Container = styled.div`
   display: flex;
