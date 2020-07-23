@@ -1,11 +1,20 @@
-import React from 'react';
-import App from './App';
+import React from "react";
 import {render, screen} from "@testing-library/react";
 
-describe('App', () => {
-  it('displays the home page by default', () => {
-    render(<App/>);
+import App from "./App";
 
-    expect(screen.getByRole('heading')).toHaveTextContent('Find Loans & Grants');
+describe("App", () => {
+  beforeEach(() => {
+    render(<App />);
+  });
+
+  it("renders a header with a menu", () => {
+    expect(screen.getByRole("menu")).toBeVisible();
+  });
+
+  it("displays the home page by default", () => {
+    expect(screen.getByRole("heading")).toHaveTextContent(
+      "Find Loans & Grants"
+    );
   });
 });
