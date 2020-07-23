@@ -3,8 +3,8 @@ import { render, screen } from "@testing-library/react";
 import Results from "./Results";
 import { Router } from "react-router-dom";
 import { createMemoryHistory } from "history";
-import { idleForIO } from "../testUtils";
-import * as api from "../api/axiosApi";
+import { idleForIO } from "../../testUtils";
+import * as api from "../../api/axiosApi";
 
 describe("Results", () => {
   const history = createMemoryHistory();

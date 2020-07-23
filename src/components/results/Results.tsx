@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { ReactComponent as NoResults } from "../assets/NoResults.svg";
-import { getResults } from "../api/axiosApi";
-import { Result } from "../types";
+import { ReactComponent as NoResults } from "../../assets/NoResults.svg";
+import { getResults } from "../../api/axiosApi";
+import { Result } from "../../types";
 
 const Results: React.FC = () => {
   const [results, setResults] = useState<Result[]>([]);

@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as About } from "./assets/About.svg";
+import { ReactComponent as About } from "../../assets/About.svg";
 
 const Container = styled.div`
   display: flex;
-  flex-flow: row wrap;
-
+  flex-flow: row wrap;  
   height: 1024px;
 `;
 
@@ -61,7 +60,6 @@ const AboutParagraph = styled.p`
   height: 168px;
   left: 0;
   top: 0;
-
   font-family: Source Sans Pro,sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -69,7 +67,6 @@ const AboutParagraph = styled.p`
   line-height: 28px;
   letter-spacing: 0.5px;
   color: #000000;
-
   flex: none;
   order: 0;
   align-self: center;
