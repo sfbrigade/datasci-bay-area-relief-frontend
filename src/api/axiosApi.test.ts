@@ -9,7 +9,7 @@ describe("getResults", () => {
   it("fetches data successfully from the API", async () => {
     const response = {
       data: {
-        json_list: [
+        results: [
           {
             _100_or_fewer: "Yes",
             _500_or_fewer: "Yes",
@@ -57,6 +57,6 @@ describe("getResults", () => {
 
     const actualResponse: Result[] = await getResults();
 
-    await expect(actualResponse).toEqual(response.data.json_list);
+    await expect(actualResponse).toEqual(response.data.results);
   });
 });

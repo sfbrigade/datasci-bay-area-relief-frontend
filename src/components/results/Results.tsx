@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { ReactComponent as NoResults } from "../../assets/NoResults.svg";
 import { getResults } from "../../api/axiosApi";
 import { Result } from "../../types";
+import styled from "styled-components";
+
+const ResultsList = styled.div`
+  margin-top: 115px;
+`;
 
 const Results: React.FC = () => {
   const [results, setResults] = useState<Result[]>([]);
@@ -29,7 +34,7 @@ const Results: React.FC = () => {
     );
   };
 
-  return <>{!loading && renderResults()}</>;
+  return <ResultsList>{!loading && renderResults()}</ResultsList>;
 };
 
 export default Results;
