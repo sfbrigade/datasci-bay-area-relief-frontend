@@ -10,9 +10,9 @@ describe("How It Works", () => {
         <HowItWorks />
       </>
     );
-   
+
     expect(screen.getByRole("heading")).toHaveTextContent("How it works");
-    
+
     expect(screen.getByText('We scrape the internet')).toBeInTheDocument();
     expect(screen.getByText('Search our database')).toBeInTheDocument();
     expect(screen.getByText('Help us look')).toBeInTheDocument();
@@ -35,10 +35,10 @@ describe("How It Works", () => {
       )
     ).toBeInTheDocument();
 
-    expect(screen.getByAltText('ImgLeft')).toBeInTheDocument();
-    expect(screen.getByAltText('ImgMiddle')).toBeInTheDocument();
-    expect(screen.getByAltText('ImgRight')).toBeInTheDocument();
-  
+    expect(screen.getByAltText('We scrape the internet')).toBeInTheDocument();
+    expect(screen.getByAltText('Search our database')).toBeInTheDocument();
+    expect(screen.getByAltText('Help us look')).toBeInTheDocument();
+
   });
 
 });
