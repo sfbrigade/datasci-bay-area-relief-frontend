@@ -8,6 +8,10 @@ import Results from "./components/results/Results";
 import HowItWorks from './components/how/HowItWorks';
 import ThankYou from './components/thankyou/ThankYou';
 
+
+
+
+ 
 const App = () => {
   return (
     <div className="App">
@@ -20,6 +24,7 @@ const App = () => {
           <Route exact path="/thankyou" component={ThankYou} />
           <Route exact path="/results" component={Results} />
         </Switch>
+
       </Router>
     </div>
   );
