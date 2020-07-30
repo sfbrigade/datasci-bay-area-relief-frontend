@@ -28,103 +28,100 @@ describe("Donate page", () => {
     );
 
     act(() => {
-      screen.getByText(/GoFundMe's/).click()
+      screen.getByText(/GoFundMe's/).click();
     });
     expect(screen.getByText(/GoFundMe's/)).toHaveTextContent("GoFundMe's in the Bay area");
     
     act(() => {
-    screen.getByText(/Redwood City/).click()
+    screen.getByText(/Redwood City/).click();
     });
-    expect(screen.getByText(/Redwood City/)).toHaveTextContent("Redwood City Small Business Relief Fund")
+    expect(screen.getByText(/Redwood City/)).toHaveTextContent("Redwood City Small Business Relief Fund");
   
     act(() => {
-      screen.getByText(/UC Berkeley/).click()
+      screen.getByText(/UC/).click();
       });
-    expect(screen.getByText(/UC Berkeley/)).toHaveTextContent("UC Berkeley Law Pro Bono")
+    expect(screen.getByText(/UC/)).toHaveTextContent("UC Berkeley Law Pro Bono");
     
     act(() => {
-      screen.getByText(/COVID-19/).click()
+      screen.getByText(/COVID-19/).click();
       });
-    expect(screen.getByText(/COVID-19/)).toHaveTextContent("COVID-19 Regional Response Fund")
+    expect(screen.getByText(/COVID-19/)).toHaveTextContent("COVID-19 Regional Response Fund");
       
     act(() => {
-      screen.getByText(/Norcal/).click()
+      screen.getByText(/Norcal/).click();
       });
-    expect(screen.getByText(/Norcal/)).toHaveTextContent("Norcal Small Business Relief Fund")
+    expect(screen.getByText(/Norcal/)).toHaveTextContent("Norcal Small Business Relief Fund");
       
     act(() => {
-      screen.getByText(/Fair/).click()
+      screen.getByText(/Fair/).click();
       });
-    expect(screen.getByText(/Fair/)).toHaveTextContent("One Fair Wage")
+    expect(screen.getByText(/Fair/)).toHaveTextContent("One Fair Wage");
     
     act(() => {
-      screen.getByText(/Berkeley/).click()
+      screen.getByText(/Berkeley Relief/).click();
       });
-    expect(screen.getByText(/Berkeley/)).toHaveTextContent("Berkeley Relief Fund")
+    expect(screen.getByText(/Berkeley Relief/)).toHaveTextContent("Berkeley Relief Fund");
     
     act(() => {
-      screen.getByText(/Mutual Aid/).click()
+      screen.getByText(/Mutual Aid/).click();
       });
-    expect(screen.getByText(/Mutual Aid/)).toHaveTextContent("Berkeley Mutual Aid")
+    expect(screen.getByText(/Mutual Aid/)).toHaveTextContent("Berkeley Mutual Aid");
     
     act(() => {
-      screen.getByText(/China Towns/).click()
+      screen.getByText(/China/).click();
       });
-    expect(screen.getByText(/China Towns/)).toHaveTextContent("Save Our China Towns ")
+    expect(screen.getByText(/China/)).toHaveTextContent("Save Our China Towns");
     
     act(() => {
-      screen.getByText(/MEDA/).click()
+      screen.getByText(/MEDA/).click();
       });
-    expect(screen.getByText(/MEDA/)).toHaveTextContent("MEDA (Mission Economic Development Agency)")
+    expect(screen.getByText(/MEDA/)).toHaveTextContent("MEDA (Mission Economic Development Agency)");
     
     act(() => {
-      screen.getByText(/YouTube/).click()
+      screen.getByText(/YouTube/).click();
       });
-    expect(screen.getByText(/YouTube/)).toHaveTextContent("YouTube Ad Proceeds to #BLMa")
+    expect(screen.getByText(/YouTube/)).toHaveTextContent("YouTube Ad Proceeds to #BLM");
     
     act(() => {
-      screen.getByText(/BAOBOB/).click()
+      screen.getByText(/BAOBOB/).click();
       });
-    expect(screen.getByText(/BAOBOB/)).toHaveTextContent("Bay Area Organization of Black Owned Businesses (BAOBOB)")
+    expect(screen.getByText(/BAOBOB/)).toHaveTextContent("Bay Area Organization of Black Owned Businesses (BAOBOB)");
     
     act(() => {
-      screen.getByText(/Restaurants/).click()
+      screen.getByText(/Restaurants/).click();
       });
-    expect(screen.getByText(/Restaurants/)).toHaveTextContent("Black Owned Restaurants")
+    expect(screen.getByText(/Restaurants/)).toHaveTextContent("Black Owned Restaurants");
     
     act(() => {
-      screen.getByText(/ReLinkefFund/).click()
+      screen.getByText(/ReliefFund/).click();
       });
-    expect(screen.getByText(/ReLinkefFund/)).toHaveTextContent("Black Owned Business ReLinkefFund")
+    expect(screen.getByText(/ReliefFund/)).toHaveTextContent("Black Owned Business ReliefFund");
     
     act(() => {
-      screen.getByText(/Chamber/).click()
+      screen.getByText(/Chamber/).click();
       });
-    expect(screen.getByText(/Chamber/)).toHaveTextContent("Silicon Valley Central Chamber of Commerce")
+    expect(screen.getByText(/Chamber/)).toHaveTextContent("Silicon Valley Central Chamber of Commerce");
     
     act(() => {
-      screen.getByText(/SF Gov/).click()
+      screen.getByText(/SF Gov/).click();
       });
-    expect(screen.getByText(/SF Gov/)).toHaveTextContent("SF Gov")
+    expect(screen.getByText(/SF Gov/)).toHaveTextContent("SF Gov");
     
     act(() => {
-      screen.getByText(/Queer/).click()
+      screen.getByText(/Queer/).click();
       });
-    expect(screen.getByText(/Queer/)).toHaveTextContent("Queer: Way Outo")
+    expect(screen.getByText(/Queer/)).toHaveTextContent("Queer: Way Out");
     
     act(() => {
-      screen.getByText(/Beard/).click()
+      screen.getByText(/Beard Foundation/).click();
       });
-    expect(screen.getByText(/Beard/)).toHaveTextContent("James Beard Foundation")
+    expect(screen.getByText(/Beard Foundation/)).toHaveTextContent("James Beard Foundation");
     
     act(() => {
-      screen.getByText(/Webinars/).click()
+      screen.getByText(/Beard Webinars/).click();
       });
-    expect(screen.getByText(/Webinars/)).toHaveTextContent("James Beard Webinars")
+    expect(screen.getByText(/Beard Webinars/)).toHaveTextContent("James Beard Webinars");
     
-
-    
-
 
 });
 
