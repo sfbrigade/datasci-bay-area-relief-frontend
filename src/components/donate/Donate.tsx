@@ -161,7 +161,7 @@ const LGBTLinks = styled.div`
 
 const Donate: React.FC = () => {
   return (
-    <div className="AboutUsContainer">
+ 
       <Container> 
         <HeaderSection>
           <Header>Donate</Header>
@@ -182,7 +182,6 @@ const Donate: React.FC = () => {
               <Link><A href ="#">Berkeley Mutual Aid</A></Link>
               <Link><A href ="#">Save Our China Towns </A></Link>
               <Link><A href="#">MEDA (Mission Economic Development Agency)</A></Link>
-
             </DonateList>
           </GeneralLinks>
         </GeneralSection>
@@ -214,7 +213,7 @@ const Donate: React.FC = () => {
         </LGBTSection>
             
       </Container>
-    </div>
+
   );
 };
 
