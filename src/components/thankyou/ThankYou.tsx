@@ -1,11 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as ThankImg } from "../../assets/ThankYou.svg";
-import { ReactComponent as CodeForSFLogo } from "../../assets/CodeForSFLogo.svg";
-import { ReactComponent as GitHubLogo } from "../../assets/GitHubLogo.svg";
-import { ReactComponent as ReactLogo } from "../../assets/ReactLogo.svg";
-
-import {Link} from "react-router-dom";
+import {ReactComponent as ThankImg} from "../../assets/ThankYou.svg";
+import {ReactComponent as CodeForSFLogo} from "../../assets/CodeForSFLogo.svg";
+import {ReactComponent as GitHubLogo} from "../../assets/GitHubLogo.svg";
+import {ReactComponent as ReactLogo} from "../../assets/ReactLogo.svg";
 
 const Container = styled.div`
   display: flex;

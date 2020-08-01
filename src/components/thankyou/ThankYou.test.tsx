@@ -7,11 +7,7 @@ import {act} from "react-dom/test-utils";
 describe("Thank you page", () => {
   
   it("renders heading and description", () => {
-    const { container } = render(
-      <>
-        <ThankYou />
-      </>
-    );
+    render(<ThankYou />);
     expect(screen.getByRole("heading")).toHaveTextContent("Thank you");
     expect(
       screen.getByText(
@@ -27,11 +23,7 @@ describe("Thank you page", () => {
   });
 
   it("render links to websites", () => {
-    const {getByText} = render(
-      <>
-        <ThankYou />
-      </>
-    );
+    render(<ThankYou />);
 
     act(() => {
       screen.getByTestId("CodeForSFLink").click();

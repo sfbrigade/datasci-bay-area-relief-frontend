@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import ImgLeft from "../../assets/ImgLeft.svg";
 import ImgMiddle from "../../assets/ImgMiddle.svg";
