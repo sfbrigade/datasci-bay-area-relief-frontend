@@ -3,7 +3,8 @@ import {render, screen, within} from "@testing-library/react";
 import Results from "./Results";
 import {idleForIO} from "../../testUtils";
 import * as api from "../../api/axiosApi";
-import {formatInterestRate} from "./ResultCard";
+import {formatInterestRate, formatDate} from "./formatHelpers";
+import {Result} from "../../types";
 
 describe("Results", () => {
   describe("when there are no results", () => {
@@ -17,11 +18,31 @@ describe("Results", () => {
   });
 
   describe("when there are results", () => {
-    const results = [
-      {name: "result 1", supportType: "Loan", interestRate: 0.01},
-      {name: "result 2", supportType: "Grant", interestRate: null},
-      {name: "result 3", supportType: "Loan", interestRate: 0},
-      {name: "result 4", supportType: "Loan", interestRate: 0.0375},
+    const results: Result[] = [
+      {
+        name: "result 1",
+        supportType: "Loan",
+        interestRate: 0.01,
+        dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
+      },
+      {
+        name: "result 2",
+        supportType: "Grant",
+        interestRate: null,
+        dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
+      },
+      {
+        name: "result 3",
+        supportType: "Loan",
+        interestRate: 0,
+        dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
+      },
+      {
+        name: "result 4",
+        supportType: "Loan",
+        interestRate: 0.0375,
+        dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
+      },
     ];
 
     it("shows the results", async () => {
@@ -44,6 +65,9 @@ describe("Results", () => {
             )
           )
         ).toBeInTheDocument();
+        expect(
+          getByText(formatDate(results[index].dateAdded))
+        ).toBeInTheDocument();
       });
     });
 
@@ -53,33 +77,6 @@ describe("Results", () => {
       await idleForIO();
 
       expect(container.querySelector("svg")?.textContent).toBeUndefined();
-    });
-  });
-});
-
-describe("formatInterestRate", () => {
-  describe("when the support type is a grant", () => {
-    it("returns 'No Interest'", () => {
-      expect(formatInterestRate(null, "Grant")).toEqual("No Interest");
-    });
-  });
-
-  describe("when the support type is a loan", () => {
-    describe("when the interest rate is a number", () => {
-      it("returns the interest rate as a percentage and the word 'Interest' when the interest rate is nonzero", () => {
-        expect(formatInterestRate(0.01, "Loan")).toEqual("1% Interest");
-        expect(formatInterestRate(0.0375, "Loan")).toEqual("3.75% Interest");
-      });
-
-      it("returns'No Interest' when interest rate is 0", () => {
-        expect(formatInterestRate(0, "Loan")).toEqual("No Interest");
-      });
-    });
-
-    describe("when the interest rate is null", () => {
-      it("returns 'Unknown", () => {
-        expect(formatInterestRate(null, "Loan")).toEqual("Unknown");
-      });
     });
   });
 });

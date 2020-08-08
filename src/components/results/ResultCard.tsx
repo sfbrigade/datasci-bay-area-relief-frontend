@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {Result} from "../../types";
 import Card from "@material-ui/core/Card";
+import {formatInterestRate, formatDate} from "./formatHelpers";
 
 const SupportTypeContainer = styled.div`
   font-style: normal;
@@ -17,21 +18,20 @@ const StyledCard = styled(Card)`
   height: 172px;
 `;
 
-export const formatInterestRate = (
-  interestRate: number | null,
-  supportType: string
-): string => {
-  if (supportType === "Grant") return "No Interest";
-  if (interestRate === null) return "Unknown";
-  return interestRate === 0 ? "No Interest" : `${interestRate * 100}% Interest`;
-};
-
-const ResultCard: React.FC<Result> = ({name, supportType, interestRate}) => {
+const ResultCard: React.FC<Result> = ({
+  name,
+  supportType,
+  interestRate,
+  dateAdded,
+}) => {
   return (
     <StyledCard>
       <SupportTypeContainer>
-        <p>{supportType}</p>
-        <p>{formatInterestRate(interestRate, supportType)}</p>
+        <p>
+          <span>{supportType}</span> •{" "}
+          <span>{formatInterestRate(interestRate, supportType)}</span> •{" "}
+          <span>{formatDate(dateAdded)}</span>
+        </p>
       </SupportTypeContainer>
       <p>{name}</p>
     </StyledCard>

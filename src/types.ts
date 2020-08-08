@@ -21,4 +21,5 @@ export interface Result {
   name: string;
   supportType: string;
   interestRate: number | null;
+  dateAdded: string;
 }

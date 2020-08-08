@@ -55,7 +55,7 @@ describe("getResults", () => {
       Promise.resolve(apiResponse)
     );
 
-    const expectedResponse = [
+    const expectedResults = [
       {
         name: apiResponse.data.results[0].name,
         supportType: apiResponse.data.results[0].support_type,
@@ -63,8 +63,10 @@ describe("getResults", () => {
       },
     ];
 
-    const actualResponse: Result[] = await getResults();
+    const actualResults: Result[] = await getResults();
 
-    await expect(actualResponse).toEqual(expectedResponse);
+    actualResults.forEach((result, index) => {
+      expect(result).toEqual(expect.objectContaining(expectedResults[index]));
+    });
   });
 });
