@@ -7,6 +7,9 @@ import AboutUs from "./components/about/AboutUs";
 import Results from "./components/results/Results";
 import HowItWorks from './components/how/HowItWorks';
 import ThankYou from './components/thankyou/ThankYou';
+import Donate from './components/donate/Donate';
+
+
 
 const App = () => {
   return (
@@ -19,6 +22,8 @@ const App = () => {
           <Route exact path="/howitworks" component={HowItWorks} />
           <Route exact path="/thankyou" component={ThankYou} />
           <Route exact path="/results" component={Results} />
+          <Route exact path="/donate" component={Donate} />
+          
         </Switch>
       </Router>
     </div>

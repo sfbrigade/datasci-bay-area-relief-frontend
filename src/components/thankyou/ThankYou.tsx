@@ -5,7 +5,6 @@ import CodeForSFLogo  from "../../assets/CodeForSFLogo.svg";
 import GitHubLogo from "../../assets/GitHubLogo.svg";
 import ReactLogo from "../../assets/ReactLogo.svg";
 
-
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;  

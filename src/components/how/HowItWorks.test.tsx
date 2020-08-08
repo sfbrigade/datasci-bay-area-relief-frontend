@@ -5,11 +5,7 @@ import HowItWorks from "./HowItWorks";
 
 describe("How It Works", () => {
   it("renders heading and description", () => {
-    const { container } = render(
-      <>
-        <HowItWorks />
-      </>
-    );
+    render(<HowItWorks />);
 
     expect(screen.getByRole("heading")).toHaveTextContent("How it works");
 

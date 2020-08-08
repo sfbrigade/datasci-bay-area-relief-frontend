@@ -1,13 +1,13 @@
 /* eslint @typescript-eslint/camelcase: 0 */
 import axios from "axios";
-import { getResults } from "./axiosApi";
-import { Result } from "../types";
+import {getResults} from "./axiosApi";
+import {Result} from "../types";
 
 jest.mock("axios");
 
 describe("getResults", () => {
   it("fetches data successfully from the API", async () => {
-    const response = {
+    const apiResponse = {
       data: {
         results: [
           {
@@ -46,17 +46,27 @@ describe("getResults", () => {
             support_type: "Loan",
             supported_entity: "Government",
             website_url: "https://oewd.org/businesses-impacted-covid-19#Loans",
-            women_owned: "No"
-          }
-        ]
-      }
+            women_owned: "No",
+          },
+        ],
+      },
     };
     (axios.get as jest.Mock).mockImplementationOnce(() =>
-      Promise.resolve(response)
+      Promise.resolve(apiResponse)
     );
 
-    const actualResponse: Result[] = await getResults();
+    const expectedResults = [
+      {
+        name: apiResponse.data.results[0].name,
+        supportType: apiResponse.data.results[0].support_type,
+        interestRate: apiResponse.data.results[0].interest_rate,
+      },
+    ];
 
-    await expect(actualResponse).toEqual(response.data.results);
+    const actualResults: Result[] = await getResults();
+
+    actualResults.forEach((result, index) => {
+      expect(result).toEqual(expect.objectContaining(expectedResults[index]));
+    });
   });
 });
