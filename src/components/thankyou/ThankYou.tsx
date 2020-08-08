@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import {ReactComponent as ThankImg} from "../../assets/ThankYou.svg";
-import {ReactComponent as CodeForSFLogo} from "../../assets/CodeForSFLogo.svg";
-import {ReactComponent as GitHubLogo} from "../../assets/GitHubLogo.svg";
-import {ReactComponent as ReactLogo} from "../../assets/ReactLogo.svg";
+import { ReactComponent as ThankImg } from "../../assets/ThankYou.svg";
+import CodeForSFLogo  from "../../assets/CodeForSFLogo.svg";
+import GitHubLogo from "../../assets/GitHubLogo.svg";
+import ReactLogo from "../../assets/ReactLogo.svg";
 
 const Container = styled.div`
   display: flex;
@@ -51,13 +51,13 @@ const LogoSection = styled.div`
   margin-top: 24px;
 `;
 
-const CodeForSFLogoImg = styled(CodeForSFLogo)`
+const CodeForSFLogoImg = styled.img`
   display:flex;  
   width: 279px;
   height: 49px;
 `;
 
-const GitHubLogoImg = styled(GitHubLogo)`
+const GitHubLogoImg = styled.img`
   display:flex;  
   width: 75px;
   height: 67px;
@@ -65,7 +65,7 @@ const GitHubLogoImg = styled(GitHubLogo)`
   
 `;
 
-const ReactLogoImg = styled(ReactLogo)`
+const ReactLogoImg = styled.img`
   display:flex;  
   width: 162px;
   height: 65px;
@@ -118,12 +118,12 @@ const ThankYou: React.FC = () => {
         </ThankYouDescription>
 
         <LogoSection>
-          <a href="https://www.codeforsanfrancisco.org/" data-testid="CodeForSFLink"><CodeForSFLogoImg data-testid="CodeForSFLogo"></CodeForSFLogoImg></a>
-          <a href="https://github.com/" data-testid="GitHubLink"><GitHubLogoImg data-testid="GitHubLogo"></GitHubLogoImg></a>
+          <a href="https://www.codeforsanfrancisco.org/" data-testid="CodeForSFLink"><CodeForSFLogoImg data-testid="CodeForSFLogo" alt="Code for SF Logo" src={CodeForSFLogo} /></a>
+          <a href="https://github.com/" data-testid="GitHubLink"><GitHubLogoImg data-testid="GitHubLogo" alt="Git Hub Logo" src={GitHubLogo} /></a>
         </LogoSection>
 
         <LogoSection>
-          <a href="https://reactjs.org/" data-testid="ReactLink"><ReactLogoImg data-testid="ReactLogo"></ReactLogoImg></a>
+          <a href="https://reactjs.org/" data-testid="ReactLink"><ReactLogoImg data-testid="ReactLogo" alt="React Logo" src={ReactLogo} /></a>
         </LogoSection>
 
       </ThankYouSection>
