@@ -32,6 +32,6 @@ describe("formatDate", () => {
     const dateString = "Fri, 05 Jun 2020 00:00:00 GMT";
 
     // TODO: Set timezone in tests so result doesn't depend on local timezone
-    expect(formatDate(dateString)).toEqual("6/4/20");
+    expect(formatDate(dateString)).toEqual("6/5/20");
   });
 });
