@@ -1,4 +1,8 @@
-import {formatInterestRate, formatDate} from "./formatHelpers";
+import {
+  formatInterestRate,
+  formatDate,
+  formatAwardAmount,
+} from "./formatHelpers";
 
 describe("formatInterestRate", () => {
   describe("when the support type is a grant", () => {
@@ -14,7 +18,7 @@ describe("formatInterestRate", () => {
         expect(formatInterestRate(0.0375, "Loan")).toEqual("3.75% Interest");
       });
 
-      it("returns'No Interest' when interest rate is 0", () => {
+      it("returns 'No Interest' when interest rate is 0", () => {
         expect(formatInterestRate(0, "Loan")).toEqual("No Interest");
       });
     });
@@ -33,5 +37,17 @@ describe("formatDate", () => {
 
     // TODO: Set timezone in tests so result doesn't depend on local timezone
     expect(formatDate(dateString)).toEqual("6/5/20");
+  });
+});
+
+describe("formatAwardAmount", () => {
+  it("returns a number in its respective US currency representation", () => {
+    expect(formatAwardAmount(1)).toEqual("$1");
+    expect(formatAwardAmount(1000)).toEqual("$1,000");
+    expect(formatAwardAmount(1000000)).toEqual("$1,000,000");
+  });
+
+  it("returns 'Amount Unknown' when amount is null", () => {
+    expect(formatAwardAmount(null)).toEqual("Amount Unknown");
   });
 });

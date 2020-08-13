@@ -22,4 +22,5 @@ export interface Result {
   supportType: string;
   interestRate: number | null;
   dateAdded: string;
+  maxAwardAmount: number | null;
 }

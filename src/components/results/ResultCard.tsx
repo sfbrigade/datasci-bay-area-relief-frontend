@@ -2,7 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import {Result} from "../../types";
 import Card from "@material-ui/core/Card";
-import {formatInterestRate, formatDate} from "./formatHelpers";
+import {
+  formatInterestRate,
+  formatDate,
+  formatAwardAmount,
+} from "./formatHelpers";
 
 const SupportTypeContainer = styled.div`
   font-style: normal;
@@ -23,6 +27,7 @@ const ResultCard: React.FC<Result> = ({
   supportType,
   interestRate,
   dateAdded,
+  maxAwardAmount,
 }) => {
   return (
     <StyledCard>
@@ -33,6 +38,7 @@ const ResultCard: React.FC<Result> = ({
           <span>{formatDate(dateAdded)}</span>
         </p>
       </SupportTypeContainer>
+      <p>{formatAwardAmount(maxAwardAmount)}</p>
       <p>{name}</p>
     </StyledCard>
   );

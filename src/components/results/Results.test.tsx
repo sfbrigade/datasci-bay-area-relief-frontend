@@ -3,7 +3,11 @@ import {render, screen, within} from "@testing-library/react";
 import Results from "./Results";
 import {idleForIO} from "../../testUtils";
 import * as api from "../../api/axiosApi";
-import {formatInterestRate, formatDate} from "./formatHelpers";
+import {
+  formatInterestRate,
+  formatDate,
+  formatAwardAmount,
+} from "./formatHelpers";
 import {Result} from "../../types";
 
 describe("Results", () => {
@@ -24,24 +28,28 @@ describe("Results", () => {
         supportType: "Loan",
         interestRate: 0.01,
         dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
+        maxAwardAmount: 10000000,
       },
       {
         name: "result 2",
         supportType: "Grant",
         interestRate: null,
         dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
+        maxAwardAmount: null,
       },
       {
         name: "result 3",
         supportType: "Loan",
         interestRate: 0,
         dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
+        maxAwardAmount: 500,
       },
       {
         name: "result 4",
         supportType: "Loan",
         interestRate: 0.0375,
         dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
+        maxAwardAmount: 20000,
       },
     ];
 
@@ -67,6 +75,9 @@ describe("Results", () => {
         ).toBeInTheDocument();
         expect(
           getByText(formatDate(results[index].dateAdded))
+        ).toBeInTheDocument();
+        expect(
+          getByText(formatAwardAmount(results[index].maxAwardAmount))
         ).toBeInTheDocument();
       });
     });

@@ -12,3 +12,7 @@ export const formatInterestRate = (
 export const formatDate = (dateString: string) => {
   return moment(dateString).format("M/D/YY");
 };
+
+export const formatAwardAmount = (amount: number | null) => {
+  return amount ? `$${amount.toLocaleString("en-US")}` : "Amount Unknown";
+};
