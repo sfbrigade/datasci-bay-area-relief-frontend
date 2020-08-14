@@ -6,6 +6,7 @@ import {
   formatInterestRate,
   formatDate,
   formatAwardAmount,
+  formatReliefType,
 } from "./formatHelpers";
 
 const StyledCard = styled(Card)`
@@ -125,12 +126,67 @@ const StyledName = styled.div`
   mix-blend-mode: normal;
 `;
 
+const StyledReliefType = styled.div`
+  text-align: left;
+
+  /* Body 3 */
+
+  position: absolute;
+  height: 20px;
+  left: 16px;
+  right: 112px;
+  top: 100.16px;
+
+  /* Body 2 / Source Sans Pro */
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+
+  letter-spacing: 0.25px;
+
+  /* Black — Disabled */
+
+  color: rgba(0, 0, 0, 0.38);
+  mix-blend-mode: normal;
+`;
+
+const StyledButton = styled.div`
+  /* Label */
+
+  position: absolute;
+  width: 36px;
+  height: 16px;
+  left: 16px;
+  bottom: 12px;
+
+  /* Button / Source Sans Pro */
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height, or 133% */
+
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+
+  /* Primary — 500* */
+
+  color: #ef5350;
+`;
+
 const ResultCard: React.FC<Result> = ({
-  name,
   supportType,
   interestRate,
   dateAdded,
   maxAwardAmount,
+  name,
+  reliefType,
 }) => {
   return (
     <StyledCard>
@@ -144,6 +200,8 @@ const ResultCard: React.FC<Result> = ({
       </SupportTypeContainer>
       <StyledAwardAmount>{formatAwardAmount(maxAwardAmount)}</StyledAwardAmount>
       <StyledName>{name}</StyledName>
+      <StyledReliefType>{formatReliefType(reliefType)}</StyledReliefType>
+      <StyledButton>Apply</StyledButton>
     </StyledCard>
   );
 };

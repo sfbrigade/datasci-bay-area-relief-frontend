@@ -23,4 +23,5 @@ export interface Result {
   interestRate: number | null;
   dateAdded: string;
   maxAwardAmount: number | null;
+  reliefType: string;
 }

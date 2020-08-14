@@ -16,3 +16,8 @@ export const formatDate = (dateString: string) => {
 export const formatAwardAmount = (amount: number | null) => {
   return amount ? `$${amount.toLocaleString("en-US")}` : "Amount Unknown";
 };
+
+export const formatReliefType = (reliefType: string) => {
+  if (reliefType === "Both") return "COVID and Protest Damage relief";
+  return reliefType + " relief";
+};

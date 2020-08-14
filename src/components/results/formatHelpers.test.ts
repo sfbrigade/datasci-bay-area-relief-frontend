@@ -2,6 +2,7 @@ import {
   formatInterestRate,
   formatDate,
   formatAwardAmount,
+  formatReliefType,
 } from "./formatHelpers";
 
 describe("formatInterestRate", () => {
@@ -49,5 +50,15 @@ describe("formatAwardAmount", () => {
 
   it("returns 'Amount Unknown' when amount is null", () => {
     expect(formatAwardAmount(null)).toEqual("Amount Unknown");
+  });
+});
+
+describe("formatReliefType", () => {
+  it("returns the relief type followed by the word relief", () => {
+    expect(formatReliefType("COVID")).toEqual("COVID relief");
+    expect(formatReliefType("Protest Damage")).toEqual("Protest Damage relief");
+  });
+  it("returns both relief types followed by the word relief if the relief type is both", () => {
+    expect(formatReliefType("Both")).toEqual("COVID and Protest Damage relief");
   });
 });

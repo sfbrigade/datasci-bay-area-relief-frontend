@@ -7,6 +7,7 @@ import {
   formatInterestRate,
   formatDate,
   formatAwardAmount,
+  formatReliefType,
 } from "./formatHelpers";
 import {Result} from "../../types";
 
@@ -29,6 +30,7 @@ describe("Results", () => {
         interestRate: 0.01,
         dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 10000000,
+        reliefType: "COVID",
       },
       {
         name: "result 2",
@@ -36,6 +38,7 @@ describe("Results", () => {
         interestRate: null,
         dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
         maxAwardAmount: null,
+        reliefType: "Protest Damage",
       },
       {
         name: "result 3",
@@ -43,6 +46,7 @@ describe("Results", () => {
         interestRate: 0,
         dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 500,
+        reliefType: "Both",
       },
       {
         name: "result 4",
@@ -50,6 +54,7 @@ describe("Results", () => {
         interestRate: 0.0375,
         dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 20000,
+        reliefType: "COVID",
       },
     ];
 
@@ -83,6 +88,12 @@ describe("Results", () => {
         expect(
           getByText(formatAwardAmount(results[index].maxAwardAmount))
         ).toBeInTheDocument();
+
+        const formattedReliefType = formatReliefType(results[index].reliefType);
+        const reliefTypeRegex = new RegExp(formattedReliefType, "i");
+        expect(getByText(reliefTypeRegex)).toBeInTheDocument();
+
+        expect(getByText("Apply")).toBeInTheDocument();
       });
     });
 
