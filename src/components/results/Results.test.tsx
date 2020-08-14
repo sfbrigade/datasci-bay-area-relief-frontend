@@ -63,19 +63,23 @@ describe("Results", () => {
 
       resultCards.forEach((resultCard, index) => {
         const {getByText} = within(resultCard);
-        expect(getByText(results[index].name)).toBeInTheDocument();
-        expect(getByText(results[index].supportType)).toBeInTheDocument();
-        expect(
-          getByText(
-            formatInterestRate(
-              results[index].interestRate,
-              results[index].supportType
-            )
-          )
-        ).toBeInTheDocument();
-        expect(
-          getByText(formatDate(results[index].dateAdded))
-        ).toBeInTheDocument();
+        const nameRegex = new RegExp(results[index].name, "i");
+        expect(getByText(nameRegex)).toBeInTheDocument();
+
+        const supportTypeRegex = new RegExp(results[index].supportType, "i");
+        expect(getByText(supportTypeRegex)).toBeInTheDocument();
+
+        const formattedInterestRate = formatInterestRate(
+          results[index].interestRate,
+          results[index].supportType
+        );
+        const interestRateRegex = new RegExp(formattedInterestRate, "i");
+        expect(getByText(interestRateRegex)).toBeInTheDocument();
+
+        const formattedDate = formatDate(results[index].dateAdded);
+        const dateAddedRegex = new RegExp(formattedDate, "i");
+        expect(getByText(dateAddedRegex)).toBeInTheDocument();
+
         expect(
           getByText(formatAwardAmount(results[index].maxAwardAmount))
         ).toBeInTheDocument();
