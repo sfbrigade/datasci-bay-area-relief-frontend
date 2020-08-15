@@ -9,7 +9,7 @@ import {
   formatAwardAmount,
   formatReliefType,
 } from "./formatHelpers";
-import {Result} from "../../types";
+import {Result, ReliefType, SupportType} from "../../types";
 
 describe("Results", () => {
   describe("when there are no results", () => {
@@ -26,35 +26,35 @@ describe("Results", () => {
     const results: Result[] = [
       {
         name: "result 1",
-        supportType: "Loan",
+        supportType: SupportType.Loan,
         interestRate: 0.01,
         dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 10000000,
-        reliefType: "COVID",
+        reliefType: ReliefType.COVID,
       },
       {
         name: "result 2",
-        supportType: "Grant",
+        supportType: SupportType.Grant,
         interestRate: null,
         dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
         maxAwardAmount: null,
-        reliefType: "Protest Damage",
+        reliefType: ReliefType.ProtestDamage,
       },
       {
         name: "result 3",
-        supportType: "Loan",
+        supportType: SupportType.Loan,
         interestRate: 0,
         dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 500,
-        reliefType: "Both",
+        reliefType: ReliefType.Both,
       },
       {
         name: "result 4",
-        supportType: "Loan",
+        supportType: SupportType.Loan,
         interestRate: 0.0375,
         dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 20000,
-        reliefType: "COVID",
+        reliefType: ReliefType.COVID,
       },
     ];
 
@@ -68,32 +68,31 @@ describe("Results", () => {
 
       resultCards.forEach((resultCard, index) => {
         const {getByText} = within(resultCard);
-        const nameRegex = new RegExp(results[index].name, "i");
-        expect(getByText(nameRegex)).toBeInTheDocument();
+        expect(getByText(results[index].name)).toBeVisible();
 
         const supportTypeRegex = new RegExp(results[index].supportType, "i");
-        expect(getByText(supportTypeRegex)).toBeInTheDocument();
+        expect(getByText(supportTypeRegex)).toBeVisible();
 
         const formattedInterestRate = formatInterestRate(
           results[index].interestRate,
           results[index].supportType
         );
         const interestRateRegex = new RegExp(formattedInterestRate, "i");
-        expect(getByText(interestRateRegex)).toBeInTheDocument();
+        expect(getByText(interestRateRegex)).toBeVisible();
 
         const formattedDate = formatDate(results[index].dateAdded);
         const dateAddedRegex = new RegExp(formattedDate, "i");
-        expect(getByText(dateAddedRegex)).toBeInTheDocument();
+        expect(getByText(dateAddedRegex)).toBeVisible();
 
         expect(
           getByText(formatAwardAmount(results[index].maxAwardAmount))
-        ).toBeInTheDocument();
+        ).toBeVisible();
 
-        const formattedReliefType = formatReliefType(results[index].reliefType);
-        const reliefTypeRegex = new RegExp(formattedReliefType, "i");
-        expect(getByText(reliefTypeRegex)).toBeInTheDocument();
+        expect(
+          getByText(formatReliefType(results[index].reliefType))
+        ).toBeVisible();
 
-        expect(getByText("Apply")).toBeInTheDocument();
+        expect(getByText("Apply")).toBeVisible();
       });
     });
 

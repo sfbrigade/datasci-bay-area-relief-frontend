@@ -1,10 +1,11 @@
 import moment from "moment";
+import {ReliefType, SupportType} from "../../types";
 
 export const formatInterestRate = (
   interestRate: number | null,
-  supportType: string
+  supportType: SupportType
 ): string => {
-  if (supportType === "Grant") return "No Interest";
+  if (supportType === SupportType.Grant) return "No Interest";
   if (interestRate === null) return "Unknown";
   return interestRate === 0 ? "No Interest" : `${interestRate * 100}% Interest`;
 };
@@ -17,7 +18,7 @@ export const formatAwardAmount = (amount: number | null) => {
   return amount ? `$${amount.toLocaleString("en-US")}` : "Amount Unknown";
 };
 
-export const formatReliefType = (reliefType: string) => {
-  if (reliefType === "Both") return "COVID and Protest Damage relief";
+export const formatReliefType = (reliefType: ReliefType) => {
+  if (reliefType === ReliefType.Both) return "COVID and Protest Damage relief";
   return reliefType + " relief";
 };

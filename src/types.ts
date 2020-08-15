@@ -19,9 +19,21 @@ export interface FilterOptions {
 
 export interface Result {
   name: string;
-  supportType: string;
+  supportType: SupportType;
   interestRate: number | null;
   dateAdded: string;
   maxAwardAmount: number | null;
-  reliefType: string;
+  reliefType: ReliefType;
+}
+
+export enum SupportType {
+  Loan = "Loan",
+  Grant = "Grant",
+  Insurance = "Insurance",
+}
+
+export enum ReliefType {
+  COVID = "COVID",
+  ProtestDamage = "Protest Damage",
+  Both = "Both",
 }

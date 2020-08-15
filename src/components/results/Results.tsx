@@ -13,6 +13,11 @@ const ResultsList = styled.div`
   margin-top: 115px;
 `;
 
+const StyledUL = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 const ListItem = styled.li`
   list-style-type: none;
 `;
@@ -40,13 +45,13 @@ const Results: React.FC = () => {
       );
     }
     return (
-      <ul>
+      <StyledUL>
         {results.map((result: Result) => (
           <ListItem key={result.name}>
             <ResultCard {...result} />
           </ListItem>
         ))}
-      </ul>
+      </StyledUL>
     );
   };
 

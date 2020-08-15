@@ -4,29 +4,36 @@ import {
   formatAwardAmount,
   formatReliefType,
 } from "./formatHelpers";
+import {ReliefType, SupportType} from "../../types";
 
 describe("formatInterestRate", () => {
   describe("when the support type is a grant", () => {
     it("returns 'No Interest'", () => {
-      expect(formatInterestRate(null, "Grant")).toEqual("No Interest");
+      expect(formatInterestRate(null, SupportType.Grant)).toEqual(
+        "No Interest"
+      );
     });
   });
 
   describe("when the support type is a loan", () => {
     describe("when the interest rate is a number", () => {
       it("returns the interest rate as a percentage and the word 'Interest' when the interest rate is nonzero", () => {
-        expect(formatInterestRate(0.01, "Loan")).toEqual("1% Interest");
-        expect(formatInterestRate(0.0375, "Loan")).toEqual("3.75% Interest");
+        expect(formatInterestRate(0.01, SupportType.Loan)).toEqual(
+          "1% Interest"
+        );
+        expect(formatInterestRate(0.0375, SupportType.Loan)).toEqual(
+          "3.75% Interest"
+        );
       });
 
       it("returns 'No Interest' when interest rate is 0", () => {
-        expect(formatInterestRate(0, "Loan")).toEqual("No Interest");
+        expect(formatInterestRate(0, SupportType.Loan)).toEqual("No Interest");
       });
     });
 
     describe("when the interest rate is null", () => {
       it("returns 'Unknown", () => {
-        expect(formatInterestRate(null, "Loan")).toEqual("Unknown");
+        expect(formatInterestRate(null, SupportType.Loan)).toEqual("Unknown");
       });
     });
   });
@@ -55,10 +62,14 @@ describe("formatAwardAmount", () => {
 
 describe("formatReliefType", () => {
   it("returns the relief type followed by the word relief", () => {
-    expect(formatReliefType("COVID")).toEqual("COVID relief");
-    expect(formatReliefType("Protest Damage")).toEqual("Protest Damage relief");
+    expect(formatReliefType(ReliefType.COVID)).toEqual("COVID relief");
+    expect(formatReliefType(ReliefType.ProtestDamage)).toEqual(
+      "Protest Damage relief"
+    );
   });
   it("returns both relief types followed by the word relief if the relief type is both", () => {
-    expect(formatReliefType("Both")).toEqual("COVID and Protest Damage relief");
+    expect(formatReliefType(ReliefType.Both)).toEqual(
+      "COVID and Protest Damage relief"
+    );
   });
 });
