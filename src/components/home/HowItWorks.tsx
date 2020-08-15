@@ -4,10 +4,25 @@ import ImgLeft from "../../assets/ImgLeft.svg";
 import ImgMiddle from "../../assets/ImgMiddle.svg";
 import ImgRight from "../../assets/ImgRight.svg";
 
+const MainContainer = styled.div`
+  width: 100%;
+`;
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 85px;
+`;
+
+const Header = styled.h6`
+  font-family: Bree Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 65px;
+  color: rgba(0, 0, 0, 0.87);
+  mix-blend-mode: normal;
+  margin-top: 200px;
 `;
 
 const LeftSection = styled.div`
@@ -22,17 +37,6 @@ const MiddleSection = styled.div`
 
 const RightSection = styled.div`
   width: 236.94px;
-`;
-
-const Header = styled.h1`
-  font-family: Bree Serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 48px;
-  line-height: 65px;
-  color: rgba(0, 0, 0, 0.87);
-  mix-blend-mode: normal;
-  margin-top: 200px;
 `;
 
 const H5 = styled.div`
@@ -82,7 +86,7 @@ const RightImg = styled.img`
 
 const HowItWorks: React.FC = () => {
   return (
-    <div className="HowItWorksContainer">
+    <MainContainer>
       <Header>How it works</Header>
       <Container>
         <LeftSection>
@@ -113,7 +117,7 @@ const HowItWorks: React.FC = () => {
           </P>
         </RightSection>
       </Container>
-    </div>
+    </MainContainer>
   );
 };
 

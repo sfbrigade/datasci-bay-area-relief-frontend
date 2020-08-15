@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as About } from "../../assets/About.svg";
+import {ReactComponent as About} from "../../assets/About.svg";
 
 const Container = styled.div`
   display: flex;
-  flex-flow: row wrap;  
+  flex-flow: row wrap;
   height: 1024px;
+  width: 100%;
 `;
 
 const AboutSection = styled.div`
@@ -46,7 +47,7 @@ const AboutHeader = styled.h1`
   display: flex;
   flex-direction: column;
   text-align: left;
-  font-family: Bree Serif,serif;
+  font-family: Bree Serif, serif;
   font-style: normal;
   font-weight: normal;
   font-size: 48px;
@@ -60,7 +61,7 @@ const AboutParagraph = styled.p`
   height: 168px;
   left: 0;
   top: 0;
-  font-family: Source Sans Pro,sans-serif;
+  font-family: Source Sans Pro, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -77,31 +78,28 @@ const AboutParagraph = styled.p`
 
 const AboutUs: React.FC = () => {
   return (
-    <div className="AboutUsContainer">
-      <Container>
-        <AboutSection>
-          <AboutDescription>
-            <AboutHeader>About</AboutHeader>
-            <AboutParagraph>
-              We are a group of volunteers invested in working together to
-              improve the City and County of San Francisco, often using
-              technology to support our efforts. By connecting people,
-              organizations, resources, tools, and networks to build for San
-              Francisco, we will all thrive.
-            </AboutParagraph>
-            <AboutParagraph>
-              The Data Science Working Group’s primary purpose is to efficiently
-              assess, inspire, and tackle Code for San Francisco’s data science
-              needs, as well as to help the City and other brigades with their
-              data science needs whenever appropriate.
-            </AboutParagraph>
-          </AboutDescription>
-        </AboutSection>
-        <ImageSection>
-          <AboutImg />
-        </ImageSection>
-      </Container>
-    </div>
+    <Container>
+      <AboutSection>
+        <AboutDescription>
+          <AboutHeader>About</AboutHeader>
+          <AboutParagraph>
+            We are a group of volunteers invested in working together to improve
+            the City and County of San Francisco, often using technology to
+            support our efforts. By connecting people, organizations, resources,
+            tools, and networks to build for San Francisco, we will all thrive.
+          </AboutParagraph>
+          <AboutParagraph>
+            The Data Science Working Group’s primary purpose is to efficiently
+            assess, inspire, and tackle Code for San Francisco’s data science
+            needs, as well as to help the City and other brigades with their
+            data science needs whenever appropriate.
+          </AboutParagraph>
+        </AboutDescription>
+      </AboutSection>
+      <ImageSection>
+        <AboutImg title="About" />
+      </ImageSection>
+    </Container>
   );
 };
 

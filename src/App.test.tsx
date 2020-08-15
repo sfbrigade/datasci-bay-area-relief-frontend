@@ -13,8 +13,8 @@ describe("App", () => {
   });
 
   it("displays the home page by default", () => {
-    expect(screen.getByRole("heading")).toHaveTextContent(
-      "Find Loans & Grants"
-    );
+    expect(
+      screen.getByRole("heading", {name: "Find Loans & Grants"})
+    ).toBeVisible();
   });
 });

@@ -1,14 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as ThankImg } from "../../assets/ThankYou.svg";
-import CodeForSFLogo  from "../../assets/CodeForSFLogo.svg";
+import ThankImg from "../../assets/ThankYou.svg";
+import CodeForSFLogo from "../../assets/CodeForSFLogo.svg";
 import GitHubLogo from "../../assets/GitHubLogo.svg";
 import ReactLogo from "../../assets/ReactLogo.svg";
 
 const Container = styled.div`
   display: flex;
-  flex-flow: row wrap;  
+  flex-flow: row wrap;
   height: 1024px;
+  width: 100%;
 `;
 
 const ThankYouSection = styled.div`
@@ -36,7 +37,7 @@ const ImageSection = styled.div`
   align-items: center;
 `;
 
-const ThankYouImg = styled(ThankImg)`
+const ThankYouImg = styled.img`
   display: flex;
   flex-direction: column;
   width: 560px;
@@ -46,27 +47,26 @@ const ThankYouImg = styled(ThankImg)`
 `;
 
 const LogoSection = styled.div`
-  display:flex;  
+  display: flex;
   width: 433px;
   margin-top: 24px;
 `;
 
 const CodeForSFLogoImg = styled.img`
-  display:flex;  
+  display: flex;
   width: 279px;
   height: 49px;
 `;
 
 const GitHubLogoImg = styled.img`
-  display:flex;  
+  display: flex;
   width: 75px;
   height: 67px;
   margin-left: 24px;
-  
 `;
 
 const ReactLogoImg = styled.img`
-  display:flex;  
+  display: flex;
   width: 162px;
   height: 65px;
 `;
@@ -75,7 +75,7 @@ const Header = styled.h1`
   display: flex;
   flex-direction: column;
   text-align: left;
-  font-family: Bree Serif,serif;
+  font-family: Bree Serif, serif;
   font-style: normal;
   font-weight: normal;
   font-size: 48px;
@@ -108,27 +108,35 @@ const ThankYou: React.FC = () => {
   return (
     <Container>
       <ImageSection>
-        <ThankYouImg data-testid="ThankYouImg"></ThankYouImg>
+        <ThankYouImg alt="Thank you image" src={ThankImg} />
       </ImageSection>
 
       <ThankYouSection>
         <ThankYouDescription>
           <Header>Thank you</Header>
-          <P>This project couldn’t have happened without the generosity of the friends and family of Sanat Moningi. Thank you also to our sponsors, who provided us the tools to make this portal possible.</P>
+          <P>
+            This project couldn’t have happened without the generosity of the
+            friends and family of Sanat Moningi. Thank you also to our sponsors,
+            who provided us the tools to make this portal possible.
+          </P>
         </ThankYouDescription>
 
         <LogoSection>
-          <a href="https://www.codeforsanfrancisco.org/" data-testid="CodeForSFLink"><CodeForSFLogoImg data-testid="CodeForSFLogo" alt="Code for SF Logo" src={CodeForSFLogo} /></a>
-          <a href="https://github.com/" data-testid="GitHubLink"><GitHubLogoImg data-testid="GitHubLogo" alt="Git Hub Logo" src={GitHubLogo} /></a>
+          <a href="https://www.codeforsanfrancisco.org/">
+            <CodeForSFLogoImg alt="Code for SF Logo" src={CodeForSFLogo} />
+          </a>
+          <a href="https://github.com/">
+            <GitHubLogoImg alt="GitHub Logo" src={GitHubLogo} />
+          </a>
         </LogoSection>
 
         <LogoSection>
-          <a href="https://reactjs.org/" data-testid="ReactLink"><ReactLogoImg data-testid="ReactLogo" alt="React Logo" src={ReactLogo} /></a>
+          <a href="https://reactjs.org/">
+            <ReactLogoImg alt="React Logo" src={ReactLogo} />
+          </a>
         </LogoSection>
-
       </ThankYouSection>
     </Container>
-
   );
 };
 
