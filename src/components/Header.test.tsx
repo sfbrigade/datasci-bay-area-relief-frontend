@@ -67,7 +67,7 @@ describe("Header", () => {
       getByText("Bay Area Relief Portal").click();
     });
 
-    expect(history.location.hash).toBe("#portal");
+    expect(history.location.pathname).toBe("/results");
   });
 
   it("navigates to the about page", () => {
@@ -81,6 +81,6 @@ describe("Header", () => {
       getByText("About").click();
     });
 
-    expect(history.location.pathname).toBe("/Aboutus");
+    expect(history.location.hash).toBe("#about");
   });
 });

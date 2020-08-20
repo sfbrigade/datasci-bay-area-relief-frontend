@@ -1,7 +1,7 @@
 import React from "react";
 import {fireEvent, render, screen} from "@testing-library/react";
 import Home from "./Home";
-import {Router} from "react-router-dom";
+import {Router, Route} from "react-router-dom";
 import {createMemoryHistory} from "history";
 import search from "../../api";
 import {BusinessType, County} from "../../types";
@@ -14,7 +14,7 @@ jest.spyOn(history, "push");
 beforeEach(() => {
   render(
     <Router history={history}>
-      <Home />
+      <Route component={Home} />
     </Router>
   );
 });
@@ -25,8 +25,13 @@ describe("Home", () => {
       screen.getByRole("heading", {name: "Find Loans & Grants"})
     ).toBeVisible();
     expect(
-      screen.getByText("Search our database for Bay Area loans")
+      screen.getByText(/Search our database for Bay Area loans/i)
     ).toBeVisible();
+  });
+
+  it("renders a landing page sky svg with a front house image", () => {
+    expect(screen.getByTitle("Landing page sky")).toBeVisible();
+    expect(screen.getByRole("img", {name: "Storefront"})).toBeVisible();
   });
 
   it("displays a business type dropdown that changes values on different options", () => {
@@ -67,35 +72,11 @@ describe("Home", () => {
     });
   });
 
-  describe("Thank you section", () => {
-    it("renders heading and description", () => {
-      expect(screen.getByRole("heading", {name: "Thank you"})).toBeVisible();
-      expect(
-        screen.getByText(
-          "This project couldn’t have happened without the generosity of the friends and family of Sanat Moningi. Thank you also to our sponsors, who provided us the tools to make this portal possible."
-        )
-      ).toBeVisible();
-    });
-
-    it("renders images and logos with links", () => {
-      expect(screen.getByAltText("Thank you image")).toBeVisible();
-      expect(screen.getByAltText("Code for SF Logo")).toBeVisible();
-      expect(
-        screen.getByAltText("Code for SF Logo").closest("a")
-      ).toHaveAttribute("href", "https://www.codeforsanfrancisco.org/");
-
-      expect(screen.getByAltText("GitHub Logo")).toBeVisible();
-      expect(screen.getByAltText("GitHub Logo").closest("a")).toHaveAttribute(
-        "href",
-        "https://github.com/"
-      );
-
-      expect(screen.getByAltText("React Logo")).toBeVisible();
-      expect(screen.getByAltText("React Logo").closest("a")).toHaveAttribute(
-        "href",
-        "https://reactjs.org/"
-      );
-    });
+  it("renders a donate button and when pressed sends the user to the donate page", () => {
+    const donateButton = screen.getByText("I want to donate");
+    expect(donateButton).toBeVisible();
+    fireEvent.click(donateButton);
+    expect(history.push).toHaveBeenCalledWith("/donate");
   });
 
   describe("How It Works section", () => {
@@ -145,6 +126,37 @@ describe("Home", () => {
       ).toBeInTheDocument();
 
       expect(screen.getByTitle("About")).toBeVisible();
+    });
+  });
+
+  describe("Thank you section", () => {
+    it("renders heading and description", () => {
+      expect(screen.getByRole("heading", {name: "Thank you"})).toBeVisible();
+      expect(
+        screen.getByText(
+          "This project couldn’t have happened without the generosity of the friends and family of Sanat Moningi. Thank you also to our sponsors, who provided us the tools to make this portal possible."
+        )
+      ).toBeVisible();
+    });
+
+    it("renders images and logos with links", () => {
+      expect(screen.getByAltText("Thank you image")).toBeVisible();
+      expect(screen.getByAltText("Code for SF Logo")).toBeVisible();
+      expect(
+        screen.getByAltText("Code for SF Logo").closest("a")
+      ).toHaveAttribute("href", "https://www.codeforsanfrancisco.org/");
+
+      expect(screen.getByAltText("GitHub Logo")).toBeVisible();
+      expect(screen.getByAltText("GitHub Logo").closest("a")).toHaveAttribute(
+        "href",
+        "https://github.com/"
+      );
+
+      expect(screen.getByAltText("React Logo")).toBeVisible();
+      expect(screen.getByAltText("React Logo").closest("a")).toHaveAttribute(
+        "href",
+        "https://reactjs.org/"
+      );
     });
   });
 });

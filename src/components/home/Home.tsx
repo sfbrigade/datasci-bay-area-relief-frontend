@@ -1,7 +1,8 @@
-import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
+import React, {useState, useEffect, useRef} from "react";
+import {useHistory, RouteComponentProps} from "react-router-dom";
 import styled from "styled-components";
-import {ReactComponent as CoolIllustration} from "../../assets/CoolIllustration.svg";
+import {ReactComponent as LandingPageSky} from "../../assets/LandingPageSky.svg";
+import Storefront from "../../assets/Storefront.png";
 import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -10,15 +11,35 @@ import search from "../../api";
 import HowItWorks from "./HowItWorks";
 import AboutUs from "./AboutUs";
 import ThankYou from "./ThankYou";
-import {BusinessType, County} from "../../types";
+import {BusinessType, County, LocationState} from "../../types";
 
-const Container = styled.div`
+const PageContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+`;
+
+const SectionContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   height: 100vh;
+  width: 100%;
 `;
 
 const ImageSection = styled.div`
   flex: 1 1 0;
+`;
+
+const StyledLandingPageSky = styled(LandingPageSky)`
+  position: absolute;
+  left: 0px;
+`;
+
+const StyledStoreFront = styled.img`
+  position: absolute;
+  width: 800;
+  height: 800px;
+  left: 0px;
+  top: 150px;
 `;
 
 const SearchSection = styled.div`
@@ -29,24 +50,87 @@ const SearchSection = styled.div`
   align-items: center;
 `;
 
+const SearchHeading = styled.h1`
+  margin-bottom: 0;
+  z-index: 10;
+  /* H3 / Source Sans Pro */
+
+  font-family: Bree Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 65px;
+  /* identical to box height */
+
+  /* Black — High Emphasis */
+
+  color: rgba(0, 0, 0, 0.87);
+  mix-blend-mode: normal;
+`;
+
+const SearchDescription = styled.p`
+  width: 400px;
+  z-index: 10;
+  /* Body 1 / Source Sans Pro */
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 28px;
+  /* or 156% */
+
+  text-align: center;
+  letter-spacing: 0.5px;
+
+  color: rgba(0, 0, 0, 0.8);
+`;
+
 const SearchFormFields = styled.div`
   display: flex;
   flex-direction: column;
   width: 328px;
 `;
 
-const PlaceholderIllustration = styled(CoolIllustration)`
-  position: absolute;
-  width: 823px;
-  height: 823px;
-  left: -201px;
-  top: 128px;
+const StyledSelect = styled(Select)`
+  margin-bottom: 1em;
 `;
 
-const Home: React.FC = () => {
+const SearchButton = styled(Button)`
+  && {
+    width: 97px;
+    height: 36px;
+    background-color: #ef5350;
+    opacity: 0.5;
+    border-radius: 200px;
+    margin-bottom: 1em;
+
+    /* Button / Source Sans Pro */
+
+    font-family: Source Sans Pro;
+    font-style: normal;
+    letter-spacing: 0.75px;
+  }
+`;
+
+const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
+  location,
+}) => {
   const [businessType, setBusinessType] = useState<BusinessType | "">("");
   const [county, setCounty] = useState<County | "">("");
   const history = useHistory();
+  const aboutRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (location.state && location.state.toAbout && aboutRef.current) {
+      aboutRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+    if (location.state && location.state.toHome) {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   const goToResults = () => {
     if (businessType !== "" && county !== "") {
@@ -54,21 +138,28 @@ const Home: React.FC = () => {
       history.push("/results");
     }
   };
+  const goToDonate = () => {
+    history.push("/donate");
+  };
 
   return (
-    <div>
-      <Container>
+    <PageContainer>
+      <SectionContainer>
         <ImageSection>
-          <PlaceholderIllustration />
+          <StyledLandingPageSky title="Landing page sky" />
+          <StyledStoreFront src={Storefront} alt="Storefront" />
         </ImageSection>
         <SearchSection>
-          <h1>Find Loans & Grants</h1>
-          <p>Search our database for Bay Area loans</p>
+          <SearchHeading>Find Loans & Grants</SearchHeading>
+          <SearchDescription>
+            Search our database for Bay Area loans for your non-profit or small
+            business.
+          </SearchDescription>
 
           <SearchFormFields>
             <FormControl variant="outlined">
               <InputLabel htmlFor="business-type-select">I am a...</InputLabel>
-              <Select
+              <StyledSelect
                 native
                 value={businessType}
                 onChange={(event) =>
@@ -84,11 +175,11 @@ const Home: React.FC = () => {
                   Small business
                 </option>
                 <option value={BusinessType.NonProfit}>Non-profit</option>
-              </Select>
+              </StyledSelect>
             </FormControl>
             <FormControl variant="outlined">
               <InputLabel htmlFor="county-select">County</InputLabel>
-              <Select
+              <StyledSelect
                 native
                 value={county}
                 onChange={(event) => setCounty(event.target.value as County)}
@@ -104,25 +195,25 @@ const Home: React.FC = () => {
                 <option value={County.ContraCosta}>Conta Costa</option>
                 <option value={County.SantaClara}>Santa Clara</option>
                 <option value={County.Any}>Any</option>
-              </Select>
+              </StyledSelect>
             </FormControl>
           </SearchFormFields>
-
-          <Button variant="contained" onClick={goToResults}>
-            Search
+          <SearchButton onClick={goToResults}>Search</SearchButton>
+          <Button color="secondary" onClick={goToDonate}>
+            I want to donate
           </Button>
         </SearchSection>
-      </Container>
-      <Container>
+      </SectionContainer>
+      <SectionContainer>
         <HowItWorks />
-      </Container>
-      <Container>
+      </SectionContainer>
+      <SectionContainer id="about" ref={aboutRef}>
         <AboutUs />
-      </Container>
-      <Container>
+      </SectionContainer>
+      <SectionContainer>
         <ThankYou />
-      </Container>
-    </div>
+      </SectionContainer>
+    </PageContainer>
   );
 };
 

@@ -4,9 +4,23 @@ import {getResults} from "../../api/axiosApi";
 import {Result} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
+import Drawer from "@material-ui/core/Drawer";
 
 const ResultsPage = styled.div`
+  display: flex;
   background: #fafafa;
+  float: left;
+  clear: both;
+`;
+
+const StyledDrawer = styled(Drawer)`
+  & > div {
+    position: static;
+    z-index: 0;
+    background-color: transparent;
+    border-right: medium none black;
+    width: 361px;
+  }
 `;
 
 const ResultsList = styled.div`
@@ -25,6 +39,7 @@ const ListItem = styled.li`
 const Results: React.FC = () => {
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     getResults().then((response) => {
       setResults(response);
@@ -57,6 +72,7 @@ const Results: React.FC = () => {
 
   return (
     <ResultsPage>
+      <StyledDrawer variant="permanent" anchor="left"></StyledDrawer>
       <ResultsList>{!loading && renderResults()}</ResultsList>
     </ResultsPage>
   );

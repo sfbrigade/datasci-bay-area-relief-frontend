@@ -37,3 +37,8 @@ export enum ReliefType {
   ProtestDamage = "Protest Damage",
   Both = "Both",
 }
+
+export type LocationState = {
+  toHome?: boolean | undefined;
+  toAbout?: boolean | undefined;
+};
