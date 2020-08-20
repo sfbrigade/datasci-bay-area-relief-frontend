@@ -25,6 +25,7 @@ describe("Results", () => {
   describe("when there are results", () => {
     const results: Result[] = [
       {
+        id: 1,
         name: "result 1",
         supportType: SupportType.Loan,
         interestRate: 0.01,
@@ -33,6 +34,7 @@ describe("Results", () => {
         reliefType: ReliefType.COVID,
       },
       {
+        id: 2,
         name: "result 2",
         supportType: SupportType.Grant,
         interestRate: null,
@@ -41,6 +43,7 @@ describe("Results", () => {
         reliefType: ReliefType.ProtestDamage,
       },
       {
+        id: 3,
         name: "result 3",
         supportType: SupportType.Loan,
         interestRate: 0,
@@ -49,6 +52,7 @@ describe("Results", () => {
         reliefType: ReliefType.Both,
       },
       {
+        id: 4,
         name: "result 4",
         supportType: SupportType.Loan,
         interestRate: 0.0375,

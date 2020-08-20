@@ -62,7 +62,7 @@ const Results: React.FC = () => {
     return (
       <StyledUL>
         {results.map((result: Result) => (
-          <ListItem key={result.name}>
+          <ListItem key={result.name + result.id}>
             <ResultCard {...result} />
           </ListItem>
         ))}

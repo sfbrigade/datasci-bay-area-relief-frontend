@@ -18,6 +18,7 @@ export interface FilterOptions {
 }
 
 export interface Result {
+  id: number;
   name: string;
   supportType: SupportType;
   interestRate: number | null;
