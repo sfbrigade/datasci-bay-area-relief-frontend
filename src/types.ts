@@ -25,6 +25,8 @@ export interface Result {
   dateAdded: string;
   maxAwardAmount: number | null;
   reliefType: ReliefType;
+  sfCounty: string;
+  alamedaCounty: string;
 }
 
 export enum SupportType {
