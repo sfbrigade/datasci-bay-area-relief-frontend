@@ -15,14 +15,14 @@ describe("Results", () => {
   describe("when there are no results", () => {
     it("renders a no results image and message", async () => {
       jest.spyOn(api, "getResults").mockResolvedValueOnce([]);
-      const {container} = render(<Results />);
+      render(<Results />);
       await idleForIO();
-      expect(container.querySelector("svg")?.textContent).toBe("NoResults.svg");
+
+      expect(screen.getByTitle("No results")).toBeVisible();
       expect(screen.getByText(/Try clearing some filters/));
     });
   });
 
-  // TODO: Add tests for sorting
   describe("when there are results", () => {
     const results: Result[] = [
       {
@@ -107,10 +107,11 @@ describe("Results", () => {
 
     it("does not show the no results image", async () => {
       jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
-      const {container} = render(<Results />);
+      render(<Results />);
       await idleForIO();
 
-      expect(container.querySelector("svg")?.textContent).toBeUndefined();
+      expect(screen.queryByTitle("No results")).toBeNull();
+      expect(screen.queryByText(/Try clearing some filters/)).toBeNull();
     });
   });
 });

@@ -6,7 +6,7 @@ import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Moment from "moment";
+import sortListBy from "./sortListBy";
 
 const ResultsPage = styled.div`
   display: flex;
@@ -116,52 +116,27 @@ const ListItem = styled.li`
 const Results: React.FC = () => {
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
-  const [sortOption, setSortOption] = useState(SortOptionType.DueDateNewToOld);
+  const [sortOption, setSortOption] = useState<SortOptionType>(
+    SortOptionType.None
+  );
 
   useEffect(() => {
     getResults().then((response) => {
       setResults(response);
+      setSortOption(SortOptionType.DueDateNewToOld);
       setLoading(false);
     });
   }, []);
 
-  // TODO: Finish rest of sort options
-  switch (+sortOption) {
-    case SortOptionType.DueDateOldToNew:
-      results.sort((a, b) => {
-        if (a.deadline === null && b.deadline !== null) {
-          return 1;
-        }
-        if (a.deadline !== null && b.deadline === null) {
-          return -1;
-        }
-        if (a.deadline === null && b.deadline === null) {
-          return 0;
-        }
-        return Moment(b.deadline).diff(Moment(a.deadline));
-      });
-      break;
-    default:
-      results.sort((a, b) => {
-        if (a.deadline === null && b.deadline !== null) {
-          return 1;
-        }
-        if (a.deadline !== null && b.deadline === null) {
-          return -1;
-        }
-        if (a.deadline === null && b.deadline === null) {
-          return 0;
-        }
-        return Moment(a.deadline).diff(Moment(b.deadline));
-      });
-      break;
-  }
+  useEffect(() => {
+    setResults((curResults) => sortListBy(curResults, sortOption));
+  }, [sortOption]);
 
   const renderResults = () => {
     if (results.length === 0) {
       return (
         <>
-          <NoResults />
+          <NoResults title="No results" />
           <p>
             Try clearing some filters! There are still {results.length} loans
             out there.
@@ -190,7 +165,7 @@ const Results: React.FC = () => {
             Sort by:
             <StyledFormControl>
               <StyledSelect
-                defaultValue={sortOption}
+                defaultValue={SortOptionType.DueDateNewToOld}
                 onChange={(event) =>
                   setSortOption(event.target.value as SortOptionType)
                 }
@@ -198,11 +173,23 @@ const Results: React.FC = () => {
                 disableUnderline
                 inputProps={{"aria-label": "sort by"}}
               >
+                <option value={SortOptionType.InterestHighToLow}>
+                  Interest: High-Low
+                </option>
+                <option value={SortOptionType.InterestLowToHigh}>
+                  Interest: Low-High
+                </option>
                 <option value={SortOptionType.DueDateNewToOld}>
                   Due date: New-Old
                 </option>
                 <option value={SortOptionType.DueDateOldToNew}>
                   Due date: Old-New
+                </option>
+                <option value={SortOptionType.AwardAmountHighToLow}>
+                  Amount: High-Low
+                </option>
+                <option value={SortOptionType.AwardAmountLowToHigh}>
+                  Amount: Low-High
                 </option>
               </StyledSelect>
             </StyledFormControl>

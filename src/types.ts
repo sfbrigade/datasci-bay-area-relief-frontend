@@ -48,4 +48,9 @@ export type LocationState = {
 export enum SortOptionType {
   DueDateNewToOld,
   DueDateOldToNew,
+  InterestHighToLow,
+  InterestLowToHigh,
+  AwardAmountLowToHigh,
+  AwardAmountHighToLow,
+  None,
 }
