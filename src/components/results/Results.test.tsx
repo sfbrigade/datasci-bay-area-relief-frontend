@@ -34,6 +34,8 @@ describe("Results", () => {
         maxAwardAmount: 10000000,
         reliefType: ReliefType.COVID,
         deadline: "Fri, 20 Sep 2019 00:00:00 GMT",
+        blackOwned: "No",
+        lgbtq: "No"
       },
       {
         id: 2,
@@ -44,6 +46,8 @@ describe("Results", () => {
         maxAwardAmount: null,
         reliefType: ReliefType.ProtestDamage,
         deadline: "Thu, 16 Apr 2020 00:00:00 GMT",
+        blackOwned: "Yes",
+        lgbtq: "No"
       },
       {
         id: 3,
@@ -54,6 +58,8 @@ describe("Results", () => {
         maxAwardAmount: 500,
         reliefType: ReliefType.Both,
         deadline: "Mon, 15 Jun 2020 00:00:00 GMT",
+        blackOwned: "No",
+        lgbtq: "Yes"
       },
       {
         id: 4,
@@ -64,6 +70,8 @@ describe("Results", () => {
         maxAwardAmount: 20000,
         reliefType: ReliefType.COVID,
         deadline: null,
+        blackOwned: "Yes",
+        lgbtq: "Yes"
       },
     ];
 
@@ -76,32 +84,45 @@ describe("Results", () => {
       const resultCards = screen.getAllByRole("listitem");
 
       resultCards.forEach((resultCard, index) => {
-        const {getByText} = within(resultCard);
-        expect(getByText(results[index].name)).toBeVisible();
+        const {getByText, queryByText} = within(resultCard);
+        const currentResult = results[index];
+        expect(getByText(currentResult.name)).toBeVisible();
 
-        const supportTypeRegex = new RegExp(results[index].supportType, "i");
+        const supportTypeRegex = new RegExp(currentResult.supportType, "i");
         expect(getByText(supportTypeRegex)).toBeVisible();
 
         const formattedInterestRate = formatInterestRate(
-          results[index].interestRate,
-          results[index].supportType
+          currentResult.interestRate,
+          currentResult.supportType
         );
         const interestRateRegex = new RegExp(formattedInterestRate, "i");
         expect(getByText(interestRateRegex)).toBeVisible();
 
-        const formattedDate = formatDate(results[index].dateAdded);
+        const formattedDate = formatDate(currentResult.dateAdded);
         const dateAddedRegex = new RegExp(formattedDate, "i");
         expect(getByText(dateAddedRegex)).toBeVisible();
 
         expect(
-          getByText(formatAwardAmount(results[index].maxAwardAmount))
+          getByText(formatAwardAmount(currentResult.maxAwardAmount))
         ).toBeVisible();
 
         expect(
-          getByText(formatReliefType(results[index].reliefType))
+          getByText(formatReliefType(currentResult.reliefType))
         ).toBeVisible();
 
         expect(getByText("Apply")).toBeVisible();
+
+        if (currentResult.blackOwned && currentResult.blackOwned === "Yes") {
+          expect(queryByText("Black-owned")).toBeVisible();
+        } else {
+          expect(queryByText("Black-owned")).toBeNull();
+        }
+
+        if (currentResult.lgbtq && currentResult.lgbtq === "Yes") {
+          expect(queryByText("LGBTQ")).toBeVisible();
+        } else {
+          expect(queryByText("LGBTQ")).toBeNull();
+        }
       });
     });
 

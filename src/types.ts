@@ -26,6 +26,8 @@ export interface Result {
   maxAwardAmount: number | null;
   reliefType: ReliefType;
   deadline: string | null;
+  blackOwned: string | null;
+  lgbtq: string | null;
 }
 
 export enum SupportType {
