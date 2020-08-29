@@ -15,9 +15,10 @@ describe("Results", () => {
   describe("when there are no results", () => {
     it("renders a no results image and message", async () => {
       jest.spyOn(api, "getResults").mockResolvedValueOnce([]);
-      const {container} = render(<Results />);
+      render(<Results />);
       await idleForIO();
-      expect(container.querySelector("svg")?.textContent).toBe("NoResults.svg");
+
+      expect(screen.getByTitle("No results")).toBeVisible();
       expect(screen.getByText(/Try clearing some filters/));
     });
   });
@@ -32,6 +33,7 @@ describe("Results", () => {
         dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 10000000,
         reliefType: ReliefType.COVID,
+        deadline: "Fri, 20 Sep 2019 00:00:00 GMT",
       },
       {
         id: 2,
@@ -41,6 +43,7 @@ describe("Results", () => {
         dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
         maxAwardAmount: null,
         reliefType: ReliefType.ProtestDamage,
+        deadline: "Thu, 16 Apr 2020 00:00:00 GMT",
       },
       {
         id: 3,
@@ -50,6 +53,7 @@ describe("Results", () => {
         dateAdded: "Wed, 10 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 500,
         reliefType: ReliefType.Both,
+        deadline: "Mon, 15 Jun 2020 00:00:00 GMT",
       },
       {
         id: 4,
@@ -59,6 +63,7 @@ describe("Results", () => {
         dateAdded: "Fri, 05 Jun 2020 00:00:00 GMT",
         maxAwardAmount: 20000,
         reliefType: ReliefType.COVID,
+        deadline: null,
       },
     ];
 
@@ -102,10 +107,11 @@ describe("Results", () => {
 
     it("does not show the no results image", async () => {
       jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
-      const {container} = render(<Results />);
+      render(<Results />);
       await idleForIO();
 
-      expect(container.querySelector("svg")?.textContent).toBeUndefined();
+      expect(screen.queryByTitle("No results")).toBeNull();
+      expect(screen.queryByText(/Try clearing some filters/)).toBeNull();
     });
   });
 });

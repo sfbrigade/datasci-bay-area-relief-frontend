@@ -25,6 +25,7 @@ export interface Result {
   dateAdded: string;
   maxAwardAmount: number | null;
   reliefType: ReliefType;
+  deadline: string | null;
 }
 
 export enum SupportType {
@@ -43,3 +44,13 @@ export type LocationState = {
   toHome?: boolean | undefined;
   toAbout?: boolean | undefined;
 };
+
+export enum SortOptionType {
+  DueDateNewToOld,
+  DueDateOldToNew,
+  InterestHighToLow,
+  InterestLowToHigh,
+  AwardAmountLowToHigh,
+  AwardAmountHighToLow,
+  None,
+}
