@@ -2,12 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {Result} from "../../types";
 import Card from "@material-ui/core/Card";
-import {
-  formatInterestRate,
-  formatDate,
-  formatAwardAmount,
-  formatReliefType,
-} from "./formatHelpers";
+import {formatAwardAmount, formatDate, formatInterestRate, formatReliefType} from "./formatHelpers";
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -23,8 +18,6 @@ const SupportTypeContainer = styled.div`
 
   display: flex;
   flex-direction: row;
-  padding: 0px;
-
   position: absolute;
   width: 196px;
   height: 16px;
@@ -40,11 +33,11 @@ const SupportTypeItem = styled.p`
   position: static;
   height: 16px;
   right: 162px;
-  top: 0px;
+  top: 0;
 
   /* Overline / Source Sans Pro */
 
-  font-family: Source Sans Pro;
+  font-family: Source Sans Pro,sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -63,7 +56,7 @@ const SupportTypeItem = styled.p`
 
   flex: none;
   align-self: center;
-  margin: 4px 0px;
+  margin: 4px 0;
 `;
 
 const StyledAwardAmount = styled.h5`
@@ -71,8 +64,8 @@ const StyledAwardAmount = styled.h5`
   padding: 0;
   margin-block-start: 0;
   margin-block-end: 0;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
   text-align: left;
 
   /* Headline 5 */
@@ -85,7 +78,7 @@ const StyledAwardAmount = styled.h5`
 
   /* H5 / Source Sans Pro */
 
-  font-family: Source Sans Pro;
+  font-family: Source Sans Pro,sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
@@ -111,7 +104,7 @@ const StyledName = styled.div`
 
   /* Body 2 / Source Sans Pro */
 
-  font-family: Source Sans Pro;
+  font-family: Source Sans Pro,sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -139,7 +132,7 @@ const StyledReliefType = styled.div`
 
   /* Body 2 / Source Sans Pro */
 
-  font-family: Source Sans Pro;
+  font-family: Source Sans Pro,sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -154,30 +147,50 @@ const StyledReliefType = styled.div`
   mix-blend-mode: normal;
 `;
 
-const StyledButton = styled.div`
-  /* Label */
-
+const CardBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
   position: absolute;
-  width: 36px;
-  height: 16px;
-  left: 16px;
   bottom: 12px;
+  width: 95%;
+  left: 12px;
+`;
 
+const StyledButton = styled.div`
   /* Button / Source Sans Pro */
-
-  font-family: Source Sans Pro;
+  font-family: Source Sans Pro,sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
   line-height: 16px;
   /* identical to box height, or 133% */
-
   letter-spacing: 0.75px;
   text-transform: uppercase;
-
   /* Primary — 500* */
-
   color: #ef5350;
+`;
+
+const Tags = styled.div`
+  display: flex;
+`;
+const Tag = styled.div`
+  margin-right: 4px;
+  background: linear-gradient(0deg, #FECE4B, #FECE4B);
+  border-radius: 16px;
+  height: 20px;
+  padding-left: 12px;
+  padding-right: 12px;
+  /* Body 2 / Source Sans Pro */
+  
+  font-family: Source Sans Pro,sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+  
+  text-align: center;
+  letter-spacing: 0.25px;
 `;
 
 const ResultCard: React.FC<Result> = ({
@@ -187,6 +200,8 @@ const ResultCard: React.FC<Result> = ({
   maxAwardAmount,
   name,
   reliefType,
+  blackOwned,
+  lgbtq
 }) => {
   return (
     <StyledCard>
@@ -201,7 +216,13 @@ const ResultCard: React.FC<Result> = ({
       <StyledAwardAmount>{formatAwardAmount(maxAwardAmount)}</StyledAwardAmount>
       <StyledName>{name}</StyledName>
       <StyledReliefType>{formatReliefType(reliefType)}</StyledReliefType>
-      <StyledButton>Apply</StyledButton>
+      <CardBottom>
+        <StyledButton>Apply</StyledButton>
+        <Tags>
+          {blackOwned && blackOwned === "Yes" ? <Tag>Black-owned</Tag> : null}
+          {lgbtq && lgbtq === "Yes" ? <Tag>LGBTQ</Tag> : null}
+        </Tags>
+      </CardBottom>
     </StyledCard>
   );
 };
