@@ -6,7 +6,7 @@ import {Result} from "../types";
 import mapKeys from "lodash/mapKeys";
 import camelCase from "lodash/camelCase";
 
-const API = "https://ec2-54-151-87-134.us-west-1.compute.amazonaws.com:8000/";
+const API = "http://ec2-54-151-87-134.us-west-1.compute.amazonaws.com:8000/";
 
 export const getResults = async (): Promise<Result[]> => {
   try {
