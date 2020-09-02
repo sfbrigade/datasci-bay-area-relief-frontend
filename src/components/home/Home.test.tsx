@@ -4,7 +4,7 @@ import Home from "./Home";
 import {Router, Route} from "react-router-dom";
 import {createMemoryHistory} from "history";
 import search from "../../api";
-import {BusinessType, County} from "../../types";
+import {OrgType, County} from "../../types";
 
 jest.mock("../../api");
 
@@ -39,9 +39,9 @@ describe("Home", () => {
     expect(businessTypeSelect).toHaveValue("");
 
     fireEvent.change(businessTypeSelect, {
-      target: {value: BusinessType.SmallBusiness},
+      target: {value: OrgType.SmallBusiness},
     });
-    expect(businessTypeSelect).toHaveValue(BusinessType.SmallBusiness);
+    expect(businessTypeSelect).toHaveValue(OrgType.SmallBusiness);
   });
 
   it("has a dropdown for county that changes value when the user selects a different option", () => {
@@ -59,13 +59,13 @@ describe("Home", () => {
       const countySelect = screen.getByLabelText("County");
 
       fireEvent.change(businessTypeSelect, {
-        target: {value: BusinessType.SmallBusiness},
+        target: {value: OrgType.SmallBusiness},
       });
       fireEvent.change(countySelect, {target: {value: County.Alameda}});
       fireEvent.click(searchButton);
 
       expect(search).toHaveBeenCalledWith({
-        businessType: BusinessType.SmallBusiness,
+        businessType: OrgType.SmallBusiness,
         county: County.Alameda,
       });
       expect(history.push).toHaveBeenCalledWith("/results");

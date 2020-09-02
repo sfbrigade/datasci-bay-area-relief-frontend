@@ -1,33 +1,26 @@
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useMemo, useState} from "react";
 import {ReactComponent as NoResults} from "../../assets/NoResults.svg";
 import {getResults} from "../../api/axiosApi";
-import {Result, SortOptionType} from "../../types";
+import {CurrentFilters, Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
+import {applyFilters, getMatchCounts} from "./filterHelpers";
+import {FilterBar} from "./FilterBar";
+import Typography from "@material-ui/core/Typography";
 
 const ResultsPage = styled.div`
   display: flex;
   background: #fafafa;
-  float: left;
-  clear: both;
-`;
-
-const Sidebar = styled.div`
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  margin-top: 130px;
-  overflow-y: auto;
-  height: auto;
-  width: 361px;
-  z-index: 0;
+  padding-top: 130px;
+  min-width: 100vh;
+  min-height: 100vh;
 `;
 
 const RightSide = styled.div`
-  margin-top: 130px;
+  flex: auto;
 `;
 
 const MatchSortContainer = styled.div`
@@ -39,48 +32,37 @@ const MatchSortContainer = styled.div`
 
 const ResultsMatched = styled.h5`
   margin: 0;
-  /* H4 / Source Sans Pro */
-
-  font-family: Source Sans Pro;
   font-style: normal;
   font-weight: normal;
   font-size: 34px;
   line-height: 43px;
-  /* identical to box height */
-
   letter-spacing: 0.25px;
-
-  /* Black — High Emphasis */
-
   color: rgba(0, 0, 0, 0.87);
   mix-blend-mode: normal;
 `;
 
 const SortContainer = styled.div`
-  /* Auto Layout */
   display: flex;
   flex-direction: row;
   padding: 6px 12px;
-
-  width: 207px;
+  min-width: 207px;
   height: 36px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 23px;
-
-  /* Body 2 / Source Sans Pro */
-
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 20px;
-  /* identical to box height, or 167% */
-
-  letter-spacing: 0.25px;
+  && .MuiTypography-root {
+    /* Body 2 / Source Sans Pro */
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+  }
 `;
 
 const StyledFormControl = styled(FormControl)`
+  flex: auto;
   display: flex;
   flex-direction: row;
   width: 128px;
@@ -91,8 +73,8 @@ const StyledFormControl = styled(FormControl)`
 
 const StyledSelect = styled(Select)`
   && select {
-    padding: 3px 0 7px;
-    margin-left: 4px;
+    padding-top: 3px;
+    margin-left: 8px;
     font-family: Source Sans Pro;
     font-style: normal;
     font-weight: normal;
@@ -116,16 +98,28 @@ const ListItem = styled.li`
 const Results: React.FC = () => {
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
+
+  const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
+    currentFilters,
+    results,
+  ]);
+
+  const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
+    filteredResults,
+  ]);
+
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.None
   );
 
   useEffect(() => {
-    getResults().then((response) => {
-      setResults(response);
-      setSortOption(SortOptionType.DueDateNewToOld);
-      setLoading(false);
-    });
+    getResults()
+      .then(setResults)
+      .then(() => {
+        setSortOption(SortOptionType.DueDateNewToOld);
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -133,7 +127,7 @@ const Results: React.FC = () => {
   }, [sortOption]);
 
   const renderResults = () => {
-    if (results.length === 0) {
+    if (filteredResults.length === 0) {
       return (
         <>
           <NoResults title="No results" />
@@ -146,7 +140,7 @@ const Results: React.FC = () => {
     }
     return (
       <StyledUL>
-        {results.map((result: Result) => (
+        {filteredResults.map((result: Result) => (
           <ListItem key={result.name + result.id}>
             <ResultCard {...result} />
           </ListItem>
@@ -155,48 +149,76 @@ const Results: React.FC = () => {
     );
   };
 
+  const handleFilterChange = (group: keyof CurrentFilters) => (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const newFilters = {...currentFilters};
+    if (event.target.checked) {
+      if (group in newFilters) {
+        if (!newFilters[group]!.includes(event.target.name)) {
+          newFilters[group]!.push(event.target.name);
+        }
+      } else {
+        newFilters[group] = [event.target.name];
+      }
+    } else {
+      const index = newFilters[group]!.indexOf(event.target.name);
+      newFilters[group]!.splice(index);
+      if (newFilters[group]!.length === 0) delete newFilters[group];
+    }
+    setCurrentFilters(newFilters);
+  };
+
   return (
     <ResultsPage>
-      <Sidebar></Sidebar>
-      <RightSide>
-        <MatchSortContainer>
-          <ResultsMatched>{`matches:`}</ResultsMatched>
-          <SortContainer>
-            Sort by:
-            <StyledFormControl>
-              <StyledSelect
-                defaultValue={SortOptionType.DueDateNewToOld}
-                onChange={(event) =>
-                  setSortOption(event.target.value as SortOptionType)
-                }
-                native
-                disableUnderline
-                inputProps={{"aria-label": "sort by"}}
-              >
-                <option value={SortOptionType.InterestHighToLow}>
-                  Interest: High-Low
-                </option>
-                <option value={SortOptionType.InterestLowToHigh}>
-                  Interest: Low-High
-                </option>
-                <option value={SortOptionType.DueDateNewToOld}>
-                  Due date: New-Old
-                </option>
-                <option value={SortOptionType.DueDateOldToNew}>
-                  Due date: Old-New
-                </option>
-                <option value={SortOptionType.AwardAmountHighToLow}>
-                  Amount: High-Low
-                </option>
-                <option value={SortOptionType.AwardAmountLowToHigh}>
-                  Amount: Low-High
-                </option>
-              </StyledSelect>
-            </StyledFormControl>
-          </SortContainer>
-        </MatchSortContainer>
-        <ResultsList>{!loading && renderResults()}</ResultsList>
-      </RightSide>
+      {!loading && (
+        <>
+          <FilterBar
+            currentFilters={currentFilters}
+            onChange={handleFilterChange}
+            matchCounts={matchCounts}
+          />
+          <RightSide>
+            <MatchSortContainer>
+              <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>
+              <SortContainer>
+                <Typography>Sort by:</Typography>
+                <StyledFormControl>
+                  <StyledSelect
+                    defaultValue={SortOptionType.DueDateNewToOld}
+                    onChange={(event) =>
+                      setSortOption(event.target.value as SortOptionType)
+                    }
+                    native
+                    disableUnderline
+                    inputProps={{"aria-label": "sort by"}}
+                  >
+                    <option value={SortOptionType.InterestHighToLow}>
+                      Interest: High-Low
+                    </option>
+                    <option value={SortOptionType.InterestLowToHigh}>
+                      Interest: Low-High
+                    </option>
+                    <option value={SortOptionType.DueDateNewToOld}>
+                      Due date: New-Old
+                    </option>
+                    <option value={SortOptionType.DueDateOldToNew}>
+                      Due date: Old-New
+                    </option>
+                    <option value={SortOptionType.AwardAmountHighToLow}>
+                      Amount: High-Low
+                    </option>
+                    <option value={SortOptionType.AwardAmountLowToHigh}>
+                      Amount: Low-High
+                    </option>
+                  </StyledSelect>
+                </StyledFormControl>
+              </SortContainer>
+            </MatchSortContainer>
+            <ResultsList>{renderResults()}</ResultsList>
+          </RightSide>
+        </>
+      )}
     </ResultsPage>
   );
 };

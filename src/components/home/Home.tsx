@@ -11,7 +11,7 @@ import search from "../../api";
 import HowItWorks from "./HowItWorks";
 import AboutUs from "./AboutUs";
 import ThankYou from "./ThankYou";
-import {BusinessType, County, LocationState} from "../../types";
+import {OrgType, County, LocationState} from "../../types";
 
 const PageContainer = styled.div`
   display: flex;
@@ -116,7 +116,7 @@ const SearchButton = styled(Button)`
 const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
   location,
 }) => {
-  const [businessType, setBusinessType] = useState<BusinessType | "">("");
+  const [businessType, setBusinessType] = useState<OrgType | "">("");
   const [county, setCounty] = useState<County | "">("");
   const history = useHistory();
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -163,7 +163,7 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
                 native
                 value={businessType}
                 onChange={(event) =>
-                  setBusinessType(event.target.value as BusinessType)
+                  setBusinessType(event.target.value as OrgType)
                 }
                 inputProps={{
                   name: "business-type",
@@ -171,10 +171,8 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
                 }}
               >
                 <option aria-label="None" value="" />
-                <option value={BusinessType.SmallBusiness}>
-                  Small business
-                </option>
-                <option value={BusinessType.NonProfit}>Non-profit</option>
+                <option value={OrgType.SmallBusiness}>Small business</option>
+                <option value={OrgType.NonProfit}>Non-profit</option>
               </StyledSelect>
             </FormControl>
             <FormControl variant="outlined">

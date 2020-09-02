@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import {Result} from "../../types";
 import Card from "@material-ui/core/Card";
-import {formatAwardAmount, formatDate, formatInterestRate, formatReliefType} from "./formatHelpers";
+import {
+  formatAwardAmount,
+  formatDate,
+  formatInterestRate,
+  formatReliefType,
+} from "./formatHelpers";
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -37,7 +42,7 @@ const SupportTypeItem = styled.p`
 
   /* Overline / Source Sans Pro */
 
-  font-family: Source Sans Pro,sans-serif;
+  font-family: Source Sans Pro, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -78,7 +83,7 @@ const StyledAwardAmount = styled.h5`
 
   /* H5 / Source Sans Pro */
 
-  font-family: Source Sans Pro,sans-serif;
+  font-family: Source Sans Pro, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
@@ -104,7 +109,7 @@ const StyledName = styled.div`
 
   /* Body 2 / Source Sans Pro */
 
-  font-family: Source Sans Pro,sans-serif;
+  font-family: Source Sans Pro, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -132,7 +137,7 @@ const StyledReliefType = styled.div`
 
   /* Body 2 / Source Sans Pro */
 
-  font-family: Source Sans Pro,sans-serif;
+  font-family: Source Sans Pro, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
@@ -158,7 +163,7 @@ const CardBottom = styled.div`
 
 const StyledButton = styled.div`
   /* Button / Source Sans Pro */
-  font-family: Source Sans Pro,sans-serif;
+  font-family: Source Sans Pro, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -175,20 +180,20 @@ const Tags = styled.div`
 `;
 const Tag = styled.div`
   margin-right: 4px;
-  background: linear-gradient(0deg, #FECE4B, #FECE4B);
+  background: linear-gradient(0deg, #fece4b, #fece4b);
   border-radius: 16px;
   height: 20px;
   padding-left: 12px;
   padding-right: 12px;
   /* Body 2 / Source Sans Pro */
-  
-  font-family: Source Sans Pro,sans-serif;
+
+  font-family: Source Sans Pro, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 12px;
   line-height: 20px;
   /* identical to box height, or 167% */
-  
+
   text-align: center;
   letter-spacing: 0.25px;
 `;
@@ -201,7 +206,7 @@ const ResultCard: React.FC<Result> = ({
   name,
   reliefType,
   blackOwned,
-  lgbtq
+  lgbtq,
 }) => {
   return (
     <StyledCard>
@@ -219,8 +224,8 @@ const ResultCard: React.FC<Result> = ({
       <CardBottom>
         <StyledButton>Apply</StyledButton>
         <Tags>
-          {blackOwned && blackOwned === "Yes" ? <Tag>Black-owned</Tag> : null}
-          {lgbtq && lgbtq === "Yes" ? <Tag>LGBTQ</Tag> : null}
+          {blackOwned && <Tag>Black-owned</Tag>}
+          {lgbtq && <Tag>LGBTQ</Tag>}
         </Tags>
       </CardBottom>
     </StyledCard>
