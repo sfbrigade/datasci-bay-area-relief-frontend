@@ -7,6 +7,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import {filterGroups} from "./filterHelpers";
+import Button from "@material-ui/core/Button";
 
 const Sidebar = styled.div`
   display: flex;
@@ -37,39 +38,42 @@ type FilterBarProps = {
   onChange: (
     group: keyof CurrentFilters
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  onClear: () => void;
 };
 
 export const FilterBar: React.FC<FilterBarProps> = ({
   currentFilters,
   matchCounts,
   onChange,
+  onClear,
 }) => (
   <Sidebar>
-    <FormControl component="fieldset">
-      {filterGroups.map(({groupName, groupLabel, filters}) => (
-        <FormControl key={groupName} component="fieldset">
-          <FormLabel component="legend">{groupLabel}</FormLabel>
-          <FormGroup>
-            {filters.map(({label, name}) => (
-              <FormControlLabel
-                key={name}
-                label={`${label} (${matchCounts[name]})`}
-                control={
-                  <Checkbox
-                    name={name}
-                    checked={
-                      !!currentFilters[
-                        groupName as keyof CurrentFilters
-                      ]?.includes(name)
-                    }
-                    onChange={onChange(groupName as keyof CurrentFilters)}
-                  />
-                }
-              />
-            ))}
-          </FormGroup>
-        </FormControl>
-      ))}
-    </FormControl>
+    {filterGroups.map(({groupName, groupLabel, filters}) => (
+      <FormControl key={groupName} component="fieldset">
+        <FormLabel component="legend">{groupLabel}</FormLabel>
+        <FormGroup>
+          {filters.map(({label, name}) => (
+            <FormControlLabel
+              key={name}
+              label={`${label} (${matchCounts[name]})`}
+              control={
+                <Checkbox
+                  name={name}
+                  checked={
+                    !!currentFilters[
+                      groupName as keyof CurrentFilters
+                    ]?.includes(name)
+                  }
+                  onChange={onChange(groupName as keyof CurrentFilters)}
+                />
+              }
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+    ))}
+    <Button color="secondary" onClick={onClear}>
+      clear
+    </Button>
   </Sidebar>
 );

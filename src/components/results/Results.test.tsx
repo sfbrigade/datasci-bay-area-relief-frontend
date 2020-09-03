@@ -129,7 +129,49 @@ describe("Results", () => {
       expect(within(resultsList).queryByText("doctor strange")).toBeNull();
     });
 
-    it.todo("clearing filters");
+    it("clearing all filters", async () => {
+      const results: Result[] = [
+        makeResult({
+          id: 1,
+          sfCounty: true,
+          smallBusiness: true,
+        }),
+        makeResult({
+          id: 2,
+          sfCounty: false,
+          smallBusiness: true,
+        }),
+        makeResult({
+          id: 3,
+          sfCounty: true,
+          smallBusiness: false,
+        }),
+      ];
+
+      jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
+      render(<Results />);
+      await idleForIO();
+
+      const sfCountyFilter = screen.getByLabelText(
+        /san francisco/i
+      ) as HTMLInputElement;
+      const smallBusinessFilter = screen.getByLabelText(
+        /small business/i
+      ) as HTMLInputElement;
+      fireEvent.click(sfCountyFilter);
+      fireEvent.click(smallBusinessFilter);
+
+      const filteredResults = screen.getAllByRole("listitem");
+      expect(filteredResults.length).toEqual(1);
+
+      fireEvent.click(screen.getByText(/clear/i));
+
+      expect(sfCountyFilter.checked).toEqual(false);
+      expect(smallBusinessFilter.checked).toEqual(false);
+
+      const unfilteredResults = screen.getAllByRole("listitem");
+      expect(unfilteredResults.length).toEqual(3);
+    });
   });
 
   describe("results list", () => {

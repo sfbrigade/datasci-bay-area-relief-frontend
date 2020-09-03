@@ -169,6 +169,8 @@ const Results: React.FC = () => {
     setCurrentFilters(newFilters);
   };
 
+  const handleClearFilters = () => setCurrentFilters({});
+
   return (
     <ResultsPage>
       {!loading && (
@@ -177,6 +179,7 @@ const Results: React.FC = () => {
             currentFilters={currentFilters}
             onChange={handleFilterChange}
             matchCounts={matchCounts}
+            onClear={handleClearFilters}
           />
           <RightSide>
             <MatchSortContainer>
