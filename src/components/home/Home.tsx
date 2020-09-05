@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from "react";
-import {useHistory, RouteComponentProps} from "react-router-dom";
+import React, {useEffect, useRef, useState} from "react";
+import {RouteComponentProps, useHistory} from "react-router-dom";
 import styled from "styled-components";
 import {ReactComponent as LandingPageSky} from "../../assets/LandingPageSky.svg";
 import Storefront from "../../assets/Storefront.png";
@@ -11,7 +11,7 @@ import search from "../../api";
 import HowItWorks from "./HowItWorks";
 import AboutUs from "./AboutUs";
 import ThankYou from "./ThankYou";
-import {OrgType, County, LocationState} from "../../types";
+import {County, LocationState, OrgType} from "../../types";
 
 const PageContainer = styled.div`
   display: flex;
@@ -116,7 +116,7 @@ const SearchButton = styled(Button)`
 const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
   location,
 }) => {
-  const [businessType, setBusinessType] = useState<OrgType | "">("");
+  const [orgType, setOrgType] = useState<OrgType | "">("");
   const [county, setCounty] = useState<County | "">("");
   const history = useHistory();
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -133,8 +133,8 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
   }, [location]);
 
   const goToResults = () => {
-    if (businessType !== "" && county !== "") {
-      search({businessType, county});
+    if (orgType !== "" && county !== "") {
+      search({businessType: orgType, county});
       history.push("/results");
     }
   };
@@ -158,16 +158,15 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
 
           <SearchFormFields>
             <FormControl variant="outlined">
-              <InputLabel htmlFor="business-type-select">I am a...</InputLabel>
+              <InputLabel htmlFor="org-type-select">I am a...</InputLabel>
               <StyledSelect
                 native
-                value={businessType}
-                onChange={(event) =>
-                  setBusinessType(event.target.value as OrgType)
-                }
+                value={orgType}
+                onChange={(event) => setOrgType(event.target.value as OrgType)}
+                label="I am a..."
                 inputProps={{
-                  name: "business-type",
-                  id: "business-type-select",
+                  name: "org-type",
+                  id: "org-type-select",
                 }}
               >
                 <option aria-label="None" value="" />
@@ -181,6 +180,7 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
                 native
                 value={county}
                 onChange={(event) => setCounty(event.target.value as County)}
+                label="County"
                 inputProps={{
                   name: "county",
                   id: "county-select",

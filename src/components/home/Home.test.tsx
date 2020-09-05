@@ -34,31 +34,31 @@ describe("Home", () => {
     expect(screen.getByRole("img", {name: "Storefront"})).toBeVisible();
   });
 
-  it("displays a business type dropdown that changes values on different options", () => {
-    const businessTypeSelect = screen.getByLabelText("I am a...");
-    expect(businessTypeSelect).toHaveValue("");
-
-    fireEvent.change(businessTypeSelect, {
-      target: {value: OrgType.SmallBusiness},
-    });
-    expect(businessTypeSelect).toHaveValue(OrgType.SmallBusiness);
-  });
-
-  it("has a dropdown for county that changes value when the user selects a different option", () => {
-    const countySelect = screen.getByLabelText("County");
-    expect(countySelect).toHaveValue("");
-
-    fireEvent.change(countySelect, {target: {value: County.Alameda}});
-    expect(countySelect).toHaveValue(County.Alameda);
-  });
-
   describe("Search Button", () => {
+    it("displays an organization type dropdown that changes values on different options", () => {
+      const orgTypeSelect = screen.getByLabelText("I am a...");
+      expect(orgTypeSelect).toHaveValue("");
+
+      fireEvent.change(orgTypeSelect, {
+        target: {value: OrgType.SmallBusiness},
+      });
+      expect(orgTypeSelect).toHaveValue(OrgType.SmallBusiness);
+    });
+
+    it("has a dropdown for county that changes value when the user selects a different option", () => {
+      const countySelect = screen.getByLabelText("County");
+      expect(countySelect).toHaveValue("");
+
+      fireEvent.change(countySelect, {target: {value: County.Alameda}});
+      expect(countySelect).toHaveValue(County.Alameda);
+    });
+
     it("searches with the filter options the user has selected", () => {
       const searchButton = screen.getByText("Search");
-      const businessTypeSelect = screen.getByLabelText("I am a...");
+      const orgTypeSelect = screen.getByLabelText("I am a...");
       const countySelect = screen.getByLabelText("County");
 
-      fireEvent.change(businessTypeSelect, {
+      fireEvent.change(orgTypeSelect, {
         target: {value: OrgType.SmallBusiness},
       });
       fireEvent.change(countySelect, {target: {value: County.Alameda}});
