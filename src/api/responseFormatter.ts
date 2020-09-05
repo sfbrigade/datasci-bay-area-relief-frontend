@@ -36,5 +36,6 @@ export const standardizeFormat = (r: ResultResponse) => {
     private: r.sector_type === "Private",
     spanish: convertToBoolean(r.spanish),
     chinese: convertToBoolean(r.chinese),
+    websiteUrl: r.website_url,
   };
 };

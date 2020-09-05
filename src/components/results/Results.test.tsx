@@ -210,9 +210,15 @@ describe("Results", () => {
 
         const resultCards = screen.getAllByRole("listitem");
 
-        resultCards.forEach((resultCard, index) => {
+        /* Result Cards Tests */
+
+        for (let i = 0; i < resultCards.length; ++i) {
+          const resultCard = resultCards[i];
+          const currentResult = results[i];
+          global.open = jest.fn();
+
           const {getByText, queryByText} = within(resultCard);
-          const currentResult = results[index];
+
           expect(getByText(currentResult.name)).toBeVisible();
 
           const supportTypeRegex = new RegExp(currentResult.supportType, "i");
@@ -237,7 +243,21 @@ describe("Results", () => {
             getByText(formatReliefType(currentResult.reliefType))
           ).toBeVisible();
 
-          expect(getByText("Apply")).toBeVisible();
+          if (currentResult.websiteUrl === "None") {
+            expect(queryByText("Apply")).toBeNull();
+          } else {
+            expect(getByText("Apply")).toBeVisible();
+            const element:
+              | HTMLElement
+              | null
+              | Error
+              | HTMLElement[] = await getByText("Apply");
+            fireEvent.click(element as HTMLElement);
+            expect(global.open).toBeCalledWith(
+              currentResult.websiteUrl,
+              "_blank"
+            );
+          }
 
           if (currentResult.blackOwned) {
             expect(queryByText("Black-owned")).toBeVisible();
@@ -250,7 +270,7 @@ describe("Results", () => {
           } else {
             expect(queryByText("LGBTQ")).toBeNull();
           }
-        });
+        }
       });
 
       it("does not show the no results image", async () => {

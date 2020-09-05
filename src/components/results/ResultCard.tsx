@@ -8,6 +8,7 @@ import {
   formatInterestRate,
   formatReliefType,
 } from "./formatHelpers";
+import Button from "@material-ui/core/Button";
 
 const StyledCard = styled(Card)`
   position: relative;
@@ -161,20 +162,6 @@ const CardBottom = styled.div`
   left: 12px;
 `;
 
-const StyledButton = styled.div`
-  /* Button / Source Sans Pro */
-  font-family: Source Sans Pro, sans-serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 16px;
-  /* identical to box height, or 133% */
-  letter-spacing: 0.75px;
-  text-transform: uppercase;
-  /* Primary — 500* */
-  color: #ef5350;
-`;
-
 const Tags = styled.div`
   display: flex;
 `;
@@ -198,6 +185,10 @@ const Tag = styled.div`
   letter-spacing: 0.25px;
 `;
 
+const onApply = (url: string) => {
+  window.open(url, "_blank");
+};
+
 const ResultCard: React.FC<Result> = ({
   supportType,
   interestRate,
@@ -207,6 +198,7 @@ const ResultCard: React.FC<Result> = ({
   reliefType,
   blackOwned,
   lgbtq,
+  websiteUrl,
 }) => {
   return (
     <StyledCard>
@@ -222,7 +214,12 @@ const ResultCard: React.FC<Result> = ({
       <StyledName>{name}</StyledName>
       <StyledReliefType>{formatReliefType(reliefType)}</StyledReliefType>
       <CardBottom>
-        <StyledButton>Apply</StyledButton>
+        {websiteUrl !== "None" && (
+          <Button color="secondary" onClick={() => onApply(websiteUrl)}>
+            Apply
+          </Button>
+        )}
+
         <Tags>
           {blackOwned && <Tag>Black-owned</Tag>}
           {lgbtq && <Tag>LGBTQ</Tag>}

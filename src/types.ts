@@ -48,6 +48,7 @@ export interface Result {
   private: boolean;
   spanish: boolean;
   chinese: boolean;
+  websiteUrl: string;
 }
 
 export enum SupportType {

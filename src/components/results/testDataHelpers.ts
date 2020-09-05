@@ -34,5 +34,6 @@ export const makeResult = (partial: Partial<Result> = {}): Result => {
     santaClaraCounty: partial.santaClaraCounty ?? false,
     smallBusiness: partial.smallBusiness ?? false,
     spanish: partial.spanish ?? false,
+    websiteUrl: partial.websiteUrl ?? "None",
   };
 };
