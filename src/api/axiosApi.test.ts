@@ -144,6 +144,7 @@ describe("standardizeFormat", () => {
       smallBusiness: false,
       spanish: true,
       supportType: SupportType.Loan,
+      websiteUrl: "https://oewd.org/businesses-impacted-covid-19#Loans",
     };
     expect(standardizeFormat(rawResult)).toEqual(transformedResult);
   });
