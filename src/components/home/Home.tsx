@@ -7,11 +7,11 @@ import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import search from "../../api";
 import HowItWorks from "./HowItWorks";
 import AboutUs from "./AboutUs";
 import ThankYou from "./ThankYou";
 import {County, LocationState, OrgType} from "../../types";
+import {getFilterNameFromGroupAndLabel} from "../results/filterHelpers";
 
 const PageContainer = styled.div`
   display: flex;
@@ -133,10 +133,15 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
   }, [location]);
 
   const goToResults = () => {
-    if (orgType !== "" && county !== "") {
-      search({businessType: orgType, county});
-      history.push("/results");
-    }
+    history.push({
+      pathname: "/results",
+      state: {
+        currentFilters: {
+          orgType: [getFilterNameFromGroupAndLabel("orgType", orgType)],
+          county: [getFilterNameFromGroupAndLabel("county", county)],
+        },
+      },
+    });
   };
   const goToDonate = () => {
     history.push("/donate");
@@ -196,7 +201,9 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
               </StyledSelect>
             </FormControl>
           </SearchFormFields>
-          <SearchButton onClick={goToResults}>Search</SearchButton>
+          <SearchButton onClick={goToResults} disabled={!orgType || !county}>
+            Search
+          </SearchButton>
           <Button color="secondary" onClick={goToDonate}>
             I want to donate
           </Button>

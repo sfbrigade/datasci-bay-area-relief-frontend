@@ -152,3 +152,21 @@ export const filterGroups: FilterGroup[] = [
     ],
   },
 ];
+
+export const getFilterNameFromGroupAndLabel = (
+  groupName: string,
+  label: string
+): string | undefined => {
+  const foundGroup = filterGroups.find(
+    (group) => group.groupName === groupName
+  );
+  if (foundGroup) {
+    const foundFilter = foundGroup.filters.find(
+      (filter) => filter.label === label
+    );
+    if (foundFilter) {
+      return foundFilter.name;
+    }
+  }
+  return undefined;
+};

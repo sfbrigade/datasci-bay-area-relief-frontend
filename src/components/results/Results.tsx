@@ -10,6 +10,7 @@ import sortListBy from "./sortListBy";
 import {applyFilters, getMatchCounts} from "./filterHelpers";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
+import {useHistory} from "react-router-dom";
 
 const ResultsPage = styled.div`
   display: flex;
@@ -98,7 +99,15 @@ const ListItem = styled.li`
 const Results: React.FC = () => {
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
+
+  const history = useHistory<{currentFilters: CurrentFilters}>();
+  const currentFiltersFromHistory =
+    history.location.state && history.location.state.currentFilters
+      ? history.location.state.currentFilters
+      : {};
+  const [currentFilters, setCurrentFilters] = useState<CurrentFilters>(
+    currentFiltersFromHistory
+  );
 
   const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
     currentFilters,

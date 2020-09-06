@@ -1,7 +1,8 @@
 import React from "react";
-import {fireEvent, render, screen, within} from "@testing-library/react";
+import {fireEvent, screen, within} from "@testing-library/react";
+import {createMemoryHistory} from "history";
 import Results from "./Results";
-import {idleForIO} from "../../testUtils";
+import {idleForIO, renderWithRouter} from "../../testUtils";
 import * as api from "../../api/axiosApi";
 import {
   formatAwardAmount,
@@ -14,6 +15,43 @@ import {makeResult} from "./testDataHelpers";
 
 describe("Results", () => {
   describe("results filtering", () => {
+    it("applies the filters passed in", async () => {
+      const results: Result[] = [
+        makeResult({
+          id: 1,
+          sanMateoCounty: true,
+          nonProfit: true,
+        }),
+        makeResult({
+          id: 2,
+          sanMateoCounty: false,
+          nonProfit: false,
+        }),
+      ];
+      jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
+
+      const history = createMemoryHistory();
+      const initialState = {
+        currentFilters: {
+          orgType: ["nonProfit"],
+          county: ["sanMateoCounty"],
+        },
+      };
+      history.push("/", initialState);
+      renderWithRouter(<Results />, {history});
+      await idleForIO();
+
+      const nonProfitCheckbox = screen.getByLabelText(
+        /non-profit/i
+      ) as HTMLInputElement;
+      const sanMateoCountyCheckbox = screen.getByLabelText(
+        /san mateo/i
+      ) as HTMLInputElement;
+
+      expect(nonProfitCheckbox.checked).toEqual(true);
+      expect(sanMateoCountyCheckbox.checked).toEqual(true);
+    });
+
     it("shows dynamic counts for the filters", async () => {
       const results: Result[] = [
         makeResult({
@@ -44,7 +82,7 @@ describe("Results", () => {
       ];
       jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
 
-      render(<Results />);
+      renderWithRouter(<Results />);
       await idleForIO();
       const sfCountyCheckbox = screen.getByLabelText(
         /san francisco/i
@@ -93,7 +131,7 @@ describe("Results", () => {
       ];
 
       jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
-      render(<Results />);
+      renderWithRouter(<Results />);
       await idleForIO();
 
       const checkBoxSFCounty = screen.getByLabelText(
@@ -149,7 +187,7 @@ describe("Results", () => {
       ];
 
       jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
-      render(<Results />);
+      renderWithRouter(<Results />);
       await idleForIO();
 
       const sfCountyFilter = screen.getByLabelText(
@@ -183,7 +221,7 @@ describe("Results", () => {
             makeResult({id: 5, smallBusiness: true, nonProfit: false}),
             makeResult({id: 6, smallBusiness: true, nonProfit: false}),
           ]);
-        render(<Results />);
+        renderWithRouter(<Results />);
         await idleForIO();
 
         const nonProfitCheckbox = screen.getByLabelText(
@@ -205,7 +243,7 @@ describe("Results", () => {
         ];
         jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
 
-        render(<Results />);
+        renderWithRouter(<Results />);
         await idleForIO();
 
         const resultCards = screen.getAllByRole("listitem");
@@ -276,7 +314,7 @@ describe("Results", () => {
       it("does not show the no results image", async () => {
         const results = [makeResult()];
         jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
-        render(<Results />);
+        renderWithRouter(<Results />);
         await idleForIO();
 
         expect(screen.queryByTitle("No results")).toBeNull();

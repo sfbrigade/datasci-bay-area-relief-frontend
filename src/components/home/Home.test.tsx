@@ -1,12 +1,9 @@
 import React from "react";
 import {fireEvent, render, screen} from "@testing-library/react";
 import Home from "./Home";
-import {Router, Route} from "react-router-dom";
+import {Route, Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
-import search from "../../api";
-import {OrgType, County} from "../../types";
-
-jest.mock("../../api");
+import {County, OrgType} from "../../types";
 
 const history = createMemoryHistory();
 jest.spyOn(history, "push");
@@ -64,11 +61,15 @@ describe("Home", () => {
       fireEvent.change(countySelect, {target: {value: County.Alameda}});
       fireEvent.click(searchButton);
 
-      expect(search).toHaveBeenCalledWith({
-        businessType: OrgType.SmallBusiness,
-        county: County.Alameda,
+      expect(history.push).toHaveBeenCalledWith({
+        pathname: "/results",
+        state: {
+          currentFilters: {
+            orgType: ["smallBusiness"],
+            county: ["alamedaCounty"],
+          },
+        },
       });
-      expect(history.push).toHaveBeenCalledWith("/results");
     });
   });
 
