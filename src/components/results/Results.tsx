@@ -164,16 +164,16 @@ const Results: React.FC = () => {
     const newFilters = {...currentFilters};
     if (event.target.checked) {
       if (group in newFilters) {
-        if (!newFilters[group]!.includes(event.target.name)) {
-          newFilters[group]!.push(event.target.name);
+        if (!newFilters[group]?.includes(event.target.name)) {
+          newFilters[group]?.push(event.target.name);
         }
       } else {
         newFilters[group] = [event.target.name];
       }
     } else {
-      const index = newFilters[group]!.indexOf(event.target.name);
-      newFilters[group]!.splice(index);
-      if (newFilters[group]!.length === 0) delete newFilters[group];
+      const index = newFilters[group]?.indexOf(event.target.name);
+      if (index) newFilters[group]?.splice(index);
+      if (newFilters[group]?.length === 0) delete newFilters[group];
     }
     setCurrentFilters(newFilters);
   };

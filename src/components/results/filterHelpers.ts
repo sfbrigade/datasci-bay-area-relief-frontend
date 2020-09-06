@@ -1,7 +1,7 @@
 import {CurrentFilters, Result} from "../../types";
 
-const isEmptyObject = (object: Record<string, any>) =>
-  Object.keys(object).length === 0;
+const isEmpty = (currentFilters: CurrentFilters) =>
+  Object.keys(currentFilters).length === 0;
 
 type MatchGroupArgs = {
   result: Result;
@@ -10,7 +10,7 @@ type MatchGroupArgs = {
 };
 
 export const matchGroup = ({result, group, currentFilters}: MatchGroupArgs) => {
-  for (const filter of currentFilters[group as keyof CurrentFilters]!) {
+  for (const filter of currentFilters[group as keyof CurrentFilters]) {
     if (result[filter as keyof Result]) {
       return true;
     }
@@ -23,7 +23,7 @@ export const applyFilters = (
   currentFilters: CurrentFilters
 ): Result[] => {
   if (results.length === 0) return [];
-  if (isEmptyObject(currentFilters)) return results;
+  if (isEmpty(currentFilters)) return results;
   return results.filter((result) => {
     for (const group in currentFilters) {
       if (!matchGroup({result, group, currentFilters})) return false;
