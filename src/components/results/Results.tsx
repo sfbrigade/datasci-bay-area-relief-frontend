@@ -172,7 +172,7 @@ const Results: React.FC = () => {
       }
     } else {
       const index = newFilters[group]?.indexOf(event.target.name);
-      if (index) newFilters[group]?.splice(index);
+      if (index >= 0) newFilters[group]?.splice(index, 1);
       if (newFilters[group]?.length === 0) delete newFilters[group];
     }
     setCurrentFilters(newFilters);
