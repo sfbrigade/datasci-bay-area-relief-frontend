@@ -36,7 +36,7 @@ const StyledLandingPageSky = styled(LandingPageSky)`
 
 const StyledStoreFront = styled.img`
   position: absolute;
-  width: 800;
+  width: 800px;
   height: 800px;
   left: 0px;
   top: 150px;

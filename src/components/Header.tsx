@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React, {useState, useEffect} from "react";
+import styled, {StyledComponent} from "styled-components";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
 
-const ContainerOutsideHome = styled.header`
+const WhiteContainer = styled.header`
   top: 0;
   width: 100%;
   height: 98px;
@@ -15,9 +15,9 @@ const ContainerOutsideHome = styled.header`
   align-items: center;
   background-color: white;
   justify-content: space-between;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.14);
 `;
-const ContainerInHome = styled.header`
+const TransparentContainer = styled.header`
   top: 0;
   width: 100%;
   height: 98px;
@@ -27,6 +27,10 @@ const ContainerInHome = styled.header`
   overflow: hidden;
   align-items: center;
   justify-content: space-between;
+`;
+
+const HiddenContainer = styled.header`
+  visibility: hidden;
 `;
 
 const LogoWrapper = styled.div`
@@ -66,12 +70,31 @@ const MenuItem = styled(Link)`
 
 const Header: React.FC = () => {
   const location = useLocation();
-  let Container = ContainerInHome;
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [visible, setVisible] = useState(true);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const isVisible = prevScrollPos > currentScrollPos;
+
+      setPrevScrollPos(currentScrollPos);
+      setVisible(isVisible);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
+
+  let Container: StyledComponent<"header", any, {}, never>;
   if (location.pathname === "/results" || location.pathname === "/donate") {
-    Container = ContainerOutsideHome;
+    Container = WhiteContainer;
   } else {
-    Container = ContainerInHome;
+    if (prevScrollPos > 0)
+      Container = visible ? WhiteContainer : HiddenContainer;
+    else Container = visible ? TransparentContainer : HiddenContainer;
   }
 
   return (
