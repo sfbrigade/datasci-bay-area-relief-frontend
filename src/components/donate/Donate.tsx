@@ -6,6 +6,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   background: #fafafa;
+  min-height: 100vh;
 `;
 
 const HeaderSection = styled.div`
