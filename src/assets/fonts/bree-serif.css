@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Bree Serif';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./bree-serif-v10-latin-regular.eot');
+    src: local('Bree Serif Regular'), local('BreeSerif-Regular'),
+    url('./bree-serif-v10-latin-regular.eot?#iefix') format('embedded-opentype'),
+    url('./bree-serif-v10-latin-regular.woff2') format('woff2'),
+    url('./bree-serif-v10-latin-regular.woff') format('woff'),
+    url('./bree-serif-v10-latin-regular.ttf') format('truetype'),
+    url('./bree-serif-v10-latin-regular.svg#BreeSerif') format('svg');
+}
