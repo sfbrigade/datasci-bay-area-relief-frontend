@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./source-sans-pro-v14-latin-regular.eot');
+    src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'),
+    url('./source-sans-pro-v14-latin-regular.eot?#iefix') format('embedded-opentype'),
+    url('./source-sans-pro-v14-latin-regular.woff2') format('woff2'),
+    url('./source-sans-pro-v14-latin-regular.woff') format('woff'),
+    url('./source-sans-pro-v14-latin-regular.ttf') format('truetype'),
+    url('./source-sans-pro-v14-latin-regular.svg#SourceSansPro') format('svg');
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    src: url('./source-sans-pro-v14-latin-600.eot');
+    src: local('Source Sans Pro SemiBold'), local('SourceSansPro-SemiBold'),
+    url('./source-sans-pro-v14-latin-600.eot?#iefix') format('embedded-opentype'),
+    url('./source-sans-pro-v14-latin-600.woff2') format('woff2'),
+    url('./source-sans-pro-v14-latin-600.woff') format('woff'),
+    url('./source-sans-pro-v14-latin-600.ttf') format('truetype'),
+    url('./source-sans-pro-v14-latin-600.svg#SourceSansPro') format('svg');
+}
