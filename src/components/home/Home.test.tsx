@@ -125,8 +125,6 @@ describe("Home", () => {
           "The Data Science Working Group’s primary purpose is to efficiently assess, inspire, and tackle Code for San Francisco’s data science needs, as well as to help the City and other brigades with their data science needs whenever appropriate."
         )
       ).toBeInTheDocument();
-
-      expect(screen.getByTitle("About")).toBeVisible();
     });
   });
 

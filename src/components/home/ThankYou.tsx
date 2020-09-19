@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import ThankImg from "../../assets/ThankYou.svg";
-import CodeForSFLogo from "../../assets/CodeForSFLogo.svg";
-import GitHubLogo from "../../assets/GitHubLogo.svg";
-import ReactLogo from "../../assets/ReactLogo.svg";
+import ThankImg from "../../assets/ThankYou.jpg";
+import CodeForSFLogo from "../../assets/CodeForSFLogo.png";
+import GitHubLogo from "../../assets/GitHubLogo.png";
+import ReactLogo from "../../assets/ReactLogo.png";
 
 const Container = styled.div`
   display: flex;
@@ -44,6 +44,7 @@ const ThankYouImg = styled.img`
   height: 560px;
   left: 67px;
   top: 320px;
+  border-radius: 50%;
 `;
 
 const LogoSection = styled.div`

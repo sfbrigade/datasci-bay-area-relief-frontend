@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import {ReactComponent as About} from "../../assets/About.svg";
 
 const Container = styled.div`
   display: flex;
@@ -32,15 +31,6 @@ const ImageSection = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const AboutImg = styled(About)`
-  display: flex;
-  flex-direction: column;
-  width: 568px;
-  height: 568px;
-  left: 720px;
-  top: 128px;
 `;
 
 const AboutHeader = styled.h1`
@@ -96,9 +86,7 @@ const AboutUs: React.FC = () => {
           </AboutParagraph>
         </AboutDescription>
       </AboutSection>
-      <ImageSection>
-        <AboutImg title="About" />
-      </ImageSection>
+      <ImageSection></ImageSection>
     </Container>
   );
 };

@@ -229,7 +229,7 @@ describe("Results", () => {
         ) as HTMLInputElement;
         fireEvent.click(nonProfitCheckbox);
 
-        expect(screen.getByTitle("No results")).toBeVisible();
+        expect(screen.getByAltText("No Results")).toBeVisible();
         expect(screen.getByText(/Try clearing some filters/));
       });
     });

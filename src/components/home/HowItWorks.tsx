@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import ImgLeft from "../../assets/ImgLeft.svg";
-import ImgMiddle from "../../assets/ImgMiddle.svg";
-import ImgRight from "../../assets/ImgRight.svg";
+import ScrapeWeb from "../../assets/ScrapeWeb.png";
+import Searching from "../../assets/Searching.png";
+import PaperAirplanes from "../../assets/PaperAirplanes.png";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -90,7 +90,7 @@ const HowItWorks: React.FC = () => {
       <Header>How it works</Header>
       <Container>
         <LeftSection>
-          <LeftImg alt="We scrape the internet" src={ImgLeft} />
+          <LeftImg alt="We scrape the internet" src={ScrapeWeb} />
           <H5>We scrape the internet</H5>
           <P>
             We search across government websites, social media, and fundraising
@@ -100,7 +100,7 @@ const HowItWorks: React.FC = () => {
         </LeftSection>
 
         <MiddleSection>
-          <MiddleImg alt="Search our database" src={ImgMiddle} />
+          <MiddleImg alt="Search our database" src={Searching} />
           <H5>Search our database</H5>
           <P>
             Here you can filter by grant qualifications. Once you find a loan or
@@ -109,7 +109,7 @@ const HowItWorks: React.FC = () => {
         </MiddleSection>
 
         <RightSection>
-          <RightImg alt="Help us look" src={ImgRight} />
+          <RightImg alt="Help us look" src={PaperAirplanes} />
           <H5>Help us look</H5>
           <P>
             Found a fund that isn’t on our website? Help the community by

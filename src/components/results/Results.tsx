@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useEffect, useMemo, useState} from "react";
-import {ReactComponent as NoResults} from "../../assets/NoResults.svg";
 import {getResults} from "../../api/axiosApi";
 import {CurrentFilters, Result, SortOptionType} from "../../types";
 import styled from "styled-components";
@@ -11,6 +10,7 @@ import {applyFilters, getMatchCounts} from "./filterHelpers";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
+import Searching from "../../assets/Searching.png";
 
 const ResultsPage = styled.div`
   display: flex;
@@ -139,7 +139,7 @@ const Results: React.FC = () => {
     if (filteredResults.length === 0) {
       return (
         <>
-          <NoResults title="No results" />
+          <img src={Searching} alt="No Results" />
           <p>
             Try clearing some filters! There are still {results.length} loans
             out there.
