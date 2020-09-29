@@ -20,6 +20,7 @@ const SectionContainer = styled.div`
   flex-wrap: wrap;
   height: 100vh;
   width: 100%;
+  position: relative;
 `;
 
 const ImageSection = styled.div`
@@ -45,6 +46,7 @@ const SearchSection = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 `;
 
 const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
@@ -78,7 +80,7 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
       <SectionContainer>
         <HowItWorks />
       </SectionContainer>
-      <SectionContainer id="about" ref={aboutRef}>
+      <SectionContainer id="about" ref={aboutRef} style={{scrollMarginTop: "-98px"}}>
         <AboutUs />
       </SectionContainer>
       <SectionContainer>

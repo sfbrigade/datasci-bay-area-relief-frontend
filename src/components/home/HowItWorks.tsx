@@ -4,120 +4,95 @@ import ScrapeWeb from "../../assets/ScrapeWeb.png";
 import Searching from "../../assets/Searching.png";
 import PaperAirplanes from "../../assets/PaperAirplanes.png";
 
-const MainContainer = styled.div`
-  width: 100%;
-`;
+import Typography from "@material-ui/core/Typography";
 
 const Container = styled.div`
+  width: 100%;
+  padding: 10% 0px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+`;
+
+const SectionContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   margin-top: 85px;
 `;
 
-const Header = styled.h6`
-  font-family: Bree Serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 48px;
-  line-height: 65px;
-  color: rgba(0, 0, 0, 0.87);
-  mix-blend-mode: normal;
-  margin-top: 200px;
+const Section = styled.div`
+  width: 260px;
+  height: 523px;
+  display: flex;
+  flex-direction: column;
 `;
 
-const LeftSection = styled.div`
-  width: 272.26px;
-  margin-right: 133.74px;
-`;
-
-const MiddleSection = styled.div`
-  width: 259.5px;
-  margin-right: 146.5px;
-`;
-
-const RightSection = styled.div`
-  width: 236.94px;
-`;
-
-const H5 = styled.div`
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 30px;
-  color: #000000;
-
-  align-self: center;
-  margin: 10px 10px;
-  padding: 10px 0px;
-  text-align: left;
-`;
-
-const P = styled.p`
-  align-self: center;
-  margin: 0px 10px;
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: 0.5px;
-  color: #000000;
-  text-align: left;
+const Heading = styled.div`
+  margin-bottom: 24px;
 `;
 
 const LeftImg = styled.img`
-  width: 272.26px;
+  width: 272px;
   height: 253px;
   padding: 0px;
+  margin-bottom: 24px;
 `;
 
 const MiddleImg = styled.img`
-  width: 272.26px;
+  width: 259.5px;
   height: 253px;
   padding: 0px;
+  margin-bottom: 24px;
 `;
 
 const RightImg = styled.img`
-  width: 252px;
+  width: 237px;
   height: 253px;
   padding: 0px;
+  margin-bottom: 24px;
 `;
 
 const HowItWorks: React.FC = () => {
   return (
-    <MainContainer>
-      <Header>How it works</Header>
-      <Container>
-        <LeftSection>
+    <Container>
+      <Typography variant="h3">How it works</Typography>
+      <SectionContainer>
+        <Section>
           <LeftImg alt="We scrape the internet" src={ScrapeWeb} />
-          <H5>We scrape the internet</H5>
-          <P>
+          <Heading>
+            <Typography variant="h5">We scrape the internet</Typography>
+          </Heading>
+          <Typography>
             We search across government websites, social media, and fundraising
             platforms to look for financial aid. We then help categorize them so
             it’s easy for you to find.
-          </P>
-        </LeftSection>
+          </Typography>
+        </Section>
 
-        <MiddleSection>
+        <Section>
           <MiddleImg alt="Search our database" src={Searching} />
-          <H5>Search our database</H5>
-          <P>
+          <Heading>
+            <Typography variant="h5">Search our database</Typography>
+          </Heading>
+          <Typography>
             Here you can filter by grant qualifications. Once you find a loan or
             grant, you can apply through the original website.
-          </P>
-        </MiddleSection>
+          </Typography>
+        </Section>
 
-        <RightSection>
+        <Section>
           <RightImg alt="Help us look" src={PaperAirplanes} />
-          <H5>Help us look</H5>
-          <P>
+          <Heading>
+            <Typography variant="h5">Help us look</Typography>
+          </Heading>
+          <Typography>
             Found a fund that isn’t on our website? Help the community by
             letting us know, so we can add it to our database.
-          </P>
-        </RightSection>
-      </Container>
-    </MainContainer>
+          </Typography>
+        </Section>
+      </SectionContainer>
+    </Container>
   );
 };
 
