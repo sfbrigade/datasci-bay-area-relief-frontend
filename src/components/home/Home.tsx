@@ -12,13 +12,13 @@ import Typography from "@material-ui/core/Typography";
 
 const PageContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 `;
 
 const SectionContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   position: relative;
 `;
@@ -80,7 +80,7 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
       <SectionContainer>
         <HowItWorks />
       </SectionContainer>
-      <SectionContainer id="about" ref={aboutRef} style={{scrollMarginTop: "-98px"}}>
+      <SectionContainer ref={aboutRef} style={{scrollMarginTop: "-98px"}}>
         <AboutUs />
       </SectionContainer>
       <SectionContainer>

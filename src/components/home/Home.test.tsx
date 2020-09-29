@@ -126,6 +126,9 @@ describe("Home", () => {
         )
       ).toBeInTheDocument();
     });
+    it("renders a yellow half circle svg", () => {
+      expect(screen.getByTitle("Yellow half circle")).toBeVisible();
+    });
   });
 
   describe("Thank you section", () => {
@@ -156,6 +159,11 @@ describe("Home", () => {
         "href",
         "https://reactjs.org/"
       );
+    });
+
+    it("renders a red triangle and teal square svg", () => {
+      expect(screen.getByTitle("Red triangle")).toBeVisible();
+      expect(screen.getByTitle("Teal square")).toBeVisible();
     });
   });
 });

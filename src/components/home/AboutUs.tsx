@@ -1,92 +1,55 @@
 import React from "react";
+import {ReactComponent as YellowHalfCircle} from "../../assets/YellowHalfCircle.svg";
 import styled from "styled-components";
+import Typography from "@material-ui/core/Typography";
 
 const Container = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  height: 1024px;
+  flex-wrap: wrap;
+  align-items: center;
   width: 100%;
+  position: relative;
 `;
 
-const AboutSection = styled.div`
-  flex: 1 1 0;
-  order: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const StyledYellowHalfCircle = styled(YellowHalfCircle)`
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  z-index: 0;
 `;
 
 const AboutDescription = styled.div`
   display: flex;
   flex-direction: column;
-  width: 433px;
+  justify-content: space-evenly;
   text-align: left;
-`;
-
-const ImageSection = styled.div`
-  flex: 1 1 0;
-  order: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const AboutHeader = styled.h1`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  font-family: Bree Serif, serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 48px;
-  padding: 0 0 23px;
-  margin: 0;
-`;
-
-const AboutParagraph = styled.p`
-  position: static;
   width: 433px;
-  height: 168px;
-  left: 0;
-  top: 0;
-  font-family: Source Sans Pro, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 28px;
-  letter-spacing: 0.5px;
-  color: #000000;
-  flex: none;
-  order: 0;
-  align-self: center;
-  text-align: justify;
-  margin: 0;
-  padding: 0 0 23px;
+  z-index: 1;
+  margin-left: 12%;
 `;
 
 const AboutUs: React.FC = () => {
   return (
     <Container>
-      <AboutSection>
-        <AboutDescription>
-          <AboutHeader>About</AboutHeader>
-          <AboutParagraph>
-            We are a group of volunteers invested in working together to improve
-            the City and County of San Francisco, often using technology to
-            support our efforts. By connecting people, organizations, resources,
-            tools, and networks to build for San Francisco, we will all thrive.
-          </AboutParagraph>
-          <AboutParagraph>
-            The Data Science Working Group’s primary purpose is to efficiently
-            assess, inspire, and tackle Code for San Francisco’s data science
-            needs, as well as to help the City and other brigades with their
-            data science needs whenever appropriate.
-          </AboutParagraph>
-        </AboutDescription>
-      </AboutSection>
-      <ImageSection></ImageSection>
+      <StyledYellowHalfCircle title="Yellow half circle"/>  
+      <AboutDescription>
+        <Typography variant="h3">About</Typography>
+        <br />
+        <br />
+        <Typography>
+          We are a group of volunteers invested in working together to improve
+          the City and County of San Francisco, often using technology to
+          support our efforts. By connecting people, organizations, resources,
+          tools, and networks to build for San Francisco, we will all thrive.
+        </Typography>
+        <br />
+        <Typography>
+          The Data Science Working Group’s primary purpose is to efficiently
+          assess, inspire, and tackle Code for San Francisco’s data science
+          needs, as well as to help the City and other brigades with their
+          data science needs whenever appropriate.
+        </Typography>
+      </AboutDescription>
     </Container>
   );
 };
