@@ -2,7 +2,7 @@ import axios from "axios";
 import {Result, ResultResponse} from "../types";
 import {standardizeFormat} from "./responseFormatter";
 
-const API = "http://ec2-54-151-87-134.us-west-1.compute.amazonaws.com:8000/";
+const API = "http://localhost:8080/";
 
 export const getResults = async (): Promise<Result[]> => {
   try {
