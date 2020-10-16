@@ -1,41 +1,42 @@
 import {ResultResponse} from "../types";
 
 const convertToBoolean = (value: string | null) => !!value && value === "Yes";
+
 export const standardizeFormat = (r: ResultResponse) => {
   return {
     id: r.id,
     name: r.name,
-    supportType: r.support_type,
-    interestRate: r.interest_rate,
-    dateAdded: r.date_added,
-    maxAwardAmount: r.max_award_amount,
-    reliefType: r.relief_type,
+    supportType: r.supportType,
+    interestRate: r.interestRate,
+    dateAdded: r.dateAdded,
+    maxAwardAmount: r.maxAwardAmount,
+    reliefType: r.reliefType,
     deadline: r.deadline,
-    deadlineApplicable: r.deadline_applicable,
-    smallBusiness: r.non_profit === "Businesses Only" || r.non_profit === "All",
-    nonProfit: r.non_profit === "Non-Profits Only" || r.non_profit === "All",
-    employs100OrFewer: convertToBoolean(r._100_or_fewer),
-    employs500OrFewer: convertToBoolean(r._500_or_fewer),
-    employs750OrFewer: convertToBoolean(r._750_or_fewer),
-    employs750More: convertToBoolean(r._750_more),
-    sanMateoCounty: convertToBoolean(r.san_mateo_county),
-    contraCostaCounty: convertToBoolean(r.contra_costa_county),
-    santaClaraCounty: convertToBoolean(r.santa_clara_county),
-    sfCounty: convertToBoolean(r.alameda_county),
-    alamedaCounty: convertToBoolean(r.alameda_county),
+    deadlineApplicable: r.deadlineApplicable,
+    smallBusiness: r.nonProfit === "Businesses Only" || r.nonProfit === "All",
+    nonProfit: r.nonProfit === "Non-Profits Only" || r.nonProfit === "All",
+    employs100OrFewer: convertToBoolean(r.lte100),
+    employs500OrFewer: convertToBoolean(r.lte500),
+    employs750OrFewer: convertToBoolean(r.lte750),
+    employs750More: convertToBoolean(r.gt750),
+    sanMateoCounty: convertToBoolean(r.sanMateoCounty),
+    contraCostaCounty: convertToBoolean(r.contraCostaCounty),
+    santaClaraCounty: convertToBoolean(r.santaClaraCounty),
+    sfCounty: convertToBoolean(r.alamedaCounty),
+    alamedaCounty: convertToBoolean(r.alamedaCounty),
     hasInterest:
-      r.interest_rate_applicable === "Yes and Reported" ||
-      r.interest_rate_applicable === "Yes but not Reported ",
-    doesNotHaveInterest: r.interest_rate_applicable === "No",
-    covid19: r.relief_type === "Both" || r.relief_type === "COVID",
+      r.interestRateApplicable === "Yes and Reported" ||
+      r.interestRateApplicable === "Yes but not Reported ",
+    doesNotHaveInterest: r.interestRateApplicable === "No",
+    covid19: r.reliefType === "Both" || r.reliefType === "COVID",
     protestDamage:
-      r.relief_type === "Both" || r.relief_type === "Protest Damage",
-    blackOwned: convertToBoolean(r.black_owned),
+      r.reliefType === "Both" || r.reliefType === "Protest Damage",
+    blackOwned: convertToBoolean(r.blackOwned),
     lgbtq: convertToBoolean(r.lgbtq),
-    public: r.sector_type === "Public",
-    private: r.sector_type === "Private",
+    public: r.sectorType === "Public",
+    private: r.sectorType === "Private",
     spanish: convertToBoolean(r.spanish),
     chinese: convertToBoolean(r.chinese),
-    websiteUrl: r.website_url,
+    websiteUrl: r.websiteUrl,
   };
 };
