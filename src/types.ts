@@ -103,7 +103,7 @@ export interface ResultResponse {
   contraCostaCounty: string;
   county: string;
   dateAdded: string;
-  deadline: null;
+  deadline: string | null;
   deadlineApplicable: string;
   description: string;
   english: string;

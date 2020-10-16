@@ -1,7 +1,7 @@
 /* eslint @typescript-eslint/camelcase: 0 */
 import axios from "axios";
 import {getResults} from "./axiosApi";
-import {ReliefType, Result, SupportType} from "../types";
+import {ReliefType, Result, ResultResponse, SupportType} from "../types";
 import {standardizeFormat} from "./responseFormatter";
 
 jest.mock("axios");
@@ -48,7 +48,7 @@ describe("getResults", () => {
             supportedEntity: "Government",
             websiteUrl: "https://oewd.org/businesses-impacted-covid-19#Loans",
             womenOwned: "No",
-          },
+          } as ResultResponse,
         ],
       },
     };
@@ -74,7 +74,7 @@ describe("getResults", () => {
 
 describe("standardizeFormat", () => {
   it("transforms a result into a predictable format", () => {
-    const rawResult = {
+    const rawResult: ResultResponse = {
       lte100: "Yes",
       lte500: "Yes",
       gt750: "No",
