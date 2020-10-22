@@ -15,7 +15,7 @@ export const formatDate = (dateString: string) => {
 };
 
 export const formatAwardAmount = (amount: number | null) => {
-  return amount ? `$${amount.toLocaleString("en-US")}` : "Amount Unknown";
+  return amount ? `$${amount.toLocaleString("en-US")}` : "Unspecified Amount";
 };
 
 export const formatReliefType = (reliefType: ReliefType) => {

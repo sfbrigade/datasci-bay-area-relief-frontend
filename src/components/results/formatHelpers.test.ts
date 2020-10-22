@@ -53,8 +53,8 @@ describe("formatAwardAmount", () => {
     expect(formatAwardAmount(1000000)).toEqual("$1,000,000");
   });
 
-  it("returns 'Amount Unknown' when amount is null", () => {
-    expect(formatAwardAmount(null)).toEqual("Amount Unknown");
+  it("returns 'Unspecified Amount' when amount is null", () => {
+    expect(formatAwardAmount(null)).toEqual("Unspecified Amount");
   });
 });
 
