@@ -2,7 +2,7 @@ import axios from "axios";
 import {Result, ResultResponse} from "../types";
 import {standardizeFormat} from "./responseFormatter";
 
-const API = "http://localhost:8080/";
+const API = "https://api-sfbayrelief.org/";
 
 export const getResults = async (): Promise<Result[]> => {
   try {
