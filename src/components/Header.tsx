@@ -3,8 +3,8 @@ import styled, {StyledComponent} from "styled-components";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
-import useWindowDimensions from "../util/useWindowDimensions";
 
+import Typography from "@material-ui/core/Typography";
 import MatMenu from '@material-ui/core/Menu';
 import MatMenuItem from '@material-ui/core/MenuItem';
 import MatButton from '@material-ui/core/Button';
@@ -51,27 +51,28 @@ const Menu = styled.div`
   justify-content: flex-end;
 `;
 
-const MenuItem = styled(Link)`
+const SmallMenuContainer = styled.div`
   display: block;
   color: black;
   text-align: center;
   margin-left: 32px;
   text-decoration: none;
-  /* Body 1 / Source Sans Pro */
 
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 28px;
-  /* identical to box height, or 156% */
+  @media (min-width: 1024px) {
+    display: none
+  }
+`;
 
-  letter-spacing: 0.5px;
+const MenuItem = styled(Link)`
+  display: none;
 
-  /* Black — High Emphasis */
-
-  color: rgba(0, 0, 0, 0.87);
-  mix-blend-mode: normal;
+  @media (min-width: 1024px) {
+  display: block;
+  color: black;
+  text-align: center;
+  margin-left: 32px;
+  text-decoration: none;
+  }
 `;
 
 const Header: React.FC = () => {
@@ -79,6 +80,7 @@ const Header: React.FC = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
 
+  // Handle navbar layout when scrolling
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
@@ -95,6 +97,8 @@ const Header: React.FC = () => {
   }, [prevScrollPos]);
 
   let Container: StyledComponent<"header", any, {}, never>;
+
+  // Change navbar layout when in home page and results page. Home page is clear and results page navbar is white 
   if (location.pathname === "/results" || location.pathname === "/donate") {
     Container = WhiteContainer;
   } else {
@@ -113,8 +117,40 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const largeMenuOptions = (
-    <Menu role="menu">
+  const SmallMenu = () => (
+    <SmallMenuContainer>
+      <MatButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        <MenuIcon/>
+      </MatButton>
+      
+      <MatMenu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MatMenuItem component={Link} to="/" onClick={handleClose}>Home</MatMenuItem>
+        <MatMenuItem component={Link} to="/results" onClick={handleClose}>Bay Area Relief Portal</MatMenuItem>
+        <MatMenuItem component={Link} to={{
+          pathname: "/",
+          search: "",
+          hash: "#about",
+          state: {toAbout: true},
+          }} onClick={handleClose}>
+          About
+        </MatMenuItem>
+      </MatMenu>
+    </SmallMenuContainer>
+  );
+  
+  return (
+    <Container>
+      <LogoWrapper>
+        <Logo role="logo" />
+      </LogoWrapper>
+      <Menu role="menu">
+        {SmallMenu()}
         <MenuItem
           to={{
             pathname: "/",
@@ -123,9 +159,11 @@ const Header: React.FC = () => {
             state: {toHome: true},
           }}
         >
-          Home
+          <Typography variant="body1">Home</Typography>
         </MenuItem>
-        <MenuItem to="/results">Bay Area Relief Portal</MenuItem>
+        <MenuItem to="/results">
+          <Typography variant="body1">Bay Area Relief Portal</Typography>
+        </MenuItem>
         <MenuItem
           to={{
             pathname: "/",
@@ -134,49 +172,9 @@ const Header: React.FC = () => {
             state: {toAbout: true},
           }}
         >
-          About
+          <Typography variant="body1">About</Typography>
         </MenuItem>
-    </Menu>
-  );
-
-  const smallMenuOptions = (
-    <Menu role="menu">
-      <MenuItem to="#">
-        <MatButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-          <MenuIcon/>
-        </MatButton>
-        
-        <MatMenu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MatMenuItem component={Link} to="/" onClick={handleClose}>Home</MatMenuItem>
-          <MatMenuItem component={Link} to="/results" onClick={handleClose}>Bay Area Relief Portal</MatMenuItem>
-          <MatMenuItem component={Link} to={{
-            pathname: "/",
-            search: "",
-            hash: "#about",
-            state: {toAbout: true},
-            }} onClick={handleClose}>
-            About
-          </MatMenuItem>
-        </MatMenu>
-      </MenuItem>
-    </Menu>
-  );
-
-  const {width} = useWindowDimensions();
-  
-  return (
-    <Container>
-      <LogoWrapper>
-        <Logo role="logo" />
-      </LogoWrapper>
-
-    {width < 700 ? smallMenuOptions : largeMenuOptions}
+      </Menu>
     </Container>
   );
 };
