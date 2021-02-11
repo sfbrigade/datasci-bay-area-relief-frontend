@@ -3,6 +3,12 @@ import styled, {StyledComponent} from "styled-components";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
+import useWindowDimensions from "../util/useWindowDimensions";
+
+import MatMenu from '@material-ui/core/Menu';
+import MatMenuItem from '@material-ui/core/MenuItem';
+import MatButton from '@material-ui/core/Button';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const WhiteContainer = styled.header`
   top: 0;
@@ -97,12 +103,18 @@ const Header: React.FC = () => {
     else Container = visible ? TransparentContainer : HiddenContainer;
   }
 
-  return (
-    <Container>
-      <LogoWrapper>
-        <Logo role="logo" />
-      </LogoWrapper>
-      <Menu role="menu">
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event : React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const largeMenuOptions = (
+    <Menu role="menu">
         <MenuItem
           to={{
             pathname: "/",
@@ -124,7 +136,47 @@ const Header: React.FC = () => {
         >
           About
         </MenuItem>
-      </Menu>
+    </Menu>
+  );
+
+  const smallMenuOptions = (
+    <Menu role="menu">
+      <MenuItem to="#">
+        <MatButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+          <MenuIcon/>
+        </MatButton>
+        
+        <MatMenu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MatMenuItem component={Link} to="/" onClick={handleClose}>Home</MatMenuItem>
+          <MatMenuItem component={Link} to="/results" onClick={handleClose}>Bay Area Relief Portal</MatMenuItem>
+          <MatMenuItem component={Link} to={{
+            pathname: "/",
+            search: "",
+            hash: "#about",
+            state: {toAbout: true},
+            }} onClick={handleClose}>
+            About
+          </MatMenuItem>
+        </MatMenu>
+      </MenuItem>
+    </Menu>
+  );
+
+  const {width} = useWindowDimensions();
+  
+  return (
+    <Container>
+      <LogoWrapper>
+        <Logo role="logo" />
+      </LogoWrapper>
+
+    {width < 700 ? smallMenuOptions : largeMenuOptions}
     </Container>
   );
 };
