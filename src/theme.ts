@@ -18,6 +18,12 @@ export const theme = createMuiTheme({
     h3: {
       fontFamily: "Bree Serif",
       fontSize: "48px",
+      color: 'rgba(0, 0, 0, 0.87)'
+    },
+    h4: {
+      fontSize: "34px",
+      lineHeight: "43px",
+      letterSpacing: "0.25px",
     },
     h5: {
       fontFamily: "Source Sans Pro",
@@ -27,6 +33,7 @@ export const theme = createMuiTheme({
       fontSize: "18px",
       letterSpacing: "0.5px",
     },
+    
     button: {
       fontWeight: 600,
     },

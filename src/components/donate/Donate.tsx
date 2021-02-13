@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
+import Typography from "@material-ui/core/Typography";
+
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,54 +18,28 @@ const HeaderSection = styled.div`
   padding-top: 120px;
 `;
 
-const Header = styled.h1`
-  text-align: center;
-  font-family: Bree Serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 48px;
-  color: rgba(0, 0, 0, 0.87);
-  mix-blend-mode: normal;
-  margin: 0px;
-  margin-bottom: 19px;
-  padding: 0px;
-`;
-
-const P = styled.p`
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  letter-spacing: 0.5px;
+const P = styled(Typography).attrs({variant: 'body1' })`
   color: rgba(0, 0, 0, 0.8);
-  text-align: center;
-  height: 58px;
   margin: 0px;
   padding: 0px;
 `;
 
-const GeneralSection = styled.div`
+const Section = styled.div`
   width: 714px;
   display: flex;
   text-align: center;
   margin-top: 44px;
 `;
 
-const GeneralHeader = styled.div`
+const SectionHeader = styled(Typography).attrs({variant: 'h4'})`
   display: flex;
   flex: 1 1 0;
   margin: 0px;
   width: 38%;
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 34px;
-  line-height: 43px;
-  letter-spacing: 0.25px;
-  color: #000000;
+  text-align: left;
 `;
 
-const GeneralLinks = styled.div`
+const SectionLinks = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -96,81 +73,21 @@ const A = styled.a`
   color: #ef5350;
 `;
 
-const BLMSection = styled.div`
-  display: flex;
-  width: 714px;
-  text-align: center;
-  margin-top: 67px;
-  padding-bottom: 50px;
-`;
-
-const BLMHeader = styled.div`
-  display: flex;
-  flex: 1 1 0;
-  margin: 0px;
-  width: 38%;
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 34px;
-  line-height: 43px;
-  text-align: left;
-  letter-spacing: 0.25px;
-  color: #000000;
-`;
-
-const BLMLinks = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin: 0px;
-  width: 62%;
-`;
-
-const LGBTSection = styled.div`
-  display: flex;
-  text-align: center;
-  width: 714px;
-  margin-top: 82px;
-  margin-bottom: 150px;
-`;
-
-const LGBTHeader = styled.div`
-  display: flex;
-  flex: 1 1 0;
-  margin: 0px;
-  width: 38%;
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 34px;
-  line-height: 43px;
-  letter-spacing: 0.25px;
-  color: #000000;
-`;
-
-const LGBTLinks = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin: 0px;
-  width: 62%;
-`;
-
 const Donate: React.FC = () => {
   return (
     <Container>
       <HeaderSection>
-        <Header>Donate</Header>
-        <P>
+        <Typography variant='h3'>Donate</Typography>
+        <br />
+        <P> 
           Not a small business, but want to help? We’ve collected a list of
           funds you can donate to.
         </P>
       </HeaderSection>
 
-      <GeneralSection>
-        <GeneralHeader>General</GeneralHeader>
-        <GeneralLinks>
+      <Section>
+        <SectionHeader>General</SectionHeader>
+        <SectionLinks>
           <DonateList>
             <Link>
               <A href="https://www.gofundme.com/">
@@ -207,15 +124,15 @@ const Donate: React.FC = () => {
               <A href="#">MEDA (Mission Economic Development Agency)</A>
             </Link>
           </DonateList>
-        </GeneralLinks>
-      </GeneralSection>
+        </SectionLinks>
+      </Section>
 
-      <BLMSection>
-        <BLMHeader>
+      <Section>
+        <SectionHeader>
           Black Lives
           <br /> Matter
-        </BLMHeader>
-        <BLMLinks>
+        </SectionHeader>
+        <SectionLinks>
           <DonateList>
             <Link>
               <A href="#">YouTube Ad Proceeds to #BLM</A>
@@ -232,12 +149,12 @@ const Donate: React.FC = () => {
               <A href="#">Black Owned Business ReliefFund</A>
             </Link>
           </DonateList>
-        </BLMLinks>
-      </BLMSection>
+        </SectionLinks>
+      </Section>
 
-      <LGBTSection>
-        <LGBTHeader>LGBT</LGBTHeader>
-        <LGBTLinks>
+      <Section>
+        <SectionHeader>LGBT</SectionHeader>
+        <SectionLinks>
           <DonateList>
             <Link>
               <A href="#">Silicon Valley Central Chamber of Commerce</A>
@@ -255,8 +172,8 @@ const Donate: React.FC = () => {
               <A href="#">James Beard Webinars</A>
             </Link>
           </DonateList>
-        </LGBTLinks>
-      </LGBTSection>
+        </SectionLinks>
+      </Section>
     </Container>
   );
 };
