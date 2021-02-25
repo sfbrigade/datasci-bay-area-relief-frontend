@@ -6,8 +6,7 @@ import {act} from "react-dom/test-utils";
 describe("Donate page", () => {
   it("renders heading and description", () => {
     render(<Donate />);
-    expect(screen.getByRole("heading")).toHaveTextContent("Donate");
-
+    expect(screen.getByRole("heading", { name: "Donate"})).toBeInTheDocument();
     expect(screen.getByText("General")).toBeInTheDocument();
     expect(screen.getByText("Black Lives Matter")).toBeInTheDocument();
     expect(screen.getByText("LGBT")).toBeInTheDocument();
