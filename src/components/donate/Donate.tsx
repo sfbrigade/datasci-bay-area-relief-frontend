@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Typography from "@material-ui/core/Typography";
+import Link from '@material-ui/core/Link';
 
 
 const Container = styled.div`
@@ -12,13 +13,13 @@ const Container = styled.div`
   min-height: 100vh;
 `;
 
-const HeaderSection = styled.div`
+const TopSection = styled.div`
   text-align: center;
   width: 708px;
   padding-top: 120px;
 `;
 
-const P = styled(Typography).attrs({variant: 'body1' })`
+const TopSectionBody = styled(Typography).attrs({variant: 'body1' })`
   color: rgba(0, 0, 0, 0.8);
   margin: 0px;
   padding: 0px;
@@ -39,92 +40,71 @@ const SectionHeader = styled(Typography).attrs({variant: 'h4'})`
   text-align: left;
 `;
 
-const SectionLinks = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  margin: 0px;
+const DonationList = styled.ul`
   width: 62%;
-`;
-
-const DonateList = styled.ul`
   list-style: none;
   text-align: left;
   padding: 0px;
   margin: 0px;
 `;
 
-const Link = styled.li`
-  list-style: none;
-  text-align: left;
+const ListItem = styled.li`
   padding: 0px;
   margin: 0px;
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 25px;
-  letter-spacing: 0.15px;
   color: #ef5350;
 `;
 
-const A = styled.a`
-  text-decoration: none;
-  color: #ef5350;
-`;
 
 const Donate: React.FC = () => {
   return (
     <Container>
-      <HeaderSection>
-        <Typography variant='h3'>Donate</Typography>
+      <TopSection>
+        <Typography variant="h3">Donate</Typography>
         <br />
-        <P> 
+        <TopSectionBody> 
           Not a small business, but want to help? We’ve collected a list of
           funds you can donate to.
-        </P>
-      </HeaderSection>
+        </TopSectionBody>
+      </TopSection>
 
       <Section>
         <SectionHeader>General</SectionHeader>
-        <SectionLinks>
-          <DonateList>
-            <Link>
-              <A href="https://www.gofundme.com/">
-                GoFundMe&apos;s in the Bay area
-              </A>
+        <DonationList>
+          <ListItem>
+            <Link variant="h6" href="https://www.gofundme.com/">
+              GoFundMe&apos;s in the Bay area
             </Link>
-            <Link>
-              <A href="https://www.redwoodcity.org/home">
-                Redwood City Small Business Relief Fund{" "}
-              </A>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="https://www.redwoodcity.org/home">
+              Redwood City Small Business Relief Fund{" "}
             </Link>
-            <Link>
-              <A href="#">UC Berkeley Law Pro Bono</A>
-            </Link>
-            <Link>
-              <A href="#">COVID-19 Regional Response Fund</A>
-            </Link>
-            <Link>
-              <A href="#">Norcal Small Business Relief Fund</A>
-            </Link>
-            <Link>
-              <A href="#">One Fair Wage </A>
-            </Link>
-            <Link>
-              <A href="#">Berkeley Relief Fund</A>
-            </Link>
-            <Link>
-              <A href="#">Berkeley Mutual Aid</A>
-            </Link>
-            <Link>
-              <A href="#">Save Our China Towns </A>
-            </Link>
-            <Link>
-              <A href="#">MEDA (Mission Economic Development Agency)</A>
-            </Link>
-          </DonateList>
-        </SectionLinks>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">UC Berkeley Law Pro Bono</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">COVID-19 Regional Response Fund</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">Norcal Small Business Relief Fund</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">One Fair Wage </Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">Berkeley Relief Fund</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">Berkeley Mutual Aid</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">Save Our China Towns </Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">MEDA (Mission Economic Development Agency)</Link>
+          </ListItem>
+        </DonationList>
       </Section>
 
       <Section>
@@ -132,47 +112,43 @@ const Donate: React.FC = () => {
           Black Lives
           <br /> Matter
         </SectionHeader>
-        <SectionLinks>
-          <DonateList>
-            <Link>
-              <A href="#">YouTube Ad Proceeds to #BLM</A>
+        <DonationList>
+          <ListItem>
+            <Link variant="h6" href="#">YouTube Ad Proceeds to #BLM</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">
+              Bay Area Organization of Black Owned Businesses (BAOBOB)
             </Link>
-            <Link>
-              <A href="#">
-                Bay Area Organization of Black Owned Businesses (BAOBOB)
-              </A>
-            </Link>
-            <Link>
-              <A href="#">Black Owned Restaurants</A>
-            </Link>
-            <Link>
-              <A href="#">Black Owned Business ReliefFund</A>
-            </Link>
-          </DonateList>
-        </SectionLinks>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">Black Owned Restaurants</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">Black Owned Business ReliefFund</Link>
+          </ListItem>
+        </DonationList>
       </Section>
 
       <Section>
         <SectionHeader>LGBT</SectionHeader>
-        <SectionLinks>
-          <DonateList>
-            <Link>
-              <A href="#">Silicon Valley Central Chamber of Commerce</A>
-            </Link>
-            <Link>
-              <A href="#">SF Gov</A>
-            </Link>
-            <Link>
-              <A href="#">Queer: Way Out</A>
-            </Link>
-            <Link>
-              <A href="#">James Beard Foundation</A>
-            </Link>
-            <Link>
-              <A href="#">James Beard Webinars</A>
-            </Link>
-          </DonateList>
-        </SectionLinks>
+        <DonationList>
+          <ListItem>
+            <Link variant="h6" href="#">Silicon Valley Central Chamber of Commerce</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">SF Gov</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">Queer: Way Out</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">James Beard Foundation</Link>
+          </ListItem>
+          <ListItem>
+            <Link variant="h6" href="#">James Beard Webinars</Link>
+          </ListItem>
+        </DonationList>
       </Section>
     </Container>
   );

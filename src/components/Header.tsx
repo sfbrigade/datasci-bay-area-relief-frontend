@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
 
+import Typography from "@material-ui/core/Typography";
+
 const WhiteContainer = styled.header`
   top: 0;
   width: 100%;
@@ -51,21 +53,7 @@ const MenuItem = styled(Link)`
   text-align: center;
   margin-left: 32px;
   text-decoration: none;
-  /* Body 1 / Source Sans Pro */
-
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 28px;
-  /* identical to box height, or 156% */
-
-  letter-spacing: 0.5px;
-
-  /* Black — High Emphasis */
-
   color: rgba(0, 0, 0, 0.87);
-  mix-blend-mode: normal;
 `;
 
 const Header: React.FC = () => {
@@ -111,9 +99,11 @@ const Header: React.FC = () => {
             state: {toHome: true},
           }}
         >
-          Home
+          <Typography variant="body1">Home</Typography>
         </MenuItem>
-        <MenuItem to="/results">Bay Area Relief Portal</MenuItem>
+        <MenuItem to="/results">
+          <Typography variant="body1">Bay Area Relief Portal</Typography>
+        </MenuItem>
         <MenuItem
           to={{
             pathname: "/",
@@ -122,7 +112,7 @@ const Header: React.FC = () => {
             state: {toAbout: true},
           }}
         >
-          About
+          <Typography variant="body1">About</Typography>
         </MenuItem>
       </Menu>
     </Container>

@@ -31,15 +31,9 @@ const MatchSortContainer = styled.div`
   margin-left: 4em;
 `;
 
-const ResultsMatched = styled.h5`
+const ResultsMatched = styled(Typography).attrs({variant: 'h4' })`
   margin: 0;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 34px;
-  line-height: 43px;
-  letter-spacing: 0.25px;
   color: rgba(0, 0, 0, 0.87);
-  mix-blend-mode: normal;
 `;
 
 const SortContainer = styled.div`
