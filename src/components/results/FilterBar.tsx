@@ -13,7 +13,7 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 361px;
-  padding-left: 50px;
+  padding-left: 10px;
   text-align: left;
 
   & .MuiTypography-root {
@@ -29,6 +29,10 @@ const Sidebar = styled.div`
     letter-spacing: 0.25px;
     color: rgba(0, 0, 0, 0.87);
     text-transform: uppercase;
+  }
+
+  @media (max-width: 752px) {
+    display: none
   }
 `;
 

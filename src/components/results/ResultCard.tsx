@@ -12,9 +12,12 @@ import Button from "@material-ui/core/Button";
 
 const StyledCard = styled(Card)`
   position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-basis: auto;
   background: #ffffff;
   border-radius: 4px;
-  width: 500px;
+  width: 300px;
   height: 172px;
   margin: 1.5em;
 `;

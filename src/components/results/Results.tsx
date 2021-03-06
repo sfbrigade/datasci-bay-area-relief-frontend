@@ -11,12 +11,13 @@ import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
+import {ResultsProps} from "../../types";
 
 const ResultsPage = styled.div`
   display: flex;
   background: #fafafa;
   padding-top: 130px;
-  min-width: 100vh;
+  min-width: 100vw;
   min-height: 100vh;
 `;
 
@@ -96,7 +97,7 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-const Results: React.FC = () => {
+const Results: React.FC<ResultsProps> = ({isFilterOpen}) => {
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -179,7 +180,7 @@ const Results: React.FC = () => {
   };
 
   const handleClearFilters = () => setCurrentFilters({});
-
+  
   return (
     <ResultsPage>
       {!loading && (
@@ -190,6 +191,7 @@ const Results: React.FC = () => {
             matchCounts={matchCounts}
             onClear={handleClearFilters}
           />
+          {isFilterOpen && console.log('Filter Open')}
           <RightSide>
             <MatchSortContainer>
               <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>

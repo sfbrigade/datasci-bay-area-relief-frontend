@@ -9,6 +9,9 @@ import MatMenu from '@material-ui/core/Menu';
 import MatMenuItem from '@material-ui/core/MenuItem';
 import MatButton from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
+import Button from "@material-ui/core/Button";
+
+import {HeaderProps} from '../types';
 
 const WhiteContainer = styled.header`
   top: 0;
@@ -58,24 +61,34 @@ const SmallMenuContainer = styled.div`
   margin-left: 32px;
   text-decoration: none;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 752px) {
     display: none
   }
+`;
+
+const FilterButtonContainer = styled.div`
+  @media (min-width: 752px) {
+    display: none
+  }
+`;
+
+const FilterButton = styled(Button)`
+  display: block;
 `;
 
 const MenuItem = styled(Link)`
   display: none;
 
-  @media (min-width: 1024px) {
-  display: block;
-  color: black;
-  text-align: center;
-  margin-left: 32px;
-  text-decoration: none;
+  @media (min-width: 752px) {
+    display: block;
+    color: black;
+    text-align: center;
+    margin-left: 32px;
+    text-decoration: none;
   }
 `;
 
-const Header: React.FC = () => {
+const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   const location = useLocation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -113,13 +126,19 @@ const Header: React.FC = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleFilterClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setIsFilterOpen(!isFilterOpen);
+    console.log({isFilterOpen});
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   const SmallMenu = () => (
-    <SmallMenuContainer>
-      <MatButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+    <SmallMenuContainer
+      id="small-menu-container">
+      <MatButton id="mat-button" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         <MenuIcon/>
       </MatButton>
       
@@ -149,6 +168,9 @@ const Header: React.FC = () => {
       <LogoWrapper>
         <Logo role="logo" />
       </LogoWrapper>
+      <FilterButtonContainer>
+        <FilterButton onClick={handleFilterClick}>Filter</FilterButton>
+      </FilterButtonContainer>
       <Menu role="menu">
         {SmallMenu()}
         <MenuItem
