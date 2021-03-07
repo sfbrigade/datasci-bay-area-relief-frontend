@@ -92,6 +92,12 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   const location = useLocation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [isResultsPage, setIsResultsPage] = useState(false);
+  
+  // Update isResultsPage when location pathname changes;
+  useEffect(() => {
+    setIsResultsPage(location.pathname === '/results');
+  }, [location.pathname]);
 
   // Handle navbar layout when scrolling
   useEffect(() => {
@@ -181,9 +187,11 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
       <LogoWrapper>
         <Logo role="logo" />
       </LogoWrapper>
-      <FilterButtonContainer>
-        <FilterButton onClick={handleFilterClick}>Filter</FilterButton>
-      </FilterButtonContainer>
+      {isResultsPage && 
+        <FilterButtonContainer>
+          <FilterButton onClick={handleFilterClick}>Filter</FilterButton>
+        </FilterButtonContainer>
+      }
       <Menu role="menu">
         {SmallMenu()}
         <MenuItem
