@@ -9,7 +9,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import {filterGroups} from "./filterHelpers";
 import Button from "@material-ui/core/Button";
 
-const Sidebar = styled.div`
+const Sidebar = styled.div<{ isFilterOpen: boolean }>`
   display: flex;
   flex-direction: column;
   min-width: 361px;
@@ -32,7 +32,17 @@ const Sidebar = styled.div`
   }
 
   @media (max-width: 752px) {
-    display: none
+    display: ${props => (props.isFilterOpen ? 'flex' : 'none')};
+    width: 75%;
+    height: auto;
+    background-color: white;
+    position: absolute;
+    top: 100px;
+    z-index: 10;
+    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 
+      0px 8px 10px 1px rgb(0 0 0 / 14%), 
+      0px 3px 14px 2px rgb(0 0 0 / 12%);
+    padding: 30px;
   }
 `;
 
@@ -43,6 +53,7 @@ type FilterBarProps = {
     group: keyof CurrentFilters
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
   onClear: () => void;
+  isFilterOpen: any;
 };
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -50,8 +61,9 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   matchCounts,
   onChange,
   onClear,
+  isFilterOpen,
 }) => (
-  <Sidebar>
+  <Sidebar isFilterOpen={isFilterOpen}>
     {filterGroups.map(({groupName, groupLabel, filters}) => (
       <FormControl key={groupName} component="fieldset">
         <FormLabel component="legend">{groupLabel}</FormLabel>

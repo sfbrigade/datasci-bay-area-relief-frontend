@@ -134,4 +134,5 @@ export interface HeaderProps {
 
 export interface ResultsProps {
   isFilterOpen: any;
+  setIsFilterOpen: any;
 }

@@ -97,7 +97,7 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-const Results: React.FC<ResultsProps> = ({isFilterOpen}) => {
+const Results: React.FC<ResultsProps> = ({isFilterOpen, setIsFilterOpen}) => {
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -190,9 +190,9 @@ const Results: React.FC<ResultsProps> = ({isFilterOpen}) => {
             onChange={handleFilterChange}
             matchCounts={matchCounts}
             onClear={handleClearFilters}
+            isFilterOpen={isFilterOpen}
           />
-          {isFilterOpen && console.log('Filter Open')}
-          <RightSide>
+          <RightSide onClick={() => setIsFilterOpen(false)}>
             <MatchSortContainer>
               <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>
               <SortContainer>

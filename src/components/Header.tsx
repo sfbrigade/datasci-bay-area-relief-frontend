@@ -109,6 +109,20 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
     };
   }, [prevScrollPos]);
 
+  // Track window width to toggle FilterBarOpen
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 752) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   let Container: StyledComponent<"header", any, {}, never>;
 
   // Change navbar layout when in home page and results page. Home page is clear and results page navbar is white 
@@ -122,13 +136,12 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event : React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleFilterClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setIsFilterOpen(!isFilterOpen);
-    console.log({isFilterOpen});
   };
 
   const handleClose = () => {
