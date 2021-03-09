@@ -13,7 +13,7 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
   display: flex;
   flex-direction: column;
   min-width: 361px;
-  padding-left: 10px;
+  padding-left: 40px;
   text-align: left;
 
   & .MuiTypography-root {
@@ -24,11 +24,19 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
   }
 
   & .MuiFormLabel-root {
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 13px;
+    // line-height: 16px;
     letter-spacing: 0.25px;
     color: rgba(0, 0, 0, 0.87);
     text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  & .MuiFormControl-root {
+    &:not(:first-child) {
+      margin-top: 15px;
+    }
+    
   }
 
   @media (max-width: 752px) {
