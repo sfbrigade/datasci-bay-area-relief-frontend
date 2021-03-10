@@ -15,7 +15,7 @@ const StyledCard = styled(Card)`
   position: relative;
   background: #ffffff;
   border-radius: 4px;
-  padding: 15px 20px;
+  padding: 12px 20px 12px 20px;
   width: 350px;
   margin: 1.5em;
   text-align: left;
@@ -26,8 +26,8 @@ const SupportTypeContainer = styled.div`
 `;
 
 const StyledAwardAmount = styled.h5`
-  margin-top: 6px;
-  margin-bottom: 2px;
+  margin-top: 4px;
+  margin-bottom: 0px;
   margin-left: -2px;
   font-family: 'Source Sans Pro';
   font-size: 28px;
@@ -40,19 +40,18 @@ const StyledName = styled(Typography).attrs({variant: 'body2' })`
 `;
 
 
-const ButtonWrapper = styled.div`
+const BottomWrapper = styled.div`
   padding-top: 35px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 
 const Tag = styled(Typography).attrs({variant: 'body2' })`
-  position: absolute;
-  bottom: 15px; 
-  right: 20px;
   background: linear-gradient(0deg, #fece4b, #fece4b);
   border-radius: 16px;
   padding: 2px 18px;
-  
+  align-self: flex-end;
   color: #715711;
 `;
 
@@ -85,14 +84,14 @@ const ResultCard: React.FC<Result> = ({
           {formatAwardAmount(maxAwardAmount)}
       </StyledAwardAmount>
       <StyledName>{name}</StyledName>
+      <BottomWrapper>
         {websiteUrl !== "None" && (
-          <ButtonWrapper>
             <Button color="secondary" variant="outlined" onClick={() => onApply(websiteUrl)}>
               Apply
             </Button>
-          </ButtonWrapper>
         )}
           <Tag>{formatReliefType(reliefType)}</Tag>
+      </BottomWrapper>
     </StyledCard>
   );
 };
