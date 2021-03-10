@@ -15,7 +15,7 @@ const StyledCard = styled(Card)`
   position: relative;
   background: #ffffff;
   border-radius: 4px;
-  padding: 12px 20px 12px 20px;
+  padding: 12px 18px;
   width: 350px;
   margin: 1.5em;
   text-align: left;
