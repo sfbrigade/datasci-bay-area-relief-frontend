@@ -16,7 +16,7 @@ const StyledCard = styled(Card)`
   background: #ffffff;
   border-radius: 4px;
   padding: 15px 20px;
-  width: 320px;
+  width: 350px;
   margin: 1.5em;
   text-align: left;
 `;
@@ -41,7 +41,7 @@ const StyledName = styled(Typography).attrs({variant: 'body2' })`
 
 
 const ButtonWrapper = styled.div`
-  padding-top: 30px;
+  padding-top: 35px;
 `;
 
 
