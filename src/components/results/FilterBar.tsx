@@ -15,14 +15,12 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
   min-width: 361px;
   padding-left: 40px;
   text-align: left;
-
   & .MuiTypography-root {
     font-size: 12px;
     line-height: 20px;
     letter-spacing: 0.25px;
     color: rgba(0, 0, 0, 0.87);
   }
-
   & .MuiFormLabel-root {
     font-size: 13px;
     // line-height: 16px;
@@ -31,14 +29,12 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
     text-transform: uppercase;
     font-weight: 600;
   }
-
   & .MuiFormControl-root {
     &:not(:first-child) {
       margin-top: 15px;
     }
     
   }
-
   @media (max-width: 752px) {
     display: ${props => (props.isFilterOpen ? 'flex' : 'none')};
     width: 75%;

@@ -1,9 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React, {ChangeEvent, useState, useEffect, useMemo} from "react";
 import styled, {StyledComponent} from "styled-components";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
+
+import {useHistory} from "react-router-dom";
+
 import {FilterBar} from "./results/FilterBar";
+import {applyFilters, getMatchCounts} from "./results/filterHelpers";
+
+
 
 import Typography from "@material-ui/core/Typography";
 import MatMenu from '@material-ui/core/Menu';
@@ -13,8 +19,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 
+import {HeaderProps, CurrentFilters, SortOptionType, Result} from '../types';
 
-import {HeaderProps} from '../types';
 
 const WhiteContainer = styled.header`
   top: 0;
@@ -39,6 +45,12 @@ const TransparentContainer = styled.header`
   overflow: hidden;
   align-items: center;
   justify-content: space-between;
+`;
+
+const FilterContainer = styled.div`
+  @media (min-width: 752px) {
+    display: none
+  }
 `;
 
 const HiddenContainer = styled.header`
@@ -87,16 +99,26 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   const [visible, setVisible] = useState(true);
   const [isResultsPage, setIsResultsPage] = useState(false);
   const [filterToggle, setFilterToggle] = React.useState(false);
+  const [results, setResults] = useState<Result[]>([]);
 
-  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-    if (event.type === 'keydown') {
-      return;
-    }
 
-    setIsFilterOpen(open);
+  const history = useHistory<{currentFilters: CurrentFilters}>();
+  const currentFiltersFromHistory =
+    history.location.state && history.location.state.currentFilters
+      ? history.location.state.currentFilters
+      : {};
+  const [currentFilters, setCurrentFilters] = useState<CurrentFilters>(
+    currentFiltersFromHistory
+  );
 
-    setFilterToggle(open);
-  };
+  const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
+    currentFilters,
+    results,
+  ]);
+
+  const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
+    filteredResults,
+  ]);
   
   // Update isResultsPage when location pathname changes;
   useEffect(() => {
@@ -158,6 +180,37 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
     setAnchorEl(null);
   };
 
+  const handleFilterChange = (group: keyof CurrentFilters) => (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const newFilters = {...currentFilters};
+    if (event.target.checked) {
+      if (group in newFilters) {
+        if (!newFilters[group]?.includes(event.target.name)) {
+          newFilters[group]?.push(event.target.name);
+        }
+      } else {
+        newFilters[group] = [event.target.name];
+      }
+    } else {
+      const index = newFilters[group]?.indexOf(event.target.name);
+      if (index >= 0) newFilters[group]?.splice(index, 1);
+      if (newFilters[group]?.length === 0) delete newFilters[group];
+    }
+    setCurrentFilters(newFilters);
+  };
+
+  const handleClearFilters = () => setCurrentFilters({});
+
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (event.type === 'keydown') {
+      return;
+    }
+    setIsFilterOpen(open);
+    setFilterToggle(open);
+  };
+
+
   const SmallMenu = () => (
     <SmallMenuContainer
       id="small-menu-container">
@@ -192,19 +245,24 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
         <Logo role="logo" />
       </LogoWrapper>
       {isResultsPage && 
-        <div>
-          <>
-            <Button onClick={toggleDrawer(true)}>{'filter'}</Button>
-            <Drawer anchor={'left'} open={filterToggle} onClose={toggleDrawer(false)}>
-              <div
-                role="presentation"
-                onClick={toggleDrawer(false)}
-                onKeyDown={toggleDrawer(false)}
-              >
-              </div>
-            </Drawer>
-          </>
-        </div>
+        <FilterContainer>
+          <Button onClick={toggleDrawer(true)}>{'filter'}</Button>
+          <Drawer anchor={'left'} open={filterToggle} onClose={toggleDrawer(false)}>
+            <div
+              role="presentation"
+              onClick={toggleDrawer(false)}
+              onKeyDown={toggleDrawer(false)}
+            >
+              <FilterBar
+                currentFilters={currentFilters}
+                onChange={handleFilterChange}
+                matchCounts={matchCounts}
+                onClear={handleClearFilters}
+                isFilterOpen={isFilterOpen}
+              />
+            </div>
+          </Drawer>
+        </FilterContainer>
       }
       <Menu role="menu">
         {SmallMenu()}
