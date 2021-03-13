@@ -3,6 +3,7 @@ import styled, {StyledComponent} from "styled-components";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
+import {FilterBar} from "./results/FilterBar";
 
 import Typography from "@material-ui/core/Typography";
 import MatMenu from '@material-ui/core/Menu';
@@ -10,6 +11,8 @@ import MatMenuItem from '@material-ui/core/MenuItem';
 import MatButton from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from "@material-ui/core/Button";
+import Drawer from "@material-ui/core/Drawer";
+
 
 import {HeaderProps} from '../types';
 
@@ -66,16 +69,6 @@ const SmallMenuContainer = styled.div`
   }
 `;
 
-const FilterButtonContainer = styled.div`
-  @media (min-width: 752px) {
-    display: none
-  }
-`;
-
-const FilterButton = styled(Button)`
-  display: block;
-`;
-
 const MenuItem = styled(Link)`
   display: none;
 
@@ -93,6 +86,17 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isResultsPage, setIsResultsPage] = useState(false);
+  const [filterToggle, setFilterToggle] = React.useState(false);
+
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+    if (event.type === 'keydown') {
+      return;
+    }
+
+    setIsFilterOpen(open);
+
+    setFilterToggle(open);
+  };
   
   // Update isResultsPage when location pathname changes;
   useEffect(() => {
@@ -188,9 +192,19 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
         <Logo role="logo" />
       </LogoWrapper>
       {isResultsPage && 
-        <FilterButtonContainer>
-          <FilterButton onClick={handleFilterClick}>Filter</FilterButton>
-        </FilterButtonContainer>
+        <div>
+          <>
+            <Button onClick={toggleDrawer(true)}>{'filter'}</Button>
+            <Drawer anchor={'left'} open={filterToggle} onClose={toggleDrawer(false)}>
+              <div
+                role="presentation"
+                onClick={toggleDrawer(false)}
+                onKeyDown={toggleDrawer(false)}
+              >
+              </div>
+            </Drawer>
+          </>
+        </div>
       }
       <Menu role="menu">
         {SmallMenu()}
