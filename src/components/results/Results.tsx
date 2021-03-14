@@ -19,6 +19,9 @@ const ResultsPage = styled.div`
   padding-top: 130px;
   min-width: 100vw;
   min-height: 100vh;
+  @media(max-width: 600px) {
+    padding-top: 120px;
+  }
 `;
 
 const RightSide = styled.div`
