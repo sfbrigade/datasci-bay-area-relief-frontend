@@ -19,7 +19,10 @@ const StyledCard = styled(Card)`
   border-radius: 4px;
   width: 300px;
   height: 172px;
-  margin: 1.5em;
+  margin: 24px;
+  @media(max-width: 500px) {
+    margin: 24px 0px;
+  }
 `;
 
 const SupportTypeContainer = styled.div`

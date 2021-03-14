@@ -39,6 +39,10 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
     
   }
 
+  @media(max-width: 1100px) {
+    min-width: 280px;
+  }
+
   @media (max-width: 752px) {
     display: ${props => (props.isFilterOpen ? 'flex' : 'none')};
     width: 75%;
