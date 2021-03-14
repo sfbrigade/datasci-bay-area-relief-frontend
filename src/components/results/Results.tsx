@@ -191,8 +191,9 @@ const Results: React.FC<ResultsProps> = ({isFilterOpen, setIsFilterOpen}) => {
             matchCounts={matchCounts}
             onClear={handleClearFilters}
             isFilterOpen={isFilterOpen}
+            setIsFilterOpen={setIsFilterOpen}
           />
-          <RightSide onClick={() => setIsFilterOpen(false)}>
+          <RightSide>
             <MatchSortContainer>
               <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>
               <SortContainer>

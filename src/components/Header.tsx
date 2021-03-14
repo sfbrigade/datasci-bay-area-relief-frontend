@@ -61,13 +61,13 @@ const SmallMenuContainer = styled.div`
   margin-left: 32px;
   text-decoration: none;
 
-  @media (min-width: 752px) {
+  @media (min-width: 770px) {
     display: none
   }
 `;
 
 const FilterButtonContainer = styled.div`
-  @media (min-width: 752px) {
+  @media (min-width: 770px) {
     display: none
   }
 `;
@@ -79,7 +79,7 @@ const FilterButton = styled(Button)`
 const MenuItem = styled(Link)`
   display: none;
 
-  @media (min-width: 752px) {
+  @media (min-width: 770px) {
     display: block;
     color: black;
     text-align: center;
@@ -114,20 +114,6 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollPos]);
-
-  // Track window width to toggle FilterBarOpen
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 752) {
-        setIsFilterOpen(false);
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   let Container: StyledComponent<"header", any, {}, never>;
 
