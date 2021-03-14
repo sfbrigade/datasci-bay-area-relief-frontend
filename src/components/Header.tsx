@@ -172,10 +172,6 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleFilterClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setIsFilterOpen(!isFilterOpen);
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -252,6 +248,7 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
               role="presentation"
               onClick={toggleDrawer(false)}
               onKeyDown={toggleDrawer(false)}
+              style={{ width: "400 px" }}
             >
               <FilterBar
                 currentFilters={currentFilters}
