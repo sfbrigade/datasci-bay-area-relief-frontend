@@ -89,6 +89,7 @@ const MenuItem = styled(Link)`
 `;
 
 const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
+  console.log('rendering header');
   const location = useLocation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);

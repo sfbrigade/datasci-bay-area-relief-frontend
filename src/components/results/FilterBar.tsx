@@ -95,7 +95,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   return (
     <ConditionalWrap
       condition={wrapSidebar}
-      wrap={(children: unknown) => <Drawer anchor="left" open={isFilterOpen} onClose={()=> setIsFilterOpen(false)}>{children}</Drawer>
+      wrap={(children: JSX.Element) => <Drawer anchor="left" open={isFilterOpen} onClose={()=> setIsFilterOpen(false)}>{children}</Drawer>
     }>
   <Sidebar isFilterOpen={isFilterOpen}>
     {filterGroups.map(({groupName, groupLabel, filters}) => (

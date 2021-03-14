@@ -91,6 +91,10 @@ const ResultsList = styled.div``;
 const StyledUL = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  padding-inline-start: 0px;
+  @media(max-width: 770px) {
+    justify-content: center;
+  }
 `;
 
 const ListItem = styled.li`
