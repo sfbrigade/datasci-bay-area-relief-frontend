@@ -63,6 +63,37 @@ export enum ReliefType {
   Both = "Both",
 }
 
+export enum OrgList {
+  LocalGoFundMe = "GoFundMe in the Bay area",
+  RedWoodCity = "Redwood City Small Business Relief Fund",
+  UCBerkleyLaw = "UC Berkeley Law Pro Bono",
+  COVIDFund = "COVID-19 Regional Response Fund",
+  NorCalFund = "Norcal Small Business Relief Fund",
+  OneFairWage = "One Fair Wage",
+  BerkleyFund = "Berkeley Relief Fund",
+  BerkleyAid = "Berkeley Mutual Aid",
+  ChinaTowns = "Save Our China Towns",
+  MEDA =  "Mission Economic Development Agency (MEDA)",
+  BLM = "Black Lives (BLM)",
+  BAOBOB = "Bay Area Organization of Black Owned Businesses (BAOBOB)",
+  BlackRestaurants = "Black Owned Restaurants",
+  BlackOwnedFund = "Black Owned Business ReliefFund",
+  ChamberOfCommerce = "Silicon Valley Central Chamber of Commerce",
+  SFGov = "San Francisco Government",
+  QueerWay = "Queer Way Out",
+  JamesBeard = "James Beard Foundation",
+  JamesBeardWeb = "James Beard Webinars",
+  
+}
+export enum PaymentMethods {
+  PayPal = "PayPal",
+  Venmo = "Venmo",
+  CashApp = "Cashapp",
+  Check = "Check",
+  Bitcoin = "Bitcoin",
+  Other = "Other",  
+}
+
 export type LocationState = {
   toHome?: boolean | undefined;
   toAbout?: boolean | undefined;
