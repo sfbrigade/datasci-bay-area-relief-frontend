@@ -19,6 +19,9 @@ const ResultsPage = styled.div`
   padding-top: 130px;
   min-width: 100vw;
   min-height: 100vh;
+  @media(max-width: 600px) {
+    padding-top: 120px;
+  }
 `;
 
 const RightSide = styled.div`
@@ -27,9 +30,12 @@ const RightSide = styled.div`
 
 const MatchSortContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-right: 10em;
-  margin-left: 4em;
+  padding-left: 24px;
+  align-items: center;
+  @media(max-width: 752px) {
+    padding-left: 0px;
+    flex-direction: column;
+  }
 `;
 
 const ResultsMatched = styled.h5`
@@ -48,10 +54,15 @@ const SortContainer = styled.div`
   flex-direction: row;
   padding: 6px 12px;
   min-width: 207px;
+  margin-left: 60px;
   height: 36px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 23px;
+  @media(max-width: 752px) {
+    margin-left: 0px;
+    margin-top: 8px;
+  }
   && .MuiTypography-root {
     /* Body 2 / Source Sans Pro */
     font-family: Source Sans Pro;

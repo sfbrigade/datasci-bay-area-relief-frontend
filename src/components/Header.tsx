@@ -25,6 +25,9 @@ const WhiteContainer = styled.header`
   background-color: white;
   justify-content: space-between;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.14);
+  @media(max-width: 600px) {
+    height: 88px;
+  }
 `;
 const TransparentContainer = styled.header`
   top: 0;
@@ -44,6 +47,9 @@ const HiddenContainer = styled.header`
 
 const LogoWrapper = styled.div`
   margin-left: 56px;
+  @media(max-width: 600px) {
+    margin-left: 24px;
+  }
 `;
 
 const Menu = styled.div`
@@ -52,6 +58,9 @@ const Menu = styled.div`
   padding-right: 88px;
   align-items: center;
   justify-content: flex-end;
+  @media(max-width: 600px) {
+    padding-right: 10px;
+  }
 `;
 
 const SmallMenuContainer = styled.div`
@@ -63,6 +72,10 @@ const SmallMenuContainer = styled.div`
 
   @media (min-width: 770px) {
     display: none
+  }
+
+  @media(max-width: 600px) {
+    margin-left: 0px;
   }
 `;
 
@@ -85,6 +98,14 @@ const MenuItem = styled(Link)`
     text-align: center;
     margin-left: 32px;
     text-decoration: none;
+  }
+`;
+
+const LogoStyled = styled(Logo)`
+  width: 246px;
+  height: auto;
+  @media(max-width: 600px) {
+    width: 160px;
   }
 `;
 
@@ -172,7 +193,8 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   return (
     <Container>
       <LogoWrapper>
-        <Logo role="logo" />
+        {/* <Logo role="logo" /> */}
+        <LogoStyled role="logo" />
       </LogoWrapper>
       {isResultsPage && 
         <FilterButtonContainer>
