@@ -16,7 +16,7 @@ const StyledCard = styled(Card)`
   background: #ffffff;
   border-radius: 4px;
   padding: 12px 18px;
-  width: 350px;
+  width: 310px;
   margin: 1.5em;
   text-align: left;
 `;
@@ -26,7 +26,7 @@ const SupportTypeContainer = styled.div`
 `;
 
 const StyledAwardAmount = styled.h5`
-  margin-top: 4px;
+  margin-top: 2px;
   margin-bottom: 0px;
   margin-left: -2px;
   font-family: 'Source Sans Pro';
@@ -41,7 +41,7 @@ const StyledName = styled(Typography).attrs({variant: 'body2' })`
 
 
 const BottomWrapper = styled.div`
-  padding-top: 35px;
+  padding-top: 28px;
   display: flex;
   justify-content: space-between;
 `;
