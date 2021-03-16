@@ -19,6 +19,6 @@ export const formatAwardAmount = (amount: number | null) => {
 };
 
 export const formatReliefType = (reliefType: ReliefType) => {
-  if (reliefType === ReliefType.Both) return "COVID and Protest Damage relief";
+  if (reliefType === ReliefType.Both) return "COVID and Protest relief";
   return reliefType + " relief";
 };

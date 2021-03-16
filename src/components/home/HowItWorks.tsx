@@ -28,7 +28,7 @@ const Section = styled.div`
   flex-direction: column;
 `;
 
-const Heading = styled.div`
+const SectionHeading = styled.div`
   margin-bottom: 24px;
 `;
 
@@ -60,9 +60,9 @@ const HowItWorks: React.FC = () => {
       <SectionContainer>
         <Section>
           <LeftImg alt="We scrape the internet" src={ScrapeWeb} />
-          <Heading>
+          <SectionHeading>
             <Typography variant="h5">We scrape the internet</Typography>
-          </Heading>
+          </SectionHeading>
           <Typography>
             We search across government websites, social media, and fundraising
             platforms to look for financial aid. We then help categorize them so
@@ -72,9 +72,9 @@ const HowItWorks: React.FC = () => {
 
         <Section>
           <MiddleImg alt="Search our database" src={Searching} />
-          <Heading>
+          <SectionHeading>
             <Typography variant="h5">Search our database</Typography>
-          </Heading>
+          </SectionHeading>
           <Typography>
             Here you can filter by grant qualifications. Once you find a loan or
             grant, you can apply through the original website.
@@ -83,9 +83,9 @@ const HowItWorks: React.FC = () => {
 
         <Section>
           <RightImg alt="Help us look" src={PaperAirplanes} />
-          <Heading>
+          <SectionHeading>
             <Typography variant="h5">Help us look</Typography>
-          </Heading>
+          </SectionHeading>
           <Typography>
             Found a fund that isn’t on our website? Help the community by
             letting us know, so we can add it to our database.
