@@ -15,7 +15,7 @@ const StyledCard = styled(Card)`
   position: relative;
   background: #ffffff;
   border-radius: 4px;
-  padding: 12px 18px;
+  padding: 12px 14px 10px 14px;
   width: 310px;
   margin: 1.5em;
   text-align: left;
@@ -91,6 +91,8 @@ const ResultCard: React.FC<Result> = ({
             </Button>
         )}
           <Tag>{formatReliefType(reliefType)}</Tag>
+          {/* {blackOwned && <Tag>Black-owned</Tag>}
+          {lgbtq && <Tag>LGBTQ</Tag>} */}
       </BottomWrapper>
     </StyledCard>
   );
