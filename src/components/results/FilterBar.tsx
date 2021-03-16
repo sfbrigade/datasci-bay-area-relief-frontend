@@ -48,6 +48,10 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
     padding-bottom: 10px;
     min-width: 300px;
   }
+
+  @media (max-width: 500px) {
+    min-width: 240px;
+  }
 `;
 
 type ConditionalProps = {
