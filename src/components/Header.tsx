@@ -110,7 +110,6 @@ const LogoStyled = styled(Logo)`
 `;
 
 const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
-  console.log('rendering header');
   const location = useLocation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -193,7 +192,6 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   return (
     <Container>
       <LogoWrapper>
-        {/* <Logo role="logo" /> */}
         <LogoStyled role="logo" />
       </LogoWrapper>
       {isResultsPage && 
