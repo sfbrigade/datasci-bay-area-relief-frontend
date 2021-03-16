@@ -45,6 +45,7 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
 
   @media (max-width: 770px) {
     padding-top: 30px;
+    padding-bottom: 10px;
     min-width: 300px;
   }
 `;
