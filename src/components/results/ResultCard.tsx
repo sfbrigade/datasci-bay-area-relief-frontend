@@ -12,10 +12,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 const StyledCard = styled(Card)`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-basis: auto;
   background: #ffffff;
   border-radius: 4px;
   width: 310px;
@@ -47,7 +43,7 @@ const StyledName = styled(Typography).attrs({variant: 'body2' })`
 
 
 const BottomWrapper = styled.div`
-  padding-top: 28px;
+  padding-top: 30px;
   display: flex;
   justify-content: space-between;
 `;

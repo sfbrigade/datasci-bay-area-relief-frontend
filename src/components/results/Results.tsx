@@ -32,7 +32,11 @@ const MatchSortContainer = styled.div`
   display: flex;
   padding-left: 24px;
   align-items: center;
-  @media(max-width: 752px) {
+  justify-content: space-between;
+  @media(max-width: 990px) {
+    justify-content: flex-start;
+  }
+  @media(max-width: 770px) {
     padding-left: 0px;
     flex-direction: column;
   }
@@ -48,12 +52,16 @@ const SortContainer = styled.div`
   flex-direction: row;
   padding: 6px 12px;
   min-width: 207px;
-  margin-left: 60px;
   height: 36px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 23px;
-  @media(max-width: 752px) {
+  transform: translateX(-200px);
+  @media(max-width: 990px) {
+    transform: translateX(0px);
+    margin-left: 26px;
+  }
+  @media(max-width: 770px) {
     margin-left: 0px;
     margin-top: 8px;
   }

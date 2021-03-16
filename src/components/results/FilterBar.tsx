@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 const Sidebar = styled.div<{ isFilterOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  min-width: 360px;
+  min-width: 320px;
   padding-left: 40px;
   text-align: left;
   overflow: auto;
@@ -38,25 +38,14 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
     &:not(:first-child) {
       margin-top: 15px;
     }
-    
+  }
+  @media (max-width: 830px) {
+    min-width: 270px;
   }
 
-  @media(max-width: 1100px) {
-    min-width: 280px;
-  }
-
-  @media (max-width: 752px) {
-    display: ${props => (props.isFilterOpen ? 'flex' : 'none')};
-    width: 75%;
-    height: auto;
-    background-color: white;
-    position: absolute;
-    top: 100px;
-    z-index: 10;
-    box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 
-      0px 8px 10px 1px rgb(0 0 0 / 14%), 
-      0px 3px 14px 2px rgb(0 0 0 / 12%);
-    padding: 30px;
+  @media (max-width: 770px) {
+    padding-top: 30px;
+    min-width: 300px;
   }
 `;
 
