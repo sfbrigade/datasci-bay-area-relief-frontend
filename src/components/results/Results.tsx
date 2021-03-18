@@ -19,7 +19,7 @@ const ResultsPage = styled.div`
   padding-top: 130px;
   min-width: 100vw;
   min-height: 100vh;
-  @media(max-width: 600px) {
+  @media (max-width: 600px) {
     padding-top: 120px;
   }
 `;
@@ -33,16 +33,16 @@ const MatchSortContainer = styled.div`
   padding-left: 24px;
   align-items: center;
   justify-content: space-between;
-  @media(max-width: 990px) {
+  @media (max-width: 990px) {
     justify-content: flex-start;
   }
-  @media(max-width: 770px) {
+  @media (max-width: 770px) {
     padding-left: 0px;
     flex-direction: column;
   }
 `;
 
-const ResultsMatched = styled(Typography).attrs({variant: 'h4' })`
+const ResultsMatched = styled(Typography).attrs({variant: "h4"})`
   margin: 0;
   color: rgba(0, 0, 0, 0.87);
 `;
@@ -57,11 +57,11 @@ const SortContainer = styled.div`
   box-sizing: border-box;
   border-radius: 23px;
   transform: translateX(-200px);
-  @media(max-width: 990px) {
+  @media (max-width: 990px) {
     transform: translateX(0px);
     margin-left: 26px;
   }
-  @media(max-width: 770px) {
+  @media (max-width: 770px) {
     margin-left: 0px;
     margin-top: 8px;
   }
@@ -105,7 +105,7 @@ const StyledUL = styled.ul`
   display: flex;
   flex-wrap: wrap;
   padding-inline-start: 0px;
-  @media(max-width: 770px) {
+  @media (max-width: 770px) {
     justify-content: center;
   }
 `;
@@ -197,7 +197,7 @@ const Results: React.FC<ResultsProps> = ({isFilterOpen, setIsFilterOpen}) => {
   };
 
   const handleClearFilters = () => setCurrentFilters({});
-  
+
   return (
     <ResultsPage>
       {!loading && (

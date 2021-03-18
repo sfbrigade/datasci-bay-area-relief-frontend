@@ -1,6 +1,12 @@
 import {CurrentFilters} from "../../types";
-import Drawer from '@material-ui/core/Drawer';
-import React, {ChangeEvent, useState, useEffect} from "react";
+import Drawer from "@material-ui/core/Drawer";
+import React, {
+  ChangeEvent,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import styled from "styled-components";
@@ -10,7 +16,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import {filterGroups} from "./filterHelpers";
 import Button from "@material-ui/core/Button";
 
-const Sidebar = styled.div<{ isFilterOpen: boolean }>`
+const Sidebar = styled.div<{isFilterOpen: boolean}>`
   display: flex;
   flex-direction: column;
   min-width: 320px;
@@ -56,21 +62,25 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
 
 type ConditionalProps = {
   condition: boolean;
-  wrap: any;
+  wrap: (children: JSX.Element) => JSX.Element;
   children: JSX.Element;
-}
+};
 
-const ConditionalWrap: React.FC<ConditionalProps> = ({condition, wrap, children}) => condition ? wrap(children) : children;
+const ConditionalWrap: React.FC<ConditionalProps> = ({
+  condition,
+  wrap,
+  children,
+}) => (condition ? wrap(children) : children);
 
 type FilterBarProps = {
   currentFilters: CurrentFilters;
-  matchCounts: {[k: string]: number};
+  matchCounts: {[key: string]: number};
   onChange: (
     group: keyof CurrentFilters
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
   onClear: () => void;
-  isFilterOpen: any;
-  setIsFilterOpen: any;
+  isFilterOpen: boolean;
+  setIsFilterOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -80,7 +90,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onClear,
   isFilterOpen,
   setIsFilterOpen,
-}) =>{ 
+}) => {
   const [wrapSidebar, setWrapSidebar] = useState(window.innerWidth < 770);
   useEffect(() => {
     const handleResize = () => {
@@ -106,38 +116,47 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
   return (
     <ConditionalWrap
+      data-testid="wrapper"
       condition={wrapSidebar}
-      wrap={(children: JSX.Element) => <Drawer anchor="left" open={isFilterOpen} onClose={()=> setIsFilterOpen(false)}>{children}</Drawer>
-    }>
-  <Sidebar isFilterOpen={isFilterOpen}>
-    {filterGroups.map(({groupName, groupLabel, filters}) => (
-      <FormControl key={groupName} component="fieldset">
-        <FormLabel component="legend">{groupLabel}</FormLabel>
-        <FormGroup>
-          {filters.map(({label, name}) => (
-            <FormControlLabel
-              key={name}
-              label={`${label} (${matchCounts[name]})`}
-              control={
-                <Checkbox
-                  name={name}
-                  checked={
-                    !!currentFilters[
-                      groupName as keyof CurrentFilters
-                    ]?.includes(name)
+      wrap={(children: JSX.Element) => (
+        <Drawer
+          anchor="left"
+          open={isFilterOpen}
+          onClose={() => setIsFilterOpen(false)}
+        >
+          {children}
+        </Drawer>
+      )}
+    >
+      <Sidebar data-testid="sidebar" isFilterOpen={isFilterOpen}>
+        {filterGroups.map(({groupName, groupLabel, filters}) => (
+          <FormControl key={groupName} component="fieldset">
+            <FormLabel component="legend">{groupLabel}</FormLabel>
+            <FormGroup>
+              {filters.map(({label, name}) => (
+                <FormControlLabel
+                  key={name}
+                  label={`${label} (${matchCounts[name]})`}
+                  control={
+                    <Checkbox
+                      name={name}
+                      checked={
+                        !!currentFilters[
+                          groupName as keyof CurrentFilters
+                        ]?.includes(name)
+                      }
+                      onChange={onChange(groupName as keyof CurrentFilters)}
+                    />
                   }
-                  onChange={onChange(groupName as keyof CurrentFilters)}
                 />
-              }
-            />
-          ))}
-        </FormGroup>
-      </FormControl>
-    ))}
-    <Button color="secondary" onClick={onClear}>
-      clear
-    </Button>
-  </Sidebar>
-  </ConditionalWrap>
-);
+              ))}
+            </FormGroup>
+          </FormControl>
+        ))}
+        <Button color="secondary" onClick={onClear}>
+          clear
+        </Button>
+      </Sidebar>
+    </ConditionalWrap>
+  );
 };
