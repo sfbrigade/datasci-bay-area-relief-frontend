@@ -7,6 +7,7 @@ import Results from "./components/results/Results";
 import Donate from "./components/donate/Donate";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {theme} from "./theme";
+import {AddPage} from "./components/addResources/AddPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/results" component={Results} />
             <Route exact path="/donate" component={Donate} />
+            <Route exact path="/add" component={AddPage} />
           </Switch>
         </Router>
       </div>
