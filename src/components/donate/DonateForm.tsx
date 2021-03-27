@@ -104,26 +104,29 @@ export const DonateForm = () => {
         </FormControl>
         <FormControl>
           <FormLabel component="legend">Payment Method</FormLabel>
-          <RadioGroup aria-label="gender" name="gender1" value={""}>
+          <RadioGroup aria-label="paymentMethod" name="paymentMethod" value={""}>
             <FormControlLabel value={PaymentMethods.Bitcoin} control={<Radio />} label={PaymentMethods.Bitcoin} />
             <FormControlLabel value={PaymentMethods.CashApp} control={<Radio />} label={PaymentMethods.CashApp} />
+            <FormControlLabel value={PaymentMethods.Venmo} control={<Radio />} label={PaymentMethods.Venmo} />
+            <FormControlLabel value={PaymentMethods.PayPal} control={<Radio />} label={PaymentMethods.PayPal} />
             <FormControlLabel value={PaymentMethods.Check} control={<Radio />} label={PaymentMethods.Check} />
             <FormControlLabel value={PaymentMethods.Other} control={<Radio />} label={PaymentMethods.Other} />
           </RadioGroup>
         </FormControl>
 
         <FormControl variant="outlined">
+          <InputLabel htmlFor="org-select">I want to donate to..</InputLabel>
           <StyledSelect
             native
-            value={""}
+            value={orgList}
             onChange={(event) => setOrgList(event.target.value as OrgList)}
-            label="I want to donate to.."
+            label="orgList"
             inputProps={{
               name: "org",
               id: "org-select",
             }}
           >
-            <option aria-label="None" value="" />
+            <option value="" />
             <option value={OrgList.BAOBOB}>{OrgList.BAOBOB}</option>
             <option value={OrgList.BLM}>{OrgList.BLM}</option>
             <option value={OrgList.BerkleyAid}>{OrgList.BerkleyAid}</option>
