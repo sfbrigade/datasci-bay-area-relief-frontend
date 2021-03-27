@@ -20,6 +20,10 @@ const StyledCard = styled(Card)`
   width: 300px;
   height: 172px;
   margin: 1.5em;
+
+  @media (min-width: 752px) {
+    width: 500px;
+  }
 `;
 
 const SupportTypeContainer = styled.div`
