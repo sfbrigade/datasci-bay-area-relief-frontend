@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import DonateForm from "./DonateForm";
+import {AddResourceForm} from "../addResources/AddResourceForm";
 
 
 const Container = styled.div`

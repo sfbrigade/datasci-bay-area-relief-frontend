@@ -16,6 +16,7 @@ import { CurrentFilters, Result } from "./types";
 
 const history = createBrowserHistory();
 
+import {AddPage} from "./components/addResources/AddPage";
 
 const App = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -56,6 +57,7 @@ const App = () => {
               />
             </Route>
             <Route exact path="/donate" component={Donate} />
+            <Route exact path="/add" component={AddPage} />
           </Switch>
         </Router>
       </div>
