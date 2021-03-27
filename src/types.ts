@@ -126,3 +126,13 @@ export interface ResultResponse {
   websiteUrl: string;
   womenOwned: string;
 }
+
+export interface HeaderProps {
+  setIsFilterOpen: any;
+  isFilterOpen: any;
+}
+
+export interface ResultsProps {
+  isFilterOpen: any;
+  setIsFilterOpen: any;
+}

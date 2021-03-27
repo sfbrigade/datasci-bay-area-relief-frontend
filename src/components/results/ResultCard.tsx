@@ -13,11 +13,18 @@ import Typography from "@material-ui/core/Typography";
 
 const StyledCard = styled(Card)`
   position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-basis: auto;
   background: #ffffff;
   border-radius: 4px;
-  width: 500px;
+  width: 300px;
   height: 172px;
   margin: 1.5em;
+
+  @media (min-width: 752px) {
+    width: 500px;
+  }
 `;
 
 const SupportTypeContainer = styled.div`
