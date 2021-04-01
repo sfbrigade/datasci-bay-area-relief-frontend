@@ -19,7 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 
-import {HeaderProps, CurrentFilters, SortOptionType, Result} from '../types';
+import {HeaderProps, CurrentFilters, Result} from '../types';
 
 
 const WhiteContainer = styled.header`
@@ -99,7 +99,7 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   const [visible, setVisible] = useState(true);
   const [isResultsPage, setIsResultsPage] = useState(false);
   const [filterToggle, setFilterToggle] = React.useState(false);
-  const [results, setResults] = useState<Result[]>([]);
+  const [results] = useState<Result[]>([]);
 
 
   const history = useHistory<{currentFilters: CurrentFilters}>();
@@ -119,7 +119,7 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
     filteredResults,
   ]);
-  
+
   // Update isResultsPage when location pathname changes;
   useEffect(() => {
     setIsResultsPage(location.pathname === '/results');
@@ -145,7 +145,7 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 752) {
-        setIsFilterOpen(false);
+        // setIsFilterOpen(false);
       }
     };
 
@@ -157,7 +157,7 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
 
   let Container: StyledComponent<"header", any, {}, never>;
 
-  // Change navbar layout when in home page and results page. Home page is clear and results page navbar is white 
+  // Change navbar layout when in home page and results page. Home page is clear and results page navbar is white
   if (location.pathname === "/results" || location.pathname === "/donate") {
     Container = WhiteContainer;
   } else {
@@ -213,7 +213,7 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
       <MatButton id="mat-button" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         <MenuIcon/>
       </MatButton>
-      
+
       <MatMenu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -234,13 +234,13 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
       </MatMenu>
     </SmallMenuContainer>
   );
-  
+
   return (
     <Container>
       <LogoWrapper>
         <Logo role="logo" />
       </LogoWrapper>
-      {isResultsPage && 
+      {isResultsPage &&
         <FilterContainer>
           <Button onClick={toggleDrawer(true)}>{'filter'}</Button>
           <Drawer anchor={'left'} open={filterToggle} onClose={toggleDrawer(false)}>
