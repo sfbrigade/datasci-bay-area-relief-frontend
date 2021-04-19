@@ -9,7 +9,6 @@ import sortListBy from "./sortListBy";
 import {applyFilters, getMatchCounts} from "./filterHelpers";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
-import {useHistory} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
 import {ResultsProps} from "../../types";
 
@@ -97,18 +96,9 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-const Results: React.FC<ResultsProps> = ({isFilterOpen, setIsFilterOpen}) => {
+const Results: React.FC<ResultsProps> = ({isFilterOpen, setIsFilterOpen, currentFilters, setCurrentFilters}) => {
   const [results, setResults] = useState<Result[]>([]);
   const [loading, setLoading] = useState(true);
-
-  const history = useHistory<{currentFilters: CurrentFilters}>();
-  const currentFiltersFromHistory =
-    history.location.state && history.location.state.currentFilters
-      ? history.location.state.currentFilters
-      : {};
-  const [currentFilters, setCurrentFilters] = useState<CurrentFilters>(
-    currentFiltersFromHistory
-  );
 
   const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
     currentFilters,

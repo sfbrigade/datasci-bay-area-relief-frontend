@@ -4,12 +4,10 @@ import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
 
-import {useHistory} from "react-router-dom";
-
 import {FilterBar} from "./results/FilterBar";
 import {applyFilters, getMatchCounts} from "./results/filterHelpers";
-
-
+import sortListBy from "./results/sortListBy";
+import {getResults} from "../api/axiosApi";
 
 import Typography from "@material-ui/core/Typography";
 import MatMenu from '@material-ui/core/Menu';
@@ -93,23 +91,13 @@ const MenuItem = styled(Link)`
   }
 `;
 
-const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
+const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen, currentFilters, setCurrentFilters}) => {
   const location = useLocation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isResultsPage, setIsResultsPage] = useState(false);
   const [filterToggle, setFilterToggle] = React.useState(false);
   const [results, setResults] = useState<Result[]>([]);
-
-
-  const history = useHistory<{currentFilters: CurrentFilters}>();
-  const currentFiltersFromHistory =
-    history.location.state && history.location.state.currentFilters
-      ? history.location.state.currentFilters
-      : {};
-  const [currentFilters, setCurrentFilters] = useState<CurrentFilters>(
-    currentFiltersFromHistory
-  );
 
   const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
     currentFilters,
@@ -120,6 +108,22 @@ const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
     filteredResults,
   ]);
   
+  const [sortOption, setSortOption] = useState<SortOptionType>(
+    SortOptionType.None
+  );
+
+  useEffect(() => {
+    getResults()
+      .then(setResults)
+      .then(() => {
+        setSortOption(SortOptionType.DueDateNewToOld);
+      });
+  }, []);
+
+  useEffect(() => {
+    setResults((curResults) => sortListBy(curResults, sortOption));
+  }, [sortOption]);
+
   // Update isResultsPage when location pathname changes;
   useEffect(() => {
     setIsResultsPage(location.pathname === '/results');

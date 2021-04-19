@@ -130,9 +130,13 @@ export interface ResultResponse {
 export interface HeaderProps {
   setIsFilterOpen: any;
   isFilterOpen: any;
+  currentFilters: CurrentFilters;
+  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
 }
 
 export interface ResultsProps {
   isFilterOpen: any;
   setIsFilterOpen: any;
+  currentFilters: CurrentFilters;
+  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
 }
