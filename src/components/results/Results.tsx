@@ -1,12 +1,11 @@
 import React, {ChangeEvent, useEffect, useMemo, useState} from "react";
-import {getResults} from "../../api/axiosApi";
 import {CurrentFilters, Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
-import {applyFilters, getMatchCounts} from "./filterHelpers";
+import {getMatchCounts} from "./filterHelpers";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
@@ -91,44 +90,37 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-const Results: React.FC<ResultsProps> = ({isFilterOpen, setIsFilterOpen}) => {
-  const [results, setResults] = useState<Result[]>([]);
+const Results: React.FC<ResultsProps> = ({
+    isFilterOpen, 
+    setIsFilterOpen, 
+    currentFilters, 
+    setCurrentFilters, 
+    setResults,
+    filteredResults
+  }) => {
   const [loading, setLoading] = useState(true);
-
   const history = useHistory<{currentFilters: CurrentFilters}>();
-  const currentFiltersFromHistory =
-    history.location.state && history.location.state.currentFilters
-      ? history.location.state.currentFilters
-      : {};
-  const [currentFilters, setCurrentFilters] = useState<CurrentFilters>(
-    currentFiltersFromHistory
-  );
 
-  const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
-    currentFilters,
-    results,
-  ]);
+  if(history.location.state && history.location.state.currentFilters){
+    setCurrentFilters(history.location.state.currentFilters);
+  }
 
   const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
     filteredResults,
   ]);
 
   const [sortOption, setSortOption] = useState<SortOptionType>(
-    SortOptionType.None
+    SortOptionType.DueDateNewToOld
   );
 
-  useEffect(() => {
-    getResults()
-      .then(setResults)
-      .then(() => {
-        setSortOption(SortOptionType.DueDateNewToOld);
-        setLoading(false);
-      });
-  }, []);
+    useEffect(() => {
+      setSortOption(SortOptionType.DueDateNewToOld);
+      setLoading(false);
+    }, [filteredResults]);
 
   useEffect(() => {
     setResults((curResults) => sortListBy(curResults, sortOption));
-  }, [sortOption]);
+  }, [sortOption, setResults]);
 
   const renderResults = () => {
     if (filteredResults.length === 0) {
@@ -136,8 +128,7 @@ const Results: React.FC<ResultsProps> = ({isFilterOpen, setIsFilterOpen}) => {
         <>
           <img src={Searching} alt="No Results" />
           <p>
-            Try clearing some filters! There are still {results.length} loans
-            out there.
+            Try clearing some filters!
           </p>
         </>
       );

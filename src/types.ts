@@ -1,3 +1,5 @@
+import { MemoryHistory } from "history/createMemoryHistory";
+
 export enum County {
   SanFrancisco = "San Francisco",
   Alameda = "Alameda",
@@ -130,9 +132,21 @@ export interface ResultResponse {
 export interface HeaderProps {
   setIsFilterOpen: any;
   isFilterOpen: any;
+  currentFilters: CurrentFilters;
+  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
+  filteredResults: Result[];
 }
 
 export interface ResultsProps {
   isFilterOpen: any;
   setIsFilterOpen: any;
+  currentFilters: CurrentFilters;
+  setResults: React.Dispatch<React.SetStateAction<Result[]>>;
+  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
+  filteredResults: Result[];
+}
+
+export interface ResultWrapperType {
+  history: MemoryHistory<{}>;
+  results: Result[];
 }

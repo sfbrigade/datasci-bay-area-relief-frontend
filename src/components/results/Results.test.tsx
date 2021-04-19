@@ -1,20 +1,46 @@
-import React from "react";
-import {fireEvent, screen, within} from "@testing-library/react";
+import React, { useState, useMemo } from "react";
+import {fireEvent, render, screen, within} from "@testing-library/react";
 import {createMemoryHistory} from "history";
 import Results from "./Results";
-import {idleForIO, renderWithRouter} from "../../testUtils";
-import * as api from "../../api/axiosApi";
+import { Router } from "react-router-dom";
+import {idleForIO} from "../../testUtils";
+import { applyFilters } from "../results/filterHelpers";
 import {
   formatAwardAmount,
   formatDate,
   formatInterestRate,
   formatReliefType,
 } from "./formatHelpers";
-import {Result} from "../../types";
+import {Result, CurrentFilters, ResultWrapperType} from "../../types";
 import {makeResult} from "./testDataHelpers";
 
 describe("Results", () => {
+  const ResultWrapper: React.FC<ResultWrapperType> = ({ history, results }) => {
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [,setResults] = useState<Result[]>([]);
+    const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
+
+    const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
+      currentFilters,
+      results,
+    ]);
+
+    return (
+      <Router history={history}>  
+        <Results 
+          isFilterOpen={isFilterOpen}
+          setIsFilterOpen={setIsFilterOpen}
+          currentFilters={currentFilters}
+          setCurrentFilters={setCurrentFilters}
+          setResults={setResults}
+          filteredResults={filteredResults}
+        />
+      </Router>
+    );
+  };
+
   describe("results filtering", () => {
+    
     it("applies the filters passed in", async () => {
       const results: Result[] = [
         makeResult({
@@ -28,7 +54,6 @@ describe("Results", () => {
           nonProfit: false,
         }),
       ];
-      jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
 
       const history = createMemoryHistory();
       const initialState = {
@@ -38,8 +63,7 @@ describe("Results", () => {
         },
       };
       history.push("/", initialState);
-      renderWithRouter(<Results />, {history});
-      await idleForIO();
+      render(<ResultWrapper history={history} results={results}/>);
 
       const nonProfitCheckbox = screen.getByLabelText(
         /non-profit/i
@@ -80,9 +104,9 @@ describe("Results", () => {
           smallBusiness: true,
         }),
       ];
-      jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
 
-      renderWithRouter(<Results />);
+      const history = createMemoryHistory();
+      render(<ResultWrapper history={history} results={results}/>);
       await idleForIO();
       const sfCountyCheckbox = screen.getByLabelText(
         /san francisco/i
@@ -101,6 +125,7 @@ describe("Results", () => {
       expect(screen.getByRole("checkbox", {name: /san francisco \(2\)/i}));
       expect(screen.getByRole("checkbox", {name: /small business \(2\)/i}));
     });
+
 
     it("allows the user to select filters that narrow down the matches shown", async () => {
       const results: Result[] = [
@@ -129,9 +154,8 @@ describe("Results", () => {
           alamedaCounty: false,
         }),
       ];
-
-      jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
-      renderWithRouter(<Results />);
+      const history = createMemoryHistory();
+      render(<ResultWrapper history={history} results={results}/>);
       await idleForIO();
 
       const checkBoxSFCounty = screen.getByLabelText(
@@ -186,9 +210,8 @@ describe("Results", () => {
         }),
       ];
 
-      jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
-      renderWithRouter(<Results />);
-      await idleForIO();
+      const history = createMemoryHistory();
+      render(<ResultWrapper history={history} results={results}/>);
 
       const sfCountyFilter = screen.getByLabelText(
         /san francisco/i
@@ -196,8 +219,10 @@ describe("Results", () => {
       const smallBusinessFilter = screen.getByLabelText(
         /small business/i
       ) as HTMLInputElement;
+
       fireEvent.click(sfCountyFilter);
       fireEvent.click(smallBusinessFilter);
+
 
       const filteredResults = screen.getAllByRole("listitem");
       expect(filteredResults.length).toEqual(1);
@@ -215,13 +240,9 @@ describe("Results", () => {
   describe("results list", () => {
     describe("when there are no matches", () => {
       it("renders a no results image and message", async () => {
-        jest
-          .spyOn(api, "getResults")
-          .mockResolvedValueOnce([
-            makeResult({id: 5, smallBusiness: true, nonProfit: false}),
-            makeResult({id: 6, smallBusiness: true, nonProfit: false}),
-          ]);
-        renderWithRouter(<Results />);
+        const results: Result[] = [];
+        const history = createMemoryHistory();
+        render(<ResultWrapper history={history} results={results}/>);
         await idleForIO();
 
         const nonProfitCheckbox = screen.getByLabelText(
@@ -241,9 +262,9 @@ describe("Results", () => {
           makeResult({id: 2, maxAwardAmount: 50000}),
           makeResult({id: 3, maxAwardAmount: 25000}),
         ];
-        jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
 
-        renderWithRouter(<Results />);
+        const history = createMemoryHistory();
+        render(<ResultWrapper history={history} results={results}/>);
         await idleForIO();
 
         const resultCards = screen.getAllByRole("listitem");
@@ -313,8 +334,8 @@ describe("Results", () => {
 
       it("does not show the no results image", async () => {
         const results = [makeResult()];
-        jest.spyOn(api, "getResults").mockResolvedValueOnce(results);
-        renderWithRouter(<Results />);
+        const history = createMemoryHistory();
+        render(<ResultWrapper history={history} results={results}/>);
         await idleForIO();
 
         expect(screen.queryByTitle("No results")).toBeNull();

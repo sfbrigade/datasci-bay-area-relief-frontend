@@ -7,9 +7,7 @@ import {ReactComponent as Logo} from "../assets/Logo.svg";
 import {useHistory} from "react-router-dom";
 
 import {FilterBar} from "./results/FilterBar";
-import {applyFilters, getMatchCounts} from "./results/filterHelpers";
-
-
+import {getMatchCounts} from "./results/filterHelpers";
 
 import Typography from "@material-ui/core/Typography";
 import MatMenu from '@material-ui/core/Menu';
@@ -19,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 
-import {HeaderProps, CurrentFilters, Result} from '../types';
+import {HeaderProps, CurrentFilters} from '../types';
 
 
 const WhiteContainer = styled.header`
@@ -93,28 +91,23 @@ const MenuItem = styled(Link)`
   }
 `;
 
-const Header: React.FC<HeaderProps> = ({setIsFilterOpen, isFilterOpen}) => {
+const Header: React.FC<HeaderProps> = ({
+    setIsFilterOpen, 
+    isFilterOpen,
+    currentFilters,
+    setCurrentFilters,
+    filteredResults,
+  }) => {
   const location = useLocation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isResultsPage, setIsResultsPage] = useState(false);
   const [filterToggle, setFilterToggle] = React.useState(false);
-  const [results] = useState<Result[]>([]);
-
 
   const history = useHistory<{currentFilters: CurrentFilters}>();
-  const currentFiltersFromHistory =
-    history.location.state && history.location.state.currentFilters
-      ? history.location.state.currentFilters
-      : {};
-  const [currentFilters, setCurrentFilters] = useState<CurrentFilters>(
-    currentFiltersFromHistory
-  );
-
-  const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
-    currentFilters,
-    results,
-  ]);
+  if(history.location.state && history.location.state.currentFilters){
+    setCurrentFilters(history.location.state.currentFilters);
+  }
 
   const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
     filteredResults,
