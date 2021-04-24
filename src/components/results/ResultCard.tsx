@@ -29,24 +29,14 @@ const StyledCard = styled(Card)`
 
 const SupportTypeContainer = styled.div`
   display: flex;
-  flex-direction: row;
   position: absolute;
-  width: 196px;
-  height: 16px;
+  width: 80%;
   left: 16px;
   top: 15px;
-  margin: 0;
-  padding: 0;
 `;
 
 const SupportTypeItem = styled(Typography).attrs({variant: 'overline' })`
   position: static;
-  height: 16px;
-  right: 162px;
-  top: 0;
-  flex: none;
-  align-self: center;
-  margin: 4px 0;
 `;
 
 const StyledAwardAmount = styled(Typography).attrs({variant: 'h5' })`
@@ -54,30 +44,25 @@ const StyledAwardAmount = styled(Typography).attrs({variant: 'h5' })`
   padding: 0;
   text-align: left;
   position: absolute;
-  height: 31px;
+  width: 90%;
   left: 16px;
-  right: 112px;
   top: 38px;
 `;
 
 const StyledName = styled(Typography).attrs({variant: 'body2' })`
   text-align: left;
   position: absolute;
-  height: 20px;
+  width: 80%;
   left: 16px;
-  right: 112px;
   top: 68px;
   color: rgba(0, 0, 0, 0.6);
-
 `;
 
 const StyledReliefType = styled(Typography).attrs({variant: 'body2' })`
   text-align: left;
   position: absolute;
-  height: 20px;
   left: 16px;
-  right: 112px;
-  top: 100.16px;
+  top: 100px;
   color: rgba(0, 0, 0, 0.38);
 `;
 
@@ -95,18 +80,14 @@ const Tags = styled.div`
   width: 60%;
   display: flex;
   justify-content: flex-end;
-  
+  padding-right: 10px
 `;
 
 const Tag = styled(Typography).attrs({variant: 'body2' })`
-  margin-right: 10px;
-
   background: linear-gradient(0deg, #fece4b, #fece4b);
   border-radius: 16px;
-  
   padding-left: 12px;
   padding-right: 12px;
-  
   color: rgba(0, 0, 0, 0.87);
 `;
 
