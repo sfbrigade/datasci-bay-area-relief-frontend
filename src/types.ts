@@ -80,6 +80,15 @@ export enum ReliefType {
   Both = "Both",
 }
 
+export enum PaymentMethods {
+  PayPal = "PayPal",
+  Venmo = "Venmo",
+  CashApp = "Cashapp",
+  Check = "Check",
+  Bitcoin = "Bitcoin",
+  Other = "Other",  
+}
+
 export enum OrgList {
   LocalGoFundMe = "GoFundMe in the Bay area",
   RedWoodCity = "Redwood City Small Business Relief Fund",

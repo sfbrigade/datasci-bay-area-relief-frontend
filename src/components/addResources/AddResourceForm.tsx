@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import Select from "@material-ui/core/Select";
-import {County, OrgList, OrgType, PaymentMethods} from "../../types";
+import {County, OrgList, OrgType, PaymentMethods, ReliefType} from "../../types";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -80,8 +80,8 @@ export const AddResourceForm = () => {
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [county, setCounty] = useState<County>();
-  const [orgType, setOrgType] = useState<orgType>();
-  const [reliefType, setReliefType] = useState<reliefType>();
+  const [orgType, setOrgType] = useState<OrgType>();
+  const [reliefType, setReliefType] = useState<ReliefType>();
   const [comments, setComments] = useState();
 
   return (
@@ -97,7 +97,7 @@ export const AddResourceForm = () => {
           <StyledTextField
             id="FirstName"
             value={firstName}
-            onChange={(event) => setFirstName(event.target.value as string)}
+            onChange={(event) => setFirstName(event.target.value)}
             label="First Name"
             inputProps={{
               name: "firstName",
@@ -109,7 +109,7 @@ export const AddResourceForm = () => {
           <StyledTextField
             id="LastName"
             value={lastName}
-            onChange={(event) => setLastName(event.target.value as string)}
+            onChange={(event) => setLastName(event.target.value)}
             label="Last Name"
             inputProps={{
               name: "lastName",
@@ -121,7 +121,7 @@ export const AddResourceForm = () => {
           <StyledTextField
             id="Email"
             value={email}
-            onChange={(event) => setEmail(event.target.value as string)}
+            onChange={(event) => setEmail(event.target.value)}
             label="Email"
             inputProps={{
               name: "email",
@@ -134,7 +134,7 @@ export const AddResourceForm = () => {
             id="PhoneNumber"
             label="Phone Number"
             value={phoneNumber}
-            onChange={(event) => setPhoneNumber(event.target.value as string)}
+            onChange={(event) => setPhoneNumber(event.target.value)}
             inputProps={{
               name: "phoneNumber",
               id: "phoneNumber-select",
@@ -167,7 +167,7 @@ export const AddResourceForm = () => {
           <StyledSelect
             native
             value={orgType}
-            onChange={(event) => setOrgType(event.target.value as orgType)}
+            onChange={(event) => setOrgType(event.target.value as OrgType)}
             label="orgType"
             inputProps={{
               name: "orgType",
@@ -175,8 +175,8 @@ export const AddResourceForm = () => {
             }}
           >
             <option aria-label="None" value="" />
-            <option value={orgType.SmallBusiness}>Small Business</option>
-            <option value={orgType.NonProfit}>Non-Profit</option>
+            <option value={OrgType.SmallBusiness}>Small Business</option>
+            <option value={OrgType.NonProfit}>Non-Profit</option>
           </StyledSelect>
         </FormControl>
         <FormControl variant="outlined">
@@ -184,7 +184,7 @@ export const AddResourceForm = () => {
           <StyledSelect
             native
             value={reliefType}
-            onChange={(event) => setReliefType(event.target.value as reliefType)}
+            onChange={(event) => setReliefType(event.target.value)}
             label="reliefType"
             inputProps={{
               name: "reliefType",
@@ -192,8 +192,8 @@ export const AddResourceForm = () => {
             }}
           >
             <option aria-label="None" value="" />
-            <option value={reliefType.COVID}>Small Business</option>
-            <option value={reliefTYpe.ProtestDamage}>Protest Damage</option>
+            <option value={ReliefType.COVID}>Small Business</option>
+            <option value={ReliefTYpe.ProtestDamage}>Protest Damage</option>
           </StyledSelect>
         </FormControl>
         <FormControl variant="outlined">
@@ -202,7 +202,7 @@ export const AddResourceForm = () => {
             label="Comments"          
           />
             value={comments}
-            onChange={(event) => setComments(event.target.value as string)}
+            onChange={(event) => setComments(event.target.value)}
             label="comments"
             inputProps={{
               name: "comments",
