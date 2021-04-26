@@ -2,7 +2,6 @@ import React, {useEffect, useState, useMemo} from "react";
 import "./App.css";
 import {Router, Route, Switch} from "react-router-dom";
 import { createBrowserHistory } from "history";
-
 import Home from "./components/home/Home";
 import Header from "./components/Header";
 import Results from "./components/results/Results";
@@ -12,11 +11,11 @@ import {theme} from "./theme";
 import { getResults } from "./api/axiosApi";
 import {applyFilters} from "./components/results/filterHelpers";
 import { CurrentFilters, Result } from "./types";
+import {AddPage} from "./components/addResources/AddPage";
 
 
 const history = createBrowserHistory();
 
-import {AddPage} from "./components/addResources/AddPage";
 
 const App = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
