@@ -1,8 +1,24 @@
-import React, {ReactElement, useState} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
+import Select from "@material-ui/core/Select";
+import {County, OrgList, OrgType, PaymentMethods} from "../../types";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormGroup from "@material-ui/core/FormGroup";
+import InputLabel from "@material-ui/core/InputLabel";
+import Button from "@material-ui/core/Button";
 import {Typography} from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import {getFilterNameFromGroupAndLabel} from "../results/filterHelpers";
+import {useHistory} from "react-router-dom";
+import {colors} from "../../theme";
+import { isUndefined } from "lodash";
 
-const FormContainer = styled.form`
+const AddResourceFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,20 +26,199 @@ const FormContainer = styled.form`
   border: 0;
 `;
 
-const FormDescription = styled.div`
+const AddResourceDescription = styled.div`
   width: 400px;
   z-index: 10;
   margin-bottom: 27px;
 `;
 
-export const AddResourceForm: React.FC = (): ReactElement => {
+const AddResourceFormFields = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 328px;
+`;
+
+const StyledSelect = styled(Select)`
+  margin-bottom: 1em;
+`;
+
+const StyledTextField = styled(TextField)`
+  margin-bottom: 1em;
+`;
+
+const StyledTextArea = styled(TextareaAutosize)`
+  margin-bottom: 1em;
+`;
+
+const AddResourceButton = styled(Button)`
+  && {
+    width: 97px;
+    height: 36px;
+    border-radius: 200px;
+
+    :disabled {
+      background-color: ${colors.primaryRed};
+      color: black;
+      opacity: 0.5;
+    }
+  }
+`;
+
+const history = useHistory();
+
+const onButtonPress = () => {
+  history.push({
+    pathname: "",
+    state: {
+    },
+  });
+};
+
+export const AddResourceForm = () => {
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [county, setCounty] = useState<County>();
+  const [orgType, setOrgType] = useState<orgType>();
+  const [reliefType, setReliefType] = useState<reliefType>();
+  const [comments, setComments] = useState();
+
   return (
-    <FormContainer>
-      <FormDescription>
+    <AddResourceFormContainer>
+      <AddResourceDescription>
         <Typography variant="body1">
-          Tip us off with a resource to save in the SF Bay Relief database.
+          Add Organization with resources for <small></small> businesses.
         </Typography>
-      </FormDescription>
-    </FormContainer>
+      </AddResourceDescription>
+
+      <AddResourceFormFields>
+        <FormControl variant="outlined">
+          <StyledTextField
+            id="FirstName"
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value as string)}
+            label="First Name"
+            inputProps={{
+              name: "firstName",
+              id: "firstName-select",
+            }}
+          />
+        </FormControl>
+        <FormControl variant="outlined">
+          <StyledTextField
+            id="LastName"
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value as string)}
+            label="Last Name"
+            inputProps={{
+              name: "lastName",
+              id: "lastname-select",
+            }}
+          />
+        </FormControl>
+        <FormControl variant="outlined">
+          <StyledTextField
+            id="Email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value as string)}
+            label="Email"
+            inputProps={{
+              name: "email",
+              id: "email-select",
+            }}
+          />
+        </FormControl>
+        <FormControl variant="outlined">
+          <StyledTextField
+            id="PhoneNumber"
+            label="Phone Number"
+            value={phoneNumber}
+            onChange={(event) => setPhoneNumber(event.target.value as string)}
+            inputProps={{
+              name: "phoneNumber",
+              id: "phoneNumber-select",
+            }}
+          />
+        </FormControl>
+        <FormControl variant="outlined">
+          <InputLabel htmlFor="county-select">County</InputLabel>
+          <StyledSelect
+            native
+            value={county}
+            onChange={(event) => setCounty(event.target.value as County)}
+            label="County"
+            inputProps={{
+              name: "county",
+              id: "county-select",
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option value={County.SanFrancisco}>San Francisco</option>
+            <option value={County.Alameda}>Alameda</option>
+            <option value={County.SanMateo}>San Mateo</option>
+            <option value={County.ContraCosta}>Conta Costa</option>
+            <option value={County.SantaClara}>Santa Clara</option>
+            <option value={County.Any}>Any</option>
+          </StyledSelect>
+        </FormControl>
+        <FormControl variant="outlined">
+          <InputLabel htmlFor="OrgType">Org Type</InputLabel>
+          <StyledSelect
+            native
+            value={orgType}
+            onChange={(event) => setOrgType(event.target.value as orgType)}
+            label="orgType"
+            inputProps={{
+              name: "orgType",
+              id: "orgType-select",
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option value={orgType.SmallBusiness}>Small Business</option>
+            <option value={orgType.NonProfit}>Non-Profit</option>
+          </StyledSelect>
+        </FormControl>
+        <FormControl variant="outlined">
+          <InputLabel htmlFor="ReliefType">Relief Type</InputLabel>
+          <StyledSelect
+            native
+            value={reliefType}
+            onChange={(event) => setReliefType(event.target.value as reliefType)}
+            label="reliefType"
+            inputProps={{
+              name: "reliefType",
+              id: "reliefType-select",
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option value={reliefType.COVID}>Small Business</option>
+            <option value={reliefTYpe.ProtestDamage}>Protest Damage</option>
+          </StyledSelect>
+        </FormControl>
+        <FormControl variant="outlined">
+          <StyledTextArea
+            id="Comments"
+            label="Comments"          
+          />
+            value={comments}
+            onChange={(event) => setComments(event.target.value as string)}
+            label="comments"
+            inputProps={{
+              name: "comments",
+              id: "comments-select",
+            }}
+        </FormControl>
+      </AddResourceFormFields>
+      <AddResourceButton
+        variant="contained"
+        color="primary"
+        onClick={onButtonPress}
+      >
+        Add Resource
+      </AddResourceButton>
+    </AddResourceFormContainer>
   );
 };
+
+export default AddResourceForm;

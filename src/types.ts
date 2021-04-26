@@ -53,6 +53,21 @@ export interface Result {
   websiteUrl: string;
 }
 
+export interface DonorInfo {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  county: County;
+  orgType: OrgType;
+  comments: string;
+  dateAdded: string;
+  reliefType: ReliefType;
+  supportType: SupportType;
+  websiteUrl: string;
+}
+
 export enum SupportType {
   Loan = "Loan",
   Grant = "Grant",
@@ -86,14 +101,6 @@ export enum OrgList {
   JamesBeard = "James Beard Foundation",
   JamesBeardWeb = "James Beard Webinars",
   
-}
-export enum PaymentMethods {
-  PayPal = "PayPal",
-  Venmo = "Venmo",
-  CashApp = "Cashapp",
-  Check = "Check",
-  Bitcoin = "Bitcoin",
-  Other = "Other",  
 }
 
 export type LocationState = {
@@ -175,6 +182,14 @@ export interface ResultsProps {
   setResults: React.Dispatch<React.SetStateAction<Result[]>>;
   setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
   filteredResults: Result[];
+}
+
+export interface AddResourceProps {
+  isFilterOpen: any;
+  setIsFilterOpen: any;
+  currentFilters: CurrentFilters;
+  setDonorInfo: React.Dispatch<React.SetStateAction<DonorInfo[]>>;
+  donorInfo: DonorInfo[];
 }
 
 export interface ResultWrapperType {
