@@ -1,22 +1,14 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import Select from "@material-ui/core/Select";
-import {County, OrgList, OrgType, PaymentMethods, ReliefType} from "../../types";
+import {County, OrgType, ReliefType} from "../../types";
 import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import {Typography} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import {getFilterNameFromGroupAndLabel} from "../results/filterHelpers";
-import {useHistory} from "react-router-dom";
 import {colors} from "../../theme";
-import { isUndefined } from "lodash";
 
 const AddResourceFormContainer = styled.form`
   display: flex;
@@ -52,7 +44,7 @@ const StyledTextArea = styled(TextareaAutosize)`
 
 const AddResourceButton = styled(Button)`
   && {
-    width: 97px;
+    width: auto;
     height: 36px;
     border-radius: 200px;
 
@@ -64,26 +56,33 @@ const AddResourceButton = styled(Button)`
   }
 `;
 
-const history = useHistory();
+const SpacerDiv = styled.div`
+  height: 1em;
+  width: auto;
+`
 
-const onButtonPress = () => {
-  history.push({
-    pathname: "",
-    state: {
-    },
-  });
-};
+// const history = useHistory();
+//
+// const onButtonPress = () => {
+//   history.push({
+//     pathname: "",
+//     state: {
+//     },
+//   });
+// };
 
 export const AddResourceForm = () => {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [email, setEmail] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [county, setCounty] = useState<County>();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [county, setCounty] = useState<County>(null);
   const [orgType, setOrgType] = useState<OrgType>();
   const [reliefType, setReliefType] = useState<ReliefType>();
   const [comments, setComments] = useState();
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     <AddResourceFormContainer>
       <AddResourceDescription>
@@ -141,6 +140,7 @@ export const AddResourceForm = () => {
             }}
           />
         </FormControl>
+        <SpacerDiv />
         <FormControl variant="outlined">
           <InputLabel htmlFor="county-select">County</InputLabel>
           <StyledSelect
@@ -157,7 +157,7 @@ export const AddResourceForm = () => {
             <option value={County.SanFrancisco}>San Francisco</option>
             <option value={County.Alameda}>Alameda</option>
             <option value={County.SanMateo}>San Mateo</option>
-            <option value={County.ContraCosta}>Conta Costa</option>
+            <option value={County.ContraCosta}>Contra Costa</option>
             <option value={County.SantaClara}>Santa Clara</option>
             <option value={County.Any}>Any</option>
           </StyledSelect>
@@ -184,7 +184,7 @@ export const AddResourceForm = () => {
           <StyledSelect
             native
             value={reliefType}
-            onChange={(event) => setReliefType(event.target.value)}
+            onChange={(event) => setReliefType(event.target.value as ReliefType)}
             label="reliefType"
             inputProps={{
               name: "reliefType",
@@ -193,27 +193,26 @@ export const AddResourceForm = () => {
           >
             <option aria-label="None" value="" />
             <option value={ReliefType.COVID}>Small Business</option>
-            <option value={ReliefTYpe.ProtestDamage}>Protest Damage</option>
+            <option value={ReliefType.ProtestDamage}>Protest Damage</option>
           </StyledSelect>
         </FormControl>
         <FormControl variant="outlined">
           <StyledTextArea
             id="Comments"
-            label="Comments"          
-          />
+            placeholder="Comments"
             value={comments}
-            onChange={(event) => setComments(event.target.value)}
-            label="comments"
-            inputProps={{
-              name: "comments",
-              id: "comments-select",
-            }}
+            onChange={(event: any) => setComments(event.target.value)}
+            // inputProps={{
+            //   name: "comments",
+            //   id: "comments-select",
+            // }}
+            />
         </FormControl>
       </AddResourceFormFields>
       <AddResourceButton
         variant="contained"
         color="primary"
-        onClick={onButtonPress}
+        onClick={() => console.log('hello')}
       >
         Add Resource
       </AddResourceButton>
