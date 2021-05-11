@@ -76,7 +76,7 @@ export const AddResourceForm = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [county, setCounty] = useState<County>(null);
+  const [county, setCounty] = useState<County>(County.Any);
   const [orgType, setOrgType] = useState<OrgType>();
   const [reliefType, setReliefType] = useState<ReliefType>();
   const [comments, setComments] = useState();
