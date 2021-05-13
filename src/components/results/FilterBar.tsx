@@ -56,7 +56,7 @@ type FilterBarProps = {
     group: keyof CurrentFilters
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
   onClear: () => void;
-  isFilterOpen: any;
+  isFilterOpen: boolean;
 };
 
 export const FilterBar: React.FC<FilterBarProps> = ({

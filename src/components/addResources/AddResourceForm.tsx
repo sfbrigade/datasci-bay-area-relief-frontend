@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import styled from "styled-components";
 import Select from "@material-ui/core/Select";
 import {County, OrgType, ReliefType} from "../../types";
@@ -59,7 +59,7 @@ const AddResourceButton = styled(Button)`
 const SpacerDiv = styled.div`
   height: 1em;
   width: auto;
-`
+`;
 
 // const history = useHistory();
 //
@@ -72,22 +72,20 @@ const SpacerDiv = styled.div`
 // };
 
 export const AddResourceForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [county, setCounty] = useState<County>(County.Any);
   const [orgType, setOrgType] = useState<OrgType>();
   const [reliefType, setReliefType] = useState<ReliefType>();
-  const [comments, setComments] = useState();
+  const [comments, setComments] = useState("");
 
-  // @ts-ignore
-  // @ts-ignore
   return (
     <AddResourceFormContainer>
       <AddResourceDescription>
         <Typography variant="body1">
-          Add Organization with resources for <small></small> businesses.
+          Add Organization with resources for small businesses.
         </Typography>
       </AddResourceDescription>
 
@@ -100,7 +98,7 @@ export const AddResourceForm = () => {
             label="First Name"
             inputProps={{
               name: "firstName",
-              id: "firstName-select",
+              id: "firstName-select"
             }}
           />
         </FormControl>
@@ -112,7 +110,7 @@ export const AddResourceForm = () => {
             label="Last Name"
             inputProps={{
               name: "lastName",
-              id: "lastname-select",
+              id: "lastname-select"
             }}
           />
         </FormControl>
@@ -124,7 +122,7 @@ export const AddResourceForm = () => {
             label="Email"
             inputProps={{
               name: "email",
-              id: "email-select",
+              id: "email-select"
             }}
           />
         </FormControl>
@@ -136,24 +134,25 @@ export const AddResourceForm = () => {
             onChange={(event) => setPhoneNumber(event.target.value)}
             inputProps={{
               name: "phoneNumber",
-              id: "phoneNumber-select",
+              id: "phoneNumber-select"
             }}
           />
         </FormControl>
-        <SpacerDiv />
+        <SpacerDiv/>
         <FormControl variant="outlined">
           <InputLabel htmlFor="county-select">County</InputLabel>
           <StyledSelect
             native
+            data-testid="county"
             value={county}
             onChange={(event) => setCounty(event.target.value as County)}
             label="County"
             inputProps={{
               name: "county",
-              id: "county-select",
+              id: "county-select"
             }}
           >
-            <option aria-label="None" value="" />
+            <option aria-label="None" value=""/>
             <option value={County.SanFrancisco}>San Francisco</option>
             <option value={County.Alameda}>Alameda</option>
             <option value={County.SanMateo}>San Mateo</option>
@@ -169,12 +168,13 @@ export const AddResourceForm = () => {
             value={orgType}
             onChange={(event) => setOrgType(event.target.value as OrgType)}
             label="orgType"
+            data-testid="orgType"
             inputProps={{
               name: "orgType",
-              id: "orgType-select",
+              id: "orgType-select"
             }}
           >
-            <option aria-label="None" value="" />
+            <option aria-label="None" value=""/>
             <option value={OrgType.SmallBusiness}>Small Business</option>
             <option value={OrgType.NonProfit}>Non-Profit</option>
           </StyledSelect>
@@ -186,12 +186,13 @@ export const AddResourceForm = () => {
             value={reliefType}
             onChange={(event) => setReliefType(event.target.value as ReliefType)}
             label="reliefType"
+            data-testid="reliefType"
             inputProps={{
               name: "reliefType",
-              id: "reliefType-select",
+              id: "reliefType-select"
             }}
           >
-            <option aria-label="None" value="" />
+            <option aria-label="None" value=""/>
             <option value={ReliefType.COVID}>Small Business</option>
             <option value={ReliefType.ProtestDamage}>Protest Damage</option>
           </StyledSelect>
@@ -199,20 +200,21 @@ export const AddResourceForm = () => {
         <FormControl variant="outlined">
           <StyledTextArea
             id="Comments"
+            data-testid="comments"
             placeholder="Comments"
             value={comments}
-            onChange={(event: any) => setComments(event.target.value)}
+            onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setComments(event.target.value)}
             // inputProps={{
             //   name: "comments",
             //   id: "comments-select",
             // }}
-            />
+          />
         </FormControl>
       </AddResourceFormFields>
       <AddResourceButton
         variant="contained"
         color="primary"
-        onClick={() => console.log('hello')}
+        onClick={() => console.log("hello")}
       >
         Add Resource
       </AddResourceButton>

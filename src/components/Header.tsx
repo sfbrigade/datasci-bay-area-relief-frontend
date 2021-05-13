@@ -92,7 +92,7 @@ const MenuItem = styled(Link)`
 `;
 
 const Header: React.FC<HeaderProps> = ({
-    setIsFilterOpen, 
+    setIsFilterOpen,
     isFilterOpen,
     currentFilters,
     setCurrentFilters,
@@ -148,7 +148,7 @@ const Header: React.FC<HeaderProps> = ({
     };
   }, []);
 
-  let Container: StyledComponent<"header", any, {}, never>;
+  let Container: StyledComponent<"header", {}, {}, never>;
 
   // Change navbar layout when in home page and results page. Home page is clear and results page navbar is white
   if (location.pathname === "/results" || location.pathname === "/donate") {

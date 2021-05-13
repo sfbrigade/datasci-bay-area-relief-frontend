@@ -4,18 +4,14 @@ import Select from "@material-ui/core/Select";
 import {County, OrgList, PaymentMethods} from "../../types";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import {Typography} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import {getFilterNameFromGroupAndLabel} from "../results/filterHelpers";
-import {useHistory} from "react-router-dom";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import {colors} from "../../theme";
-import { isUndefined } from "lodash";
 
 const DonateFormContainer = styled.form`
   display: flex;
@@ -63,7 +59,6 @@ export const DonateForm = () => {
   const [orgList, setOrgList] = useState<OrgList>();
   const [county, setCounty] = useState<County>();
 
-  const history = useHistory();
   return (
     <DonateFormContainer>
       <DonateDescription>

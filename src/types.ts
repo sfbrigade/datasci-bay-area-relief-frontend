@@ -1,4 +1,5 @@
 import { MemoryHistory } from "history/createMemoryHistory";
+import {Dispatch, SetStateAction} from "react";
 
 export enum County {
   SanFrancisco = "San Francisco",
@@ -86,7 +87,7 @@ export enum PaymentMethods {
   CashApp = "Cashapp",
   Check = "Check",
   Bitcoin = "Bitcoin",
-  Other = "Other",  
+  Other = "Other",
 }
 
 export enum OrgList {
@@ -109,7 +110,7 @@ export enum OrgList {
   QueerWay = "Queer Way Out",
   JamesBeard = "James Beard Foundation",
   JamesBeardWeb = "James Beard Webinars",
-  
+
 }
 
 export type LocationState = {
@@ -177,27 +178,27 @@ export interface ResultResponse {
 }
 
 export interface HeaderProps {
-  setIsFilterOpen: any;
-  isFilterOpen: any;
+  setIsFilterOpen: Dispatch<boolean>;
+  isFilterOpen: boolean;
   currentFilters: CurrentFilters;
-  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
+  setCurrentFilters: Dispatch<SetStateAction<CurrentFilters>>;
   filteredResults: Result[];
 }
 
 export interface ResultsProps {
-  isFilterOpen: any;
-  setIsFilterOpen: any;
+  setIsFilterOpen: Dispatch<boolean>;
+  isFilterOpen: boolean;
   currentFilters: CurrentFilters;
-  setResults: React.Dispatch<React.SetStateAction<Result[]>>;
-  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
+  setResults: Dispatch<SetStateAction<Result[]>>;
+  setCurrentFilters: Dispatch<SetStateAction<CurrentFilters>>;
   filteredResults: Result[];
 }
 
 export interface AddResourceProps {
-  isFilterOpen: any;
-  setIsFilterOpen: any;
+  isFilterOpen: Dispatch<boolean>;
+  setIsFilterOpen: boolean;
   currentFilters: CurrentFilters;
-  setDonorInfo: React.Dispatch<React.SetStateAction<DonorInfo[]>>;
+  setDonorInfo: Dispatch<SetStateAction<DonorInfo[]>>;
   donorInfo: DonorInfo[];
 }
 
