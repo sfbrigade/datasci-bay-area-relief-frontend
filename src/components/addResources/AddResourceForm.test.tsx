@@ -9,6 +9,7 @@ describe("Add Resource Form", () => {
     getByText("First Name");
     getByText("Last Name");
     getByText("Email");
+    getByText("URL");
     getByText("Phone Number");
     getByTestId("county");
     getByTestId("orgType");

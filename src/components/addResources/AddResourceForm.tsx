@@ -80,6 +80,7 @@ export const AddResourceForm = () => {
   const [orgType, setOrgType] = useState<OrgType>();
   const [reliefType, setReliefType] = useState<ReliefType>();
   const [comments, setComments] = useState("");
+  const [url, setUrl] = useState("");
 
   return (
     <AddResourceFormContainer>
@@ -135,6 +136,18 @@ export const AddResourceForm = () => {
             inputProps={{
               name: "phoneNumber",
               id: "phoneNumber-select"
+            }}
+          />
+        </FormControl>
+        <FormControl variant="outlined">
+          <StyledTextField
+            id="URL"
+            label="URL"
+            value={url}
+            onChange={(event) => setUrl(event.target.value)}
+            inputProps={{
+              name: "url",
+              id: "url-select"
             }}
           />
         </FormControl>
@@ -214,7 +227,20 @@ export const AddResourceForm = () => {
       <AddResourceButton
         variant="contained"
         color="primary"
-        onClick={() => console.log("hello")}
+        onClick={() => {
+          const resource = {
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            url,
+            county,
+            reliefType,
+            orgType,
+            comments
+          };
+          console.log({resource});
+        }}
       >
         Add Resource
       </AddResourceButton>
