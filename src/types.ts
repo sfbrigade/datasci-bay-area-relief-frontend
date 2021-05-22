@@ -139,6 +139,18 @@ export interface CurrentFilters {
   language?: string[];
 }
 
+export interface AddReliefBody {
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  phoneNumber?: string;
+  url: string;
+  county?: string;
+  orgType?: string;
+  reliefType?: string;
+  comments?: string;
+}
+
 export interface ResultResponse {
   lte100: string;
   lte500: string;

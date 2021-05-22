@@ -1,33 +1,41 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Select from "@material-ui/core/Select";
-import {County, OrgType, ReliefType} from "../../types";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
+import {AddReliefBody, County, OrgType, ReliefType} from "../../types";
 import Button from "@material-ui/core/Button";
-import {Typography} from "@material-ui/core";
+import {Paper, Typography} from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import {colors} from "../../theme";
+import {useFormik} from "formik";
+import * as yup from "yup";
+import {addResult} from "../../api/axiosApi";
+import {AxiosResponse} from "axios";
 
-const AddResourceFormContainer = styled.form`
+const StyledPaper = styled(Paper)`
+  elevation: higher;
+`;
+
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   margin-top: 14px;
+  padding-left: 30px;
+  padding-right: 30px;
   border: 0;
 `;
 
-const AddResourceDescription = styled.div`
+const Description = styled.div`
   width: 400px;
   z-index: 10;
   margin-bottom: 27px;
 `;
 
-const AddResourceFormFields = styled.div`
+const Grouping = styled.div`
   display: flex;
   flex-direction: column;
-  width: 328px;
+  width: 400px;
 `;
 
 const StyledSelect = styled(Select)`
@@ -36,6 +44,8 @@ const StyledSelect = styled(Select)`
 
 const StyledTextField = styled(TextField)`
   margin-bottom: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
 `;
 
 const StyledTextArea = styled(TextareaAutosize)`
@@ -47,7 +57,8 @@ const AddResourceButton = styled(Button)`
     width: auto;
     height: 36px;
     border-radius: 200px;
-
+    margin-top: 1em;
+    margin-bottom: 2em;
     :disabled {
       background-color: ${colors.primaryRed};
       color: black;
@@ -70,181 +81,138 @@ const SpacerDiv = styled.div`
 //     },
 //   });
 // };
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+const validationSchema = yup.object({
+  firstName: yup.string(),
+  lastName: yup.string(),
+  email: yup.string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  phoneNumber: yup.string().matches(phoneRegExp, "Enter a valid phone number"),
+  url: yup.string()
+    .url("Enter a valid url")
+    .required("Url is required"),
+  comments: yup.string(),
+});
+
+const sleep = (callback: ()=>void, ms: number) => {
+  return setTimeout(callback, ms);
+}
 
 export const AddResourceForm = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [county, setCounty] = useState<County>(County.Any);
-  const [orgType, setOrgType] = useState<OrgType>();
-  const [reliefType, setReliefType] = useState<ReliefType>();
-  const [comments, setComments] = useState("");
-  const [url, setUrl] = useState("");
+  const [addResourceButtonText, setAddResourceButtonText] = useState("Add Resource");
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      county: "",
+      comments: "",
+      url: ""
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      console.log({values});
+      const resource: AddReliefBody = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        phoneNumber: values.phoneNumber,
+        url: values.url,
+        county: values.county,
+        comments: values.comments
+      };
+      console.log({resource});
+      const response: AxiosResponse = await addResult(resource);
+      console.log({response});
+      if (response.status === 202) {
+        setAddResourceButtonText("Submitted!");
+
+        sleep(()=>{
+          formik.resetForm();
+          setAddResourceButtonText("Add Resource");
+        }, 2000);
+
+      } else if (response.status === 400) {
+        setAddResourceButtonText("Correct and Try Again");
+      } else {
+        setAddResourceButtonText("Try Again Later");
+      }
+    }
+  });
+
+  const validateFirstName = (value: string) => {
+    let error: string;
+    if (!value) {
+      error = "Required";
+    }
+    return error;
+  };
 
   return (
-    <AddResourceFormContainer>
-      <AddResourceDescription>
+    <StyledPaper>
+      <Description>
         <Typography variant="body1">
           Add Organization with resources for small businesses.
         </Typography>
-      </AddResourceDescription>
+      </Description>
 
-      <AddResourceFormFields>
-        <FormControl variant="outlined">
-          <StyledTextField
-            id="FirstName"
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-            label="First Name"
-            inputProps={{
-              name: "firstName",
-              id: "firstName-select"
-            }}
-          />
-        </FormControl>
-        <FormControl variant="outlined">
-          <StyledTextField
-            id="LastName"
-            value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
-            label="Last Name"
-            inputProps={{
-              name: "lastName",
-              id: "lastname-select"
-            }}
-          />
-        </FormControl>
-        <FormControl variant="outlined">
-          <StyledTextField
-            id="Email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            label="Email"
-            inputProps={{
-              name: "email",
-              id: "email-select"
-            }}
-          />
-        </FormControl>
-        <FormControl variant="outlined">
-          <StyledTextField
-            id="PhoneNumber"
-            label="Phone Number"
-            value={phoneNumber}
-            onChange={(event) => setPhoneNumber(event.target.value)}
-            inputProps={{
-              name: "phoneNumber",
-              id: "phoneNumber-select"
-            }}
-          />
-        </FormControl>
-        <FormControl variant="outlined">
-          <StyledTextField
-            id="URL"
-            label="URL"
-            value={url}
-            onChange={(event) => setUrl(event.target.value)}
-            inputProps={{
-              name: "url",
-              id: "url-select"
-            }}
-          />
-        </FormControl>
-        <SpacerDiv/>
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="county-select">County</InputLabel>
-          <StyledSelect
-            native
-            data-testid="county"
-            value={county}
-            onChange={(event) => setCounty(event.target.value as County)}
-            label="County"
-            inputProps={{
-              name: "county",
-              id: "county-select"
-            }}
-          >
-            <option aria-label="None" value=""/>
-            <option value={County.SanFrancisco}>San Francisco</option>
-            <option value={County.Alameda}>Alameda</option>
-            <option value={County.SanMateo}>San Mateo</option>
-            <option value={County.ContraCosta}>Contra Costa</option>
-            <option value={County.SantaClara}>Santa Clara</option>
-            <option value={County.Any}>Any</option>
-          </StyledSelect>
-        </FormControl>
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="OrgType">Org Type</InputLabel>
-          <StyledSelect
-            native
-            value={orgType}
-            onChange={(event) => setOrgType(event.target.value as OrgType)}
-            label="orgType"
-            data-testid="orgType"
-            inputProps={{
-              name: "orgType",
-              id: "orgType-select"
-            }}
-          >
-            <option aria-label="None" value=""/>
-            <option value={OrgType.SmallBusiness}>Small Business</option>
-            <option value={OrgType.NonProfit}>Non-Profit</option>
-          </StyledSelect>
-        </FormControl>
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="ReliefType">Relief Type</InputLabel>
-          <StyledSelect
-            native
-            value={reliefType}
-            onChange={(event) => setReliefType(event.target.value as ReliefType)}
-            label="reliefType"
-            data-testid="reliefType"
-            inputProps={{
-              name: "reliefType",
-              id: "reliefType-select"
-            }}
-          >
-            <option aria-label="None" value=""/>
-            <option value={ReliefType.COVID}>Small Business</option>
-            <option value={ReliefType.ProtestDamage}>Protest Damage</option>
-          </StyledSelect>
-        </FormControl>
-        <FormControl variant="outlined">
-          <StyledTextArea
-            id="Comments"
-            data-testid="comments"
-            placeholder="Comments"
-            value={comments}
-            onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setComments(event.target.value)}
-            // inputProps={{
-            //   name: "comments",
-            //   id: "comments-select",
-            // }}
-          />
-        </FormControl>
-      </AddResourceFormFields>
-      <AddResourceButton
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          const resource = {
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            url,
-            county,
-            reliefType,
-            orgType,
-            comments
-          };
-          console.log({resource});
-        }}
-      >
-        Add Resource
-      </AddResourceButton>
-    </AddResourceFormContainer>
+      <Grouping>
+          <StyledForm onSubmit={formik.handleSubmit}>
+            <StyledTextField
+              id="firstName"
+              label="First Name"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+              helperText={formik.touched.firstName && formik.errors.firstName}
+            />
+            <StyledTextField
+              id="lastName"
+              label="Last Name"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              helperText={formik.touched.lastName && formik.errors.lastName}
+            />
+            <StyledTextField
+              id="email"
+              label="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+            <StyledTextField
+              id="phoneNumber"
+              label="Phone Number"
+              value={formik.values.phoneNumber}
+              onChange={formik.handleChange}
+              error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
+              helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+            />
+            <StyledTextField
+              id="url"
+              label="Url"
+              value={formik.values.url}
+              onChange={formik.handleChange}
+              error={formik.touched.url && Boolean(formik.errors.url)}
+              helperText={formik.touched.url && formik.errors.url}
+            />
+            <AddResourceButton
+              variant="contained"
+              color="primary"
+              disabled={(addResourceButtonText === "Submitted!" || addResourceButtonText === "Try Again Later")}
+              type="submit"
+            >
+              {addResourceButtonText}
+            </AddResourceButton>
+          </StyledForm>
+      </Grouping>
+    </StyledPaper>
   );
 };
 
