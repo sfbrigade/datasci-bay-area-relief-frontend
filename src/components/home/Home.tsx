@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useContext, useEffect, useRef} from "react";
 import {RouteComponentProps} from "react-router-dom";
 import styled from "styled-components";
 import {ReactComponent as LandingPageSky} from "../../assets/LandingPageSky.svg";
@@ -50,7 +50,7 @@ const SearchSection = styled.div`
 `;
 
 const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
-  location,
+  location
 }) => {
   const aboutRef = useRef<HTMLDivElement>(null);
 

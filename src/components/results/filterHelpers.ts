@@ -22,9 +22,11 @@ export const applyFilters = (
   results: Result[],
   currentFilters: CurrentFilters
 ): Result[] => {
+  debugger;
   if (results.length === 0) return [];
   if (isEmpty(currentFilters)) return results;
   return results.filter((result) => {
+    debugger;
     for (const group in currentFilters) {
       if (!matchGroup({result, group, currentFilters})) return false;
     }

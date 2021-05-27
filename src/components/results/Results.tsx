@@ -1,16 +1,15 @@
-import React, {ChangeEvent, useEffect, useMemo, useState} from "react";
-import {CurrentFilters, Result, SortOptionType} from "../../types";
+import React, {ChangeEvent, useContext, useEffect, useMemo, useState} from "react";
+import {CurrentFilters, HomeSearchFormTypes, Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
-import {getMatchCounts} from "./filterHelpers";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
-import {ResultsProps} from "../../types";
+import FilterContext from "../../context/filter";
 
 const ResultsPage = styled.div`
   display: flex;
@@ -31,7 +30,7 @@ const MatchSortContainer = styled.div`
   margin-left: 4em;
 `;
 
-const ResultsMatched = styled(Typography).attrs({variant: 'h4' })`
+const ResultsMatched = styled(Typography).attrs({variant: "h4"})`
   margin: 0;
   color: rgba(0, 0, 0, 0.87);
 `;
@@ -45,6 +44,7 @@ const SortContainer = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 23px;
+
   && .MuiTypography-root {
     /* Body 2 / Source Sans Pro */
     font-family: Source Sans Pro;
@@ -90,43 +90,54 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-const Results: React.FC<ResultsProps> = ({
-    isFilterOpen, 
-    setIsFilterOpen, 
-    currentFilters, 
-    setCurrentFilters, 
-    setResults,
-    filteredResults
-  }) => {
+const Results: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const history = useHistory<{currentFilters: CurrentFilters}>();
+  const {
+    currentFilters,
+    setCurrentFilters,
+    setInitialData,
+    isFilterOpen,
+    setIsFilterOpen,
+    filteredResults
+  } = useContext(FilterContext);
 
-  if(history.location.state && history.location.state.currentFilters){
-    setCurrentFilters(history.location.state.currentFilters);
-  }
+  useEffect(() => {
+    if (history.location.search) {
+      const params = new URLSearchParams(history.location.search);
+      let pathFilters: HomeSearchFormTypes = {
+        orgType: [params.get("orgType")],
+      };
+      if (params.get('county')) {
+        pathFilters['county'] = [params.get('county')];
+      }
+      setCurrentFilters(pathFilters);
+    }
+  }, []);
 
-  const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
-    filteredResults,
-  ]);
+  // const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
+  //   filteredResults,
+  // ]);
+  const matchCounts = {};
 
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.DueDateNewToOld
   );
 
-    useEffect(() => {
-      setSortOption(SortOptionType.DueDateNewToOld);
-      setLoading(false);
-    }, [filteredResults]);
+  useEffect(() => {
+    setSortOption(SortOptionType.DueDateNewToOld);
+    setLoading(false);
+  }, [filteredResults]);
 
   useEffect(() => {
-    setResults((curResults) => sortListBy(curResults, sortOption));
-  }, [sortOption, setResults]);
+    setInitialData((curResults) => sortListBy(curResults, sortOption));
+  }, [sortOption, setInitialData]);
 
   const renderResults = () => {
     if (filteredResults.length === 0) {
       return (
         <>
-          <img src={Searching} alt="No Results" />
+          <img src={Searching} alt="No Results"/>
           <p>
             Try clearing some filters!
           </p>
@@ -148,6 +159,7 @@ const Results: React.FC<ResultsProps> = ({
     event: ChangeEvent<HTMLInputElement>
   ) => {
     const newFilters = {...currentFilters};
+    debugger;
     if (event.target.checked) {
       if (group in newFilters) {
         if (!newFilters[group]?.includes(event.target.name)) {
@@ -165,13 +177,12 @@ const Results: React.FC<ResultsProps> = ({
   };
 
   const handleClearFilters = () => setCurrentFilters({});
-  
+
   return (
     <ResultsPage>
       {!loading && (
         <>
           <FilterBar
-            currentFilters={currentFilters}
             onChange={handleFilterChange}
             matchCounts={matchCounts}
             onClear={handleClearFilters}

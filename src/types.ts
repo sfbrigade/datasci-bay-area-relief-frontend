@@ -2,17 +2,17 @@ import { MemoryHistory } from "history/createMemoryHistory";
 import {Dispatch, SetStateAction} from "react";
 
 export enum County {
-  SanFrancisco = "San Francisco",
-  Alameda = "Alameda",
-  SanMateo = "San Mateo",
-  ContraCosta = "Contra Costa",
-  SantaClara = "Santa Clara",
-  Any = "Any",
+  SanFrancisco = "sfCounty",
+  Alameda = "alamedaCounty",
+  SanMateo = "sanMateoCounty",
+  ContraCosta = "contraCostaCounty",
+  SantaClara = "santaClaraCounty",
+  Any = "any",
 }
 
 export enum OrgType {
-  SmallBusiness = "Small business",
-  NonProfit = "Non-profit",
+  SmallBusiness = "smallBusiness",
+  NonProfit = "nonProfit",
 }
 
 export interface FilterOptions {
@@ -189,26 +189,7 @@ export interface ResultResponse {
   womenOwned: string;
 }
 
-export interface HeaderProps {
-  setIsFilterOpen: Dispatch<boolean>;
-  isFilterOpen: boolean;
-  currentFilters: CurrentFilters;
-  setCurrentFilters: Dispatch<SetStateAction<CurrentFilters>>;
-  filteredResults: Result[];
-}
-
-export interface ResultsProps {
-  setIsFilterOpen: Dispatch<boolean>;
-  isFilterOpen: boolean;
-  currentFilters: CurrentFilters;
-  setResults: Dispatch<SetStateAction<Result[]>>;
-  setCurrentFilters: Dispatch<SetStateAction<CurrentFilters>>;
-  filteredResults: Result[];
-}
-
 export interface AddResourceProps {
-  isFilterOpen: Dispatch<boolean>;
-  setIsFilterOpen: boolean;
   currentFilters: CurrentFilters;
   setDonorInfo: Dispatch<SetStateAction<DonorInfo[]>>;
   donorInfo: DonorInfo[];
@@ -217,4 +198,9 @@ export interface AddResourceProps {
 export interface ResultWrapperType {
   history: MemoryHistory<{}>;
   results: Result[];
+}
+
+export interface HomeSearchFormTypes {
+  orgType?: string[];
+  county?: string[];
 }

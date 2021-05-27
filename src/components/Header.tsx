@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, useEffect, useMemo} from "react";
+import React, {ChangeEvent, useState, useEffect, useMemo, useContext} from "react";
 import styled, {StyledComponent} from "styled-components";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
@@ -17,7 +17,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 
-import {HeaderProps, CurrentFilters} from '../types';
+import {CurrentFilters} from '../types';
+import FilterContext from "../context/filter";
 
 
 const WhiteContainer = styled.header`
@@ -91,18 +92,14 @@ const MenuItem = styled(Link)`
   }
 `;
 
-const Header: React.FC<HeaderProps> = ({
-    setIsFilterOpen,
-    isFilterOpen,
-    currentFilters,
-    setCurrentFilters,
-    filteredResults,
-  }) => {
+const Header: React.FC = () => {
   const location = useLocation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isResultsPage, setIsResultsPage] = useState(false);
   const [filterToggle, setFilterToggle] = React.useState(false);
+
+  const {currentFilters, setCurrentFilters, setIsFilterOpen, isFilterOpen, filteredResults} = useContext(FilterContext);
 
   const history = useHistory<{currentFilters: CurrentFilters}>();
   if(history.location.state && history.location.state.currentFilters){
@@ -173,6 +170,7 @@ const Header: React.FC<HeaderProps> = ({
     event: ChangeEvent<HTMLInputElement>
   ) => {
     const newFilters = {...currentFilters};
+    debugger;
     if (event.target.checked) {
       if (group in newFilters) {
         if (!newFilters[group]?.includes(event.target.name)) {
@@ -244,7 +242,6 @@ const Header: React.FC<HeaderProps> = ({
               style={{ width: "400 px" }}
             >
               <FilterBar
-                currentFilters={currentFilters}
                 onChange={handleFilterChange}
                 matchCounts={matchCounts}
                 onClear={handleClearFilters}

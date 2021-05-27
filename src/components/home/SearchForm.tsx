@@ -4,7 +4,7 @@ import {County, OrgType} from "../../types";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {getFilterNameFromGroupAndLabel} from "../results/filterHelpers";
 import {useHistory} from "react-router-dom";
 import {Typography} from "@material-ui/core";
@@ -58,19 +58,31 @@ const DonateButton = styled(Button)`
 export const SearchForm = () => {
   const [orgType, setOrgType] = useState<OrgType>();
   const [county, setCounty] = useState<County>();
-
   const history = useHistory();
 
   const goToResults = () => {
-    history.push({
-      pathname: "/results",
-      state: {
-        currentFilters: {
-          orgType: [getFilterNameFromGroupAndLabel("orgType", orgType)],
-          county: [getFilterNameFromGroupAndLabel("county", county)],
-        },
-      },
-    });
+    let path = '/results';
+    if (orgType) {
+      path += `?orgType=${orgType}`;
+    }
+    if (county && county !== 'any') {
+      if (path.indexOf('?') === -1) {
+        path += `?county=${county}`;
+      } else {
+        path += `&county=${county}`;
+      }
+    }
+    history.push(path)
+    // history.push({
+    //   pathname: path
+      // state: {
+      //   currentFilters: {
+      //     orgType: [getFilterNameFromGroupAndLabel("orgType", orgType)],
+      //     county: [getFilterNameFromGroupAndLabel("county", county)],
+      //   },
+      // },
+    // });
+
   };
   const goToDonate = () => {
     history.push("/donate");
