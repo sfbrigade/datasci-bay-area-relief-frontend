@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo, createContext} from "react";
+import React, {useEffect, useState, useMemo, createContext, Dispatch, SetStateAction, ChangeEvent} from "react";
 import "./App.css";
 import {Router, Route, Switch} from "react-router-dom";
 import {createBrowserHistory} from "history";
@@ -22,6 +22,29 @@ const App = () => {
   const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
   const [filteredResults, setFilteredResults] = useState<Result[]>([]);
 
+  const contextID = "43de757f-c6f5-4b80-80e1-98ab19ad9aa7";
+
+  const handleFilterChange = (group: keyof CurrentFilters) => (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(`App.tsx::handleFilterChange, ${group}, ${event.target.name}`);
+    const newFilters = {...currentFilters};
+    if (event.target.checked) {
+      if (group in newFilters) {
+        if (!newFilters[group]?.includes(event.target.name)) {
+          newFilters[group]?.push(event.target.name);
+        }
+      } else {
+        newFilters[group] = [event.target.name];
+      }
+    } else {
+      const index = newFilters[group]?.indexOf(event.target.name);
+      if (index >= 0) newFilters[group]?.splice(index, 1);
+      if (newFilters[group]?.length === 0) delete newFilters[group];
+    }
+    setCurrentFilters(newFilters);
+  };
+
+  const handleClearFilters = () => setCurrentFilters({});
+
   useEffect(() => {
     setFilteredResults(applyFilters(initialData, currentFilters));
   }, [currentFilters, initialData])
@@ -34,7 +57,18 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <FilterContext.Provider
-        value={{currentFilters, setCurrentFilters, isFilterOpen, setIsFilterOpen, initialData, setInitialData, filteredResults}}>
+        value={{
+          currentFilters,
+          setCurrentFilters,
+          isFilterOpen,
+          setIsFilterOpen,
+          initialData,
+          setInitialData,
+          filteredResults,
+          handleFilterChange,
+          handleClearFilters,
+          contextID
+        }}>
         <div className="App">
           <Router history={history}>
             <Header />

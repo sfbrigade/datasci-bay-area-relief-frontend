@@ -1,5 +1,5 @@
 import {CurrentFilters} from "../../types";
-import React, {ChangeEvent, useContext} from "react";
+import React, {useContext} from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import styled from "styled-components";
@@ -54,23 +54,16 @@ const Sidebar = styled.div<{isFilterOpen: boolean}>`
   }
 `;
 
-type FilterBarProps = {
-  matchCounts: {[k: string]: number};
-  onChange: (
-    group: keyof CurrentFilters
-  ) => (event: ChangeEvent<HTMLInputElement>) => void;
-  onClear: () => void;
-  isFilterOpen: boolean;
-};
+export const FilterBar: React.FC = () => {
+  const {
+    currentFilters,
+    handleFilterChange,
+    handleClearFilters,
+    isFilterOpen,
+    contextID
+  } = useContext(FilterContext);
 
-export const FilterBar: React.FC<FilterBarProps> = ({
-                                                      matchCounts,
-                                                      onChange,
-                                                      onClear,
-                                                      isFilterOpen
-                                                    }) => {
-  const {currentFilters} = useContext(FilterContext);
-  console.log("FilterBar::currentFilters", currentFilters);
+  console.log(`contextID: ${contextID}`);
   return (
     <Sidebar isFilterOpen={isFilterOpen}>
       {filterGroups.map(({groupName, groupLabel, filters}) => {
@@ -84,7 +77,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                 return (
                   <FormControlLabel
                     key={name}
-                    label={`${label} (${matchCounts[name]})`}
+                    label={`${label}`}
                     control={
                       <Checkbox
                         name={name}
@@ -96,7 +89,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
                             groupName as keyof CurrentFilters
                             ]?.includes(label)
                         }
-                        onChange={onChange(groupName as keyof CurrentFilters)}
+                        onChange={handleFilterChange(groupName as keyof CurrentFilters)}
                       />
                     }
                   />
@@ -106,7 +99,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </FormControl>
         );
       })}
-      <Button color="secondary" onClick={onClear}>
+      <Button color="secondary" onClick={handleClearFilters}>
         clear
       </Button>
     </Sidebar>

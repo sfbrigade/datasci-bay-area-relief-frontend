@@ -99,16 +99,21 @@ const Header: React.FC = () => {
   const [isResultsPage, setIsResultsPage] = useState(false);
   const [filterToggle, setFilterToggle] = React.useState(false);
 
-  const {currentFilters, setCurrentFilters, setIsFilterOpen, isFilterOpen, filteredResults} = useContext(FilterContext);
+  const {
+    setCurrentFilters,
+    setIsFilterOpen,
+    isFilterOpen,
+    filteredResults,
+  } = useContext(FilterContext);
 
   const history = useHistory<{currentFilters: CurrentFilters}>();
   if(history.location.state && history.location.state.currentFilters){
     setCurrentFilters(history.location.state.currentFilters);
   }
 
-  const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
-    filteredResults,
-  ]);
+  // const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
+  //   filteredResults,
+  // ]);
 
   // Update isResultsPage when location pathname changes;
   useEffect(() => {
@@ -166,29 +171,6 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const handleFilterChange = (group: keyof CurrentFilters) => (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newFilters = {...currentFilters};
-    debugger;
-    if (event.target.checked) {
-      if (group in newFilters) {
-        if (!newFilters[group]?.includes(event.target.name)) {
-          newFilters[group]?.push(event.target.name);
-        }
-      } else {
-        newFilters[group] = [event.target.name];
-      }
-    } else {
-      const index = newFilters[group]?.indexOf(event.target.name);
-      if (index >= 0) newFilters[group]?.splice(index, 1);
-      if (newFilters[group]?.length === 0) delete newFilters[group];
-    }
-    setCurrentFilters(newFilters);
-  };
-
-  const handleClearFilters = () => setCurrentFilters({});
-
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === 'keydown') {
       return;
@@ -241,12 +223,7 @@ const Header: React.FC = () => {
               onKeyDown={toggleDrawer(false)}
               style={{ width: "400 px" }}
             >
-              <FilterBar
-                onChange={handleFilterChange}
-                matchCounts={matchCounts}
-                onClear={handleClearFilters}
-                isFilterOpen={isFilterOpen}
-              />
+              <FilterBar />
             </div>
           </Drawer>
         </FilterContainer>

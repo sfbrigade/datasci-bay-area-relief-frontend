@@ -1,69 +1,63 @@
-import React, { useState, useMemo } from "react";
+import React, {useState, useMemo} from "react";
 import {fireEvent, render, screen, within} from "@testing-library/react";
 import {createMemoryHistory} from "history";
 import Results from "./Results";
-import { Router } from "react-router-dom";
-import {idleForIO} from "../../testUtils";
-import { applyFilters } from "../results/filterHelpers";
+import {Router} from "react-router-dom";
+import {idleForIO, testResult} from "../../testUtils";
 import {
   formatAwardAmount,
   formatDate,
   formatInterestRate,
-  formatReliefType,
+  formatReliefType
 } from "./formatHelpers";
 import {Result, CurrentFilters, ResultWrapperType} from "../../types";
 import {makeResult} from "./testDataHelpers";
+import FilterContext, {FilterContextType} from "../../context/filter";
+const filterValue: FilterContextType = {
+  setInitialData: jest.fn(),
+  currentFilters: {},
+  setCurrentFilters: jest.fn(),
+  isFilterOpen: false,
+  setIsFilterOpen: jest.fn(),
+  initialData: [testResult],
+  filteredResults: [testResult],
+  handleFilterChange: jest.fn()
+}
 
 describe("Results", () => {
-  const ResultWrapper: React.FC<ResultWrapperType> = ({ history, results }) => {
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [,setResults] = useState<Result[]>([]);
-    const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
-
-    const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
-      currentFilters,
-      results,
-    ]);
+  const ResultWrapper: React.FC<ResultWrapperType> = ({history, results}) => {
+    //currentFilters, setCurrentFilters, isFilterOpen, setIsFilterOpen, initialData, setInitialData, filteredResults
 
     return (
-      <Router history={history}>  
-        <Results 
-          isFilterOpen={isFilterOpen}
-          setIsFilterOpen={setIsFilterOpen}
-          currentFilters={currentFilters}
-          setCurrentFilters={setCurrentFilters}
-          setResults={setResults}
-          filteredResults={filteredResults}
-        />
-      </Router>
+      <FilterContext.Provider value={filterValue}>
+        <Router history={history}>
+          <Results/>
+        </Router>
+      </FilterContext.Provider>
     );
   };
 
   describe("results filtering", () => {
-    
+
     it("applies the filters passed in", async () => {
       const results: Result[] = [
         makeResult({
           id: 1,
           sanMateoCounty: true,
-          nonProfit: true,
+          nonProfit: true
         }),
         makeResult({
           id: 2,
           sanMateoCounty: false,
-          nonProfit: false,
-        }),
+          nonProfit: false
+        })
       ];
 
       const history = createMemoryHistory();
-      const initialState = {
-        currentFilters: {
-          orgType: ["nonProfit"],
-          county: ["sanMateoCounty"],
-        },
-      };
-      history.push("/", initialState);
+      history.push("/?orgType=nonProfit&county=sanMateoCounty");
+      filterValue.currentFilters = {orgType: ['nonProfit'], county: ['sanMateoCounty']};
       render(<ResultWrapper history={history} results={results}/>);
+      expect(filterValue.setCurrentFilters).toBeCalledWith({orgType: ['nonProfit'], county: ['sanMateoCounty']});
 
       const nonProfitCheckbox = screen.getByLabelText(
         /non-profit/i
@@ -72,6 +66,7 @@ describe("Results", () => {
         /san mateo/i
       ) as HTMLInputElement;
 
+      screen.debug(nonProfitCheckbox);
       expect(nonProfitCheckbox.checked).toEqual(true);
       expect(sanMateoCountyCheckbox.checked).toEqual(true);
     });
@@ -81,28 +76,28 @@ describe("Results", () => {
         makeResult({
           id: 1,
           sfCounty: true,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 2,
           sfCounty: true,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 3,
           sfCounty: true,
-          smallBusiness: false,
+          smallBusiness: false
         }),
         makeResult({
           id: 4,
           sfCounty: false,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 5,
           sfCounty: false,
-          smallBusiness: true,
-        }),
+          smallBusiness: true
+        })
       ];
 
       const history = createMemoryHistory();
@@ -133,26 +128,26 @@ describe("Results", () => {
           id: 1,
           name: "captain marvel",
           sfCounty: true,
-          alamedaCounty: false,
+          alamedaCounty: false
         }),
         makeResult({
           id: 2,
           name: "black panther",
           sfCounty: false,
-          alamedaCounty: true,
+          alamedaCounty: true
         }),
         makeResult({
           id: 3,
           name: "hulk",
           sfCounty: false,
-          alamedaCounty: false,
+          alamedaCounty: false
         }),
         makeResult({
           id: 4,
           name: "doctor strange",
           sfCounty: false,
-          alamedaCounty: false,
-        }),
+          alamedaCounty: false
+        })
       ];
       const history = createMemoryHistory();
       render(<ResultWrapper history={history} results={results}/>);
@@ -196,18 +191,18 @@ describe("Results", () => {
         makeResult({
           id: 1,
           sfCounty: true,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 2,
           sfCounty: false,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 3,
           sfCounty: true,
-          smallBusiness: false,
-        }),
+          smallBusiness: false
+        })
       ];
 
       const history = createMemoryHistory();
@@ -260,7 +255,7 @@ describe("Results", () => {
         const results = [
           makeResult({id: 1, maxAwardAmount: 100000}),
           makeResult({id: 2, maxAwardAmount: 50000}),
-          makeResult({id: 3, maxAwardAmount: 25000}),
+          makeResult({id: 3, maxAwardAmount: 25000})
         ];
 
         const history = createMemoryHistory();

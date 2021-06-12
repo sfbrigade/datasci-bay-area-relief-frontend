@@ -24,7 +24,7 @@ export interface Result {
   id: number;
   name: string;
   supportType: SupportType;
-  interestRate: number | null;
+  interestRate: number;
   dateAdded: string;
   maxAwardAmount: number | null;
   reliefType: ReliefType;

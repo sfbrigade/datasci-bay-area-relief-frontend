@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useContext, useEffect, useMemo, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {CurrentFilters, HomeSearchFormTypes, Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
@@ -94,31 +94,30 @@ const Results: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const history = useHistory<{currentFilters: CurrentFilters}>();
   const {
-    currentFilters,
     setCurrentFilters,
     setInitialData,
     isFilterOpen,
     setIsFilterOpen,
-    filteredResults
+    filteredResults,
   } = useContext(FilterContext);
 
   useEffect(() => {
     if (history.location.search) {
       const params = new URLSearchParams(history.location.search);
       let pathFilters: HomeSearchFormTypes = {
-        orgType: [params.get("orgType")],
+        orgType: [params.get("orgType")]
       };
-      if (params.get('county')) {
-        pathFilters['county'] = [params.get('county')];
+      if (params.get("county")) {
+        pathFilters["county"] = [params.get("county")];
       }
       setCurrentFilters(pathFilters);
     }
   }, []);
 
   // const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
-  //   filteredResults,
+  //   filteredResults
   // ]);
-  const matchCounts = {};
+  // const matchCounts = {};
 
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.DueDateNewToOld
@@ -155,39 +154,11 @@ const Results: React.FC = () => {
     );
   };
 
-  const handleFilterChange = (group: keyof CurrentFilters) => (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newFilters = {...currentFilters};
-    debugger;
-    if (event.target.checked) {
-      if (group in newFilters) {
-        if (!newFilters[group]?.includes(event.target.name)) {
-          newFilters[group]?.push(event.target.name);
-        }
-      } else {
-        newFilters[group] = [event.target.name];
-      }
-    } else {
-      const index = newFilters[group]?.indexOf(event.target.name);
-      if (index >= 0) newFilters[group]?.splice(index, 1);
-      if (newFilters[group]?.length === 0) delete newFilters[group];
-    }
-    setCurrentFilters(newFilters);
-  };
-
-  const handleClearFilters = () => setCurrentFilters({});
-
   return (
     <ResultsPage>
       {!loading && (
         <>
-          <FilterBar
-            onChange={handleFilterChange}
-            matchCounts={matchCounts}
-            onClear={handleClearFilters}
-            isFilterOpen={isFilterOpen}
-          />
+          <FilterBar />
           <RightSide onClick={() => setIsFilterOpen(false)}>
             <MatchSortContainer>
               <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>
