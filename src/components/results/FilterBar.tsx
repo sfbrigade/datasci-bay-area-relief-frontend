@@ -12,7 +12,7 @@ import Button from "@material-ui/core/Button";
 const Sidebar = styled.div<{ isFilterOpen: boolean }>`
   display: flex;
   flex-direction: column;
-  min-width: 361px;
+  min-width: 150px;
   padding-left: 40px;
   text-align: left;
   & .MuiTypography-root {
