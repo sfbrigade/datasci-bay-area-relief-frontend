@@ -51,7 +51,6 @@ const Sidebar = styled.div<{ isFilterOpen: boolean }>`
 
 type FilterBarProps = {
   currentFilters: CurrentFilters;
-  matchCounts: {[k: string]: number};
   onChange: (
     group: keyof CurrentFilters
   ) => (event: ChangeEvent<HTMLInputElement>) => void;
@@ -61,7 +60,6 @@ type FilterBarProps = {
 
 export const FilterBar: React.FC<FilterBarProps> = ({
   currentFilters,
-  matchCounts,
   onChange,
   onClear,
   isFilterOpen,
@@ -74,7 +72,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           {filters.map(({label, name}) => (
             <FormControlLabel
               key={name}
-              label={`${label} (${matchCounts[name]})`}
+              label={label}
               control={
                 <Checkbox
                   name={name}

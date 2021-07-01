@@ -76,57 +76,6 @@ describe("Results", () => {
       expect(sanMateoCountyCheckbox.checked).toEqual(true);
     });
 
-    it("shows dynamic counts for the filters", async () => {
-      const results: Result[] = [
-        makeResult({
-          id: 1,
-          sfCounty: true,
-          smallBusiness: true,
-        }),
-        makeResult({
-          id: 2,
-          sfCounty: true,
-          smallBusiness: true,
-        }),
-        makeResult({
-          id: 3,
-          sfCounty: true,
-          smallBusiness: false,
-        }),
-        makeResult({
-          id: 4,
-          sfCounty: false,
-          smallBusiness: true,
-        }),
-        makeResult({
-          id: 5,
-          sfCounty: false,
-          smallBusiness: true,
-        }),
-      ];
-
-      const history = createMemoryHistory();
-      render(<ResultWrapper history={history} results={results}/>);
-      await idleForIO();
-      const sfCountyCheckbox = screen.getByLabelText(
-        /san francisco/i
-      ) as HTMLInputElement;
-      const smallBizCheckbox = screen.getByLabelText(
-        /small business/i
-      ) as HTMLInputElement;
-      expect(screen.getByRole("checkbox", {name: /san francisco \(3\)/i}));
-      expect(screen.getByRole("checkbox", {name: /small business \(4\)/i}));
-
-      fireEvent.click(smallBizCheckbox);
-      expect(screen.getByRole("checkbox", {name: /san francisco \(2\)/i}));
-      expect(screen.getByRole("checkbox", {name: /small business \(4\)/i}));
-
-      fireEvent.click(sfCountyCheckbox);
-      expect(screen.getByRole("checkbox", {name: /san francisco \(2\)/i}));
-      expect(screen.getByRole("checkbox", {name: /small business \(2\)/i}));
-    });
-
-
     it("allows the user to select filters that narrow down the matches shown", async () => {
       const results: Result[] = [
         makeResult({

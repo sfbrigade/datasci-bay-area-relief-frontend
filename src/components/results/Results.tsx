@@ -1,11 +1,10 @@
-import React, {ChangeEvent, useEffect, useMemo, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {CurrentFilters, Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
-import {getMatchCounts} from "./filterHelpers";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
@@ -105,10 +104,6 @@ const Results: React.FC<ResultsProps> = ({
     setCurrentFilters(history.location.state.currentFilters);
   }
 
-  const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
-    filteredResults,
-  ]);
-
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.DueDateNewToOld
   );
@@ -173,7 +168,7 @@ const Results: React.FC<ResultsProps> = ({
           <FilterBar
             currentFilters={currentFilters}
             onChange={handleFilterChange}
-            matchCounts={matchCounts}
+            // matchCounts={matchCounts}
             onClear={handleClearFilters}
             isFilterOpen={isFilterOpen}
           />

@@ -41,7 +41,7 @@ describe("formatInterestRate", () => {
 
 describe("formatDate", () => {
   it("returns a date with format M/D/YY", () => {
-    const dateString = "Fri, 05 Jun 2020 00:00:00 GMT";
+    const dateString = "Fri, 05 Jun 2020 09:00:00 GMT";
     expect(formatDate(dateString)).toEqual("6/5/20");
   });
 });

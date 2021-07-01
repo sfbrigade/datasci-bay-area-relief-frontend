@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, useEffect, useMemo} from "react";
+import React, {ChangeEvent, useState, useEffect} from "react";
 import styled, {StyledComponent} from "styled-components";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
@@ -7,7 +7,6 @@ import {ReactComponent as Logo} from "../assets/Logo.svg";
 import {useHistory} from "react-router-dom";
 
 import {FilterBar} from "./results/FilterBar";
-import {getMatchCounts} from "./results/filterHelpers";
 
 import Typography from "@material-ui/core/Typography";
 import MatMenu from '@material-ui/core/Menu';
@@ -108,10 +107,6 @@ const Header: React.FC<HeaderProps> = ({
   if(history.location.state && history.location.state.currentFilters){
     setCurrentFilters(history.location.state.currentFilters);
   }
-
-  const matchCounts = useMemo(() => getMatchCounts(filteredResults), [
-    filteredResults,
-  ]);
 
   // Update isResultsPage when location pathname changes;
   useEffect(() => {
@@ -246,7 +241,6 @@ const Header: React.FC<HeaderProps> = ({
               <FilterBar
                 currentFilters={currentFilters}
                 onChange={handleFilterChange}
-                matchCounts={matchCounts}
                 onClear={handleClearFilters}
                 isFilterOpen={isFilterOpen}
               />
