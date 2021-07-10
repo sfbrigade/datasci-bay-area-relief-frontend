@@ -14,7 +14,7 @@ export type RenderResultWithHistory = RenderResult & {history: MemoryHistory};
 type RenderWithRouterFunction = (
   ui: React.ReactElement,
   routeOptions?: {path?: string; history?: MemoryHistory}
-) => RenderResultWithHistory;
+) => any;
 
 export const renderWithRouter: RenderWithRouterFunction = (
   ui,
