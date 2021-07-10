@@ -1,4 +1,7 @@
 import { MemoryHistory } from "history/createMemoryHistory";
+import { ChangeEvent } from "react";
+import { SetStateAction } from "react";
+import { Dispatch } from "react";
 
 export enum County {
   SanFrancisco = "San Francisco",
@@ -138,15 +141,32 @@ export interface HeaderProps {
 }
 
 export interface ResultsProps {
-  isFilterOpen: any;
+  //isFilterOpen: any;
   setIsFilterOpen: any;
   currentFilters: CurrentFilters;
   setResults: React.Dispatch<React.SetStateAction<Result[]>>;
   setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
-  filteredResults: Result[];
+  // filteredResults: Result[];
 }
 
 export interface ResultWrapperType {
   history: MemoryHistory<{}>;
   results: Result[];
 }
+
+export interface GlobalStateContextType {
+  setCurrentFilters?: Dispatch<SetStateAction<CurrentFilters>>;
+  currentFilters?: CurrentFilters;
+  handleFilterChange?: (
+      group: keyof CurrentFilters
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  setIsFilterOpen?: Dispatch<SetStateAction<boolean>>;
+  isFilterOpen: boolean;
+  setInitialData?: Dispatch<SetStateAction<Result[]>>;
+  initialData?: Result[];
+  filteredResults?: Result[];
+  setFilteredResults?: Dispatch<SetStateAction<Result[]>>;
+  handleClearFilters?: () => void;
+}
+
+

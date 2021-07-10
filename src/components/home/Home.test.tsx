@@ -4,11 +4,23 @@ import Home from "./Home";
 import {Route, Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
 import {County, OrgType} from "../../types";
+import { setValues } from "../../context/globalStates";
 
 const history = createMemoryHistory();
 jest.spyOn(history, "push");
 
 beforeEach(() => {
+  setValues({
+    setCurrentFilters: jest.fn(),
+    currentFilters: {},
+    handleFilterChange: jest.fn(),
+    setIsFilterOpen: jest.fn(),
+    isFilterOpen: true,
+    setInitialData: jest.fn(),
+    initialData: [],
+    filteredResults: [],
+    handleClearFilters: jest.fn()
+  })
   render(
     <Router history={history}>
       <Route component={Home} />

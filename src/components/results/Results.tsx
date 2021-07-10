@@ -3,6 +3,7 @@ import {CurrentFilters, Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
+import List from "@material-ui/core/List";
 import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
 import {FilterBar} from "./FilterBar";
@@ -10,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
 import {ResultsProps} from "../../types";
+import { useContext } from "react";
+import {GlobalStateContext} from "../../context/globalStates";
 
 const ResultsPage = styled.div`
   display: flex;
@@ -90,13 +93,17 @@ const ListItem = styled.li`
 `;
 
 const Results: React.FC<ResultsProps> = ({
-    isFilterOpen, 
+    //isFilterOpen,
     setIsFilterOpen, 
     currentFilters, 
     setCurrentFilters, 
     setResults,
-    filteredResults
+    // filteredResults
   }) => {
+  const ctx = useContext(GlobalStateContext);
+  let isFilterOpen = ctx.isFilterOpen;
+  let filteredResults = ctx.filteredResults;
+
   const [loading, setLoading] = useState(true);
   const history = useHistory<{currentFilters: CurrentFilters}>();
 
