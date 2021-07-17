@@ -5,7 +5,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import React, {useState} from "react";
-import {getFilterNameFromGroupAndLabel} from "../results/filterHelpers";
+import {getFilterNameFromGroupAndTargetName} from "../results/filterHelpers";
 import {useHistory} from "react-router-dom";
 import {Typography} from "@material-ui/core";
 import {colors} from "../../theme";
@@ -56,22 +56,32 @@ const DonateButton = styled(Button)`
 `;
 
 export const SearchForm = () => {
-  const [orgType, setOrgType] = useState<OrgType>();
-  const [county, setCounty] = useState<County>();
+  const [orgType, setOrgType] = useState<OrgType>(OrgType.Any);
+  const [county, setCounty] = useState<County>(County.Any);
 
   const history = useHistory();
 
   const goToResults = () => {
+    let path = "/results";
+    if (orgType !== 'any') {
+      const orgTypeParam = getFilterNameFromGroupAndTargetName("orgType", orgType);
+      //append orgType=blah
+      path = `${path}orgType=${orgTypeParam}&`;
+    }
+    //check if county is NOT any, append county
+    const countyParam = getFilterNameFromGroupAndTargetName("county", county);
+    if(countyParam && countyParam !== 'any') {
+      path = `${path}county=${countyParam}`;
+    }
+    //if (path[path.length -1] === ? or === &, slice it out
+    if(path[path.length-1] === "?" || path[path.length-1] ==="&") {
+      path = path.slice(0, path.length-1);
+    }
     history.push({
-      pathname: "/results",
-      state: {
-        currentFilters: {
-          orgType: [getFilterNameFromGroupAndLabel("orgType", orgType)],
-          county: [getFilterNameFromGroupAndLabel("county", county)],
-        },
-      },
+      pathname: path
     });
   };
+
   const goToDonate = () => {
     history.push("/donate");
   };
@@ -96,9 +106,10 @@ export const SearchForm = () => {
             inputProps={{
               name: "org-type",
               id: "org-type-select",
+              "data-testid": "org-type-select"
             }}
           >
-            <option aria-label="None" value="" />
+            <option value={OrgType.Any}>Any</option>
             <option value={OrgType.SmallBusiness}>Small business</option>
             <option value={OrgType.NonProfit}>Non-profit</option>
           </StyledSelect>
@@ -115,13 +126,12 @@ export const SearchForm = () => {
               id: "county-select",
             }}
           >
-            <option aria-label="None" value="" />
+            <option value={County.Any}>Any</option>
             <option value={County.SanFrancisco}>San Francisco</option>
             <option value={County.Alameda}>Alameda</option>
             <option value={County.SanMateo}>San Mateo</option>
             <option value={County.ContraCosta}>Conta Costa</option>
             <option value={County.SantaClara}>Santa Clara</option>
-            <option value={County.Any}>Any</option>
           </StyledSelect>
         </FormControl>
       </SearchFormFields>

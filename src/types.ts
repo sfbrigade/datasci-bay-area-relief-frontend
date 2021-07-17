@@ -1,17 +1,32 @@
 import { MemoryHistory } from "history/createMemoryHistory";
 
+// export enum County {
+//   SanFrancisco = "San Francisco",
+//   Alameda = "Alameda",
+//   SanMateo = "San Mateo",
+//   ContraCosta = "Contra Costa",
+//   SantaClara = "Santa Clara",
+//   Any = "Any",
+// }
+
 export enum County {
-  SanFrancisco = "San Francisco",
-  Alameda = "Alameda",
-  SanMateo = "San Mateo",
-  ContraCosta = "Contra Costa",
-  SantaClara = "Santa Clara",
-  Any = "Any",
+  SanFrancisco = "sfCounty",
+  Alameda = "alamedaCounty",
+  SanMateo = "sanMateoCounty",
+  ContraCosta = "contraCostaCounty",
+  SantaClara = "santaClaraCounty",
+  Any = "any",
 }
 
+// export enum OrgType {
+//   SmallBusiness = "Small business",
+//   NonProfit = "Non-profit",
+// }
+
 export enum OrgType {
-  SmallBusiness = "Small business",
-  NonProfit = "Non-profit",
+  SmallBusiness = "smallBusiness",
+  NonProfit = "nonProfit",
+  Any = "any",
 }
 
 export interface FilterOptions {

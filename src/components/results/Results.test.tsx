@@ -26,8 +26,8 @@ describe("Results", () => {
     ]);
 
     return (
-      <Router history={history}>  
-        <Results 
+      <Router history={history}>
+        <Results
           isFilterOpen={isFilterOpen}
           setIsFilterOpen={setIsFilterOpen}
           currentFilters={currentFilters}
@@ -40,7 +40,6 @@ describe("Results", () => {
   };
 
   describe("results filtering", () => {
-    
     it("applies the filters passed in", async () => {
       const results: Result[] = [
         makeResult({

@@ -153,18 +153,51 @@ export const filterGroups: FilterGroup[] = [
   },
 ];
 
-export const getFilterNameFromGroupAndLabel = (
+export const getFilterNameFromGroupAndTargetName = (
   groupName: string,
-  label: string
+  name: string
 ): string | undefined => {
   const foundGroup = filterGroups.find(
     (group) => group.groupName === groupName
   );
+  console.log("----groupname----");
+  console.log(foundGroup);
+  console.log(groupName);
+  console.log(name);
+
   if (foundGroup) {
+    const foundFilter = foundGroup.filters.find(
+      (filter) => filter.name === name
+    );
+    if (foundFilter) {
+      return foundFilter.name;
+    }
+  }
+  return undefined;
+};
+
+
+
+export const getFilterNameFromGroupAndLabel = (
+  groupName: string,
+  label: string
+): string | undefined => {
+  console.log("getFilterNameFromGroupAndLabel-------");
+  console.log(groupName);
+  console.log(label);
+  const foundGroup = filterGroups.find(
+    (group) => group.groupName === groupName
+  );
+  if (foundGroup) {
+    console.log("----foundgroup----");
+    console.log(foundGroup);
     const foundFilter = foundGroup.filters.find(
       (filter) => filter.label === label
     );
+    console.log("----foundfilter-----");
+    console.log(foundFilter);
     if (foundFilter) {
+
       return foundFilter.name;
     }
   }
