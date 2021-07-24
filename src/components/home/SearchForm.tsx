@@ -66,20 +66,22 @@ export const SearchForm = () => {
     if (orgType !== 'any') {
       const orgTypeParam = getFilterNameFromGroupAndTargetName("orgType", orgType);
       //append orgType=blah
-      path = `${path}orgType=${orgTypeParam}&`;
+      path = `${path}?orgType=${orgTypeParam}&`;
     }
     //check if county is NOT any, append county
     const countyParam = getFilterNameFromGroupAndTargetName("county", county);
+
     if(countyParam && countyParam !== 'any') {
+      if(orgType === 'any') {
+        path = `${path}?`;
+      }
       path = `${path}county=${countyParam}`;
     }
     //if (path[path.length -1] === ? or === &, slice it out
     if(path[path.length-1] === "?" || path[path.length-1] ==="&") {
       path = path.slice(0, path.length-1);
     }
-    history.push({
-      pathname: path
-    });
+    history.push(path);
   };
 
   const goToDonate = () => {
