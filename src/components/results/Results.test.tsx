@@ -4,7 +4,7 @@ import {createMemoryHistory} from "history";
 import Results from "./Results";
 import { Router } from "react-router-dom";
 import {idleForIO} from "../../testUtils";
-import { applyFilters } from "../results/filterHelpers";
+import { applyFilters } from "./filterHelpers";
 import {
   formatAwardAmount,
   formatDate,
@@ -16,7 +16,7 @@ import {makeResult} from "./testDataHelpers";
 import { setValues } from "../../context/globalStates";
 
 describe("Results", () => {
-  let results = [
+  const results = [
     makeResult({
       id: 1,
       sanMateoCounty: true,
@@ -39,10 +39,10 @@ describe("Results", () => {
     filteredResults: [],
     setFilteredResults: jest.fn(),
     handleClearFilters: jest.fn()
-  })
+  });
 
   const ResultWrapper: React.FC<ResultWrapperType> = ({ history, results }) => {
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [, setIsFilterOpen] = useState(false);
     const [,setResults] = useState<Result[]>([]);
     const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
 
@@ -54,7 +54,7 @@ describe("Results", () => {
     setValues({
       filteredResults: filteredResults,
       isFilterOpen: false
-    })
+    });
 
     return (
       <Router history={history}>  
@@ -71,16 +71,10 @@ describe("Results", () => {
   };
 
   describe("results filtering", () => {
-    
     it("applies the filters passed in", async () => {
       const history = createMemoryHistory();
-      const initialState = {
-        currentFilters: {
-          orgType: ["nonProfit"],
-          county: ["sanMateoCounty"],
-        },
-      };
-      history.push("/", initialState);
+
+      history.push("/?orgType=nonProfit&county=sanMateoCounty");
       render(<ResultWrapper history={history} results={results}/>);
 
       const nonProfitCheckbox = screen.getByLabelText(
@@ -187,7 +181,6 @@ describe("Results", () => {
           smallBusiness: false,
         }),
       ];
-      let something =
       setValues({
         setCurrentFilters: jest.fn(),
         currentFilters: {},
@@ -231,9 +224,8 @@ describe("Results", () => {
   describe("results list", () => {
     describe("when there are no matches", () => {
       it("renders a no results image and message", async () => {
-        const results: Result[] = [];
         const history = createMemoryHistory();
-        render(<ResultWrapper history={history} results={results}/>);
+        render(<ResultWrapper history={history} results={[]}/>);
         await idleForIO();
 
         const nonProfitCheckbox = screen.getByLabelText(
@@ -336,7 +328,7 @@ describe("Results", () => {
           filteredResults: [],
           setFilteredResults: jest.fn(),
           handleClearFilters: jest.fn()
-        })
+        });
         const history = createMemoryHistory();
         render(<ResultWrapper history={history} results={singleResult}/>);
         await idleForIO();

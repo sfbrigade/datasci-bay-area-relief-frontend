@@ -1,17 +1,14 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
-import {CurrentFilters, Result, SortOptionType} from "../../types";
+import React, {ChangeEvent, useContext, useEffect, useState} from "react";
+import {CurrentFilters, HomeSearchFormTypes, Result, ResultsProps, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
-import List from "@material-ui/core/List";
 import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
-import {ResultsProps} from "../../types";
-import { useContext } from "react";
 import {GlobalStateContext} from "../../context/globalStates";
 
 const ResultsPage = styled.div`
@@ -101,15 +98,25 @@ const Results: React.FC<ResultsProps> = ({
     // filteredResults
   }) => {
   const ctx = useContext(GlobalStateContext);
-  let isFilterOpen = ctx.isFilterOpen;
-  let filteredResults = ctx.filteredResults;
+  const isFilterOpen = ctx.isFilterOpen;
+  const filteredResults = ctx.filteredResults;
 
   const [loading, setLoading] = useState(true);
   const history = useHistory<{currentFilters: CurrentFilters}>();
 
-  if(history.location.state && history.location.state.currentFilters){
-    setCurrentFilters(history.location.state.currentFilters);
-  }
+  useEffect(() => {
+    if (history.location.search) {
+      const params = new URLSearchParams(history.location.search);
+      const pathFilters: HomeSearchFormTypes = {};
+      if (params.get("orgType")) {
+        pathFilters["orgType"] = [params.get("orgType")];
+      }
+      if (params.get("county")) {
+        pathFilters["county"] = [params.get("county")];
+      }
+      setCurrentFilters(pathFilters);
+    }
+  }, [history.location.search, setCurrentFilters]);
 
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.DueDateNewToOld
