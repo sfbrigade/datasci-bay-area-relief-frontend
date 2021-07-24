@@ -112,7 +112,7 @@ const Results: React.FC<ResultsProps> = ({
       }
       setCurrentFilters(pathFilters);
     }
-  }, []);
+  }, [history.location.search, setCurrentFilters]);
 
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.DueDateNewToOld
