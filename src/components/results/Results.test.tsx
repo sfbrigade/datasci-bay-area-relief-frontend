@@ -4,7 +4,7 @@ import {createMemoryHistory} from "history";
 import Results from "./Results";
 import { Router } from "react-router-dom";
 import {idleForIO} from "../../testUtils";
-import { applyFilters } from "../results/filterHelpers";
+import { applyFilters } from "./filterHelpers";
 import {
   formatAwardAmount,
   formatDate,
@@ -26,8 +26,8 @@ describe("Results", () => {
     ]);
 
     return (
-      <Router history={history}>  
-        <Results 
+      <Router history={history}>
+        <Results
           isFilterOpen={isFilterOpen}
           setIsFilterOpen={setIsFilterOpen}
           currentFilters={currentFilters}
@@ -40,7 +40,6 @@ describe("Results", () => {
   };
 
   describe("results filtering", () => {
-    
     it("applies the filters passed in", async () => {
       const results: Result[] = [
         makeResult({
@@ -56,13 +55,8 @@ describe("Results", () => {
       ];
 
       const history = createMemoryHistory();
-      const initialState = {
-        currentFilters: {
-          orgType: ["nonProfit"],
-          county: ["sanMateoCounty"],
-        },
-      };
-      history.push("/", initialState);
+
+      history.push("/?orgType=nonProfit&county=sanMateoCounty");
       render(<ResultWrapper history={history} results={results}/>);
 
       const nonProfitCheckbox = screen.getByLabelText(
@@ -189,9 +183,8 @@ describe("Results", () => {
   describe("results list", () => {
     describe("when there are no matches", () => {
       it("renders a no results image and message", async () => {
-        const results: Result[] = [];
         const history = createMemoryHistory();
-        render(<ResultWrapper history={history} results={results}/>);
+        render(<ResultWrapper history={history} results={[]}/>);
         await idleForIO();
 
         const nonProfitCheckbox = screen.getByLabelText(

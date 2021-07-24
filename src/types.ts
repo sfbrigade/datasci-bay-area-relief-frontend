@@ -1,17 +1,32 @@
 import { MemoryHistory } from "history/createMemoryHistory";
 
+// export enum County {
+//   SanFrancisco = "San Francisco",
+//   Alameda = "Alameda",
+//   SanMateo = "San Mateo",
+//   ContraCosta = "Contra Costa",
+//   SantaClara = "Santa Clara",
+//   Any = "Any",
+// }
+
 export enum County {
-  SanFrancisco = "San Francisco",
-  Alameda = "Alameda",
-  SanMateo = "San Mateo",
-  ContraCosta = "Contra Costa",
-  SantaClara = "Santa Clara",
-  Any = "Any",
+  SanFrancisco = "sfCounty",
+  Alameda = "alamedaCounty",
+  SanMateo = "sanMateoCounty",
+  ContraCosta = "contraCostaCounty",
+  SantaClara = "santaClaraCounty",
+  Any = "any",
 }
 
+// export enum OrgType {
+//   SmallBusiness = "Small business",
+//   NonProfit = "Non-profit",
+// }
+
 export enum OrgType {
-  SmallBusiness = "Small business",
-  NonProfit = "Non-profit",
+  SmallBusiness = "smallBusiness",
+  NonProfit = "nonProfit",
+  Any = "any",
 }
 
 export interface FilterOptions {
@@ -130,16 +145,16 @@ export interface ResultResponse {
 }
 
 export interface HeaderProps {
-  setIsFilterOpen: any;
-  isFilterOpen: any;
+  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isFilterOpen: boolean;
   currentFilters: CurrentFilters;
   setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
   filteredResults: Result[];
 }
 
 export interface ResultsProps {
-  isFilterOpen: any;
-  setIsFilterOpen: any;
+  isFilterOpen: boolean;
+  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
   currentFilters: CurrentFilters;
   setResults: React.Dispatch<React.SetStateAction<Result[]>>;
   setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
@@ -149,4 +164,9 @@ export interface ResultsProps {
 export interface ResultWrapperType {
   history: MemoryHistory<{}>;
   results: Result[];
+}
+
+export interface HomeSearchFormTypes {
+  orgType?: string[];
+  county?: string[];
 }

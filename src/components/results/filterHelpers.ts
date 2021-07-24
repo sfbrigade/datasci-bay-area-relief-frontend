@@ -153,6 +153,27 @@ export const filterGroups: FilterGroup[] = [
   },
 ];
 
+export const getFilterNameFromGroupAndTargetName = (
+  groupName: string,
+  name: string
+): string | undefined => {
+  const foundGroup = filterGroups.find(
+    (group) => group.groupName === groupName
+  );
+
+  if (foundGroup) {
+    const foundFilter = foundGroup.filters.find(
+      (filter) => filter.name === name
+    );
+    if (foundFilter) {
+      return foundFilter.name;
+    }
+  }
+  return undefined;
+};
+
+
+
 export const getFilterNameFromGroupAndLabel = (
   groupName: string,
   label: string
@@ -165,6 +186,7 @@ export const getFilterNameFromGroupAndLabel = (
       (filter) => filter.label === label
     );
     if (foundFilter) {
+
       return foundFilter.name;
     }
   }

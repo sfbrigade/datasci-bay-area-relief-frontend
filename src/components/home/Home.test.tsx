@@ -3,7 +3,6 @@ import {fireEvent, render, screen} from "@testing-library/react";
 import Home from "./Home";
 import {Route, Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
-import {County, OrgType} from "../../types";
 
 const history = createMemoryHistory();
 jest.spyOn(history, "push");
@@ -29,48 +28,6 @@ describe("Home", () => {
   it("renders a landing page sky svg with a front house image", () => {
     expect(screen.getByTitle("Landing page sky")).toBeVisible();
     expect(screen.getByRole("img", {name: "Storefront"})).toBeVisible();
-  });
-
-  describe("Search Button", () => {
-    it("displays an organization type dropdown that changes values on different options", () => {
-      const orgTypeSelect = screen.getByLabelText("I am a...");
-      expect(orgTypeSelect).toHaveValue("");
-
-      fireEvent.change(orgTypeSelect, {
-        target: {value: OrgType.SmallBusiness},
-      });
-      expect(orgTypeSelect).toHaveValue(OrgType.SmallBusiness);
-    });
-
-    it("has a dropdown for county that changes value when the user selects a different option", () => {
-      const countySelect = screen.getByLabelText("County");
-      expect(countySelect).toHaveValue("");
-
-      fireEvent.change(countySelect, {target: {value: County.Alameda}});
-      expect(countySelect).toHaveValue(County.Alameda);
-    });
-
-    it("searches with the filter options the user has selected", () => {
-      const searchButton = screen.getByText("Search");
-      const orgTypeSelect = screen.getByLabelText("I am a...");
-      const countySelect = screen.getByLabelText("County");
-
-      fireEvent.change(orgTypeSelect, {
-        target: {value: OrgType.SmallBusiness},
-      });
-      fireEvent.change(countySelect, {target: {value: County.Alameda}});
-      fireEvent.click(searchButton);
-
-      expect(history.push).toHaveBeenCalledWith({
-        pathname: "/results",
-        state: {
-          currentFilters: {
-            orgType: ["smallBusiness"],
-            county: ["alamedaCounty"],
-          },
-        },
-      });
-    });
   });
 
   it("renders a donate button and when pressed sends the user to the donate page", () => {
