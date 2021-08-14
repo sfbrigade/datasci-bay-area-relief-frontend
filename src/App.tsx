@@ -97,8 +97,8 @@ const App = () => {
               <Results
                 //isFilterOpen={isFilterOpen}
                 setIsFilterOpen={setIsFilterOpen}
-                currentFilters={currentFilters}
-                setCurrentFilters={setCurrentFilters}
+                // currentFilters={currentFilters}
+                // setCurrentFilters={setCurrentFilters}
                 setResults={setData}
                 // filteredResults={filteredResults}
               />

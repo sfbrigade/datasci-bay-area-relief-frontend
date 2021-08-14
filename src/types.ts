@@ -158,9 +158,9 @@ export interface HeaderProps {
 export interface ResultsProps {
   //isFilterOpen: boolean;
   setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  currentFilters: CurrentFilters;
+  // currentFilters: CurrentFilters;
   setResults: React.Dispatch<React.SetStateAction<Result[]>>;
-  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
+  // setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
   //filteredResults: Result[];
 }
 

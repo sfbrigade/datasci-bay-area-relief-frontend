@@ -30,7 +30,7 @@ const MatchSortContainer = styled.div`
   margin-left: 4em;
 `;
 
-const ResultsMatched = styled(Typography).attrs({variant: 'h4' })`
+const ResultsMatched = styled(Typography).attrs({variant: "h4"})`
   margin: 0;
   color: rgba(0, 0, 0, 0.87);
 `;
@@ -44,6 +44,7 @@ const SortContainer = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 23px;
+
   && .MuiTypography-root {
     /* Body 2 / Source Sans Pro */
     font-family: Source Sans Pro;
@@ -90,16 +91,18 @@ const ListItem = styled.li`
 `;
 
 const Results: React.FC<ResultsProps> = ({
-    //isFilterOpen,
-    setIsFilterOpen, 
-    currentFilters, 
-    setCurrentFilters, 
-    setResults,
-    // filteredResults
-  }) => {
+                                           //isFilterOpen,
+                                           setIsFilterOpen,
+                                           // currentFilters,
+                                           // setCurrentFilters,
+                                           setResults
+                                           // filteredResults
+                                         }) => {
   const ctx = useContext(GlobalStateContext);
   const isFilterOpen = ctx.isFilterOpen;
   const filteredResults = ctx.filteredResults;
+  const currentFilters = ctx.currentFilters;
+  const setCurrentFilters = ctx.setCurrentFilters;
 
   const [loading, setLoading] = useState(true);
   const history = useHistory<{currentFilters: CurrentFilters}>();
@@ -122,10 +125,10 @@ const Results: React.FC<ResultsProps> = ({
     SortOptionType.DueDateNewToOld
   );
 
-    useEffect(() => {
-      setSortOption(SortOptionType.DueDateNewToOld);
-      setLoading(false);
-    }, [filteredResults]);
+  useEffect(() => {
+    setSortOption(SortOptionType.DueDateNewToOld);
+    setLoading(false);
+  }, [filteredResults]);
 
   useEffect(() => {
     setResults((curResults) => sortListBy(curResults, sortOption));
@@ -135,7 +138,7 @@ const Results: React.FC<ResultsProps> = ({
     if (filteredResults.length === 0) {
       return (
         <>
-          <img src={Searching} alt="No Results" />
+          <img src={Searching} alt="No Results"/>
           <p>
             Try clearing some filters!
           </p>
@@ -174,7 +177,7 @@ const Results: React.FC<ResultsProps> = ({
   };
 
   const handleClearFilters = () => setCurrentFilters({});
-  
+
   return (
     <ResultsPage>
       {!loading && (

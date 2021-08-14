@@ -53,16 +53,18 @@ describe("Results", () => {
 
     setValues({
       filteredResults: filteredResults,
-      isFilterOpen: false
+      isFilterOpen: false,
+      currentFilters: currentFilters,
+      setCurrentFilters: setCurrentFilters
     });
 
     return (
-      <Router history={history}>  
-        <Results 
+      <Router history={history}>
+        <Results
           // isFilterOpen={isFilterOpen}
           setIsFilterOpen={setIsFilterOpen}
-          currentFilters={currentFilters}
-          setCurrentFilters={setCurrentFilters}
+          // currentFilters={currentFilters}
+          // setCurrentFilters={setCurrentFilters}
           setResults={setResults}
           // filteredResults={filteredResults}
         />
