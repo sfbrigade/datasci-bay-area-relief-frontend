@@ -91,18 +91,14 @@ const ListItem = styled.li`
 `;
 
 const Results: React.FC<ResultsProps> = ({
-                                           //isFilterOpen,
-                                           setIsFilterOpen,
-                                           // currentFilters,
-                                           // setCurrentFilters,
-                                           setResults
-                                           // filteredResults
+                                           setIsFilterOpen
                                          }) => {
   const ctx = useContext(GlobalStateContext);
   const isFilterOpen = ctx.isFilterOpen;
   const filteredResults = ctx.filteredResults;
   const currentFilters = ctx.currentFilters;
   const setCurrentFilters = ctx.setCurrentFilters;
+  const setFilteredResults = ctx.setFilteredResults;
 
   const [loading, setLoading] = useState(true);
   const history = useHistory<{currentFilters: CurrentFilters}>();
@@ -131,8 +127,8 @@ const Results: React.FC<ResultsProps> = ({
   }, [filteredResults]);
 
   useEffect(() => {
-    setResults((curResults) => sortListBy(curResults, sortOption));
-  }, [sortOption, setResults]);
+    setFilteredResults((filteredResults) => sortListBy(filteredResults, sortOption));
+  }, [sortOption, setFilteredResults]);
 
   const renderResults = () => {
     if (filteredResults.length === 0) {

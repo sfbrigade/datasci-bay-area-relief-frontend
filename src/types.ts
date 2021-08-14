@@ -156,17 +156,12 @@ export interface HeaderProps {
 }
 
 export interface ResultsProps {
-  //isFilterOpen: boolean;
   setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  // currentFilters: CurrentFilters;
-  setResults: React.Dispatch<React.SetStateAction<Result[]>>;
-  // setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
-  //filteredResults: Result[];
 }
 
 export interface ResultWrapperType {
   history: MemoryHistory<{}>;
-  results: Result[];
+  initialResults: Result[];
 }
 
 export interface HomeSearchFormTypes {

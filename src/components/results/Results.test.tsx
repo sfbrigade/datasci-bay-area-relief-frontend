@@ -41,32 +41,29 @@ describe("Results", () => {
     handleClearFilters: jest.fn()
   });
 
-  const ResultWrapper: React.FC<ResultWrapperType> = ({ history, results }) => {
+  const ResultWrapper: React.FC<ResultWrapperType> = ({ history, initialResults }) => {
     const [, setIsFilterOpen] = useState(false);
-    const [,setResults] = useState<Result[]>([]);
+    const [results, setResults] = useState<Result[]>(initialResults);
     const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
+    const [filteredResults, setFilteredResults] = useState<Result[]>([]);
 
-    const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
-      currentFilters,
-      results,
-    ]);
+    useMemo(
+      () => setFilteredResults(applyFilters(results, currentFilters)),
+      [currentFilters, setFilteredResults, results]
+    );
 
     setValues({
-      filteredResults: filteredResults,
+      filteredResults,
+      setFilteredResults,
       isFilterOpen: false,
-      currentFilters: currentFilters,
-      setCurrentFilters: setCurrentFilters
+      currentFilters,
+      setCurrentFilters
     });
 
     return (
       <Router history={history}>
         <Results
-          // isFilterOpen={isFilterOpen}
           setIsFilterOpen={setIsFilterOpen}
-          // currentFilters={currentFilters}
-          // setCurrentFilters={setCurrentFilters}
-          setResults={setResults}
-          // filteredResults={filteredResults}
         />
       </Router>
     );
@@ -77,7 +74,7 @@ describe("Results", () => {
       const history = createMemoryHistory();
 
       history.push("/?orgType=nonProfit&county=sanMateoCounty");
-      render(<ResultWrapper history={history} results={results}/>);
+      render(<ResultWrapper history={history} initialResults={results}/>);
 
       const nonProfitCheckbox = screen.getByLabelText(
         /non-profit/i
@@ -130,7 +127,7 @@ describe("Results", () => {
         handleClearFilters: jest.fn()
       });
       const history = createMemoryHistory();
-      render(<ResultWrapper history={history} results={narrowedResults}/>);
+      render(<ResultWrapper history={history} initialResults={narrowedResults}/>);
       await idleForIO();
 
       const checkBoxSFCounty = screen.getByLabelText(
@@ -197,7 +194,7 @@ describe("Results", () => {
       });
 
       const history = createMemoryHistory();
-      render(<ResultWrapper history={history} results={clearingAllFiltersResults}/>);
+      render(<ResultWrapper history={history} initialResults={clearingAllFiltersResults}/>);
 
       const sfCountyFilter = screen.getByLabelText(
         /san francisco/i
@@ -227,7 +224,7 @@ describe("Results", () => {
     describe("when there are no matches", () => {
       it("renders a no results image and message", async () => {
         const history = createMemoryHistory();
-        render(<ResultWrapper history={history} results={[]}/>);
+        render(<ResultWrapper history={history} initialResults={[]}/>);
         await idleForIO();
 
         const nonProfitCheckbox = screen.getByLabelText(
@@ -249,7 +246,7 @@ describe("Results", () => {
         ];
 
         const history = createMemoryHistory();
-        render(<ResultWrapper history={history} results={results}/>);
+        render(<ResultWrapper history={history} initialResults={results}/>);
         await idleForIO();
 
         const resultCards = screen.getAllByRole("listitem");
@@ -332,7 +329,7 @@ describe("Results", () => {
           handleClearFilters: jest.fn()
         });
         const history = createMemoryHistory();
-        render(<ResultWrapper history={history} results={singleResult}/>);
+        render(<ResultWrapper history={history} initialResults={singleResult}/>);
         await idleForIO();
 
         expect(screen.queryByTitle("No results")).toBeNull();
