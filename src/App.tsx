@@ -25,12 +25,9 @@ const App = () => {
   const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
   const [filteredResults, setFilteredResults] = useState<Result[]>([]);
 
-  console.log(`currentFilters::${currentFilters}`);
-
   const handleClearFilters = () => setCurrentFilters({});
 
   const handleFilterChange = (group: keyof CurrentFilters) => (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(`App.tsx::handleFilterChange, ${group}, ${event.target.name}`);
     const newFilters = {...currentFilters};
     if (event.target.checked) {
       if (group in newFilters) {
@@ -52,7 +49,6 @@ const App = () => {
     () => setFilteredResults(applyFilters(data, currentFilters)),
     [currentFilters, setFilteredResults, data]
   );
-  console.log({filteredResults});
 
   const definedStateValues = {
     setCurrentFilters: setCurrentFilters,
