@@ -147,14 +147,6 @@ export interface ResultResponse {
   womenOwned: string;
 }
 
-export interface HeaderProps {
-  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isFilterOpen: boolean;
-  currentFilters: CurrentFilters;
-  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
-  filteredResults: Result[];
-}
-
 export interface ResultWrapperType {
   history: MemoryHistory<{}>;
   initialResults: Result[];

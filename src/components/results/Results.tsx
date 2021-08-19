@@ -7,9 +7,10 @@ import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
-import {useHistory} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
 import {GlobalStateContext} from "../../context/globalStates";
+import {grabCurrentFiltersFromURLParams} from "../../util/historyHelper";
 
 const ResultsPage = styled.div`
   display: flex;
@@ -100,21 +101,13 @@ const Results: React.FC = () => {
   const setIsFilterOpen = ctx.setIsFilterOpen;
 
   const [loading, setLoading] = useState(true);
-  const history = useHistory<{currentFilters: CurrentFilters}>();
+  const location = useLocation();
 
   useEffect(() => {
-    if (history.location.search) {
-      const params = new URLSearchParams(history.location.search);
-      const pathFilters: HomeSearchFormTypes = {};
-      if (params.get("orgType")) {
-        pathFilters["orgType"] = [params.get("orgType")];
-      }
-      if (params.get("county")) {
-        pathFilters["county"] = [params.get("county")];
-      }
-      setCurrentFilters(pathFilters);
+    if (location.search) {
+      setCurrentFilters(grabCurrentFiltersFromURLParams(location));
     }
-  }, [history.location.search, setCurrentFilters]);
+  }, [location.search, setCurrentFilters]);
 
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.DueDateNewToOld

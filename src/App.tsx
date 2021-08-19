@@ -73,18 +73,10 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Router history={history}>
-          <Header
-            isFilterOpen={isFilterOpen}
-            setIsFilterOpen={setIsFilterOpen}
-            currentFilters={currentFilters}
-            setCurrentFilters={setCurrentFilters}
-            filteredResults={filteredResults}
-          />
+          <Header />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/results">
-              <Results />
-            </Route>
+            <Route exact path="/results" component={Results} />
             <Route exact path="/donate" component={Donate} />
           </Switch>
         </Router>

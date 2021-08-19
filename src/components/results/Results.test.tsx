@@ -42,7 +42,7 @@ describe("Results", () => {
   });
 
   const ResultWrapper: React.FC<ResultWrapperType> = ({ history, initialResults }) => {
-    const [, setIsFilterOpen] = useState(false);
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [results, ] = useState<Result[]>(initialResults);
     const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
     const [filteredResults, setFilteredResults] = useState<Result[]>([]);
@@ -55,7 +55,7 @@ describe("Results", () => {
     setValues({
       filteredResults,
       setFilteredResults,
-      isFilterOpen: false,
+      isFilterOpen,
       currentFilters,
       setCurrentFilters,
       setIsFilterOpen
