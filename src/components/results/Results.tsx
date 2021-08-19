@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useContext, useEffect, useState} from "react";
-import {CurrentFilters, HomeSearchFormTypes, Result, ResultsProps, SortOptionType} from "../../types";
+import {CurrentFilters, HomeSearchFormTypes, Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
@@ -90,15 +90,14 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-const Results: React.FC<ResultsProps> = ({
-                                           setIsFilterOpen
-                                         }) => {
+const Results: React.FC = () => {
   const ctx = useContext(GlobalStateContext);
   const isFilterOpen = ctx.isFilterOpen;
   const filteredResults = ctx.filteredResults;
   const currentFilters = ctx.currentFilters;
   const setCurrentFilters = ctx.setCurrentFilters;
   const setFilteredResults = ctx.setFilteredResults;
+  const setIsFilterOpen = ctx.setIsFilterOpen;
 
   const [loading, setLoading] = useState(true);
   const history = useHistory<{currentFilters: CurrentFilters}>();

@@ -87,9 +87,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/results">
-              <Results
-                setIsFilterOpen={setIsFilterOpen}
-              />
+              <Results />
             </Route>
             <Route exact path="/donate" component={Donate} />
           </Switch>

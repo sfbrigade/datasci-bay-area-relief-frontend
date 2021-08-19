@@ -155,10 +155,6 @@ export interface HeaderProps {
   filteredResults: Result[];
 }
 
-export interface ResultsProps {
-  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 export interface ResultWrapperType {
   history: MemoryHistory<{}>;
   initialResults: Result[];
