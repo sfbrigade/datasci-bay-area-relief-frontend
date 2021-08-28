@@ -92,13 +92,12 @@ const ListItem = styled.li`
 `;
 
 const Results: React.FC = () => {
-  const ctx = useContext(GlobalStateContext);
-  const isFilterOpen = ctx.isFilterOpen;
-  const filteredResults = ctx.filteredResults;
-  const currentFilters = ctx.currentFilters;
-  const setCurrentFilters = ctx.setCurrentFilters;
-  const setFilteredResults = ctx.setFilteredResults;
-  const setIsFilterOpen = ctx.setIsFilterOpen;
+  const {
+    filteredResults,
+    setCurrentFilters,
+    setFilteredResults,
+    setIsFilterOpen
+  } = useContext(GlobalStateContext);
 
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -144,26 +143,6 @@ const Results: React.FC = () => {
     );
   };
 
-  const handleFilterChange = (group: keyof CurrentFilters) => (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newFilters = {...currentFilters};
-    if (event.target.checked) {
-      if (group in newFilters) {
-        if (!newFilters[group]?.includes(event.target.name)) {
-          newFilters[group]?.push(event.target.name);
-        }
-      } else {
-        newFilters[group] = [event.target.name];
-      }
-    } else {
-      const index = newFilters[group]?.indexOf(event.target.name);
-      if (index >= 0) newFilters[group]?.splice(index, 1);
-      if (newFilters[group]?.length === 0) delete newFilters[group];
-    }
-    setCurrentFilters(newFilters);
-  };
-
   const handleClearFilters = () => setCurrentFilters({});
 
   return (
@@ -171,11 +150,7 @@ const Results: React.FC = () => {
       {!loading && (
         <>
           <FilterBar
-            currentFilters={currentFilters}
-            onChange={handleFilterChange}
-            // matchCounts={matchCounts}
             onClear={handleClearFilters}
-            isFilterOpen={isFilterOpen}
           />
           <RightSide onClick={() => setIsFilterOpen(false)}>
             <MatchSortContainer>

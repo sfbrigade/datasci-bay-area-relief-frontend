@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from "react";
+import React, {useEffect, useState, useMemo, ChangeEvent} from "react";
 import "./App.css";
 import {Router, Route, Switch} from "react-router-dom";
 import {createBrowserHistory} from "history";
@@ -12,7 +12,6 @@ import {theme} from "./theme";
 import {getResults} from "./api/axiosApi";
 import {applyFilters} from "./components/results/filterHelpers";
 import {CurrentFilters, GlobalStateContextType, Result} from "./types";
-import {ChangeEvent} from "react";
 import {setValues} from "./context/globalStates";
 
 

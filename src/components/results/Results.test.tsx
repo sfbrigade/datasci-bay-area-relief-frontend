@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, {useState, useMemo} from "react";
 import {fireEvent, render, screen, within} from "@testing-library/react";
 import {createMemoryHistory} from "history";
 import Results from "./Results";
@@ -46,6 +46,7 @@ describe("Results", () => {
     const [results, ] = useState<Result[]>(initialResults);
     const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
     const [filteredResults, setFilteredResults] = useState<Result[]>([]);
+    const handleFilterChange = jest.fn();
 
     useMemo(
       () => setFilteredResults(applyFilters(results, currentFilters)),
@@ -58,7 +59,8 @@ describe("Results", () => {
       isFilterOpen,
       currentFilters,
       setCurrentFilters,
-      setIsFilterOpen
+      setIsFilterOpen,
+      handleFilterChange
     });
 
     return (
@@ -141,6 +143,7 @@ describe("Results", () => {
 
       fireEvent.click(checkBoxSFCounty);
       fireEvent.click(checkBoxAlamedaCounty);
+
       const resultCardsBefore = screen.getAllByRole("listitem");
       expect(resultCardsBefore.length).toEqual(results.length);
 
