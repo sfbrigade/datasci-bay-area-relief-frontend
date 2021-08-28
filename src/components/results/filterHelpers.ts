@@ -1,5 +1,5 @@
 import {CurrentFilters, Result} from "../../types";
-import React, {ChangeEvent} from "react";
+import {Dispatch, SetStateAction} from "react";
 
 const isEmpty = (currentFilters: CurrentFilters) =>
   Object.keys(currentFilters).length === 0;
@@ -32,6 +32,31 @@ export const applyFilters = (
     return true;
   });
 };
+
+export const applyFilterChanges =
+  (
+    isChecked: boolean,
+    targetName: string,
+    group: keyof CurrentFilters,
+    currentFilters: CurrentFilters,
+    setCurrentFilters: Dispatch<SetStateAction<CurrentFilters>>
+  ) => {
+    const newFilters = {...currentFilters};
+    if (isChecked) {
+      if (group in newFilters) {
+        if (!newFilters[group]?.includes(targetName)) {
+          newFilters[group]?.push(targetName);
+        }
+      } else {
+        newFilters[group] = [targetName];
+      }
+    } else {
+      const index = newFilters[group]?.indexOf(targetName);
+      if (index >= 0) newFilters[group]?.splice(index, 1);
+      if (newFilters[group]?.length === 0) delete newFilters[group];
+    }
+    setCurrentFilters(newFilters);
+  };
 
 export const allFilters = [
   "smallBusiness",

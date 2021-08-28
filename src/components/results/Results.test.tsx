@@ -1,32 +1,32 @@
-import React, {useState, useMemo} from "react";
+import React, {useState, useMemo, ChangeEvent} from "react";
 import {fireEvent, render, screen, within} from "@testing-library/react";
 import {createMemoryHistory} from "history";
 import Results from "./Results";
-import { Router } from "react-router-dom";
+import {Router} from "react-router-dom";
 import {idleForIO} from "../../testUtils";
-import { applyFilters } from "./filterHelpers";
+import {applyFilterChanges, applyFilters} from "./filterHelpers";
 import {
   formatAwardAmount,
   formatDate,
   formatInterestRate,
-  formatReliefType,
+  formatReliefType
 } from "./formatHelpers";
 import {Result, CurrentFilters, ResultWrapperType} from "../../types";
 import {makeResult} from "./testDataHelpers";
-import { setValues } from "../../context/globalStates";
+import {setValues} from "../../context/globalStates";
 
 describe("Results", () => {
   const results = [
     makeResult({
       id: 1,
       sanMateoCounty: true,
-      nonProfit: true,
+      nonProfit: true
     }),
     makeResult({
       id: 2,
       sanMateoCounty: false,
-      nonProfit: false,
-    }),
+      nonProfit: false
+    })
   ];
   setValues({
     setCurrentFilters: jest.fn(),
@@ -41,12 +41,14 @@ describe("Results", () => {
     handleClearFilters: jest.fn()
   });
 
-  const ResultWrapper: React.FC<ResultWrapperType> = ({ history, initialResults }) => {
+  const ResultWrapper: React.FC<ResultWrapperType> = ({history, initialResults}) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [results, ] = useState<Result[]>(initialResults);
+    const [results] = useState<Result[]>(initialResults);
     const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
     const [filteredResults, setFilteredResults] = useState<Result[]>([]);
-    const handleFilterChange = jest.fn();
+    const handleFilterChange = (group: keyof CurrentFilters) => (event: ChangeEvent<HTMLInputElement>) => {
+      applyFilterChanges(event.target.checked, event.target.name, group, currentFilters, setCurrentFilters);
+    };
 
     useMemo(
       () => setFilteredResults(applyFilters(results, currentFilters)),
@@ -65,7 +67,7 @@ describe("Results", () => {
 
     return (
       <Router history={history}>
-        <Results />
+        <Results/>
       </Router>
     );
   };
@@ -94,26 +96,26 @@ describe("Results", () => {
           id: 1,
           name: "captain marvel",
           sfCounty: true,
-          alamedaCounty: false,
+          alamedaCounty: false
         }),
         makeResult({
           id: 2,
           name: "black panther",
           sfCounty: false,
-          alamedaCounty: true,
+          alamedaCounty: true
         }),
         makeResult({
           id: 3,
           name: "hulk",
           sfCounty: false,
-          alamedaCounty: false,
+          alamedaCounty: false
         }),
         makeResult({
           id: 4,
           name: "doctor strange",
           sfCounty: false,
-          alamedaCounty: false,
-        }),
+          alamedaCounty: false
+        })
       ];
       setValues({
         setCurrentFilters: jest.fn(),
@@ -169,18 +171,18 @@ describe("Results", () => {
         makeResult({
           id: 1,
           sfCounty: true,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 2,
           sfCounty: false,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 3,
           sfCounty: true,
-          smallBusiness: false,
-        }),
+          smallBusiness: false
+        })
       ];
       setValues({
         setCurrentFilters: jest.fn(),
@@ -244,7 +246,7 @@ describe("Results", () => {
         const results = [
           makeResult({id: 1, maxAwardAmount: 100000}),
           makeResult({id: 2, maxAwardAmount: 50000}),
-          makeResult({id: 3, maxAwardAmount: 25000}),
+          makeResult({id: 3, maxAwardAmount: 25000})
         ];
 
         const history = createMemoryHistory();

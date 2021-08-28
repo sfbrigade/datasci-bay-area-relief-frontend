@@ -10,7 +10,7 @@ import Donate from "./components/donate/Donate";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {theme} from "./theme";
 import {getResults} from "./api/axiosApi";
-import {applyFilters} from "./components/results/filterHelpers";
+import {applyFilters, applyFilterChanges} from "./components/results/filterHelpers";
 import {CurrentFilters, GlobalStateContextType, Result} from "./types";
 import {setValues} from "./context/globalStates";
 
@@ -27,21 +27,13 @@ const App = () => {
   const handleClearFilters = () => setCurrentFilters({});
 
   const handleFilterChange = (group: keyof CurrentFilters) => (event: ChangeEvent<HTMLInputElement>) => {
-    const newFilters = {...currentFilters};
-    if (event.target.checked) {
-      if (group in newFilters) {
-        if (!newFilters[group]?.includes(event.target.name)) {
-          newFilters[group]?.push(event.target.name);
-        }
-      } else {
-        newFilters[group] = [event.target.name];
-      }
-    } else {
-      const index = newFilters[group]?.indexOf(event.target.name);
-      if (index >= 0) newFilters[group]?.splice(index, 1);
-      if (newFilters[group]?.length === 0) delete newFilters[group];
-    }
-    setCurrentFilters(newFilters);
+    applyFilterChanges(
+      event.target.checked,
+      event.target.name,
+      group,
+      currentFilters,
+      setCurrentFilters
+    );
   };
 
   useMemo(
@@ -72,11 +64,11 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <Router history={history}>
-          <Header />
+          <Header/>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/results" component={Results} />
-            <Route exact path="/donate" component={Donate} />
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/results" component={Results}/>
+            <Route exact path="/donate" component={Donate}/>
           </Switch>
         </Router>
       </div>
