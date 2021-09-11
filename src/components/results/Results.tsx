@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
-import {CurrentFilters, HomeSearchFormTypes, Result, SortOptionType} from "../../types";
+import React, {useContext, useEffect, useState} from "react";
+import {Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
@@ -7,9 +7,10 @@ import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
-import {useHistory} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
-import {ResultsProps} from "../../types";
+import {GlobalStateContext} from "../../context/globalStates";
+import {grabCurrentFiltersFromURLParams} from "../../util/historyHelper";
 
 const ResultsPage = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ const MatchSortContainer = styled.div`
   margin-left: 4em;
 `;
 
-const ResultsMatched = styled(Typography).attrs({variant: 'h4' })`
+const ResultsMatched = styled(Typography).attrs({variant: "h4"})`
   margin: 0;
   color: rgba(0, 0, 0, 0.87);
 `;
@@ -44,6 +45,7 @@ const SortContainer = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   border-radius: 23px;
+
   && .MuiTypography-root {
     /* Body 2 / Source Sans Pro */
     font-family: Source Sans Pro;
@@ -89,49 +91,41 @@ const ListItem = styled.li`
   list-style-type: none;
 `;
 
-const Results: React.FC<ResultsProps> = ({
-    isFilterOpen, 
-    setIsFilterOpen, 
-    currentFilters, 
-    setCurrentFilters, 
-    setResults,
-    filteredResults
-  }) => {
+const Results: React.FC = () => {
+  const {
+    filteredResults,
+    setCurrentFilters,
+    setFilteredResults,
+    setIsFilterOpen
+  } = useContext(GlobalStateContext);
+
   const [loading, setLoading] = useState(true);
-  const history = useHistory<{currentFilters: CurrentFilters}>();
+  const location = useLocation();
 
   useEffect(() => {
-    if (history.location.search) {
-      const params = new URLSearchParams(history.location.search);
-      const pathFilters: HomeSearchFormTypes = {};
-      if (params.get("orgType")) {
-        pathFilters["orgType"] = [params.get("orgType")];
-      }
-      if (params.get("county")) {
-        pathFilters["county"] = [params.get("county")];
-      }
-      setCurrentFilters(pathFilters);
+    if (location.search) {
+      setCurrentFilters(grabCurrentFiltersFromURLParams(location));
     }
-  }, [history.location.search, setCurrentFilters]);
+  }, [location, setCurrentFilters]);
 
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.DueDateNewToOld
   );
 
-    useEffect(() => {
-      setSortOption(SortOptionType.DueDateNewToOld);
-      setLoading(false);
-    }, [filteredResults]);
+  useEffect(() => {
+    setSortOption(SortOptionType.DueDateNewToOld);
+    setLoading(false);
+  }, [filteredResults]);
 
   useEffect(() => {
-    setResults((curResults) => sortListBy(curResults, sortOption));
-  }, [sortOption, setResults]);
+    setFilteredResults((filteredResults) => sortListBy(filteredResults, sortOption));
+  }, [sortOption, setFilteredResults]);
 
   const renderResults = () => {
     if (filteredResults.length === 0) {
       return (
         <>
-          <img src={Searching} alt="No Results" />
+          <img src={Searching} alt="No Results"/>
           <p>
             Try clearing some filters!
           </p>
@@ -149,39 +143,11 @@ const Results: React.FC<ResultsProps> = ({
     );
   };
 
-  const handleFilterChange = (group: keyof CurrentFilters) => (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newFilters = {...currentFilters};
-    if (event.target.checked) {
-      if (group in newFilters) {
-        if (!newFilters[group]?.includes(event.target.name)) {
-          newFilters[group]?.push(event.target.name);
-        }
-      } else {
-        newFilters[group] = [event.target.name];
-      }
-    } else {
-      const index = newFilters[group]?.indexOf(event.target.name);
-      if (index >= 0) newFilters[group]?.splice(index, 1);
-      if (newFilters[group]?.length === 0) delete newFilters[group];
-    }
-    setCurrentFilters(newFilters);
-  };
-
-  const handleClearFilters = () => setCurrentFilters({});
-  
   return (
     <ResultsPage>
       {!loading && (
         <>
-          <FilterBar
-            currentFilters={currentFilters}
-            onChange={handleFilterChange}
-            // matchCounts={matchCounts}
-            onClear={handleClearFilters}
-            isFilterOpen={isFilterOpen}
-          />
+          <FilterBar />
           <RightSide onClick={() => setIsFilterOpen(false)}>
             <MatchSortContainer>
               <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>

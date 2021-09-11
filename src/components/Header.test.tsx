@@ -5,22 +5,26 @@ import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
 import {act} from "react-dom/test-utils";
 import { Result, CurrentFilters } from "../types";
+import {setValues} from "../context/globalStates";
 
 describe("Header", () => {
   const history = createMemoryHistory();
+
   const HeaderWrapper = () => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
     const filteredResults = [] as Result[];
+
+    setValues({
+      setIsFilterOpen,
+      isFilterOpen,
+      setCurrentFilters,
+      currentFilters
+    });
+
     return (
       <Router history={history}>
-        <Header 
-          isFilterOpen={isFilterOpen}
-          setIsFilterOpen={setIsFilterOpen}
-          currentFilters={currentFilters}
-          setCurrentFilters={setCurrentFilters}
-          filteredResults={filteredResults}
-        />
+        <Header />
       </Router>
     );
   };

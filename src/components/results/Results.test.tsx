@@ -1,63 +1,83 @@
-import React, { useState, useMemo } from "react";
+import React, {useState, useMemo, ChangeEvent} from "react";
 import {fireEvent, render, screen, within} from "@testing-library/react";
 import {createMemoryHistory} from "history";
 import Results from "./Results";
-import { Router } from "react-router-dom";
+import {Router} from "react-router-dom";
 import {idleForIO} from "../../testUtils";
-import { applyFilters } from "./filterHelpers";
+import {applyFilterChanges, applyFilters} from "./filterHelpers";
 import {
   formatAwardAmount,
   formatDate,
   formatInterestRate,
-  formatReliefType,
+  formatReliefType
 } from "./formatHelpers";
 import {Result, CurrentFilters, ResultWrapperType} from "../../types";
 import {makeResult} from "./testDataHelpers";
+import {setValues} from "../../context/globalStates";
 
 describe("Results", () => {
-  const ResultWrapper: React.FC<ResultWrapperType> = ({ history, results }) => {
-    const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [,setResults] = useState<Result[]>([]);
-    const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
+  const results = [
+    makeResult({
+      id: 1,
+      sanMateoCounty: true,
+      nonProfit: true
+    }),
+    makeResult({
+      id: 2,
+      sanMateoCounty: false,
+      nonProfit: false
+    })
+  ];
+  setValues({
+    setCurrentFilters: jest.fn(),
+    currentFilters: {},
+    handleFilterChange: jest.fn(),
+    setIsFilterOpen: jest.fn(),
+    isFilterOpen: false,
+    setInitialData: jest.fn(),
+    initialData: results,
+    filteredResults: [],
+    setFilteredResults: jest.fn(),
+    handleClearFilters: jest.fn()
+  });
 
-    const filteredResults = useMemo(() => applyFilters(results, currentFilters), [
+  const ResultWrapper: React.FC<ResultWrapperType> = ({history, initialResults}) => {
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [results] = useState<Result[]>(initialResults);
+    const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
+    const [filteredResults, setFilteredResults] = useState<Result[]>([]);
+    const handleFilterChange = (group: keyof CurrentFilters) => (event: ChangeEvent<HTMLInputElement>) => {
+      applyFilterChanges(event.target.checked, event.target.name, group, currentFilters, setCurrentFilters);
+    };
+
+    useMemo(
+      () => setFilteredResults(applyFilters(results, currentFilters)),
+      [currentFilters, setFilteredResults, results]
+    );
+
+    setValues({
+      filteredResults,
+      setFilteredResults,
+      isFilterOpen,
       currentFilters,
-      results,
-    ]);
+      setCurrentFilters,
+      setIsFilterOpen,
+      handleFilterChange
+    });
 
     return (
       <Router history={history}>
-        <Results
-          isFilterOpen={isFilterOpen}
-          setIsFilterOpen={setIsFilterOpen}
-          currentFilters={currentFilters}
-          setCurrentFilters={setCurrentFilters}
-          setResults={setResults}
-          filteredResults={filteredResults}
-        />
+        <Results/>
       </Router>
     );
   };
 
   describe("results filtering", () => {
     it("applies the filters passed in", async () => {
-      const results: Result[] = [
-        makeResult({
-          id: 1,
-          sanMateoCounty: true,
-          nonProfit: true,
-        }),
-        makeResult({
-          id: 2,
-          sanMateoCounty: false,
-          nonProfit: false,
-        }),
-      ];
-
       const history = createMemoryHistory();
 
       history.push("/?orgType=nonProfit&county=sanMateoCounty");
-      render(<ResultWrapper history={history} results={results}/>);
+      render(<ResultWrapper history={history} initialResults={results}/>);
 
       const nonProfitCheckbox = screen.getByLabelText(
         /non-profit/i
@@ -71,34 +91,46 @@ describe("Results", () => {
     });
 
     it("allows the user to select filters that narrow down the matches shown", async () => {
-      const results: Result[] = [
+      const narrowedResults = [
         makeResult({
           id: 1,
           name: "captain marvel",
           sfCounty: true,
-          alamedaCounty: false,
+          alamedaCounty: false
         }),
         makeResult({
           id: 2,
           name: "black panther",
           sfCounty: false,
-          alamedaCounty: true,
+          alamedaCounty: true
         }),
         makeResult({
           id: 3,
           name: "hulk",
           sfCounty: false,
-          alamedaCounty: false,
+          alamedaCounty: false
         }),
         makeResult({
           id: 4,
           name: "doctor strange",
           sfCounty: false,
-          alamedaCounty: false,
-        }),
+          alamedaCounty: false
+        })
       ];
+      setValues({
+        setCurrentFilters: jest.fn(),
+        currentFilters: {},
+        handleFilterChange: jest.fn(),
+        setIsFilterOpen: jest.fn(),
+        isFilterOpen: false,
+        setInitialData: jest.fn(),
+        initialData: narrowedResults,
+        filteredResults: narrowedResults,
+        setFilteredResults: jest.fn(),
+        handleClearFilters: jest.fn()
+      });
       const history = createMemoryHistory();
-      render(<ResultWrapper history={history} results={results}/>);
+      render(<ResultWrapper history={history} initialResults={narrowedResults}/>);
       await idleForIO();
 
       const checkBoxSFCounty = screen.getByLabelText(
@@ -111,11 +143,11 @@ describe("Results", () => {
       expect(checkBoxSFCounty.checked).toEqual(false);
       expect(checkBoxAlamedaCounty.checked).toEqual(false);
 
-      const resultCardsBefore = screen.getAllByRole("listitem");
-      expect(resultCardsBefore.length).toEqual(results.length);
-
       fireEvent.click(checkBoxSFCounty);
       fireEvent.click(checkBoxAlamedaCounty);
+
+      const resultCardsBefore = screen.getAllByRole("listitem");
+      expect(resultCardsBefore.length).toEqual(results.length);
 
       expect(checkBoxSFCounty.checked).toEqual(true);
       expect(checkBoxAlamedaCounty.checked).toEqual(true);
@@ -135,26 +167,38 @@ describe("Results", () => {
     });
 
     it("clearing all filters", async () => {
-      const results: Result[] = [
+      const clearingAllFiltersResults: Result[] = [
         makeResult({
           id: 1,
           sfCounty: true,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 2,
           sfCounty: false,
-          smallBusiness: true,
+          smallBusiness: true
         }),
         makeResult({
           id: 3,
           sfCounty: true,
-          smallBusiness: false,
-        }),
+          smallBusiness: false
+        })
       ];
+      setValues({
+        setCurrentFilters: jest.fn(),
+        currentFilters: {},
+        handleFilterChange: jest.fn(),
+        setIsFilterOpen: jest.fn(),
+        isFilterOpen: false,
+        setInitialData: jest.fn(),
+        initialData: clearingAllFiltersResults,
+        filteredResults: [],
+        setFilteredResults: jest.fn(),
+        handleClearFilters: jest.fn()
+      });
 
       const history = createMemoryHistory();
-      render(<ResultWrapper history={history} results={results}/>);
+      render(<ResultWrapper history={history} initialResults={clearingAllFiltersResults}/>);
 
       const sfCountyFilter = screen.getByLabelText(
         /san francisco/i
@@ -184,7 +228,7 @@ describe("Results", () => {
     describe("when there are no matches", () => {
       it("renders a no results image and message", async () => {
         const history = createMemoryHistory();
-        render(<ResultWrapper history={history} results={[]}/>);
+        render(<ResultWrapper history={history} initialResults={[]}/>);
         await idleForIO();
 
         const nonProfitCheckbox = screen.getByLabelText(
@@ -202,11 +246,11 @@ describe("Results", () => {
         const results = [
           makeResult({id: 1, maxAwardAmount: 100000}),
           makeResult({id: 2, maxAwardAmount: 50000}),
-          makeResult({id: 3, maxAwardAmount: 25000}),
+          makeResult({id: 3, maxAwardAmount: 25000})
         ];
 
         const history = createMemoryHistory();
-        render(<ResultWrapper history={history} results={results}/>);
+        render(<ResultWrapper history={history} initialResults={results}/>);
         await idleForIO();
 
         const resultCards = screen.getAllByRole("listitem");
@@ -275,9 +319,21 @@ describe("Results", () => {
       });
 
       it("does not show the no results image", async () => {
-        const results = [makeResult()];
+        const singleResult = [makeResult()];
+        setValues({
+          setCurrentFilters: jest.fn(),
+          currentFilters: {},
+          handleFilterChange: jest.fn(),
+          setIsFilterOpen: jest.fn(),
+          isFilterOpen: false,
+          setInitialData: jest.fn(),
+          initialData: singleResult,
+          filteredResults: [],
+          setFilteredResults: jest.fn(),
+          handleClearFilters: jest.fn()
+        });
         const history = createMemoryHistory();
-        render(<ResultWrapper history={history} results={results}/>);
+        render(<ResultWrapper history={history} initialResults={singleResult}/>);
         await idleForIO();
 
         expect(screen.queryByTitle("No results")).toBeNull();

@@ -1,4 +1,4 @@
-import {applyFilters, matchGroup} from "./filterHelpers";
+import {applyFilterChanges, applyFilters, matchGroup} from "./filterHelpers";
 import {makeResult} from "./testDataHelpers";
 import {CurrentFilters, Result} from "../../types";
 
@@ -9,23 +9,57 @@ describe("matchGroup", () => {
     const result3 = makeResult({sfCounty: true, alamedaCounty: true});
 
     const currentFilters: CurrentFilters = {
-      county: ["sfCounty", "alamedaCounty"],
+      county: ["sfCounty", "alamedaCounty"]
     };
 
     const tests: [Result, boolean][] = [
       [result1, true],
       [result2, true],
-      [result3, true],
+      [result3, true]
     ];
     tests.forEach(([result, expectedMatch]) => {
       expect(
         matchGroup({
           result,
           group: "county",
-          currentFilters,
+          currentFilters
         })
       ).toBe(expectedMatch);
     });
+  });
+});
+
+describe("applyFilterChanges", () => {
+  it("takes in a group, currentFilters, and a hook, and calls hook with added filters", () => {
+    //setup
+    const setCurrentFiltersMock = jest.fn();
+    const isChecked = true;
+    const targetName = "alamedaCounty";
+    const groupKey = "county";
+    const currentFilters: CurrentFilters = {county: ["sanMateoCounty"]};
+
+    //execute
+    applyFilterChanges(isChecked, targetName,
+      groupKey, currentFilters, setCurrentFiltersMock);
+
+    //expect
+    expect(setCurrentFiltersMock).toBeCalledWith({county: ["sanMateoCounty", "alamedaCounty"]});
+  });
+
+  it("takes in a group, currentFilters, and a hook, and calls hook with removed filters", () => {
+    //setup
+    const setCurrentFiltersMock = jest.fn();
+    const isChecked = false;
+    const targetName = "alamedaCounty";
+    const groupKey = "county";
+    const currentFilters: CurrentFilters = {county: ["sanMateoCounty", "alamedaCounty"]};
+
+    //execute
+    applyFilterChanges(isChecked, targetName,
+      groupKey, currentFilters, setCurrentFiltersMock);
+
+    //expect
+    expect(setCurrentFiltersMock).toBeCalledWith({county: ["sanMateoCounty"]});
   });
 });
 
@@ -38,7 +72,7 @@ describe("applyFilters", () => {
     const results = [
       makeResult({id: 1}),
       makeResult({id: 2}),
-      makeResult({id: 3}),
+      makeResult({id: 3})
     ];
     const filteredResults = applyFilters(results, {});
     expect(filteredResults).toEqual(results);
@@ -51,7 +85,7 @@ describe("applyFilters", () => {
 
     const currentFilters = {
       county: ["sfCounty"],
-      category: ["blackOwned"],
+      category: ["blackOwned"]
     };
 
     const filteredResults = applyFilters(

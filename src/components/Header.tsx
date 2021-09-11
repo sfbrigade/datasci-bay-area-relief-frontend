@@ -1,23 +1,19 @@
-import React, {ChangeEvent, useState, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styled, {StyledComponent} from "styled-components";
-import {Link} from "react-router-dom";
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
-
-import {useHistory} from "react-router-dom";
 
 import {FilterBar} from "./results/FilterBar";
 
 import Typography from "@material-ui/core/Typography";
-import MatMenu from '@material-ui/core/Menu';
-import MatMenuItem from '@material-ui/core/MenuItem';
-import MatButton from '@material-ui/core/Button';
-import MenuIcon from '@material-ui/icons/Menu';
+import MatMenu from "@material-ui/core/Menu";
+import MatMenuItem from "@material-ui/core/MenuItem";
+import MatButton from "@material-ui/core/Button";
 import Button from "@material-ui/core/Button";
+import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
-
-import {HeaderProps, CurrentFilters} from '../types';
-
+import {GlobalStateContext} from "../context/globalStates";
+import {grabCurrentFiltersFromURLParams} from "../util/historyHelper";
 
 const WhiteContainer = styled.header`
   top: 0;
@@ -90,27 +86,27 @@ const MenuItem = styled(Link)`
   }
 `;
 
-const Header: React.FC<HeaderProps> = ({
-    setIsFilterOpen, 
-    isFilterOpen,
-    currentFilters,
+const Header: React.FC = () => {
+  const {
+    setIsFilterOpen,
     setCurrentFilters,
-    filteredResults,
-  }) => {
+  } = useContext(GlobalStateContext);
+
   const location = useLocation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isResultsPage, setIsResultsPage] = useState(false);
   const [filterToggle, setFilterToggle] = React.useState(false);
 
-  const history = useHistory<{currentFilters: CurrentFilters}>();
-  if(history.location.state && history.location.state.currentFilters){
-    setCurrentFilters(history.location.state.currentFilters);
-  }
+  useEffect(() => {
+    if (location.search) {
+      setCurrentFilters(grabCurrentFiltersFromURLParams(location));
+    }
+  }, [setCurrentFilters, location]);
 
   // Update isResultsPage when location pathname changes;
   useEffect(() => {
-    setIsResultsPage(location.pathname === '/results');
+    setIsResultsPage(location.pathname === "/results");
   }, [location.pathname]);
 
   // Handle navbar layout when scrolling
@@ -164,30 +160,8 @@ const Header: React.FC<HeaderProps> = ({
     setAnchorEl(null);
   };
 
-  const handleFilterChange = (group: keyof CurrentFilters) => (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newFilters = {...currentFilters};
-    if (event.target.checked) {
-      if (group in newFilters) {
-        if (!newFilters[group]?.includes(event.target.name)) {
-          newFilters[group]?.push(event.target.name);
-        }
-      } else {
-        newFilters[group] = [event.target.name];
-      }
-    } else {
-      const index = newFilters[group]?.indexOf(event.target.name);
-      if (index >= 0) newFilters[group]?.splice(index, 1);
-      if (newFilters[group]?.length === 0) delete newFilters[group];
-    }
-    setCurrentFilters(newFilters);
-  };
-
-  const handleClearFilters = () => setCurrentFilters({});
-
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-    if (event.type === 'keydown') {
+    if (event.type === "keydown") {
       return;
     }
     setIsFilterOpen(open);
@@ -215,8 +189,8 @@ const Header: React.FC<HeaderProps> = ({
           pathname: "/",
           search: "",
           hash: "#about",
-          state: {toAbout: true},
-          }} onClick={handleClose}>
+          state: {toAbout: true}
+        }} onClick={handleClose}>
           About
         </MatMenuItem>
       </MatMenu>
@@ -226,27 +200,22 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <Container>
       <LogoWrapper>
-        <Logo role="logo" />
+        <Logo role="logo"/>
       </LogoWrapper>
       {isResultsPage &&
-        <FilterContainer>
-          <Button onClick={toggleDrawer(true)}>{'filter'}</Button>
-          <Drawer anchor={'left'} open={filterToggle} onClose={toggleDrawer(false)}>
-            <div
-              role="presentation"
-              onClick={toggleDrawer(false)}
-              onKeyDown={toggleDrawer(false)}
-              style={{ width: "400 px" }}
-            >
-              <FilterBar
-                currentFilters={currentFilters}
-                onChange={handleFilterChange}
-                onClear={handleClearFilters}
-                isFilterOpen={isFilterOpen}
-              />
-            </div>
-          </Drawer>
-        </FilterContainer>
+      <FilterContainer>
+        <Button onClick={toggleDrawer(true)}>{"filter"}</Button>
+        <Drawer anchor={"left"} open={filterToggle} onClose={toggleDrawer(false)}>
+          <div
+            role="presentation"
+            onClick={toggleDrawer(false)}
+            onKeyDown={toggleDrawer(false)}
+            style={{width: "400 px"}}
+          >
+            <FilterBar />
+          </div>
+        </Drawer>
+      </FilterContainer>
       }
       <Menu role="menu">
         {SmallMenu()}
@@ -255,7 +224,7 @@ const Header: React.FC<HeaderProps> = ({
             pathname: "/",
             search: "",
             hash: "",
-            state: {toHome: true},
+            state: {toHome: true}
           }}
         >
           <Typography variant="body1">Home</Typography>
@@ -268,7 +237,7 @@ const Header: React.FC<HeaderProps> = ({
             pathname: "/",
             search: "",
             hash: "#about",
-            state: {toAbout: true},
+            state: {toAbout: true}
           }}
         >
           <Typography variant="body1">About</Typography>

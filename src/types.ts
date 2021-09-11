@@ -1,4 +1,7 @@
 import { MemoryHistory } from "history/createMemoryHistory";
+import { ChangeEvent } from "react";
+import { SetStateAction } from "react";
+import { Dispatch } from "react";
 
 // export enum County {
 //   SanFrancisco = "San Francisco",
@@ -144,29 +147,27 @@ export interface ResultResponse {
   womenOwned: string;
 }
 
-export interface HeaderProps {
-  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isFilterOpen: boolean;
-  currentFilters: CurrentFilters;
-  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
-  filteredResults: Result[];
-}
-
-export interface ResultsProps {
-  isFilterOpen: boolean;
-  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  currentFilters: CurrentFilters;
-  setResults: React.Dispatch<React.SetStateAction<Result[]>>;
-  setCurrentFilters: React.Dispatch<React.SetStateAction<CurrentFilters>>;
-  filteredResults: Result[];
-}
-
 export interface ResultWrapperType {
   history: MemoryHistory<{}>;
-  results: Result[];
+  initialResults: Result[];
 }
 
 export interface HomeSearchFormTypes {
   orgType?: string[];
   county?: string[];
+}
+
+export interface GlobalStateContextType {
+  setCurrentFilters?: Dispatch<SetStateAction<CurrentFilters>>;
+  currentFilters?: CurrentFilters;
+  handleFilterChange?: (
+    group: keyof CurrentFilters
+  ) => (event: ChangeEvent<HTMLInputElement>) => void;
+  setIsFilterOpen?: Dispatch<SetStateAction<boolean>>;
+  isFilterOpen: boolean;
+  setInitialData?: Dispatch<SetStateAction<Result[]>>;
+  initialData?: Result[];
+  filteredResults?: Result[];
+  setFilteredResults?: Dispatch<SetStateAction<Result[]>>;
+  handleClearFilters?: () => void;
 }

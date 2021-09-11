@@ -1,4 +1,5 @@
 import {CurrentFilters, Result} from "../../types";
+import {Dispatch, SetStateAction} from "react";
 
 const isEmpty = (currentFilters: CurrentFilters) =>
   Object.keys(currentFilters).length === 0;
@@ -32,6 +33,31 @@ export const applyFilters = (
   });
 };
 
+export const applyFilterChanges =
+  (
+    isChecked: boolean,
+    targetName: string,
+    group: keyof CurrentFilters,
+    currentFilters: CurrentFilters,
+    setCurrentFilters: Dispatch<SetStateAction<CurrentFilters>>
+  ) => {
+    const newFilters = {...currentFilters};
+    if (isChecked) {
+      if (group in newFilters) {
+        if (!newFilters[group]?.includes(targetName)) {
+          newFilters[group]?.push(targetName);
+        }
+      } else {
+        newFilters[group] = [targetName];
+      }
+    } else {
+      const index = newFilters[group]?.indexOf(targetName);
+      if (index >= 0) newFilters[group]?.splice(index, 1);
+      if (newFilters[group]?.length === 0) delete newFilters[group];
+    }
+    setCurrentFilters(newFilters);
+  };
+
 export const allFilters = [
   "smallBusiness",
   "nonProfit",
@@ -53,7 +79,7 @@ export const allFilters = [
   "public",
   "private",
   "spanish",
-  "chinese",
+  "chinese"
 ];
 
 const defaultMatchCounts = () => {
@@ -87,8 +113,8 @@ export const filterGroups: FilterGroup[] = [
     groupLabel: "Type",
     filters: [
       {name: "smallBusiness", label: "Small business"},
-      {name: "nonProfit", label: "Non-profit"},
-    ],
+      {name: "nonProfit", label: "Non-profit"}
+    ]
   },
   {
     groupName: "county",
@@ -98,8 +124,8 @@ export const filterGroups: FilterGroup[] = [
       {name: "alamedaCounty", label: "Alameda"},
       {name: "sanMateoCounty", label: "San Mateo"},
       {name: "contraCostaCounty", label: "Contra Costa"},
-      {name: "santaClaraCounty", label: "Santa Clara"},
-    ],
+      {name: "santaClaraCounty", label: "Santa Clara"}
+    ]
   },
   {
     groupName: "employees",
@@ -108,49 +134,49 @@ export const filterGroups: FilterGroup[] = [
       {name: "employs100OrFewer", label: "<100"},
       {name: "employs500OrFewer", label: "<500"},
       {name: "employs750OrFewer", label: "<750"},
-      {name: "employs750More", label: ">751"},
-    ],
+      {name: "employs750More", label: ">751"}
+    ]
   },
   {
     groupName: "hasInterest",
     groupLabel: "Has Interest?",
     filters: [
       {name: "hasInterest", label: "Yes"},
-      {name: "doesNotHaveInterest", label: "No"},
-    ],
+      {name: "doesNotHaveInterest", label: "No"}
+    ]
   },
   {
     groupName: "reliefType",
     groupLabel: "Relief Type",
     filters: [
       {name: "covid19", label: "COVID-19"},
-      {name: "protestDamage", label: "Protest damage"},
-    ],
+      {name: "protestDamage", label: "Protest damage"}
+    ]
   },
   {
     groupName: "category",
     groupLabel: "Category",
     filters: [
       {name: "blackOwned", label: "Black-owned"},
-      {name: "lgbtq", label: "LGBTQ"},
-    ],
+      {name: "lgbtq", label: "LGBTQ"}
+    ]
   },
   {
     groupName: "sector",
     groupLabel: "Sector",
     filters: [
       {name: "public", label: "Public"},
-      {name: "private", label: "Private"},
-    ],
+      {name: "private", label: "Private"}
+    ]
   },
   {
     groupName: "language",
     groupLabel: "Language",
     filters: [
       {name: "spanish", label: "Spanish"},
-      {name: "chinese", label: "Chinese"},
-    ],
-  },
+      {name: "chinese", label: "Chinese"}
+    ]
+  }
 ];
 
 export const getFilterNameFromGroupAndTargetName = (
@@ -171,7 +197,6 @@ export const getFilterNameFromGroupAndTargetName = (
   }
   return undefined;
 };
-
 
 
 export const getFilterNameFromGroupAndLabel = (
