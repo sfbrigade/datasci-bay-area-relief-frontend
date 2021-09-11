@@ -51,17 +51,12 @@ const Sidebar = styled.div<{isFilterOpen: boolean}>`
   }
 `;
 
-type FilterBarProps = {
-  onClear: () => void;
-};
-
-export const FilterBar: React.FC<FilterBarProps> = ({
-                                                      onClear
-                                                    }) => {
+export const FilterBar: React.FC = () => {
     const {
       isFilterOpen,
       currentFilters,
-      handleFilterChange
+      handleFilterChange,
+      handleClearFilters
     } = useContext(GlobalStateContext);
 
     return (
@@ -90,7 +85,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             </FormGroup>
           </FormControl>
         ))}
-        <Button color="secondary" onClick={onClear}>
+        <Button color="secondary" onClick={handleClearFilters}>
           clear
         </Button>
       </Sidebar>);

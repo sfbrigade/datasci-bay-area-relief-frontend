@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styled, {StyledComponent} from "styled-components";
 import {Link, useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
@@ -12,8 +12,6 @@ import MatButton from "@material-ui/core/Button";
 import Button from "@material-ui/core/Button";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
-
-import {CurrentFilters} from "../types";
 import {GlobalStateContext} from "../context/globalStates";
 import {grabCurrentFiltersFromURLParams} from "../util/historyHelper";
 
@@ -104,7 +102,7 @@ const Header: React.FC = () => {
     if (location.search) {
       setCurrentFilters(grabCurrentFiltersFromURLParams(location));
     }
-  }, [setCurrentFilters, location.search]);
+  }, [setCurrentFilters, location]);
 
   // Update isResultsPage when location pathname changes;
   useEffect(() => {
@@ -162,8 +160,6 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const handleClearFilters = () => setCurrentFilters({});
-
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === "keydown") {
       return;
@@ -216,9 +212,7 @@ const Header: React.FC = () => {
             onKeyDown={toggleDrawer(false)}
             style={{width: "400 px"}}
           >
-            <FilterBar
-              onClear={handleClearFilters}
-            />
+            <FilterBar />
           </div>
         </Drawer>
       </FilterContainer>

@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useContext, useEffect, useState} from "react";
-import {CurrentFilters, HomeSearchFormTypes, Result, SortOptionType} from "../../types";
+import React, {useContext, useEffect, useState} from "react";
+import {Result, SortOptionType} from "../../types";
 import styled from "styled-components";
 import ResultCard from "./ResultCard";
 import FormControl from "@material-ui/core/FormControl";
@@ -106,7 +106,7 @@ const Results: React.FC = () => {
     if (location.search) {
       setCurrentFilters(grabCurrentFiltersFromURLParams(location));
     }
-  }, [location.search, setCurrentFilters]);
+  }, [location, setCurrentFilters]);
 
   const [sortOption, setSortOption] = useState<SortOptionType>(
     SortOptionType.DueDateNewToOld
@@ -143,15 +143,11 @@ const Results: React.FC = () => {
     );
   };
 
-  const handleClearFilters = () => setCurrentFilters({});
-
   return (
     <ResultsPage>
       {!loading && (
         <>
-          <FilterBar
-            onClear={handleClearFilters}
-          />
+          <FilterBar />
           <RightSide onClick={() => setIsFilterOpen(false)}>
             <MatchSortContainer>
               <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>
