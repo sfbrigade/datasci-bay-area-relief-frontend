@@ -43,7 +43,7 @@ export interface Result {
   supportType: SupportType;
   interestRate: number | null;
   dateAdded: string;
-  maxAwardAmount: number | null;
+  maxAwardAmount: number;
   reliefType: ReliefType;
   deadline: string | null;
   deadlineApplicable: string | null;
