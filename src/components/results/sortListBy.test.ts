@@ -53,7 +53,7 @@ describe("sortListBy", () => {
     supportType: SupportType.Loan,
     interestRate: 0,
     dateAdded: "Fri, 01 Jun 2020 00:00:00 GMT",
-    maxAwardAmount: 0,
+    maxAwardAmount: null,
     reliefType: ReliefType.COVID,
     deadline: null,
   };
@@ -68,7 +68,15 @@ describe("sortListBy", () => {
     deadline: null,
   };
 
+  const awardAmountHighToLow: Result[] = [result1, result4, result3];
+  const awardAmountLowToHigh: Result[] = [result3, result4, result1];
+
+  const interestRatesLowToHigh: Result[] = [result6, result1];
+  const interestRatesHighToLow: Result[] = [result1, result6];
+
   const results: Result[] = [result1, result2, result3, result4, result5, result6];
+
+
 
   it("Should return a new list and not mutate the given list ", () => {
     const output = sortListBy(results, SortOptionType.None);
@@ -76,68 +84,51 @@ describe("sortListBy", () => {
   });
 
   describe("Sorting by award amount", () => {
-    it("places results with null award amount at the end", () => {
-      const results: Result[] = [result3, result1, result4];
-      // const results: Result[] = [result1, result4, result3];
-      // const answer: Result[] = [result1, result5];
-      const answer: Result[] = [result1, result4, result3];
-      expect(sortListBy(results, SortOptionType.AwardAmountHighToLow)).toEqual(
-        answer
-      );
+    it("sorts results from highest to lowest maxAwardAmount with null value at beginning", () => {
+      // Sort results[] objects from high to low maxAwardAmount
+      const sortedResultsList: Result[] = sortListBy(results, SortOptionType.AwardAmountHighToLow);
+
+      // For each result object in sortedResultsList, extract maxAwardAmount and store in sortedValuesList
+      const sortedValuesList: number[] = sortedResultsList.map(sortedResultsList => sortedResultsList.maxAwardAmount);
+      const answer: number[] = [null, 10000000, 20000, 500, 0, 0];
+
+      expect(sortedValuesList).toEqual(answer);
     });
-    it("sorts results from high to low award amounts when sort option is AwardAmountHighToLow", () => {
-      const answer: Result[] = [result1, result4, result3, result2, result5];
-      const highToLow = sortListBy(
-        results,
-        SortOptionType.AwardAmountHighToLow
-      );
-      expect(highToLow).toEqual(answer);
-    });
+
     it("sorts results from low to high award amounts when sort option is AwardAmountLowToHigh", () => {
-      const answer: Result[] = [result2, result5, result3, result4, result1];
-      const lowToHigh = sortListBy(
-        results,
-        SortOptionType.AwardAmountLowToHigh
-      );
-      expect(lowToHigh).toEqual(answer);
+      // Sort results[] objects from low to high maxAwardAmount
+      const sortedResultsList: Result[] = sortListBy(results, SortOptionType.AwardAmountLowToHigh);
+
+      // For each result object in sortedResultsList, extract maxAwardAmount and store in sortedValuesList
+      const sortedValuesList: number[] = sortedResultsList.map(sortedResultsList => sortedResultsList.maxAwardAmount);
+      const answer: number[] = [0, 0, 500, 20000, 10000000, null];
+
+      expect(sortedValuesList).toEqual(answer);
     });
   });
 
   describe("Sorting by interest", () => {
-    it("places results with non loan support types at the end", () => {
-      const results: Result[] = [result2, result1];
-      const answer: Result[] = [result1, result2];
-      expect(sortListBy(results, SortOptionType.InterestLowToHigh)).toEqual(
-        answer
-      );
-      expect(sortListBy(results, SortOptionType.InterestHighToLow)).toEqual(
-        answer
-      );
+    it("Sorts interest rates lowest to highest", () => {
+      // Sort results[] objects from low to high interestRate
+      const sortedResultsList: Result[] = sortListBy(results, SortOptionType.InterestLowToHigh);
+
+      // For each result object in sortedResultsList, extract interestRate and store in sortedValuesList
+      const sortedValuesList: number[] = sortedResultsList.map(sortedResultsList => sortedResultsList.interestRate);
+      const answer: number[] = [0, 0, 0, 0.01, 0.0375, null];
+
+      expect(sortedValuesList).toEqual(answer);
     });
 
-    it("places results with support type loan and null interest rates at the end", () => {
-      const results: Result[] = [result1, result6];
-      const answer: Result[] = [result6, result1];
-      expect(sortListBy(results, SortOptionType.InterestLowToHigh)).toEqual(
-        answer
-      );
-      expect(sortListBy(results, SortOptionType.InterestHighToLow)).toEqual(
-        answer
-      );
-    });
+    // TODO: Currently failing, check behavior of null in sortListBy for interest rates
+    it("Sorts interest rates highest to lowest", () => {
+      // Sort results[] objects from low to high interestRate
+      const sortedResultsList: Result[] = sortListBy(results, SortOptionType.InterestHighToLow);
 
-    it("sorts results from low to high interest rates when sort option is InterestLowToHigh ", () => {
-      const answer: Result[] = [result3, result5, result1, result4, result2];
-      expect(sortListBy(results, SortOptionType.InterestLowToHigh)).toEqual(
-        answer
-      );
-    });
+      // For each result object in sortedResultsList, extract interestRate and store in sortedValuesList
+      const sortedValuesList: number[] = sortedResultsList.map(sortedResultsList => sortedResultsList.interestRate);
+      const answer: number[] = [null, 0.0375, 0.01, 0, 0 ,0];
 
-    it("sorts results from high to low interest rates when sort option is InterestHighToLow ", () => {
-      const answer: Result[] = [result4, result1, result3, result5, result2];
-      expect(sortListBy(results, SortOptionType.InterestHighToLow)).toEqual(
-        answer
-      );
+      expect(sortedValuesList).toEqual(answer);
     });
   });
 
