@@ -1,7 +1,13 @@
 import React, {useEffect, useRef} from "react";
+import { 
+  PageContainer,
+  SectionContainer,
+  ImageSection,
+  StyledLandingPageSky,
+  StyledStoreFront,
+  SearchSection
+ } from './Home.styles';
 import {RouteComponentProps} from "react-router-dom";
-import styled from "styled-components";
-import {ReactComponent as LandingPageSky} from "../../assets/LandingPageSky.svg";
 import Storefront from "../../assets/Storefront.png";
 import HowItWorks from "./HowItWorks";
 import AboutUs from "./AboutUs";
@@ -10,44 +16,6 @@ import {LocationState} from "../../types";
 import {SearchForm} from "./SearchForm";
 import Typography from "@material-ui/core/Typography";
 
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const SectionContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-`;
-
-const ImageSection = styled.div`
-  flex: 1 1 0;
-`;
-
-const StyledLandingPageSky = styled(LandingPageSky)`
-  position: absolute;
-  left: 0px;
-`;
-
-const StyledStoreFront = styled.img`
-  position: absolute;
-  width: 800px;
-  height: 800px;
-  left: 0px;
-  top: 150px;
-`;
-
-const SearchSection = styled.div`
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-`;
 
 const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
   location,
