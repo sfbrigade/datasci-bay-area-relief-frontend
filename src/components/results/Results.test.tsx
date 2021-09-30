@@ -28,17 +28,11 @@ describe("Results", () => {
       nonProfit: false
     })
   ];
-  setValues({
-    setCurrentFilters: jest.fn(),
-    currentFilters: {},
-    handleFilterChange: jest.fn(),
-    setIsFilterOpen: jest.fn(),
-    isFilterOpen: false,
-    setInitialData: jest.fn(),
-    initialData: results,
-    filteredResults: [],
-    setFilteredResults: jest.fn(),
-    handleClearFilters: jest.fn()
+
+  let handleClearFiltersCalledTimes = 0;
+
+  beforeEach(() => {
+    handleClearFiltersCalledTimes = 0;
   });
 
   const ResultWrapper: React.FC<ResultWrapperType> = ({history, initialResults}) => {
@@ -48,6 +42,11 @@ describe("Results", () => {
     const [filteredResults, setFilteredResults] = useState<Result[]>([]);
     const handleFilterChange = (group: keyof CurrentFilters) => (event: ChangeEvent<HTMLInputElement>) => {
       applyFilterChanges(event.target.checked, event.target.name, group, currentFilters, setCurrentFilters);
+    };
+
+    const handleClearFilters = () => {
+      ++handleClearFiltersCalledTimes;
+      setCurrentFilters({});
     };
 
     useMemo(
@@ -62,7 +61,8 @@ describe("Results", () => {
       currentFilters,
       setCurrentFilters,
       setIsFilterOpen,
-      handleFilterChange
+      handleFilterChange,
+      handleClearFilters
     });
 
     return (
@@ -117,18 +117,6 @@ describe("Results", () => {
           alamedaCounty: false
         })
       ];
-      setValues({
-        setCurrentFilters: jest.fn(),
-        currentFilters: {},
-        handleFilterChange: jest.fn(),
-        setIsFilterOpen: jest.fn(),
-        isFilterOpen: false,
-        setInitialData: jest.fn(),
-        initialData: narrowedResults,
-        filteredResults: narrowedResults,
-        setFilteredResults: jest.fn(),
-        handleClearFilters: jest.fn()
-      });
       const history = createMemoryHistory();
       render(<ResultWrapper history={history} initialResults={narrowedResults}/>);
       await idleForIO();
@@ -184,18 +172,6 @@ describe("Results", () => {
           smallBusiness: false
         })
       ];
-      setValues({
-        setCurrentFilters: jest.fn(),
-        currentFilters: {},
-        handleFilterChange: jest.fn(),
-        setIsFilterOpen: jest.fn(),
-        isFilterOpen: false,
-        setInitialData: jest.fn(),
-        initialData: clearingAllFiltersResults,
-        filteredResults: [],
-        setFilteredResults: jest.fn(),
-        handleClearFilters: jest.fn()
-      });
 
       const history = createMemoryHistory();
       render(<ResultWrapper history={history} initialResults={clearingAllFiltersResults}/>);
@@ -210,11 +186,12 @@ describe("Results", () => {
       fireEvent.click(sfCountyFilter);
       fireEvent.click(smallBusinessFilter);
 
-
       const filteredResults = screen.getAllByRole("listitem");
       expect(filteredResults.length).toEqual(1);
 
       fireEvent.click(screen.getByText(/clear/i));
+
+      expect(handleClearFiltersCalledTimes).toEqual(1);
 
       expect(sfCountyFilter.checked).toEqual(false);
       expect(smallBusinessFilter.checked).toEqual(false);
@@ -320,18 +297,6 @@ describe("Results", () => {
 
       it("does not show the no results image", async () => {
         const singleResult = [makeResult()];
-        setValues({
-          setCurrentFilters: jest.fn(),
-          currentFilters: {},
-          handleFilterChange: jest.fn(),
-          setIsFilterOpen: jest.fn(),
-          isFilterOpen: false,
-          setInitialData: jest.fn(),
-          initialData: singleResult,
-          filteredResults: [],
-          setFilteredResults: jest.fn(),
-          handleClearFilters: jest.fn()
-        });
         const history = createMemoryHistory();
         render(<ResultWrapper history={history} initialResults={singleResult}/>);
         await idleForIO();
