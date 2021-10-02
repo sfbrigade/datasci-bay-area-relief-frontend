@@ -14,77 +14,14 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
 import {GlobalStateContext} from "../context/globalStates";
 import {grabCurrentFiltersFromURLParams} from "../util/historyHelper";
-
-const WhiteContainer = styled.header`
-  top: 0;
-  width: 100%;
-  height: 98px;
-  z-index: 100;
-  display: flex;
-  position: fixed;
-  overflow: hidden;
-  align-items: center;
-  background-color: white;
-  justify-content: space-between;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.14);
-`;
-const TransparentContainer = styled.header`
-  top: 0;
-  width: 100%;
-  height: 98px;
-  z-index: 100;
-  display: flex;
-  position: fixed;
-  overflow: hidden;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const FilterContainer = styled.div`
-  @media (min-width: 752px) {
-    display: none
-  }
-`;
-
-const HiddenContainer = styled.header`
-  visibility: hidden;
-`;
-
-const LogoWrapper = styled.div`
-  margin-left: 56px;
-`;
-
-const Menu = styled.div`
-  height: 100%;
-  display: flex;
-  padding-right: 88px;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-const SmallMenuContainer = styled.div`
-  display: block;
-  color: black;
-  text-align: center;
-  margin-left: 32px;
-  text-decoration: none;
-
-  @media (min-width: 752px) {
-    display: none
-  }
-`;
-
-const MenuItem = styled(Link)`
-  display: none;
-
-  @media (min-width: 752px) {
-    display: block;
-    color: black;
-    text-align: center;
-    margin-left: 32px;
-    text-decoration: none;
-  }
-`;
+import {
+  FilterContainer,
+  HiddenContainer,
+  LogoWrapper, Menu, MenuItem,
+  SmallMenuContainer,
+  TransparentContainer,
+  WhiteContainer
+} from "./Header.styles";
 
 const Header: React.FC = () => {
   const {
