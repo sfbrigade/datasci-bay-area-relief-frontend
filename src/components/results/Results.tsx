@@ -1,9 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Result, SortOptionType} from "../../types";
-import styled from "styled-components";
 import ResultCard from "./ResultCard";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import sortListBy from "./sortListBy";
 import {FilterBar} from "./FilterBar";
 import Typography from "@material-ui/core/Typography";
@@ -11,85 +8,15 @@ import {useLocation} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
 import {GlobalStateContext} from "../../context/globalStates";
 import {grabCurrentFiltersFromURLParams} from "../../util/historyHelper";
-
-const ResultsPage = styled.div`
-  display: flex;
-  background: #fafafa;
-  padding-top: 130px;
-  min-width: 100vw;
-  min-height: 100vh;
-`;
-
-const RightSide = styled.div`
-  flex: auto;
-`;
-
-const MatchSortContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-right: 10em;
-  margin-left: 4em;
-`;
-
-const ResultsMatched = styled(Typography).attrs({variant: "h4"})`
-  margin: 0;
-  color: rgba(0, 0, 0, 0.87);
-`;
-
-const SortContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 6px 12px;
-  min-width: 207px;
-  height: 36px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-  border-radius: 23px;
-
-  && .MuiTypography-root {
-    /* Body 2 / Source Sans Pro */
-    font-family: Source Sans Pro;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 20px;
-    letter-spacing: 0.25px;
-  }
-`;
-
-const StyledFormControl = styled(FormControl)`
-  flex: auto;
-  display: flex;
-  flex-direction: row;
-  width: 128px;
-  height: 24px;
-  order: 1;
-  align-self: flex-end;
-`;
-
-const StyledSelect = styled(Select)`
-  && select {
-    padding-top: 3px;
-    margin-left: 8px;
-    font-family: Source Sans Pro;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 18px;
-    letter-spacing: 0.25px;
-  }
-`;
-
-const ResultsList = styled.div``;
-
-const StyledUL = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const ListItem = styled.li`
-  list-style-type: none;
-`;
+import {
+  ListItem,
+  MatchSortContainer, ResultsList,
+  ResultsMatched,
+  ResultsPage,
+  RightSide,
+  SortContainer, StyledFormControl, StyledSelect,
+  StyledUL
+} from "./Results.styles";
 
 const Results: React.FC = () => {
   const {

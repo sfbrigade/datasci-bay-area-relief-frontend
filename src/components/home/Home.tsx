@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from "react";
-import { 
+import {
   PageContainer,
   SectionContainer,
   ImageSection,
@@ -15,7 +15,6 @@ import ThankYou from "./ThankYou";
 import {LocationState} from "../../types";
 import {SearchForm} from "./SearchForm";
 import Typography from "@material-ui/core/Typography";
-
 
 const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
   location,
