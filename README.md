@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Committing Code
+This project has Husky configured to run tests prior to committing.
+
 ## Available Scripts
 
 In the project directory, you can run:
