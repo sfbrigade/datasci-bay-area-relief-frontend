@@ -4,6 +4,7 @@ import {SearchForm} from "./SearchForm";
 import {idleForIO} from "../../testUtils";
 import {createMemoryHistory} from "history";
 import {Route, Router} from "react-router-dom";
+import renderer from 'react-test-renderer';
 
 const history = createMemoryHistory();
 jest.spyOn(history, "push");
@@ -15,6 +16,13 @@ describe('SearchForm selections', () => {
         <Route component={SearchForm} />
       </Router>
     );
+  });
+
+  it('renders correctly', () => {
+    const tree = renderer
+      .create(<SearchForm />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   it('renders a SearchForm with two default Anys', () => {

@@ -1,0 +1,221 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm selections renders correctly 1`] = `
+<form
+  className="sc-bdnylx wxXGl"
+>
+  <div
+    className="sc-gtssRu eAezmj"
+  >
+    <p
+      className="MuiTypography-root MuiTypography-body1"
+    >
+      Search our database for Bay Area loans for your non-profit or small business.
+    </p>
+  </div>
+  <div
+    className="sc-dlnjPT eHtjKL"
+  >
+    <div
+      className="MuiFormControl-root"
+    >
+      <label
+        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
+        data-shrink={true}
+        htmlFor="org-type-select"
+      >
+        I am a...
+      </label>
+      <div
+        className="MuiInputBase-root MuiOutlinedInput-root sc-hKFyIo kKqkRf MuiInputBase-formControl"
+        onClick={[Function]}
+      >
+        <select
+          aria-invalid={false}
+          className="MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
+          data-testid="org-type-select"
+          disabled={false}
+          id="org-type-select"
+          multiple={false}
+          name="org-type"
+          onAnimationStart={[Function]}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          required={false}
+          value="any"
+        >
+          <option
+            value="any"
+          >
+            Any
+          </option>
+          <option
+            value="smallBusiness"
+          >
+            Small business
+          </option>
+          <option
+            value="nonProfit"
+          >
+            Non-profit
+          </option>
+        </select>
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden={true}
+          className="PrivateNotchedOutline-root-1 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            className="PrivateNotchedOutline-legendLabelled-3 PrivateNotchedOutline-legendNotched-4"
+          >
+            <span>
+              I am a...
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+    <div
+      className="MuiFormControl-root"
+    >
+      <label
+        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-filled"
+        data-shrink={true}
+        htmlFor="county-select"
+      >
+        County
+      </label>
+      <div
+        className="MuiInputBase-root MuiOutlinedInput-root sc-hKFyIo kKqkRf MuiInputBase-formControl"
+        onClick={[Function]}
+      >
+        <select
+          aria-invalid={false}
+          className="MuiSelect-root MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input"
+          disabled={false}
+          id="county-select"
+          multiple={false}
+          name="county"
+          onAnimationStart={[Function]}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          required={false}
+          value="any"
+        >
+          <option
+            value="any"
+          >
+            Any
+          </option>
+          <option
+            value="sfCounty"
+          >
+            San Francisco
+          </option>
+          <option
+            value="alamedaCounty"
+          >
+            Alameda
+          </option>
+          <option
+            value="sanMateoCounty"
+          >
+            San Mateo
+          </option>
+          <option
+            value="contraCostaCounty"
+          >
+            Conta Costa
+          </option>
+          <option
+            value="santaClaraCounty"
+          >
+            Santa Clara
+          </option>
+        </select>
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root MuiSelect-icon MuiSelect-iconOutlined"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M7 10l5 5 5-5z"
+          />
+        </svg>
+        <fieldset
+          aria-hidden={true}
+          className="PrivateNotchedOutline-root-1 MuiOutlinedInput-notchedOutline"
+        >
+          <legend
+            className="PrivateNotchedOutline-legendLabelled-3 PrivateNotchedOutline-legendNotched-4"
+          >
+            <span>
+              County
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <button
+    className="MuiButtonBase-root MuiButton-root MuiButton-contained sc-eCApGN beDnGC MuiButton-containedPrimary"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex={0}
+    type="button"
+  >
+    <span
+      className="MuiButton-label"
+    >
+      Search
+    </span>
+  </button>
+  <button
+    className="MuiButtonBase-root MuiButton-root MuiButton-text sc-jSFkmK giMmbY MuiButton-textPrimary"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex={0}
+    type="button"
+  >
+    <span
+      className="MuiButton-label"
+    >
+      I want to donate
+    </span>
+  </button>
+</form>
+`;
