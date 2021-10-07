@@ -40,7 +40,6 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
           <StyledStoreFront src={Storefront} alt="Storefront" />
         </ImageSection>
         <SearchSection>
-          <Typography variant="h3">Find Loans & Grants</Typography>
           <SearchForm />
         </SearchSection>
       </SectionContainer>

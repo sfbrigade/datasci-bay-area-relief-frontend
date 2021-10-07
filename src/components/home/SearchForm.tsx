@@ -1,59 +1,18 @@
-import styled from "styled-components";
-import Select from "@material-ui/core/Select";
 import {County, OrgType} from "../../types";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
-import Button from "@material-ui/core/Button";
 import React, {useState} from "react";
 import {getFilterNameFromGroupAndTargetName} from "../results/filterHelpers";
 import {useHistory} from "react-router-dom";
 import {Typography} from "@material-ui/core";
-import {colors} from "../../theme";
-
-const SearchFormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 14px;
-  border: 0;
-`;
-
-const SearchDescription = styled.div`
-  width: 400px;
-  z-index: 10;
-  margin-bottom: 27px;
-`;
-
-const SearchFormFields = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 328px;
-`;
-
-const StyledSelect = styled(Select)`
-  margin-bottom: 1em;
-`;
-
-const SearchButton = styled(Button)`
-  && {
-    width: 97px;
-    height: 36px;
-    border-radius: 200px;
-
-    :disabled {
-      background-color: ${colors.primaryRed};
-      color: black;
-      opacity: 0.5;
-    }
-  }
-`;
-const DonateButton = styled(Button)`
-  && {
-    margin-top: 13px;
-    padding: 13px;
-    border-radius: 4px;
-  }
-`;
+import {
+  DonateButton,
+  SearchButton,
+  SearchDescription,
+  SearchFormContainer,
+  SearchFormFields,
+  StyledSelect
+} from "./SearchForm.styles";
 
 export const SearchForm = () => {
   const [orgType, setOrgType] = useState<OrgType>(OrgType.Any);
@@ -90,6 +49,7 @@ export const SearchForm = () => {
 
   return (
     <SearchFormContainer>
+      <Typography variant="h3">Find Loans & Grants</Typography>
       <SearchDescription>
         <Typography variant="body1">
           Search our database for Bay Area loans for your non-profit or small
