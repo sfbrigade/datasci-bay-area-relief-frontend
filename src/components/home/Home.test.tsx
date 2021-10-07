@@ -28,6 +28,10 @@ beforeEach(() => {
 });
 
 describe("Home", () => {
+  it('matches the snapshot', () => {
+
+  });
+
   it("renders a homepage title with description", () => {
     expect(
       screen.getByRole("heading", {name: "Find Loans & Grants"})

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultCard tests matches the snapshot 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root sc-bdnylx cJtASr MuiPaper-elevation1 MuiPaper-rounded"
+>
+  <div
+    className="sc-gtssRu frKVdL"
+  >
+    <span
+      className="MuiTypography-root sc-dlnjPT gBKAmh MuiTypography-overline"
+    >
+      Grant • No Interest • 6/10/20
+    </span>
+  </div>
+  <h5
+    className="MuiTypography-root sc-hKFyIo gDTYSf MuiTypography-h5"
+  >
+    $10,000
+  </h5>
+  <p
+    className="MuiTypography-root sc-eCApGN hgNLgN MuiTypography-body2"
+  >
+    some test name
+  </p>
+  <p
+    className="MuiTypography-root sc-jSFkmK jvsbkj MuiTypography-body2"
+  >
+    COVID relief
+  </p>
+  <div
+    className="sc-gKAblj fKEQtp"
+  >
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="button"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        Apply
+      </span>
+    </button>
+    <div
+      className="sc-iCoHVE jCbugA"
+    >
+      <p
+        className="MuiTypography-root sc-fujyUd fyCOjw MuiTypography-body2"
+      >
+        Black-owned
+      </p>
+    </div>
+  </div>
+</div>
+`;
