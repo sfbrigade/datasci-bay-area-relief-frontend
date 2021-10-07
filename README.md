@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Committing Code 
+- This project has Husky configured to run tests prior to committing.
+- When pulling down the husky-enabled codebase for the first time, please do a `yarn install` to grab the husky dependency. 
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -43,4 +47,3 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-Delete me!

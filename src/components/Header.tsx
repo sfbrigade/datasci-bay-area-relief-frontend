@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import styled, {StyledComponent} from "styled-components";
+import {StyledComponent} from "styled-components";
 import {Link, useLocation} from "react-router-dom";
 import {ReactComponent as Logo} from "../assets/Logo.svg";
 
