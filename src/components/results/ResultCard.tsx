@@ -24,7 +24,8 @@ const onApply = (url: string) => {
 const ResultCard: React.FC<Result> = ({
   supportType,
   interestRate,
-  dateAdded,
+  deadline,
+  deadlineApplicable,
   maxAwardAmount,
   name,
   reliefType,
@@ -32,14 +33,28 @@ const ResultCard: React.FC<Result> = ({
   lgbtq,
   websiteUrl,
 }) => {
+  const deadlineString = (): string => {
+    let deadlineLabelText = "";
+    if (deadlineApplicable === "Yes" || deadlineApplicable === "Unknown") {
+      if (!deadline) {
+        deadlineLabelText = "Unknown";
+      } else {
+        deadlineLabelText = formatDate(deadline);
+      }
+    } else if (deadlineApplicable === "No") {
+      deadlineLabelText = "Ongoing";
+    }
+    return deadlineLabelText;
+  }
+
   return (
     <StyledCard>
       <SupportTypeContainer>
         <SupportTypeItem>
-          {`${supportType} • ${formatInterestRate(
+          <span data-testid='support-type-header'>{`${supportType} • ${formatInterestRate(
             interestRate,
             supportType
-          )} • ${formatDate(dateAdded)}`}
+          )} • ${deadlineString()}`}</span>
         </SupportTypeItem>
       </SupportTypeContainer>
       <StyledAwardAmount>{formatAwardAmount(maxAwardAmount)}</StyledAwardAmount>

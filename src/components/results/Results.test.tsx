@@ -1,5 +1,5 @@
 import React, {useState, useMemo, ChangeEvent} from "react";
-import {fireEvent, render, screen, within} from "@testing-library/react";
+import {fireEvent, getByTestId, render, screen, within} from "@testing-library/react";
 import {createMemoryHistory} from "history";
 import Results from "./Results";
 import {Router} from "react-router-dom";
@@ -221,9 +221,9 @@ describe("Results", () => {
     describe("when there are matches", () => {
       it("displays the matches with relevant information on result cards", async () => {
         const results = [
-          makeResult({id: 1, maxAwardAmount: 100000}),
-          makeResult({id: 2, maxAwardAmount: 50000}),
-          makeResult({id: 3, maxAwardAmount: 25000})
+          makeResult({id: 1, maxAwardAmount: 100000, deadlineApplicable: 'Yes', deadline: '2019-09-25T00:00:00.000Z'}),
+          makeResult({id: 2, maxAwardAmount: 50000, deadlineApplicable: 'Yes', deadline: '2019-09-25T00:00:00.000Z'}),
+          makeResult({id: 3, maxAwardAmount: 25000, deadlineApplicable: 'Yes', deadline: '2019-09-25T00:00:00.000Z'})
         ];
 
         const history = createMemoryHistory();
@@ -253,9 +253,10 @@ describe("Results", () => {
           const interestRateRegex = new RegExp(formattedInterestRate, "i");
           expect(getByText(interestRateRegex)).toBeVisible();
 
-          const formattedDate = formatDate(currentResult.dateAdded);
-          const dateAddedRegex = new RegExp(formattedDate, "i");
-          expect(getByText(dateAddedRegex)).toBeVisible();
+          const formattedDate = formatDate(currentResult.deadline);
+          const supportTypeHeaders = screen.getAllByTestId('support-type-header')
+          expect(supportTypeHeaders[i]).toBeVisible();
+          expect(supportTypeHeaders[i].textContent).toContain(formattedDate);
 
           expect(
             getByText(formatAwardAmount(currentResult.maxAwardAmount))

@@ -2,7 +2,7 @@ import axios from "axios";
 import {Result, ResultResponse} from "../types";
 import {standardizeFormat} from "./responseFormatter";
 
-const API = "https://api-sfbayrelief.org/";
+const API = process.env.REACT_APP_BACKEND_API_URL;
 
 export const getResults = async (): Promise<Result[]> => {
   try {
