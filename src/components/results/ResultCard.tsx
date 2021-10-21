@@ -45,7 +45,7 @@ const ResultCard: React.FC<Result> = ({
       deadlineLabelText = "Ongoing";
     }
     return deadlineLabelText;
-  }
+  };
 
   return (
     <StyledCard>

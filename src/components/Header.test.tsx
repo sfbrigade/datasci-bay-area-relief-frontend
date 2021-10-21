@@ -13,7 +13,6 @@ describe("Header", () => {
   const HeaderWrapper = () => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
-    const filteredResults = [] as Result[];
 
     setValues({
       setIsFilterOpen,
