@@ -1,5 +1,5 @@
 import React, {useState, useMemo, ChangeEvent} from "react";
-import {fireEvent, getByTestId, render, screen, within} from "@testing-library/react";
+import {fireEvent, render, screen, within} from "@testing-library/react";
 import {createMemoryHistory} from "history";
 import Results from "./Results";
 import {Router} from "react-router-dom";
@@ -254,7 +254,7 @@ describe("Results", () => {
           expect(getByText(interestRateRegex)).toBeVisible();
 
           const formattedDate = formatDate(currentResult.deadline);
-          const supportTypeHeaders = screen.getAllByTestId('support-type-header')
+          const supportTypeHeaders = screen.getAllByTestId('support-type-header');
           expect(supportTypeHeaders[i]).toBeVisible();
           expect(supportTypeHeaders[i].textContent).toContain(formattedDate);
 
