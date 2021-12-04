@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
+import {Typography} from "@material-ui/core";
+import {colors} from "../theme";
 
 export const WhiteContainer = styled.header`
   top: 0;
@@ -28,7 +30,7 @@ export const TransparentContainer = styled.header`
 
 export const FilterContainer = styled.div`
   @media (min-width: 752px) {
-    display: none
+    display: none;
   }
 `;
 
@@ -56,7 +58,7 @@ export const SmallMenuContainer = styled.div`
   text-decoration: none;
 
   @media (min-width: 752px) {
-    display: none
+    display: none;
   }
 `;
 
@@ -69,5 +71,12 @@ export const MenuItem = styled(Link)`
     text-align: center;
     margin-left: 32px;
     text-decoration: none;
+  }
+`;
+
+export const MenuItemTypography = styled(Typography)`
+  &:hover {
+    color: ${colors.primaryRed};
+    font-weight: 500;
   }
 `;
