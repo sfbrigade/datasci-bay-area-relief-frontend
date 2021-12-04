@@ -30,7 +30,7 @@ export const TransparentContainer = styled.header`
 
 export const FilterContainer = styled.div`
   @media (min-width: 752px) {
-    display: none
+    display: none;
   }
 `;
 
@@ -58,7 +58,7 @@ export const SmallMenuContainer = styled.div`
   text-decoration: none;
 
   @media (min-width: 752px) {
-    display: none
+    display: none;
   }
 `;
 
@@ -79,4 +79,4 @@ export const MenuItemTypography = styled(Typography)`
     color: ${colors.primaryRed};
     font-weight: 500;
   }
-`
+`;

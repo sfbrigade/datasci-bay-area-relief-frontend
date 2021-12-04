@@ -23,18 +23,18 @@ describe("Header", () => {
 
     return (
       <Router history={history}>
-        <Header/>
+        <Header />
       </Router>
     );
   };
 
   it("renders a logo", () => {
-    const {getByRole} = render(< HeaderWrapper/>);
+    const {getByRole} = render(<HeaderWrapper />);
     expect(getByRole("logo")).toBeVisible();
   });
 
   it("renders a menu with 3 links", () => {
-    const {getByRole} = render(< HeaderWrapper/>);
+    const {getByRole} = render(<HeaderWrapper />);
     expect(getByRole("link", {name: "Home"})).toBeVisible();
     expect(getByRole("link", {name: "Search"})).toBeVisible();
     expect(getByRole("link", {name: "About"})).toBeVisible();
@@ -42,7 +42,7 @@ describe("Header", () => {
   });
 
   it("navigates to the home page", () => {
-    const {getByRole} = render(< HeaderWrapper/>);
+    const {getByRole} = render(<HeaderWrapper />);
     act(() => {
       getByRole("link", {name: "Home"}).click();
     });
@@ -51,7 +51,7 @@ describe("Header", () => {
   });
 
   it("navigates to the portal", () => {
-    const {getByRole} = render(< HeaderWrapper/>);
+    const {getByRole} = render(<HeaderWrapper />);
     act(() => {
       getByRole("link", {name: "Search"}).click();
     });
@@ -60,7 +60,7 @@ describe("Header", () => {
   });
 
   it("navigates to the about page", () => {
-    const {getByRole} = render(< HeaderWrapper/>);
+    const {getByRole} = render(<HeaderWrapper />);
     act(() => {
       getByRole("link", {name: "About"}).click();
     });
@@ -69,7 +69,7 @@ describe("Header", () => {
   });
 
   it("navigates to the donate page", () => {
-    const {getByRole} = render(<HeaderWrapper/>);
+    const {getByRole} = render(<HeaderWrapper />);
     act(() => {
       getByRole("link", {name: "Donate"}).click();
     });
