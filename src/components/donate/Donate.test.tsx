@@ -6,7 +6,7 @@ import {act} from "react-dom/test-utils";
 describe("Donate page", () => {
   it("renders heading and description", () => {
     render(<Donate />);
-    expect(screen.getByRole("heading", { name: "Donate"})).toBeInTheDocument();
+    expect(screen.getByRole("heading", {name: "Donate"})).toBeInTheDocument();
     expect(screen.getByText("General")).toBeInTheDocument();
     expect(screen.getByText("Black Lives Matter")).toBeInTheDocument();
     expect(screen.getByText("LGBT")).toBeInTheDocument();
@@ -14,6 +14,13 @@ describe("Donate page", () => {
 
   it("render links to donate websites", () => {
     render(<Donate />);
+
+    act(() => {
+      screen.getByText(/Donate to SF Bay Relief/).click();
+    });
+    expect(screen.getByText(/Donate to SF Bay Relief/)).toHaveTextContent(
+      "Donate to SF Bay Relief"
+    );
 
     act(() => {
       screen.getByText(/GoFundMe's/).click();
