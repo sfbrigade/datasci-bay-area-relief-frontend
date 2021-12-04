@@ -5,7 +5,6 @@ import {ReactComponent as Logo} from "../assets/Logo.svg";
 
 import {FilterBar} from "./results/FilterBar";
 
-import Typography from "@material-ui/core/Typography";
 import MatMenu from "@material-ui/core/Menu";
 import MatMenuItem from "@material-ui/core/MenuItem";
 import MatButton from "@material-ui/core/Button";
@@ -20,7 +19,8 @@ import {
   LogoWrapper, Menu, MenuItem,
   SmallMenuContainer,
   TransparentContainer,
-  WhiteContainer
+  WhiteContainer,
+  MenuItemTypography
 } from "./Header.styles";
 
 const Header: React.FC = () => {
@@ -121,7 +121,7 @@ const Header: React.FC = () => {
         onClose={handleClose}
       >
         <MatMenuItem component={Link} to="/" onClick={handleClose}>Home</MatMenuItem>
-        <MatMenuItem component={Link} to="/results" onClick={handleClose}>Bay Area Relief Portal</MatMenuItem>
+        <MatMenuItem component={Link} to="/results" onClick={handleClose}>Search</MatMenuItem>
         <MatMenuItem component={Link} to={{
           pathname: "/",
           search: "",
@@ -130,6 +130,7 @@ const Header: React.FC = () => {
         }} onClick={handleClose}>
           About
         </MatMenuItem>
+        <MatMenuItem component={Link} to="/donate" onClick={handleClose}>Donate</MatMenuItem>
       </MatMenu>
     </SmallMenuContainer>
   );
@@ -164,10 +165,10 @@ const Header: React.FC = () => {
             state: {toHome: true}
           }}
         >
-          <Typography variant="body1">Home</Typography>
+          <MenuItemTypography variant="body1">Home</MenuItemTypography>
         </MenuItem>
         <MenuItem to="/results">
-          <Typography variant="body1">Bay Area Relief Portal</Typography>
+          <MenuItemTypography variant="body1">Search</MenuItemTypography>
         </MenuItem>
         <MenuItem
           to={{
@@ -177,7 +178,10 @@ const Header: React.FC = () => {
             state: {toAbout: true}
           }}
         >
-          <Typography variant="body1">About</Typography>
+          <MenuItemTypography variant="body1">About</MenuItemTypography>
+        </MenuItem>
+        <MenuItem to="/donate">
+          <MenuItemTypography variant="body1">Donate</MenuItemTypography>
         </MenuItem>
       </Menu>
     </Container>
