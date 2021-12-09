@@ -65,7 +65,7 @@ const Donate: React.FC = () => {
           funds you can donate to.
         </TopSectionBody>
         <br />
-        <Link href="https://www.codeforsanfrancisco.org/donate">
+        <Link href="https://www.codeforamerica.org/donate/brigade/?utm_campaign=code%20for%20san%20francisco&amp;utm_source=codeforsanfrancisco%20site">
           <Button variant="contained">Donate to SF Bay Relief</Button>
         </Link>
       </TopSection>
