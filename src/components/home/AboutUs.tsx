@@ -2,6 +2,7 @@ import React from "react";
 import {ReactComponent as YellowHalfCircle} from "../../assets/YellowHalfCircle.svg";
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
+import ImageAvatars from "./ImageAvatars";
 
 const Container = styled.div`
   display: flex;
@@ -49,6 +50,8 @@ const AboutUs: React.FC = () => {
           needs, as well as to help the City and other brigades with their
           data science needs whenever appropriate.
         </Typography>
+        <ImageAvatars />
+
       </AboutDescription>
     </Container>
   );
