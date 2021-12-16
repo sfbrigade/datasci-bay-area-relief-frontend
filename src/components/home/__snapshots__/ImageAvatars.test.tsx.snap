@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageAvatars> renders correctly 1`] = `
+<ForwardRef(StyledComponent)
+  component="section"
+  mb={8}
+  mt={8}
+>
+  <ForwardRef(WithStyles)
+    variant="h3"
+  >
+    Meet the Team
+  </ForwardRef(WithStyles)>
+  <div
+    className="makeStyles-root-1"
+  >
+    <ForwardRef(WithStyles)
+      container={true}
+      spacing={2}
+    >
+      <ForwardRef(WithStyles)
+        item={true}
+        xs={6}
+      >
+        <ForwardRef(StyledComponent)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <ForwardRef(WithStyles)
+            alt="Rocio"
+            className="makeStyles-large-2"
+            src="rocio.jpg"
+          />
+          <ForwardRef(WithStyles)>
+            Rocio Ng
+          </ForwardRef(WithStyles)>
+          <ForwardRef(WithStyles)
+            variant="body2"
+          >
+            Project Lead
+          </ForwardRef(WithStyles)>
+        </ForwardRef(StyledComponent)>
+      </ForwardRef(WithStyles)>
+      <ForwardRef(WithStyles)
+        item={true}
+        xs={6}
+      >
+        <ForwardRef(StyledComponent)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <ForwardRef(WithStyles)
+            alt="Emily"
+            className="makeStyles-large-2"
+            src="emily.jpg"
+          />
+          <ForwardRef(WithStyles)>
+            Emily Kasa
+          </ForwardRef(WithStyles)>
+          <ForwardRef(WithStyles)
+            variant="body2"
+          >
+            Data Jam Lead
+          </ForwardRef(WithStyles)>
+        </ForwardRef(StyledComponent)>
+      </ForwardRef(WithStyles)>
+    </ForwardRef(WithStyles)>
+  </div>
+</ForwardRef(StyledComponent)>
+`;
