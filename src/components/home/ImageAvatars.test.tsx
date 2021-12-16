@@ -6,5 +6,4 @@ describe('<ImageAvatars>', () => {
     it('renders correctly', () => {
         shallowRenderToMatchSnapshot(<ImageAvatars />);
       });
-
 });
