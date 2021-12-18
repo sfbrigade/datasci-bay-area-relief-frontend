@@ -5,19 +5,22 @@
   "dependencies": {
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.11.2",
+    "@testing-library/dom": "5",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
+    "@testing-library/user-event": "7.2.1",
     "@types/jest": "^24.0.0",
     "@types/lodash": "^4.14.159",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/react-test-renderer": "^17.0.1",
     "axios": "^0.19.2",
     "moment": "^2.27.0",
     "prettier": "^2.3.2",
-    "react": "^16.13.1",
+    "react": "^16.8.0",
     "react-dom": "^16.13.1",
+    "react-is": "16.8.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.1",
@@ -52,6 +55,7 @@
     "@commitlint/config-conventional": "^14.1.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
-    "husky": "^7.0.0"
+    "husky": "^7.0.0",
+    "react-test-renderer": "^16.8.6"
   }
 }
