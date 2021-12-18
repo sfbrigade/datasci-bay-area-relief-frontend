@@ -1,11 +1,17 @@
 import React from "react";
 
 import Link from "@material-ui/core/Link";
-import {Button} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
-import {Container, TopSection, TopSectionBody, Section, SectionHeader, DonationList, ListItem} from './Donate.styles';
-
+import {
+  Container,
+  DonationList,
+  ListItem,
+  Section,
+  SectionHeader,
+  TopSection,
+  TopSectionBody,
+} from "./Donate.styles";
 
 const Donate: React.FC = () => {
   return (
@@ -18,9 +24,35 @@ const Donate: React.FC = () => {
           funds you can donate to.
         </TopSectionBody>
         <br />
-        <Link href="https://www.codeforamerica.org/donate/brigade/?utm_campaign=code%20for%20san%20francisco&amp;utm_source=codeforsanfrancisco%20site">
-          <Button variant="contained">Donate to SF Bay Relief</Button>
-        </Link>
+        <Typography
+          variant="body2"
+          style={{
+            marginBottom: "8px",
+          }}
+        >
+          <span>Please navigate through the donation instructions, </span>
+          <span>select Code For San Francisco, </span>
+          <br />
+          <span>and under what inspired you include: "SF Bay Relief".</span>
+        </Typography>
+        <iframe
+          title="Donate"
+          frameBorder="0"
+          height="1160px"
+          name="donorbox"
+          scrolling="no"
+          seamless
+          src="https://donorbox.org/embed/codeforamerica-brigades"
+          style={{
+            display: "inline-block",
+            maxWidth: "426px",
+            minWidth: "426px",
+            maxHeight: "none !important",
+            height: "1160px",
+            width: "100%",
+          }}
+          data-donorbox-id="DonorBox-f1"
+        />
       </TopSection>
 
       <Section>
