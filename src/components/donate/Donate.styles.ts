@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
+import { colors } from "../../theme";
 
 export const Container = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ export const TopSection = styled.div`
 `;
 
 export const TopSectionBody = styled(Typography).attrs({variant: "body1"})`
-  color: rgba(0, 0, 0, 0.8);
+  color: ${colors.text};
   margin: 0px;
   padding: 0px;
 `;

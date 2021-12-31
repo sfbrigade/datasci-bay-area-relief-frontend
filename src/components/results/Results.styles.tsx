@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import { colors } from "../../theme";
 
 export const ResultsPage = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ export const MatchSortContainer = styled.div`
 
 export const ResultsMatched = styled(Typography).attrs({variant: "h4"})`
   margin: 0;
-  color: rgba(0, 0, 0, 0.87);
+  color: ${colors.text};
 `;
 
 export const SortContainer = styled.div`
