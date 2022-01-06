@@ -33,7 +33,7 @@ const Donate: React.FC = () => {
           <span>Please navigate through the donation instructions, </span>
           <span>select Code For San Francisco, </span>
           <br />
-          <span>and under what inspired you include: "SF Bay Relief".</span>
+          <span>and under what inspired you include: &ldquo;SF Bay Relief&rdquo;.</span>
         </Typography>
         <iframe
           title="Donate"
