@@ -12,6 +12,7 @@ import {
   TopSection,
   TopSectionBody,
 } from "./Donate.styles";
+import {screen} from "@testing-library/react";
 
 const Donate: React.FC = () => {
   return (
