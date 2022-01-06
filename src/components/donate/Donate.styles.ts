@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import {Box, Button} from "@material-ui/core";
+import { colors } from "../../theme";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   background: #fafafa;
   min-height: 100vh;
-  
 `;
 
 export const TopSection = styled.div`
@@ -18,7 +18,7 @@ export const TopSection = styled.div`
 `;
 
 export const TopSectionBody = styled(Typography).attrs({variant: "body1"})`
-  color: rgba(0, 0, 0, 0.8);
+  color: ${colors.text};
   margin: 0px;
   padding: 0px;
 `;

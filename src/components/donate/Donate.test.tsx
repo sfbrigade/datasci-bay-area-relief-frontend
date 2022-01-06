@@ -15,12 +15,12 @@ describe("Donate page", () => {
   it("render links to donate websites", () => {
     render(<Donate />);
 
-    act(() => {
-      screen.getByText(/Donate to SF Bay Relief/).click();
-    });
-    expect(screen.getByText(/Donate to SF Bay Relief/)).toHaveTextContent(
-      "Donate to SF Bay Relief"
-    );
+    // act(() => {
+    //   screen.getByText(/Donate to SF Bay Relief/).click();
+    // });
+    // expect(screen.getByText(/Donate to SF Bay Relief/)).toHaveTextContent(
+    //   "Donate to SF Bay Relief"
+    // );
 
     act(() => {
       screen.getByText(/GoFundMe's/).click();

@@ -3,8 +3,11 @@ import "./assets/fonts/source-sans-pro.css";
 import {createMuiTheme} from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
 
+const defaultTheme = createMuiTheme();
+
 export const colors = {
   primaryRed: red[400],
+  text: defaultTheme.palette.text.primary,
 };
 
 export const theme = createMuiTheme({
@@ -18,7 +21,7 @@ export const theme = createMuiTheme({
     h3: {
       fontFamily: "Bree Serif",
       fontSize: "48px",
-      color: "rgba(0, 0, 0, 0.87)"
+      color: colors.text,
     },
     h4: {
       fontSize: "34px",
@@ -29,7 +32,7 @@ export const theme = createMuiTheme({
       fontFamily: "Source Sans Pro",
       fontSize: "24px",
       lineHeight: "30px",
-      color: "rgba(0, 0, 0, 0.87)"
+      color: colors.text,
     },
     h6: {
       fontFamily: "Source Sans Pro",
@@ -61,7 +64,8 @@ export const theme = createMuiTheme({
       lineHeight: "16px",
       letterSpacing: "1.5px",
       textTransform: "uppercase",
-      color: "rgba(0, 0, 0, 0.87)"
+      color: colors.text,
     }
   },
 });
+
