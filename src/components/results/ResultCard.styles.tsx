@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
+import { colors } from "../../theme";
 
 export const StyledCard = styled(Card)`
   position: relative;
@@ -79,5 +80,5 @@ export const Tag = styled(Typography).attrs({variant: 'body2' })`
   border-radius: 16px;
   padding-left: 12px;
   padding-right: 12px;
-  color: rgba(0, 0, 0, 0.87);
+  color: ${colors.text};
 `;

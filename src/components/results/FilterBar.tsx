@@ -9,6 +9,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import {filterGroups} from "./filterHelpers";
 import Button from "@material-ui/core/Button";
 import {GlobalStateContext} from "../../context/globalStates";
+import { colors } from "../../theme";
 
 const Sidebar = styled.div<{isFilterOpen: boolean}>`
   display: flex;
@@ -21,14 +22,14 @@ const Sidebar = styled.div<{isFilterOpen: boolean}>`
     font-size: 12px;
     line-height: 20px;
     letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.87);
+    color: ${colors.text};
   }
 
   & .MuiFormLabel-root {
     font-size: 13px;
     // line-height: 16px;
     letter-spacing: 0.25px;
-    color: rgba(0, 0, 0, 0.87);
+    color: ${colors.text};
     text-transform: uppercase;
     font-weight: 600;
   }
