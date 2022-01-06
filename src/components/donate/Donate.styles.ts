@@ -28,7 +28,6 @@ export const Section = styled.div`
   display: flex;
   flex-direction: row;
   text-align: center;
-  margin-top: 44px;
 `;
 
 export const SectionHeader = styled(Typography).attrs({variant: "h4"})`

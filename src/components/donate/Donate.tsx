@@ -38,9 +38,8 @@ const Donate: React.FC = () => {
         <iframe
           title="Donate"
           frameBorder="0"
-          height="1160px"
           name="donorbox"
-          scrolling="no"
+          scrolling="yes"
           seamless
           src="https://donorbox.org/embed/codeforamerica-brigades"
           style={{
@@ -48,7 +47,8 @@ const Donate: React.FC = () => {
             maxWidth: "426px",
             minWidth: "426px",
             maxHeight: "none !important",
-            height: "1160px",
+            height: "660px",
+            overflowY: "auto",
             width: "100%",
           }}
           data-donorbox-id="DonorBox-f1"
