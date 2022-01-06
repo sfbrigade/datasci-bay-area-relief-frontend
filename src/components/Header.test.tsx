@@ -4,7 +4,7 @@ import Header from "./Header";
 import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
 import {act} from "react-dom/test-utils";
-import {Result, CurrentFilters} from "../types";
+import {CurrentFilters} from "../types";
 import {setValues} from "../context/globalStates";
 
 describe("Header", () => {
