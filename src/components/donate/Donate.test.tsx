@@ -16,13 +16,6 @@ describe("Donate page", () => {
     render(<Donate />);
 
     act(() => {
-      screen.getByText(/Donate to SF Bay Relief/).click();
-    });
-    expect(screen.getByText(/Donate to SF Bay Relief/)).toHaveTextContent(
-      "Donate to SF Bay Relief"
-    );
-
-    act(() => {
       screen.getByText(/GoFundMe's/).click();
     });
     expect(screen.getByText(/GoFundMe's/)).toHaveTextContent(

@@ -10,11 +10,10 @@ export const idleForIO = async (): Promise<void> => {
 };
 
 export type RenderResultWithHistory = RenderResult & {history: MemoryHistory};
-
 type RenderWithRouterFunction = (
   ui: React.ReactElement,
   routeOptions?: {path?: string; history?: MemoryHistory}
-) => any;
+) => RenderResultWithHistory;
 
 export const renderWithRouter: RenderWithRouterFunction = (
   ui,

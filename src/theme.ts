@@ -50,6 +50,12 @@ export const theme = createMuiTheme({
       lineHeight: "20px",
       letterSpacing: "0.25px",
     },
+    subtitle1: {
+      color: "darkblue",
+      fontSize: "12px",
+      lineHeight: "12px",
+      letterSpacing: "0.25px",
+    },
     button: {
       fontWeight: 600,
     },
