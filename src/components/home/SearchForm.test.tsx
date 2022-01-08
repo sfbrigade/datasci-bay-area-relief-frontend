@@ -1,5 +1,5 @@
 import React from "react";
-import {fireEvent, render, screen} from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import {SearchForm} from "./SearchForm";
 import {idleForIO} from "../../testUtils";
 import {createMemoryHistory} from "history";
@@ -9,15 +9,18 @@ const history = createMemoryHistory();
 jest.spyOn(history, "push");
 
 describe('SearchForm selections', () => {
-  beforeEach(() => {
-    render(
-      <Router history={history}>
-        <Route component={SearchForm} />
-      </Router>
-    );
+  beforeEach(async () => {
+    await act(async () => {
+      await render(
+        <Router history={history}>
+          <Route component={SearchForm} />
+        </Router>
+      );
+    });
   });
 
-  it('renders a SearchForm with two default Anys', () => {
+  it('renders a SearchForm with two default Anys', async () => {
+    await idleForIO();
     const anyObject = screen.getAllByRole('option', {name: 'Any'});
     expect(anyObject).toHaveLength(2);
   });

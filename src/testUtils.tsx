@@ -5,7 +5,7 @@ import {Router} from "react-router-dom";
 
 export const idleForIO = async (): Promise<void> => {
   await act(async () => {
-    await new Promise((resolve) => setImmediate(resolve));
+    await new Promise((resolve) => resolve());
   });
 };
 

@@ -1,11 +1,18 @@
 import React from "react";
-import {render, screen} from "@testing-library/react";
+import {screen} from "@testing-library/react";
 import Donate from "./Donate";
 import {act} from "react-dom/test-utils";
+import {createMemoryHistory, MemoryHistory} from "history";
+import {renderWithRouter} from "../../testUtils";
 
 describe("Donate page", () => {
+  let history: MemoryHistory;
+  beforeEach(() => {
+    history = createMemoryHistory();
+    renderWithRouter(<Donate />, {path: "/donate", history});
+  });
+
   it("renders heading and description", () => {
-    render(<Donate />);
     expect(screen.getByRole("heading", {name: "Donate"})).toBeInTheDocument();
     expect(screen.getByText("General")).toBeInTheDocument();
     expect(screen.getByText("Black Lives Matter")).toBeInTheDocument();
@@ -13,8 +20,6 @@ describe("Donate page", () => {
   });
 
   it("render links to donate websites", () => {
-    render(<Donate />);
-
     act(() => {
       screen.getByText(/GoFundMe's/).click();
     });

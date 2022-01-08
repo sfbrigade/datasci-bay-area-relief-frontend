@@ -5,29 +5,27 @@ import {
   ImageSection,
   StyledLandingPageSky,
   StyledStoreFront,
-  SearchSection
- } from './Home.styles';
+  SearchSection,
+} from "./Home.styles";
 import {RouteComponentProps} from "react-router-dom";
 import Storefront from "../../assets/Storefront.png";
 import HowItWorks from "./HowItWorks";
 import AboutUs from "./AboutUs";
 import ThankYou from "./ThankYou";
-import {LocationState} from "../../types";
 import {SearchForm} from "./SearchForm";
 import Typography from "@material-ui/core/Typography";
+import { LocationState } from "../../types";
 
-const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
-  location,
-}) => {
+const Home: React.FC<RouteComponentProps> = ({location}) => {
   const aboutRef = useRef<HTMLDivElement>(null);
-
+  const customLocationState = location.state as LocationState;
   useEffect(() => {
-    if (location.state && location.state.toAbout && aboutRef.current) {
+    if (customLocationState?.toAbout === true){
       aboutRef.current.scrollIntoView({
         behavior: "smooth",
       });
     }
-    if (location.state && location.state.toHome) {
+    if (customLocationState?.toHome === true) {
       window.scrollTo(0, 0);
     }
   }, [location]);

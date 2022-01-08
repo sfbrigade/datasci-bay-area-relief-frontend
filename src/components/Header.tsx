@@ -83,7 +83,7 @@ const Header: React.FC = () => {
     };
   }, []);
 
-  let Container: StyledComponent<"header", React.FC, {}, never>;
+  let Container: StyledComponent<"header", React.FC>;
 
   // Change navbar layout when in home page and results page. Home page is clear and results page navbar is white
   if (location.pathname === "/results" || location.pathname === "/donate") {

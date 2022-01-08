@@ -1,5 +1,5 @@
 import React, {useState, useMemo, ChangeEvent} from "react";
-import {fireEvent, render, screen, within} from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import {createMemoryHistory} from "history";
 import Results from "./Results";
 import {Router} from "react-router-dom";
@@ -77,7 +77,9 @@ describe("Results", () => {
       const history = createMemoryHistory();
 
       history.push("/?orgType=nonProfit&county=sanMateoCounty");
-      render(<ResultWrapper history={history} initialResults={results}/>);
+      await act(async () => {
+        await render(<ResultWrapper history={history} initialResults={results}/>);
+      });
 
       const nonProfitCheckbox = screen.getByLabelText(
         /non-profit/i
@@ -175,6 +177,7 @@ describe("Results", () => {
 
       const history = createMemoryHistory();
       render(<ResultWrapper history={history} initialResults={clearingAllFiltersResults}/>);
+      await idleForIO();
 
       const sfCountyFilter = screen.getByLabelText(
         /san francisco/i

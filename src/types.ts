@@ -1,7 +1,5 @@
 import { MemoryHistory } from "history/createMemoryHistory";
-import { ChangeEvent } from "react";
-import { SetStateAction } from "react";
-import { Dispatch } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 // export enum County {
 //   SanFrancisco = "San Francisco",
@@ -148,7 +146,7 @@ export interface ResultResponse {
 }
 
 export interface ResultWrapperType {
-  history: MemoryHistory<{}>;
+  history: MemoryHistory;
   initialResults: Result[];
 }
 

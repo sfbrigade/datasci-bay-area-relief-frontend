@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/camelcase: 0 */
 import axios from "axios";
 import {getResults} from "./axiosApi";
 import {ReliefType, Result, ResultResponse, SupportType} from "../types";

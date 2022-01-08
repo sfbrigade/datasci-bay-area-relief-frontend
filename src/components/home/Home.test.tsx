@@ -6,6 +6,7 @@ import {createMemoryHistory} from "history";
 import { setValues } from "../../context/globalStates";
 
 const history = createMemoryHistory();
+history.location.state = {toAbout: false, toHome: false};
 jest.spyOn(history, "push");
 
 beforeEach(() => {
