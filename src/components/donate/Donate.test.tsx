@@ -20,19 +20,19 @@ describe("Donate page", () => {
   });
 
   it("render links to donate websites", () => {
-    act(() => {
-      screen.getByText(/GoFundMe's/).click();
-    });
-    expect(screen.getByText(/GoFundMe's/)).toHaveTextContent(
-      "GoFundMe's in the Bay area"
-    );
+    // act(() => {
+    //   screen.getByText(/GoFundMe's/).click();
+    // });
+    // expect(screen.getByText(/GoFundMe's/)).toHaveTextContent(
+    //   "GoFundMe's in the Bay area"
+    // );
 
-    act(() => {
-      screen.getByText(/Redwood City/).click();
-    });
-    expect(screen.getByText(/Redwood City/)).toHaveTextContent(
-      "Redwood City Small Business Relief Fund"
-    );
+    // act(() => {
+    //   screen.getByText(/Redwood City/).click();
+    // });
+    // expect(screen.getByText(/Redwood City/)).toHaveTextContent(
+    //   "Redwood City Small Business Relief Fund"
+    // );
 
     act(() => {
       screen.getByText(/UC/).click();
