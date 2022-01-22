@@ -1,16 +1,16 @@
 import "./assets/fonts/bree-serif.css";
 import "./assets/fonts/source-sans-pro.css";
-import {createMuiTheme} from "@material-ui/core/styles";
+import {createTheme} from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
 
-const defaultTheme = createMuiTheme();
+const defaultTheme = createTheme();
 
 export const colors = {
   primaryRed: red[400],
   text: defaultTheme.palette.text.primary,
 };
 
-export const theme = createMuiTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       main: colors.primaryRed,
