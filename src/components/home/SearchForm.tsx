@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 import Select from "@material-ui/core/Select";
 import {County, OrgType} from "../../types";
@@ -14,20 +15,31 @@ const SearchFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 14px;
-  border: 0;
+  margin-top: 0.5rem;
+
+  @media(min-width: 40rem){
+    margin-top: 1rem;
+  }
 `;
 
 const SearchDescription = styled.div`
-  width: 400px;
   z-index: 10;
-  margin-bottom: 27px;
+  margin-bottom: 1rem;
+  width: 90%;
+
+  @media(min-width: 40rem){
+    width: 22rem;
+  }
 `;
 
 const SearchFormFields = styled.div`
   display: flex;
   flex-direction: column;
-  width: 328px;
+  width: 90%;
+ 
+  @media(min-width: 40rem){
+    width: 18rem;
+  }
 `;
 
 const StyledSelect = styled(Select)`

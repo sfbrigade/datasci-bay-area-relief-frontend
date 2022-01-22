@@ -2,40 +2,69 @@ import styled from "styled-components";
 import {ReactComponent as LandingPageSky} from "../../assets/LandingPageSky.svg";
 
 export const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+
 `;
 
 export const SectionContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
+
+@media(min-width: 40rem){
+    display: flex;
+  }
 `;
 
 export const ImageSection = styled.div`
-  flex: 1 1 0;
+  width: 100%;
+
+  @media(min-width: 40rem){
+    flex: 0.5;
+  }
+`;
+
+export const ImageContainer = styled.div`
+  width: 50vh;
+  height: 50vh;
+  position: relative;
+ 
+  @media(min-width: 40rem){
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const StyledLandingPageSky = styled(LandingPageSky)`
-  position: absolute;
-  left: 0px;
+  width: 100%;
+  height: 100%;
+
+  @media(min-width: 40rem){
+    width: 98%;
+  }
+`;
+
+export const ImageStoreContainer = styled.div`
+  width: 100%;
 `;
 
 export const StyledStoreFront = styled.img`
   position: absolute;
-  width: 800px;
-  height: 800px;
-  left: 0px;
-  top: 150px;
+  top: 1.5rem;
+  left:0;
+  width: 100%;
+  height: 100%;
+
+  @media(min-width: 40rem){
+    width: 100%;
+    top: 4rem;
+  }
 `;
 
 export const SearchSection = styled.div`
-  flex: 1 1 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  z-index: 1;
+  margin: 1rem 0;
+
+  @media(min-width: 40rem){
+    flex: 0.5;
+    justify-content:center;
+  }
 `;
