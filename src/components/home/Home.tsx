@@ -6,9 +6,8 @@ import {
   ImageSection,
   StyledLandingPageSky,
   StyledStoreFront,
-  SearchSection,
-  ImageContainer,
-  ImageStoreContainer
+  SearchSection
+  
  } from './Home.styles';
 import {RouteComponentProps} from "react-router-dom";
 import Storefront from "../../assets/Storefront.png";
@@ -39,16 +38,11 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
     <PageContainer>
       <SectionContainer>
         <ImageSection>
-          <ImageContainer>
-          <StyledLandingPageSky title="Landing page sky" />
-          <ImageStoreContainer>
+          <StyledLandingPageSky title="Landing page sky" /> 
           <StyledStoreFront src={Storefront} alt="Storefront" />
-
-          </ImageStoreContainer>
-          </ImageContainer>
         </ImageSection>
         <SearchSection>
-          <Typography variant="h2">Find Loans & Grants</Typography>
+          <Typography variant="h3">Find Loans & Grants</Typography>
           <SearchForm />
         </SearchSection>
       </SectionContainer>

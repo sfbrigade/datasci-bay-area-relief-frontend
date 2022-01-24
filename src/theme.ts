@@ -18,21 +18,13 @@ export const theme = createMuiTheme({
   },
   typography: {
     fontFamily: "Source Sans Pro",
-    h2: {
-      fontFamily: "Bree Serif",
-      fontSize: "36px",
-      color: colors.text,
-      ['@media (min-width: 40rem)']:{
-        fontSize: "38px"
-      }
-    },
-
+  
     h3: {
       fontFamily: "Bree Serif",
-      fontSize: "36px",
+      fontSize: "10vw",
       color: colors.text,
-      ['@media (min-width: 40rem)']:{
-        fontSize: "48px"
+      ['@media (min-width: 30rem)']:{
+        fontSize: "4.1vw"
       }
     },
     h4: {
@@ -53,12 +45,12 @@ export const theme = createMuiTheme({
       letterSpacing: "0.15px"
     },
     body1: {
-      fontSize: "16px",
-      lineHeight: "25px",
-      letterSpacing: "0.5px",
-      ['@media (min-width: 40rem)']:{
-        fontSize: "18px",
-        lineHeight: "28px"
+      fontSize: "5vw",
+      lineHeight: "5.3vw",
+      letterSpacing: "0.05vw",
+      ['@media (min-width: 30rem)']:{
+        fontSize: "1.5vw",
+        lineHeight: "2vw"
       }
     },
     body2: {
@@ -73,7 +65,7 @@ export const theme = createMuiTheme({
       letterSpacing: "0.25px",
     },
     button: {
-      fontWeight: 600,
+      fontWeight: 600
     },
     overline: {
       fontSize: "12px",
