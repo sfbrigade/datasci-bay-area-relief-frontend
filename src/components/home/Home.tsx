@@ -7,7 +7,6 @@ import {
   StyledLandingPageSky,
   StyledStoreFront,
   SearchSection
-  
  } from './Home.styles';
 import {RouteComponentProps} from "react-router-dom";
 import Storefront from "../../assets/Storefront.png";

@@ -44,7 +44,7 @@ export const StyledStoreFront = styled.img`
   position: absolute;
   width: 72vw;
   height: 72vw;
-  left: 0;
+  left: 0px;
   top: 13vw;
 
   @media(min-width: 30rem){
@@ -52,6 +52,7 @@ export const StyledStoreFront = styled.img`
     max-width: 500px;
     height: 43vw;
     max-height: 500px;
+    top: 8vw;
   }
 `;
 
