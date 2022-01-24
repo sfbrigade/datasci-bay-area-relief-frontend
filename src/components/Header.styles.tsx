@@ -8,7 +8,7 @@ export const WhiteContainer = styled.header`
   top: 0;
   right:0;
   width: 100%;
-  height: 20vw;
+  height: 15vw;
   z-index: 100;
   display: flex;
   position: fixed;
@@ -17,6 +17,10 @@ export const WhiteContainer = styled.header`
   background-color: white;
   justify-content: space-between;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.14);
+  
+  @media(min-width: 30rem){
+    height: 8.5vw;
+  }
   
 `;
 export const TransparentContainer = styled.header`
