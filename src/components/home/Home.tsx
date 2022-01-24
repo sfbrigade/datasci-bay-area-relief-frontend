@@ -1,3 +1,4 @@
+
 import React, {useEffect, useRef} from "react";
 import {
   PageContainer,
@@ -36,7 +37,7 @@ const Home: React.FC<RouteComponentProps<{}, {}, LocationState>> = ({
     <PageContainer>
       <SectionContainer>
         <ImageSection>
-          <StyledLandingPageSky title="Landing page sky" />
+          <StyledLandingPageSky title="Landing page sky" /> 
           <StyledStoreFront src={Storefront} alt="Storefront" />
         </ImageSection>
         <SearchSection>
