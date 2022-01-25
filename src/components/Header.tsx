@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {StyledComponent} from "styled-components";
 import {Link, useLocation} from "react-router-dom";
-import {ReactComponent as Logo} from "../assets/Logo.svg";
 
 import {FilterBar} from "./results/FilterBar";
 
@@ -17,6 +16,7 @@ import {
   FilterContainer,
   HiddenContainer,
   LogoWrapper,
+  StyledLogo,
   Menu,
   MenuItem,
   SmallMenuContainer,
@@ -161,7 +161,7 @@ const Header: React.FC = () => {
   return (
     <Container>
       <LogoWrapper>
-        <Logo role="logo" />
+        <StyledLogo role="logo" />
       </LogoWrapper>
       {isResultsPage && (
         <FilterContainer>

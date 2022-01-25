@@ -1,3 +1,4 @@
+
 import styled from "styled-components";
 import Select from "@material-ui/core/Select";
 import {County, OrgType} from "../../types";
@@ -14,20 +15,28 @@ const SearchFormContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 14px;
-  border: 0;
+  margin-top: 1.4vw;
 `;
 
 const SearchDescription = styled.div`
-  width: 400px;
   z-index: 10;
-  margin-bottom: 27px;
+  margin-bottom: 7vw;
+  width: 90%;
+
+  @media(min-width: 30rem){
+    width: 33vw;
+    margin-bottom: 1.5vw;
+  }
 `;
 
 const SearchFormFields = styled.div`
   display: flex;
   flex-direction: column;
-  width: 328px;
+  width: 80%;
+ 
+  @media(min-width: 30rem){
+    width: 28vw;
+  }
 `;
 
 const StyledSelect = styled(Select)`
@@ -36,9 +45,16 @@ const StyledSelect = styled(Select)`
 
 const SearchButton = styled(Button)`
   && {
-    width: 97px;
-    height: 36px;
+    width: 20vw;
+    height: 10.6vw;
     border-radius: 200px;
+    font-size: 5vw;
+
+    @media(min-width: 30rem){
+      width: 8.9vw;
+      height: 3.6vw;
+      font-size: 1.3vw;
+    }
 
     :disabled {
       background-color: ${colors.primaryRed};
@@ -49,9 +65,16 @@ const SearchButton = styled(Button)`
 `;
 const DonateButton = styled(Button)`
   && {
-    margin-top: 13px;
-    padding: 13px;
-    border-radius: 4px;
+    margin-top: 2vw;
+    padding: 2vw;
+    border-radius: 0.4vw;
+    font-size: 6vw;
+
+    @media(min-width: 30rem){
+      margin-top: 1.2vw;
+      padding: 1.2vw;
+      font-size: 1.3vw;
+    }
   }
 `;
 
