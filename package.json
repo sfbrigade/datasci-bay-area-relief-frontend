@@ -33,7 +33,7 @@
     "test": "TZ=UTC react-scripts test",
     "updateSnapshots": "CI=true TZ=UTC react-scripts test --env=jsdom --updateSnapshot",
     "eject": "react-scripts eject",
-    "lint": "eslint --max-warnings=0 './src/**/*.{ts,tsx}'",
+    "lint": "eslint --max-warnings=0 --ext .ts,.tsx src",
     "allTests": "CI=true TZ=UTC react-scripts test --env=jsdom",
     "prepare": "husky install"
   },
