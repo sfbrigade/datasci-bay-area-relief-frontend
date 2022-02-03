@@ -2,6 +2,7 @@ import "./assets/fonts/bree-serif.css";
 import "./assets/fonts/source-sans-pro.css";
 import {createMuiTheme} from "@material-ui/core/styles";
 import red from "@material-ui/core/colors/red";
+import { CenterFocusStrong } from "@material-ui/icons";
 
 const defaultTheme = createMuiTheme();
 
@@ -18,10 +19,15 @@ export const theme = createMuiTheme({
   },
   typography: {
     fontFamily: "Source Sans Pro",
+  
     h3: {
       fontFamily: "Bree Serif",
-      fontSize: "48px",
+      fontSize: "10vw",
+      textAlign: "center",
       color: colors.text,
+      ['@media (min-width: 30rem)']:{
+        fontSize: "4.1vw"
+      }
     },
     h4: {
       fontSize: "34px",
@@ -30,9 +36,14 @@ export const theme = createMuiTheme({
     },
     h5: {
       fontFamily: "Source Sans Pro",
-      fontSize: "24px",
-      lineHeight: "30px",
+      fontSize: "8vw",
+      lineHeight: "8vw",
       color: colors.text,
+      ['@media (min-width: 30rem)']:{
+        fontSize: "2.2vw",
+        lineHeight: "2.7vw"
+      }
+
     },
     h6: {
       fontFamily: "Source Sans Pro",
@@ -41,14 +52,13 @@ export const theme = createMuiTheme({
       letterSpacing: "0.15px"
     },
     body1: {
-      fontSize: "18px",
-      lineHeight: "28px",
-      letterSpacing: "0.5px",
-    },
-    body2: {
-      fontSize: "12px",
-      lineHeight: "20px",
-      letterSpacing: "0.25px",
+      
+      //lineHeight: "7.1vw",
+      letterSpacing: "0.05vw",
+      ['@media (min-width: 30rem)']:{
+        
+        //lineHeight: "2vw"
+      }
     },
     subtitle1: {
       color: "darkblue",
@@ -57,7 +67,7 @@ export const theme = createMuiTheme({
       letterSpacing: "0.25px",
     },
     button: {
-      fontWeight: 600,
+      fontWeight: 600
     },
     overline: {
       fontSize: "12px",

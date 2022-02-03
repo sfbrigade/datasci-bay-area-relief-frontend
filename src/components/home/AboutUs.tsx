@@ -5,29 +5,50 @@ import Typography from "@material-ui/core/Typography";
 import ImageAvatars from "./ImageAvatars";
 
 const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
   position: relative;
+
+  @media(min-width: 30rem){
+    display: flex;
+    padding: 10vw 0;
+  }
 `;
 
 const StyledYellowHalfCircle = styled(YellowHalfCircle)`
-  position: absolute;
-  left: 0px;
-  top: 50%;
-  z-index: 0;
+ display: none;
+
+  @media(min-width: 30rem){
+    position: absolute;
+    left: 0px;
+    top: 15vw;
+    width: 10vw;
+    z-index: 0;
+
+  }
 `;
 
 const AboutDescription = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  text-align: left;
-  width: 433px;
   z-index: 1;
-  margin-left: 12%;
+  padding: 0 4vw;
+
+  @media(min-width: 30rem){ 
+    width: 40%;
+    text-align: left;
+    margin-left: 12%;
+  }
+}
 `;
+
+const Team = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 7vw;
+  
+  @media(min-width: 30rem){
+    width: 40%;   
+    margin-top: 0;  
+  }
+`
+
 
 const AboutUs: React.FC = () => {
   return (
@@ -36,8 +57,7 @@ const AboutUs: React.FC = () => {
       <AboutDescription>
         <Typography variant="h3">About</Typography>
         <br />
-        <br />
-        <Typography>
+        <Typography variant="body1">
           We are a group of volunteers invested in working together to improve
           the City and County of San Francisco, often using technology to
           support our efforts. By connecting people, organizations, resources,
@@ -50,9 +70,13 @@ const AboutUs: React.FC = () => {
           needs, as well as to help the City and other brigades with their
           data science needs whenever appropriate.
         </Typography>
-        <ImageAvatars />
-
+        
       </AboutDescription>
+        <Team>
+          <ImageAvatars />
+        </Team>
+      
+
     </Container>
   );
 };

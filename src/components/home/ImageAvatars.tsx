@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   large: {
-    width: theme.spacing(15),
-    height: theme.spacing(15),
+    width: theme.spacing(10),
+    height: theme.spacing(10),
   },
 }));
 
@@ -25,7 +25,7 @@ export default function ImageAvatars() {
   const classes = useStyles();
 
   return (
-    <Box component="section" mt={8} mb={8}>
+    <Box component="section" mt={0} mb={0}>
       <Typography variant="h3">Meet the Team</Typography>
     <div className={classes.root}>
       <Grid container spacing={2}>
