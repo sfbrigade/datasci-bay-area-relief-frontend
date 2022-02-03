@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {render} from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 import Header from "./Header";
 import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
@@ -28,50 +28,48 @@ describe("Header", () => {
     );
   };
 
+  beforeAll(() => {
+    render(<HeaderWrapper />);
+  });
+
   it("renders a logo", () => {
-    const {getByRole} = render(<HeaderWrapper />);
-    expect(getByRole("logo")).toBeVisible();
+    expect(screen.getByRole("logo")).toBeVisible();
   });
 
   it("renders a menu with 3 links", () => {
-    const {getByRole} = render(<HeaderWrapper />);
-    expect(getByRole("link", {name: "Home"})).toBeVisible();
-    expect(getByRole("link", {name: "Search"})).toBeVisible();
-    expect(getByRole("link", {name: "About"})).toBeVisible();
-    expect(getByRole("link", {name: "Donate"})).toBeVisible();
+    expect(screen.getByRole("link", {name: "Home"})).toBeVisible();
+    expect(screen.getByRole("link", {name: "Search"})).toBeVisible();
+    expect(screen.getByRole("link", {name: "About"})).toBeVisible();
+    expect(screen.getByRole("link", {name: "Donate"})).toBeVisible();
   });
 
   it("navigates to the home page", () => {
-    const {getByRole} = render(<HeaderWrapper />);
     act(() => {
-      getByRole("link", {name: "Home"}).click();
+      screen.getByRole("link", {name: "Home"}).click();
     });
 
     expect(history.location.pathname).toBe("/");
   });
 
   it("navigates to the portal", () => {
-    const {getByRole} = render(<HeaderWrapper />);
     act(() => {
-      getByRole("link", {name: "Search"}).click();
+      screen.getByRole("link", {name: "Search"}).click();
     });
 
     expect(history.location.pathname).toBe("/results");
   });
 
   it("navigates to the about page", () => {
-    const {getByRole} = render(<HeaderWrapper />);
     act(() => {
-      getByRole("link", {name: "About"}).click();
+      screen.getByRole("link", {name: "About"}).click();
     });
 
     expect(history.location.hash).toBe("#about");
   });
 
   it("navigates to the donate page", () => {
-    const {getByRole} = render(<HeaderWrapper />);
     act(() => {
-      getByRole("link", {name: "Donate"}).click();
+      screen.getByRole("link", {name: "Donate"}).click();
     });
     expect(history.location.pathname).toBe("/donate");
   });
