@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {render, screen} from "@testing-library/react";
+import {render, screen, prettyDOM} from "@testing-library/react";
 import Header from "./Header";
 import {Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
@@ -28,11 +28,11 @@ describe("Header", () => {
     );
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     render(<HeaderWrapper />);
   });
 
-  it("renders a logo", () => {
+  it("renders a logo", () => {        
     expect(screen.getByRole("logo")).toBeVisible();
   });
 
