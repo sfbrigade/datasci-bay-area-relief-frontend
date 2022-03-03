@@ -19,7 +19,7 @@
     "jest-location-mock": "^1.0.9",
     "moment": "^2.27.0",
     "prettier": "^2.3.2",
-    "react": "^16.8.0",
+    "react": "^17.0.2",
     "react-dom": "^16.13.1",
     "react-is": "16.8.0",
     "react-router-dom": "^5.2.0",
