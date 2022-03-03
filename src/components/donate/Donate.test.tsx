@@ -1,15 +1,11 @@
 import React from "react";
-import {screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import Donate from "./Donate";
 import {act} from "react-dom/test-utils";
-import {createMemoryHistory, MemoryHistory} from "history";
-import {renderWithRouter} from "../../testUtils";
 
 describe("Donate page", () => {
-  let history: MemoryHistory;
   beforeEach(() => {
-    history = createMemoryHistory();
-    renderWithRouter(<Donate />, {path: "/donate", history});
+    render(<Donate />);
   });
 
   it("renders heading and description", () => {
