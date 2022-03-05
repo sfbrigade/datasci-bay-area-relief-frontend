@@ -58,7 +58,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.19",
     "husky": "^7.0.0",
-    "react-test-renderer": "^16.8.6"
+    "react-test-renderer": "^17.0.1"
   },
   "engines": {
     "node": ">=v14.17.5"
