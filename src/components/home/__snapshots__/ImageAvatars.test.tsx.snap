@@ -1,74 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ImageAvatars> renders correctly 1`] = `
-<ForwardRef(StyledComponent)
+<Styled(MuiBox)
   component="section"
   mb={8}
   mt={8}
 >
-  <ForwardRef(WithStyles)
+  <WithStyles(ForwardRef(Typography))
     variant="h3"
   >
     Meet the Team
-  </ForwardRef(WithStyles)>
+  </WithStyles(ForwardRef(Typography))>
   <div
     className="makeStyles-root-1"
   >
-    <ForwardRef(WithStyles)
+    <WithStyles(ForwardRef(Grid))
       container={true}
       spacing={2}
     >
-      <ForwardRef(WithStyles)
+      <WithStyles(ForwardRef(Grid))
         item={true}
         xs={6}
       >
-        <ForwardRef(StyledComponent)
+        <Styled(MuiBox)
           alignItems="center"
           display="flex"
           flexDirection="column"
           justifyContent="center"
         >
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Avatar))
             alt="Rocio"
             className="makeStyles-large-2"
             src="rocio.jpg"
           />
-          <ForwardRef(WithStyles)>
+          <WithStyles(ForwardRef(Typography))>
             Rocio Ng
-          </ForwardRef(WithStyles)>
-          <ForwardRef(WithStyles)
+          </WithStyles(ForwardRef(Typography))>
+          <WithStyles(ForwardRef(Typography))
             variant="body2"
           >
             Project Lead
-          </ForwardRef(WithStyles)>
-        </ForwardRef(StyledComponent)>
-      </ForwardRef(WithStyles)>
-      <ForwardRef(WithStyles)
+          </WithStyles(ForwardRef(Typography))>
+        </Styled(MuiBox)>
+      </WithStyles(ForwardRef(Grid))>
+      <WithStyles(ForwardRef(Grid))
         item={true}
         xs={6}
       >
-        <ForwardRef(StyledComponent)
+        <Styled(MuiBox)
           alignItems="center"
           display="flex"
           flexDirection="column"
           justifyContent="center"
         >
-          <ForwardRef(WithStyles)
+          <WithStyles(ForwardRef(Avatar))
             alt="Emily"
             className="makeStyles-large-2"
             src="emily.jpg"
           />
-          <ForwardRef(WithStyles)>
+          <WithStyles(ForwardRef(Typography))>
             Emily Kasa
-          </ForwardRef(WithStyles)>
-          <ForwardRef(WithStyles)
+          </WithStyles(ForwardRef(Typography))>
+          <WithStyles(ForwardRef(Typography))
             variant="body2"
           >
             Data Jam Lead
-          </ForwardRef(WithStyles)>
-        </ForwardRef(StyledComponent)>
-      </ForwardRef(WithStyles)>
-    </ForwardRef(WithStyles)>
+          </WithStyles(ForwardRef(Typography))>
+        </Styled(MuiBox)>
+      </WithStyles(ForwardRef(Grid))>
+    </WithStyles(ForwardRef(Grid))>
   </div>
-</ForwardRef(StyledComponent)>
+</Styled(MuiBox)>
 `;

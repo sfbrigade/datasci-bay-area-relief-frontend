@@ -1,8 +1,9 @@
 import sortListBy from "./sortListBy";
 import {Result, ReliefType, SupportType, SortOptionType} from "../../types";
+import { makeResult } from "./testDataHelpers";
 
 describe("sortListBy", () => {
-  const result1 = {
+  const result1 = makeResult({
     id: 1,
     name: "result 1",
     supportType: SupportType.Loan,
@@ -11,8 +12,8 @@ describe("sortListBy", () => {
     maxAwardAmount: 10000000,
     reliefType: ReliefType.COVID,
     deadline: "Fri, 20 Sep 2019 00:00:00 GMT",
-  };
-  const result2 = {
+  });
+  const result2 = makeResult({
     id: 2,
     name: "result 2",
     supportType: SupportType.Grant,
@@ -21,8 +22,8 @@ describe("sortListBy", () => {
     maxAwardAmount: null,
     reliefType: ReliefType.ProtestDamage,
     deadline: "Thu, 16 Apr 2020 00:00:00 GMT",
-  };
-  const result3 = {
+  });
+  const result3 = makeResult({
     id: 3,
     name: "result 3",
     supportType: SupportType.Loan,
@@ -31,8 +32,8 @@ describe("sortListBy", () => {
     maxAwardAmount: 500,
     reliefType: ReliefType.Both,
     deadline: "Mon, 15 Jun 2020 00:00:00 GMT",
-  };
-  const result4 = {
+  });
+  const result4 = makeResult({
     id: 4,
     name: "result 4",
     supportType: SupportType.Loan,
@@ -41,8 +42,8 @@ describe("sortListBy", () => {
     maxAwardAmount: 20000,
     reliefType: ReliefType.COVID,
     deadline: null,
-  };
-  const result5 = {
+  });
+  const result5 = makeResult({
     id: 5,
     name: "result 5",
     supportType: SupportType.Loan,
@@ -51,8 +52,8 @@ describe("sortListBy", () => {
     maxAwardAmount: null,
     reliefType: ReliefType.COVID,
     deadline: null,
-  };
-  const result6 = {
+  });
+  const result6 = makeResult({
     id: 6,
     name: "result 6",
     supportType: SupportType.Loan,
@@ -61,7 +62,7 @@ describe("sortListBy", () => {
     maxAwardAmount: null,
     reliefType: ReliefType.COVID,
     deadline: null,
-  };
+  });
 
   const results: Result[] = [result1, result2, result3, result4, result5];
 
