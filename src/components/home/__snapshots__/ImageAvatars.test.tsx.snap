@@ -68,6 +68,31 @@ exports[`<ImageAvatars> renders correctly 1`] = `
           </WithStyles(ForwardRef(Typography))>
         </Styled(MuiBox)>
       </WithStyles(ForwardRef(Grid))>
+      <WithStyles(ForwardRef(Grid))
+        item={true}
+        xs={6}
+      >
+        <Styled(MuiBox)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <WithStyles(ForwardRef(Avatar))
+            alt="Alex"
+            className="makeStyles-large-2"
+            src="alexkerr.jpg"
+          />
+          <WithStyles(ForwardRef(Typography))>
+            Alex Kerr
+          </WithStyles(ForwardRef(Typography))>
+          <WithStyles(ForwardRef(Typography))
+            variant="body2"
+          >
+            Engineer
+          </WithStyles(ForwardRef(Typography))>
+        </Styled(MuiBox)>
+      </WithStyles(ForwardRef(Grid))>
     </WithStyles(ForwardRef(Grid))>
   </div>
 </Styled(MuiBox)>
