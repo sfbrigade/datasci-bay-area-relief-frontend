@@ -68,6 +68,31 @@ exports[`<ImageAvatars> renders correctly 1`] = `
           </ForwardRef(Typography)>
         </ForwardRef(Box)>
       </ForwardRef(Grid)>
+      <ForwardRef(Grid)
+        item={true}
+        xs={6}
+      >
+        <ForwardRef(Box)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <ForwardRef(Avatar)
+            alt="Alex"
+            className="ImageAvatars-large"
+            src="alexkerr.jpg"
+          />
+          <ForwardRef(Typography)>
+            Alex Kerr
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
+            variant="body2"
+          >
+            Engineer
+          </ForwardRef(Typography)>
+        </ForwardRef(Box)>
+      </ForwardRef(Grid)>
     </ForwardRef(Grid)>
   </div>
 </Styled(ForwardRef(Box))>

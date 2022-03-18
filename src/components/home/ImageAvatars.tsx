@@ -5,8 +5,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-import rocio from '../../assets/avatars/rocio.jpg';
-import emily from '../../assets/avatars/emily.jpg';
+import rocio from "../../assets/avatars/rocio.jpg";
+import emily from "../../assets/avatars/emily.jpg";
+import alex from "../../assets/avatars/alexkerr.jpg";
 
 const PREFIX = 'ImageAvatars';
 
@@ -39,30 +40,46 @@ export default function ImageAvatars() {
   return (
     <StyledBox component="section" mt={8} mb={8}>
       <Typography variant="h3">Meet the Team</Typography>
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Box display="flex"  
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center">
-        <Avatar alt="Rocio" src={rocio} className={classes.large} />
-        <Typography>Rocio Ng</Typography>
-        <Typography variant="body2">Project Lead</Typography>
-        </Box>
+      <div className={classes.root}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Avatar alt="Rocio" src={rocio} className={classes.large} />
+              <Typography>Rocio Ng</Typography>
+              <Typography variant="body2">Project Lead</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Avatar alt="Emily" src={emily} className={classes.large} />
+              <Typography>Emily Kasa</Typography>
+              <Typography variant="body2">Data Jam Lead</Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Avatar alt="Alex" src={alex} className={classes.large}/>
+              <Typography>Alex Kerr</Typography>
+              <Typography variant="body2">Engineer</Typography>
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-        <Box display="flex"  
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center">
-        <Avatar alt="Emily" src={emily} className={classes.large} />
-        <Typography>Emily Kasa</Typography>
-        <Typography  variant="body2">Data Jam Lead</Typography>
-        </Box>
-        </Grid>
-      </Grid>
-    </div>
+      </div>
     </StyledBox>
   );
 }
