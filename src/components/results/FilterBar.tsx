@@ -27,7 +27,7 @@ const Sidebar = styled.div<{isFilterOpen: boolean}>`
 
   & .MuiFormLabel-root {
     font-size: 13px;
-    // line-height: 16px;
+    line-height: 1rem;
     letter-spacing: 0.25px;
     color: ${colors.text};
     text-transform: uppercase;

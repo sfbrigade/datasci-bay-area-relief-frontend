@@ -87,6 +87,7 @@ const Results: React.FC = () => {
                       setSortOption(event.target.value as SortOptionType)
                     }
                     native
+                    variant="standard"
                     inputProps={{"aria-label": "sort by"}}
                   >
                     <option value={SortOptionType.InterestHighToLow}>
