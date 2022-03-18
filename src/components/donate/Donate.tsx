@@ -1,7 +1,7 @@
 import React from "react";
 
-import Link from "@material-ui/core/Link";
-import Typography from "@material-ui/core/Typography";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 
 import {
   Container,
@@ -59,52 +59,52 @@ const Donate: React.FC = () => {
         <SectionHeader>General</SectionHeader>
         <DonationList>
           <ListItem>
-            <Link variant="h6" href="https://www.gofundme.com/">
+            <Link variant="h6" href="https://www.gofundme.com/" underline="hover">
               GoFundMe&apos;s in the Bay area
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="https://www.redwoodcity.org/home">
+            <Link variant="h6" href="https://www.redwoodcity.org/home" underline="hover">
               Redwood City Small Business Relief Fund{" "}
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               UC Berkeley Law Pro Bono
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               COVID-19 Regional Response Fund
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Norcal Small Business Relief Fund
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               One Fair Wage{" "}
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Berkeley Relief Fund
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Berkeley Mutual Aid
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Save Our China Towns{" "}
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               MEDA (Mission Economic Development Agency)
             </Link>
           </ListItem>
@@ -118,22 +118,22 @@ const Donate: React.FC = () => {
         </SectionHeader>
         <DonationList>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               YouTube Ad Proceeds to #BLM
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Bay Area Organization of Black Owned Businesses (BAOBOB)
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Black Owned Restaurants
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Black Owned Business ReliefFund
             </Link>
           </ListItem>
@@ -144,27 +144,27 @@ const Donate: React.FC = () => {
         <SectionHeader>LGBT</SectionHeader>
         <DonationList>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Silicon Valley Central Chamber of Commerce
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               SF Gov
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               Queer: Way Out
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               James Beard Foundation
             </Link>
           </ListItem>
           <ListItem>
-            <Link variant="h6" href="#">
+            <Link variant="h6" href="#" underline="hover">
               James Beard Webinars
             </Link>
           </ListItem>

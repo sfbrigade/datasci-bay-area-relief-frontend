@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Typography from "@material-ui/core/Typography";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { colors } from "../../theme";
 
 export const ResultsPage = styled.div`

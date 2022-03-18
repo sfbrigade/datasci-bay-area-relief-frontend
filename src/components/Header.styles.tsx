@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import {Typography} from "@material-ui/core";
+import {Typography} from "@mui/material";
 import {colors} from "../theme";
 
 export const WhiteContainer = styled.header`

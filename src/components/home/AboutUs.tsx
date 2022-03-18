@@ -1,7 +1,7 @@
 import React from "react";
 import {ReactComponent as YellowHalfCircle} from "../../assets/YellowHalfCircle.svg";
 import styled from "styled-components";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import ImageAvatars from "./ImageAvatars";
 
 const Container = styled.div`

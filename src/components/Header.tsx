@@ -5,12 +5,12 @@ import {ReactComponent as Logo} from "../assets/Logo.svg";
 
 import {FilterBar} from "./results/FilterBar";
 
-import MatMenu from "@material-ui/core/Menu";
-import MatMenuItem from "@material-ui/core/MenuItem";
-import MatButton from "@material-ui/core/Button";
-import Button from "@material-ui/core/Button";
-import MenuIcon from "@material-ui/icons/Menu";
-import Drawer from "@material-ui/core/Drawer";
+import MatMenu from "@mui/material/Menu";
+import MatMenuItem from "@mui/material/MenuItem";
+import MatButton from "@mui/material/Button";
+import Button from "@mui/material/Button";
+import MenuIcon from "@mui/icons-material/Menu";
+import Drawer from "@mui/material/Drawer";
 import {GlobalStateContext} from "../context/globalStates";
 import {grabCurrentFiltersFromURLParams} from "../util/historyHelper";
 import {

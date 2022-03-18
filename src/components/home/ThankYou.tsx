@@ -6,7 +6,7 @@ import {ReactComponent as TealSquare} from "../../assets/TealSquare.svg";
 import CodeForSFLogo from "../../assets/CodeForSFLogo.png";
 import GitHubLogo from "../../assets/GitHubLogo.png";
 import ReactLogo from "../../assets/ReactLogo.png";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 
 
 /* 

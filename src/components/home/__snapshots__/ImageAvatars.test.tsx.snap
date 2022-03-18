@@ -1,74 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ImageAvatars> renders correctly 1`] = `
-<Styled(MuiBox)
+<Styled(ForwardRef(Box))
   component="section"
   mb={8}
   mt={8}
 >
-  <WithStyles(ForwardRef(Typography))
+  <ForwardRef(Typography)
     variant="h3"
   >
     Meet the Team
-  </WithStyles(ForwardRef(Typography))>
+  </ForwardRef(Typography)>
   <div
-    className="makeStyles-root-1"
+    className="ImageAvatars-root"
   >
-    <WithStyles(ForwardRef(Grid))
+    <ForwardRef(Grid)
       container={true}
       spacing={2}
     >
-      <WithStyles(ForwardRef(Grid))
+      <ForwardRef(Grid)
         item={true}
         xs={6}
       >
-        <Styled(MuiBox)
+        <ForwardRef(Box)
           alignItems="center"
           display="flex"
           flexDirection="column"
           justifyContent="center"
         >
-          <WithStyles(ForwardRef(Avatar))
+          <ForwardRef(Avatar)
             alt="Rocio"
-            className="makeStyles-large-2"
+            className="ImageAvatars-large"
             src="rocio.jpg"
           />
-          <WithStyles(ForwardRef(Typography))>
+          <ForwardRef(Typography)>
             Rocio Ng
-          </WithStyles(ForwardRef(Typography))>
-          <WithStyles(ForwardRef(Typography))
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
             variant="body2"
           >
             Project Lead
-          </WithStyles(ForwardRef(Typography))>
-        </Styled(MuiBox)>
-      </WithStyles(ForwardRef(Grid))>
-      <WithStyles(ForwardRef(Grid))
+          </ForwardRef(Typography)>
+        </ForwardRef(Box)>
+      </ForwardRef(Grid)>
+      <ForwardRef(Grid)
         item={true}
         xs={6}
       >
-        <Styled(MuiBox)
+        <ForwardRef(Box)
           alignItems="center"
           display="flex"
           flexDirection="column"
           justifyContent="center"
         >
-          <WithStyles(ForwardRef(Avatar))
+          <ForwardRef(Avatar)
             alt="Emily"
-            className="makeStyles-large-2"
+            className="ImageAvatars-large"
             src="emily.jpg"
           />
-          <WithStyles(ForwardRef(Typography))>
+          <ForwardRef(Typography)>
             Emily Kasa
-          </WithStyles(ForwardRef(Typography))>
-          <WithStyles(ForwardRef(Typography))
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
             variant="body2"
           >
             Data Jam Lead
-          </WithStyles(ForwardRef(Typography))>
-        </Styled(MuiBox)>
-      </WithStyles(ForwardRef(Grid))>
-    </WithStyles(ForwardRef(Grid))>
+          </ForwardRef(Typography)>
+        </ForwardRef(Box)>
+      </ForwardRef(Grid)>
+    </ForwardRef(Grid)>
   </div>
-</Styled(MuiBox)>
+</Styled(ForwardRef(Box))>
 `;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Typography from "@material-ui/core/Typography";
-import {Box, Button} from "@material-ui/core";
+import Typography from "@mui/material/Typography";
+import {Box, Button} from "@mui/material";
 import { colors } from "../../theme";
 
 export const Container = styled.div`

@@ -13,7 +13,7 @@ import HowItWorks from "./HowItWorks";
 import AboutUs from "./AboutUs";
 import ThankYou from "./ThankYou";
 import {SearchForm} from "./SearchForm";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import { LocationState } from "../../types";
 
 const Home: React.FC<RouteComponentProps> = ({location}) => {
