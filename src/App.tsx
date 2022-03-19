@@ -2,13 +2,12 @@ import React, {useEffect, useState, useMemo, ChangeEvent} from "react";
 import "./App.css";
 import {Router, Route, Switch} from "react-router-dom";
 import {createBrowserHistory} from "history";
-import "@mui/styles";
 
 import Home from "./components/home/Home";
 import Header from "./components/Header";
 import Results from "./components/results/Results";
 import Donate from "./components/donate/Donate";
-import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import {theme} from "./theme";
 import {getResults} from "./api/axiosApi";
 import {applyFilters, applyFilterChanges} from "./components/results/filterHelpers";
@@ -16,16 +15,7 @@ import {CurrentFilters, GlobalStateContextType, Result} from "./types";
 import {setValues} from "./context/globalStates";
 
 
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
-
-
-
 const history = createBrowserHistory();
-
 
 const App = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
