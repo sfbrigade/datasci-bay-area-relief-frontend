@@ -98,7 +98,7 @@ export const SearchForm = () => {
       </SearchDescription>
 
       <SearchFormFields>
-        <FormControl variant="outlined">
+        <FormControl>
           <InputLabel htmlFor="org-type-select">I am a...</InputLabel>
           <StyledSelect
             native
@@ -116,7 +116,7 @@ export const SearchForm = () => {
             <option value={OrgType.NonProfit}>Non-profit</option>
           </StyledSelect>
         </FormControl>
-        <FormControl variant="outlined">
+        <FormControl>
           <InputLabel htmlFor="county-select">County</InputLabel>
           <StyledSelect
             native
