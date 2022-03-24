@@ -1,13 +1,13 @@
 import {CurrentFilters} from "../../types";
 import React, {useContext} from "react";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import styled from "styled-components";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import FormGroup from "@mui/material/FormGroup";
 import {filterGroups} from "./filterHelpers";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 import {GlobalStateContext} from "../../context/globalStates";
 import { colors } from "../../theme";
 
@@ -27,7 +27,7 @@ const Sidebar = styled.div<{isFilterOpen: boolean}>`
 
   & .MuiFormLabel-root {
     font-size: 13px;
-    // line-height: 16px;
+    line-height: 1rem;
     letter-spacing: 0.25px;
     color: ${colors.text};
     text-transform: uppercase;

@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import Select from "@material-ui/core/Select";
+import Select from "@mui/material/Select";
 import {County, OrgType} from "../../types";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Button from "@material-ui/core/Button";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Button from "@mui/material/Button";
 import React, {useState} from "react";
 import {getFilterNameFromGroupAndTargetName} from "../results/filterHelpers";
 import {useHistory} from "react-router-dom";
-import {Typography} from "@material-ui/core";
+import {Typography} from "@mui/material";
 import {colors} from "../../theme";
 
 const SearchFormContainer = styled.form`
@@ -98,7 +98,7 @@ export const SearchForm = () => {
       </SearchDescription>
 
       <SearchFormFields>
-        <FormControl variant="outlined">
+        <FormControl>
           <InputLabel htmlFor="org-type-select">I am a...</InputLabel>
           <StyledSelect
             native
@@ -116,7 +116,7 @@ export const SearchForm = () => {
             <option value={OrgType.NonProfit}>Non-profit</option>
           </StyledSelect>
         </FormControl>
-        <FormControl variant="outlined">
+        <FormControl>
           <InputLabel htmlFor="county-select">County</InputLabel>
           <StyledSelect
             native

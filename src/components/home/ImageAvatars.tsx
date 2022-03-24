@@ -1,32 +1,44 @@
-import React from "react";
-import {makeStyles} from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import React from 'react';
+import { styled } from '@mui/material/styles';
+import Avatar from '@mui/material/Avatar';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 import rocio from "../../assets/avatars/rocio.jpg";
 import emily from "../../assets/avatars/emily.jpg";
 import alex from "../../assets/avatars/alexkerr.jpg";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    "& > *": {
+const PREFIX = 'ImageAvatars';
+
+const classes = {
+  root: `${PREFIX}-root`,
+  large: `${PREFIX}-large`
+};
+
+const StyledBox = styled(Box)((
+  {
+    theme
+  }
+) => ({
+  [`& .${classes.root}`]: {
+    display: 'flex',
+    '& > *': {
       margin: theme.spacing(1),
     },
   },
-  large: {
+
+  [`& .${classes.large}`]: {
     width: theme.spacing(15),
     height: theme.spacing(15),
-  },
+  }
 }));
 
 export default function ImageAvatars() {
-  const classes = useStyles();
+
 
   return (
-    <Box component="section" mt={8} mb={8}>
+    <StyledBox component="section" mt={8} mb={8}>
       <Typography variant="h3">Meet the Team</Typography>
       <div className={classes.root}>
         <Grid container spacing={2}>
@@ -68,6 +80,6 @@ export default function ImageAvatars() {
           </Grid>
         </Grid>
       </div>
-    </Box>
+    </StyledBox>
   );
 }

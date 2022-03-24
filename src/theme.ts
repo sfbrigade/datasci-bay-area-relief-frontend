@@ -1,7 +1,7 @@
 import "./assets/fonts/bree-serif.css";
 import "./assets/fonts/source-sans-pro.css";
-import {createTheme} from "@material-ui/core/styles";
-import red from "@material-ui/core/colors/red";
+import { createTheme } from "@mui/material/styles";
+import { red } from '@mui/material/colors';
 
 const defaultTheme = createTheme();
 

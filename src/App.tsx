@@ -7,7 +7,7 @@ import Home from "./components/home/Home";
 import Header from "./components/Header";
 import Results from "./components/results/Results";
 import Donate from "./components/donate/Donate";
-import {ThemeProvider} from "@material-ui/core/styles";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import {theme} from "./theme";
 import {getResults} from "./api/axiosApi";
 import {applyFilters, applyFilterChanges} from "./components/results/filterHelpers";
@@ -16,7 +16,6 @@ import {setValues} from "./context/globalStates";
 
 
 const history = createBrowserHistory();
-
 
 const App = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -61,18 +60,20 @@ const App = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <Router history={history}>
-          <Header/>
-          <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/results" component={Results}/>
-            <Route exact path="/donate" component={Donate}/>
-          </Switch>
-        </Router>
-      </div>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <Router history={history}>
+            <Header/>
+            <Switch>
+              <Route exact path="/" component={Home}/>
+              <Route exact path="/results" component={Results}/>
+              <Route exact path="/donate" component={Donate}/>
+            </Switch>
+          </Router>
+        </div>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

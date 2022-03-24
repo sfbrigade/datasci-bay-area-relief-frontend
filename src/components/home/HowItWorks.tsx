@@ -4,7 +4,7 @@ import ScrapeWeb from "../../assets/ScrapeWeb.png";
 import Searching from "../../assets/Searching.png";
 import PaperAirplanes from "../../assets/PaperAirplanes.png";
 
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 
 const Container = styled.div`
   width: 100%;

@@ -3,7 +3,7 @@ import {Result, SortOptionType} from "../../types";
 import ResultCard from "./ResultCard";
 import sortListBy from "./sortListBy";
 import {FilterBar} from "./FilterBar";
-import Typography from "@material-ui/core/Typography";
+import Typography from "@mui/material/Typography";
 import {useLocation} from "react-router-dom";
 import Searching from "../../assets/Searching.png";
 import {GlobalStateContext} from "../../context/globalStates";
@@ -87,7 +87,7 @@ const Results: React.FC = () => {
                       setSortOption(event.target.value as SortOptionType)
                     }
                     native
-                    disableUnderline
+                    variant="standard"
                     inputProps={{"aria-label": "sort by"}}
                   >
                     <option value={SortOptionType.InterestHighToLow}>
