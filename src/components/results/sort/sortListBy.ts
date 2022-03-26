@@ -1,4 +1,4 @@
-import {SortOptionType, Result, SupportType} from "../../types";
+import {SortOptionType, Result, SupportType} from "../../../types";
 import Moment from "moment";
 
 /**
