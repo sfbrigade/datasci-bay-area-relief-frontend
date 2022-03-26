@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - This project has Husky configured to run tests prior to committing.
 - When pulling down the husky-enabled codebase for the first time, please do a `yarn install` to grab the husky dependency. 
 
+## Feature Flags
+```REACT_APP_SHOW_SORT={true|false}``` - Added to your local `.env` file will toggle whether or not the app shows the sort bar on the Results component. 
+
 ## Available Scripts
 
 In the project directory, you can run:
