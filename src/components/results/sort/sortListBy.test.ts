@@ -1,6 +1,6 @@
 import sortListBy from "./sortListBy";
-import {Result, ReliefType, SupportType, SortOptionType} from "../../types";
-import { makeResult } from "./testDataHelpers";
+import {Result, ReliefType, SupportType, SortOptionType} from "../../../types";
+import { makeResult } from "../testDataHelpers";
 
 describe("sortListBy", () => {
   const result1 = makeResult({
