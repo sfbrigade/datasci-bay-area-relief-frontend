@@ -5,7 +5,6 @@ import {createBrowserHistory} from "history";
 
 import Home from "./components/home/Home";
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Results from "./components/results/Results";
 import Donate from "./components/donate/Donate";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
@@ -72,7 +71,6 @@ const App = () => {
               <Route exact path="/donate" component={Donate}/>
             </Switch>
           </Router>
-          <Footer />
         </div>
       </ThemeProvider>
     </StyledEngineProvider>
