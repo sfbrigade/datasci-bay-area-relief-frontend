@@ -17,9 +17,9 @@ export const SortContainer = styled.div`
     font-family: Source Sans Pro;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
-    line-height: 20px;
-    letter-spacing: 0.25px;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.016rem;
   }
 `;
 
@@ -40,8 +40,8 @@ export const StyledSelect = styled(Select)`
     font-family: Source Sans Pro;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
-    line-height: 18px;
-    letter-spacing: 0.25px;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.016rem;
   }
 `;
