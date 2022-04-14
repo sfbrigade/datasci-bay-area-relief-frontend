@@ -81,6 +81,7 @@ export const FilterBar: React.FC = () => {
                       onChange={handleFilterChange(groupName as keyof CurrentFilters)}
                     />
                   }
+                  sx={{fontSize: '.75rem', height: '1.25rem', marginBottom: '0.3125rem', marginTop: '0.3125rem', whiteSpace: 'nowrap', lineHeight: '1'}}
                 />
               ))}
             </FormGroup>
