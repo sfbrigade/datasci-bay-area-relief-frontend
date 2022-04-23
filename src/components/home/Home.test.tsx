@@ -3,7 +3,7 @@ import {fireEvent, render, screen} from "@testing-library/react";
 import Home from "./Home";
 import {Route, Router} from "react-router-dom";
 import {createMemoryHistory} from "history";
-import { setValues } from "../../context/globalStates";
+import {setValues} from "../../context/globalStates";
 
 const history = createMemoryHistory();
 history.location.state = {toAbout: false, toHome: false};
@@ -19,7 +19,7 @@ beforeEach(() => {
     setInitialData: jest.fn(),
     initialData: [],
     filteredResults: [],
-    handleClearFilters: jest.fn()
+    handleClearFilters: jest.fn(),
   });
   render(
     <Router history={history}>
@@ -39,7 +39,7 @@ describe("Home", () => {
   });
 
   it("renders a landing page sky svg with a front house image", () => {
-    expect(screen.getByTitle("Landing page sky")).toBeVisible();
+    expect(screen.getByTestId("sky-asset")).toBeVisible();
     expect(screen.getByRole("img", {name: "Storefront"})).toBeVisible();
   });
 
@@ -132,8 +132,8 @@ describe("Home", () => {
     });
 
     it("renders a red triangle and teal square svg", () => {
-      expect(screen.getByTitle("Red triangle")).toBeVisible();
-      expect(screen.getByTitle("Teal square")).toBeVisible();
+      expect(screen.getByAltText("red triangle")).toBeVisible();
+      expect(screen.getByAltText("teal square")).toBeVisible();
     });
   });
 });

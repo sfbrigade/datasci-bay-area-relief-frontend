@@ -3,9 +3,9 @@ import {
   PageContainer,
   SectionContainer,
   ImageSection,
-  StyledLandingPageSky,
   StyledStoreFront,
   SearchSection,
+  LPImages,
 } from "./Home.styles";
 import {RouteComponentProps} from "react-router-dom";
 import Storefront from "../../assets/Storefront.png";
@@ -14,13 +14,13 @@ import AboutUs from "./AboutUs";
 import ThankYou from "./ThankYou";
 import {SearchForm} from "./SearchForm";
 import Typography from "@mui/material/Typography";
-import { LocationState } from "../../types";
+import {LocationState} from "../../types";
 
 const Home: React.FC<RouteComponentProps> = ({location}) => {
   const aboutRef = useRef<HTMLDivElement>(null);
   const customLocationState = location.state as LocationState;
   useEffect(() => {
-    if (customLocationState?.toAbout === true){
+    if (customLocationState?.toAbout === true) {
       aboutRef.current.scrollIntoView({
         behavior: "smooth",
       });
@@ -31,17 +31,16 @@ const Home: React.FC<RouteComponentProps> = ({location}) => {
   }, [location]);
 
   return (
-    <PageContainer>
-      <SectionContainer>
+    <PageContainer className="containerPage">
+      <LPImages data-testid="sky-asset">
         <ImageSection>
-          <StyledLandingPageSky title="Landing page sky" />
           <StyledStoreFront src={Storefront} alt="Storefront" />
         </ImageSection>
         <SearchSection>
           <Typography variant="h3">Find Loans & Grants</Typography>
           <SearchForm />
         </SearchSection>
-      </SectionContainer>
+      </LPImages>
       <SectionContainer>
         <HowItWorks />
       </SectionContainer>

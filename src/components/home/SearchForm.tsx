@@ -19,7 +19,7 @@ const SearchFormContainer = styled.form`
 `;
 
 const SearchDescription = styled.div`
-  width: 400px;
+  max-width: 65%;
   z-index: 10;
   margin-bottom: 27px;
 `;
@@ -63,23 +63,26 @@ export const SearchForm = () => {
 
   const goToResults = () => {
     let path = "/results";
-    if (orgType !== 'any') {
-      const orgTypeParam = getFilterNameFromGroupAndTargetName("orgType", orgType);
+    if (orgType !== "any") {
+      const orgTypeParam = getFilterNameFromGroupAndTargetName(
+        "orgType",
+        orgType
+      );
       //append orgType=blah
       path = `${path}?orgType=${orgTypeParam}&`;
     }
     //check if county is NOT any, append county
     const countyParam = getFilterNameFromGroupAndTargetName("county", county);
 
-    if(countyParam && countyParam !== 'any') {
-      if(orgType === 'any') {
+    if (countyParam && countyParam !== "any") {
+      if (orgType === "any") {
         path = `${path}?`;
       }
       path = `${path}county=${countyParam}`;
     }
     //if (path[path.length -1] === ? or === &, slice it out
-    if(path[path.length-1] === "?" || path[path.length-1] ==="&") {
-      path = path.slice(0, path.length-1);
+    if (path[path.length - 1] === "?" || path[path.length - 1] === "&") {
+      path = path.slice(0, path.length - 1);
     }
     history.push(path);
   };
@@ -108,7 +111,7 @@ export const SearchForm = () => {
             inputProps={{
               name: "org-type",
               id: "org-type-select",
-              "data-testid": "org-type-select"
+              "data-testid": "org-type-select",
             }}
           >
             <option value={OrgType.Any}>Any</option>

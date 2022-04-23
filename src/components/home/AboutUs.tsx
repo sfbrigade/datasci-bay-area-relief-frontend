@@ -27,12 +27,15 @@ const AboutDescription = styled.div`
   width: 433px;
   z-index: 1;
   margin-left: 12%;
+  @media (max-width: 752px) {
+    margin: 0 12% 0 12%;
+  }
 `;
 
 const AboutUs: React.FC = () => {
   return (
     <Container>
-      <StyledYellowHalfCircle title="Yellow half circle"/>  
+      <StyledYellowHalfCircle title="Yellow half circle" />
       <AboutDescription>
         <Typography variant="h3">About</Typography>
         <br />
@@ -47,11 +50,10 @@ const AboutUs: React.FC = () => {
         <Typography>
           The Data Science Working Group’s primary purpose is to efficiently
           assess, inspire, and tackle Code for San Francisco’s data science
-          needs, as well as to help the City and other brigades with their
-          data science needs whenever appropriate.
+          needs, as well as to help the City and other brigades with their data
+          science needs whenever appropriate.
         </Typography>
         <ImageAvatars />
-
       </AboutDescription>
     </Container>
   );
