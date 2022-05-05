@@ -8,11 +8,10 @@ import GitHubLogo from "../../assets/GitHubLogo.png";
 import ReactLogo from "../../assets/ReactLogo.png";
 import Typography from "@mui/material/Typography";
 
-
 /* 
   Note: "justify-content: space-around" causes html elements to overflow on left
         when screen view is mobile size
-*/  
+*/
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -41,17 +40,19 @@ const StyledTealSquare = styled(TealSquare)`
 
 const TextAndLogos = styled.div`
   display: flex;
-  flex-direction: column;;
-  text-align: left; 
+  flex-direction: column;
+  text-align: left;
   width: 433px;
   height: 430px;
-  @media screen and (max-width: 480px){
-      margin-left: 30%;
+  @media screen and (max-width: 480px) {
+    margin-left: 30%;
   }
 `;
 
 const ThankYouImg = styled.img`
   border-radius: 50%;
+  max-width: 100%;
+  height: auto;
 `;
 
 const Logos = styled.div`
@@ -75,25 +76,29 @@ const ReactLogoImg = styled.img`
   height: 65px;
 `;
 
-
 const ThankYou: React.FC = () => {
   return (
     <Container>
       <ImageSection>
-        <ThankYouImg alt="Thank you image" src={ThankImg} />
-        <StyledRedTriangle title="Red triangle"/>
-        <StyledTealSquare title="Teal square"/>
+        <ThankYouImg
+          alt="Thank you image"
+          src={ThankImg}
+          width="375"
+          height="375"
+        />
+        <StyledRedTriangle title="Red triangle" />
+        <StyledTealSquare title="Teal square" />
       </ImageSection>
 
       <TextAndLogos>
         <Typography variant="h3">Thank you</Typography>
-        <br/>
+        <br />
         <Typography>
           This project couldn’t have happened without the generosity of the
           friends and family of Sanat Moningi. Thank you also to our sponsors,
           who provided us the tools to make this portal possible.
         </Typography>
-        <br/>
+        <br />
         <Logos>
           <a href="https://www.codeforsanfrancisco.org/">
             <CodeForSFLogoImg alt="Code for SF Logo" src={CodeForSFLogo} />
