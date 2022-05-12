@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactComponent as LandingPageSky } from "../../assets/LandingPageSky.svg";
+import Sky from "../../assets/LandingPageSky.svg";
 
 export const PageContainer = styled.div`
   display: flex;
@@ -15,24 +15,27 @@ export const SectionContainer = styled.div`
 `;
 
 export const ImageSection = styled.div`
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
   flex: 1 1 0;
 `;
 
-export const StyledLandingPageSky = styled(LandingPageSky)`
-  position: absolute;
-  left: 0px;
+export const LPImages = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: url(${Sky}) no-repeat;
 `;
 
 export const StyledStoreFront = styled.img`
-  display: none;
   position: absolute;
   width: 800px;
   height: 800px;
   left: 0px;
   top: 150px;
-  @media (min-width: 768px) {
-    display: block;
-  }
 `;
 
 export const SearchSection = styled.div`
