@@ -41,9 +41,9 @@ const StyledTealSquare = styled(TealSquare)`
 
 const TextAndLogos = styled.div`
   display: flex;
-  flex-direction: column;;
+  flex-direction: column;
   text-align: left; 
-  width: 433px;
+  width: 433px; 
   height: 430px;
   @media screen and (max-width: 480px){
       margin-left: 30%;

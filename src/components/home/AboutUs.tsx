@@ -24,9 +24,10 @@ const AboutDescription = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   text-align: left;
-  width: 433px;
+  width: auto;
   z-index: 1;
   margin-left: 12%;
+  margin-right: 12%;
 `;
 
 const AboutUs: React.FC = () => {
@@ -36,7 +37,7 @@ const AboutUs: React.FC = () => {
       <AboutDescription>
         <Typography variant="h3">About</Typography>
         <br />
-        <br />
+        <br />        
         <Typography>
           We are a group of volunteers invested in working together to improve
           the City and County of San Francisco, often using technology to
@@ -51,7 +52,6 @@ const AboutUs: React.FC = () => {
           data science needs whenever appropriate.
         </Typography>
         <ImageAvatars />
-
       </AboutDescription>
     </Container>
   );
