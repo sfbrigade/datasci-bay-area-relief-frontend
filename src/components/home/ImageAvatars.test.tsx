@@ -33,43 +33,44 @@ describe("<ImageAvatars>", () => {
     expect(screen.getByText("Engineer Lead")).toBeVisible();
   });
 
+  it('displays 5 engineer labels', () => {
+    render(<ImageAvatars />);
+    const results = screen.getAllByText("Engineer");
+    expect(results.length).toEqual(5);
+  });
+
   it("displays alexs name and photo and title", () => {
     render(<ImageAvatars />);
 
     expect(screen.getByAltText("Alex")).toHaveAttribute("src", "alexkerr.jpg");
     expect(screen.getByText("Alex Kerr")).toBeVisible();
-    expect(screen.getByText("Engineer")).toBeVisible();
   });
   
   it("displays chuhuis name and photo and title", () => {
     render(<ImageAvatars />);
 
-    expect(screen.getByAltText("ChuHui")).toHaveAttribute("src", "alexkerr.jpg");
+    expect(screen.getByAltText("ChuHui")).toHaveAttribute("src", "chuhui.jpg");
     expect(screen.getByText("ChuHui Fu")).toBeVisible();
-    expect(screen.getByText("Engineer")).toBeVisible();
   });
   
   it("displays davids name and photo and title", () => {
     render(<ImageAvatars />);
 
-    expect(screen.getByAltText("David")).toHaveAttribute("src", "alexkerr.jpg");
+    expect(screen.getByAltText("David")).toHaveAttribute("src", "david.jpg");
     expect(screen.getByText("David Hay")).toBeVisible();
-    expect(screen.getByText("Engineer")).toBeVisible();
   });
 
   it("displays hermans name and photo and title", () => {
     render(<ImageAvatars />);
 
-    expect(screen.getByAltText("Herman")).toHaveAttribute("src", "alexkerr.jpg");
+    expect(screen.getByAltText("Herman")).toHaveAttribute("src", "herman.jpg");
     expect(screen.getByText("Herman Chiu")).toBeVisible();
-    expect(screen.getByText("Engineer")).toBeVisible();
   });
 
   it("displays joels name and photo and title", () => {
     render(<ImageAvatars />);
 
-    expect(screen.getByAltText("Joel")).toHaveAttribute("src", "alexkerr.jpg");
+    expect(screen.getByAltText("Joel")).toHaveAttribute("src", "joel.png");
     expect(screen.getByText("Joel Reinecke")).toBeVisible();
-    expect(screen.getByText("Engineer")).toBeVisible();
   });
 });

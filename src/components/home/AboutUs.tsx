@@ -28,6 +28,9 @@ const AboutDescription = styled.div`
   z-index: 1;
   margin-left: 12%;
   margin-right: 12%;
+  @media (max-width: 752px) {
+    margin: 0 12% 0 12%;
+  }
 `;
 
 const AboutUs: React.FC = () => {
@@ -37,7 +40,7 @@ const AboutUs: React.FC = () => {
       <AboutDescription>
         <Typography variant="h3">About</Typography>
         <br />
-        <br />        
+        <br />
         <Typography>
           We are a group of volunteers invested in working together to improve
           the City and County of San Francisco, often using technology to
