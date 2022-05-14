@@ -9,7 +9,7 @@ import Results from "./components/results/Results";
 import Donate from "./components/donate/Donate";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import {theme} from "./theme";
-import {getResults} from "./api/axiosApi";
+import {getResults} from "./api/getResults";
 import {applyFilters, applyFilterChanges} from "./components/results/filterHelpers";
 import {CurrentFilters, GlobalStateContextType, Result} from "./types";
 import {setValues} from "./context/globalStates";
