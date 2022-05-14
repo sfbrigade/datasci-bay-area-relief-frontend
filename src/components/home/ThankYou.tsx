@@ -49,7 +49,7 @@ const TextAndLogos = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 100%;
+  width: 100%; 
   height: auto;
   margin: 0 5% 0 5%;
   @media screen and (min-width: 720px) {

@@ -24,9 +24,10 @@ const AboutDescription = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   text-align: left;
-  width: 433px;
+  width: auto;
   z-index: 1;
   margin-left: 12%;
+  margin-right: 12%;
   @media (max-width: 752px) {
     margin: 0 12% 0 12%;
   }
@@ -34,28 +35,28 @@ const AboutDescription = styled.div`
 
 const AboutUs: React.FC = () => {
   return (
-      <Container>
-        <StyledYellowHalfCircle title="Yellow half circle" />
-        <AboutDescription>
-          <Typography variant="h3">About</Typography>
-          <br />
-          <br />
-          <Typography>
-            We are a group of volunteers invested in working together to improve
-            the City and County of San Francisco, often using technology to
-            support our efforts. By connecting people, organizations, resources,
-            tools, and networks to build for San Francisco, we will all thrive.
-          </Typography>
-          <br />
-          <Typography>
-            The Data Science Working Group’s primary purpose is to efficiently
-            assess, inspire, and tackle Code for San Francisco’s data science
-            needs, as well as to help the City and other brigades with their data
-            science needs whenever appropriate.
-          </Typography>
-          <ImageAvatars />
-        </AboutDescription>
-      </Container>
+    <Container>
+      <StyledYellowHalfCircle title="Yellow half circle"/>  
+      <AboutDescription>
+        <Typography variant="h3">About</Typography>
+        <br />
+        <br />
+        <Typography>
+          We are a group of volunteers invested in working together to improve
+          the City and County of San Francisco, often using technology to
+          support our efforts. By connecting people, organizations, resources,
+          tools, and networks to build for San Francisco, we will all thrive.
+        </Typography>
+        <br />
+        <Typography>
+          The Data Science Working Group’s primary purpose is to efficiently
+          assess, inspire, and tackle Code for San Francisco’s data science
+          needs, as well as to help the City and other brigades with their
+          data science needs whenever appropriate.
+        </Typography>
+        <ImageAvatars />
+      </AboutDescription>
+    </Container>
   );
 };
 
