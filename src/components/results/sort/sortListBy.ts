@@ -2,9 +2,10 @@ import {SortOptionType, Result, SupportType} from "../../../types";
 import Moment from "moment";
 
 /**
+ * TODO use lodash
  * Sorts a copy of the given list with the given option and returns the copy.
- * @param list of results
- * @param option sort option type
+ * @param {Result[]} list - filteredResults from ../Results.tsx
+ * @param {SortOptionType} option - Sort order
  */
 export default (list: Result[], option: SortOptionType): Result[] => {
   const sortedList = [...list];
@@ -106,7 +107,7 @@ export default (list: Result[], option: SortOptionType): Result[] => {
         if (a.deadline === null && b.deadline === null) {
           return 0;
         }
-        return Moment(b.deadline).diff(Moment(a.deadline));
+        return Moment(a.deadline).diff(Moment(b.deadline));
       });
       break;
     case SortOptionType.DueDateNewToOld:
@@ -120,7 +121,7 @@ export default (list: Result[], option: SortOptionType): Result[] => {
         if (a.deadline === null && b.deadline === null) {
           return 0;
         }
-        return Moment(a.deadline).diff(Moment(b.deadline));
+        return Moment(b.deadline).diff(Moment(a.deadline));
       });
       break;
     case SortOptionType.None:

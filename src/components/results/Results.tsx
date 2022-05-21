@@ -39,17 +39,20 @@ const Results: React.FC = () => {
     SortOptionType.DueDateNewToOld
   );
 
+  // On load set sorting new to old
   useEffect(() => {
     setSortOption(SortOptionType.DueDateNewToOld);
     setLoading(false);
-  }, [filteredResults]);
+  }, []);
 
+  // Everytime sortOption or setFilteredResults changes sort filteredResults
   useEffect(() => {
     setFilteredResults((filteredResults) =>
       sortListBy(filteredResults, sortOption)
     );
   }, [sortOption, setFilteredResults]);
 
+  // results card element
   const renderResults = () => {
     if (filteredResults.length === 0) {
       return (
@@ -78,10 +81,7 @@ const Results: React.FC = () => {
           <RightSide onClick={() => setIsFilterOpen(false)}>
             <MatchSortContainer>
               <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>
-              {process.env.REACT_APP_SHOW_SORT &&
-                process.env.REACT_APP_SHOW_SORT === "true" && (
-                  <SortDropdown setSortOption={setSortOption} />
-                )}
+                <SortDropdown setSortOption={setSortOption} />
             </MatchSortContainer>
             <ResultsList>{renderResults()}</ResultsList>
           </RightSide>
