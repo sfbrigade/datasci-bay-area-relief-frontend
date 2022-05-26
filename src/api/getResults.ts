@@ -1,6 +1,6 @@
 import {Result, ResultResponse} from "../types";
 import {standardizeFormat} from "./responseFormatter";
-import data from "../assets/data/new_results.json";
+import data from "../assets/data/results.json";
 
 export const getResults = async (): Promise<Result[]> => {
   try {
