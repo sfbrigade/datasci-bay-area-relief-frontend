@@ -2,7 +2,7 @@ import {getResults} from "./getResults";
 import {ReliefType, Result, ResultResponse, SupportType} from "../types";
 import {standardizeFormat} from "./responseFormatter";
 
-const data = require("../assets/data/new_results.json");
+const data = require("../assets/data/results.json");
 
 describe("getResults", () => {
   it("fetches data successfully from the API", async () => {
