@@ -151,14 +151,14 @@ describe("sortListBy", () => {
     });
 
     it("sorts results from oldest deadline to newest deadline when sort option is DueDateOldToNew", () => {
-      const answer: Result[] = [result3, result2, result1, result4, result5];
+      const answer: Result[] = [result1, result2, result3, result4, result5];
       expect(sortListBy(results, SortOptionType.DueDateOldToNew)).toEqual(
         answer
       );
     });
 
     it("sorts results from newest deadline to oldest deadline when sort option is DueDateNewToOld", () => {
-      const answer: Result[] = [result1, result2, result3, result4, result5];
+      const answer: Result[] = [result3, result2, result1, result4, result5];
       expect(sortListBy(results, SortOptionType.DueDateNewToOld)).toEqual(
         answer
       );
