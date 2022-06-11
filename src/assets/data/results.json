@@ -583,7 +583,7 @@
       "sectorType":"Public",
       "supportedEntity":"Government",
       "entityName":"U.S. Small Business Association (SBA)",
-      "deadlineApplicable":"Yes",
+      "deadlineApplicable":"No",
       "deadline":null,
       "websiteUrl":"https://www.sba.gov/federal-contracting/contracting-assistance-programs/8a-business-development-program",
       "description":"",

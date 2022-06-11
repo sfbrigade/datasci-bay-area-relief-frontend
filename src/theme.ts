@@ -1,13 +1,14 @@
 import "./assets/fonts/bree-serif.css";
 import "./assets/fonts/source-sans-pro.css";
 import {createTheme} from "@mui/material/styles";
-import {red} from "@mui/material/colors";
+import { grey, red } from "@mui/material/colors";
 
 const defaultTheme = createTheme();
 
 export const colors = {
   primaryRed: red[400],
   text: defaultTheme.palette.text.primary,
+  white: grey[50],
 };
 
 export const theme = createTheme({
