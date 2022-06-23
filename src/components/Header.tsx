@@ -22,7 +22,7 @@ import {
   SmallMenuContainer,
   TransparentContainer,
   WhiteContainer,
-  MenuItemTypography
+  MenuItemTypography,
 } from "./Header.styles";
 
 const Header: React.FC = () => {
@@ -34,41 +34,32 @@ const Header: React.FC = () => {
   const [isResultsPage, setIsResultsPage] = useState(false);
   const [filterToggle, setFilterToggle] = React.useState(false);
 
-  useEffect(
-    () => {
-      if (location.search) {
-        setCurrentFilters(grabCurrentFiltersFromURLParams(location));
-      }
-    },
-    [setCurrentFilters, location]
-  );
+  useEffect(() => {
+    if (location.search) {
+      setCurrentFilters(grabCurrentFiltersFromURLParams(location));
+    }
+  }, [setCurrentFilters, location]);
 
   // Update isResultsPage when location pathname changes;
-  useEffect(
-    () => {
-      setIsResultsPage(location.pathname === "/results");
-    },
-    [location.pathname]
-  );
+  useEffect(() => {
+    setIsResultsPage(location.pathname === "/results");
+  }, [location.pathname]);
 
   // Handle navbar layout when scrolling
-  useEffect(
-    () => {
-      const handleScroll = () => {
-        const currentScrollPos = window.pageYOffset;
-        const isVisible = prevScrollPos > currentScrollPos;
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      const isVisible = prevScrollPos > currentScrollPos;
 
-        setPrevScrollPos(currentScrollPos);
-        setVisible(isVisible);
-      };
+      setPrevScrollPos(currentScrollPos);
+      setVisible(isVisible);
+    };
 
-      window.addEventListener("scroll", handleScroll);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    },
-    [prevScrollPos]
-  );
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
 
   // Track window width to toggle FilterBarOpen
   useEffect(() => {
@@ -104,15 +95,14 @@ const Header: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const toggleDrawer = (open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
-    if (event.type === "keydown") {
-      return;
-    }
-    setIsFilterOpen(open);
-    setFilterToggle(open);
-  };
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (event.type === "keydown") {
+        return;
+      }
+      setIsFilterOpen(open);
+      setFilterToggle(open);
+    };
 
   const SmallMenu = () => (
     <SmallMenuContainer id="small-menu-container">
@@ -138,17 +128,17 @@ const Header: React.FC = () => {
         <MatMenuItem component={Link} to="/results" onClick={handleClose}>
           Search
         </MatMenuItem>
-        <MatMenuItem
-          component={Link}
-          to={{
-            pathname: "/",
-            search: "",
-            hash: "#about",
-            state: {toAbout: true}
-          }}
-          onClick={handleClose}
-        >
-          About
+        <MatMenuItem onClick={handleClose}>
+          <Link
+            to={{
+              pathname: "/",
+              search: "",
+              hash: "#about",
+              // state: {toAbout: true},
+            }}
+          >
+            About
+          </Link>
         </MatMenuItem>
         <MatMenuItem component={Link} to="/donate" onClick={handleClose}>
           Donate
@@ -188,7 +178,7 @@ const Header: React.FC = () => {
             pathname: "/",
             search: "",
             hash: "",
-            state: {toHome: true}
+            // state: {toHome: true},
           }}
         >
           <MenuItemTypography variant="body1">Home</MenuItemTypography>
@@ -201,7 +191,7 @@ const Header: React.FC = () => {
             pathname: "/",
             search: "",
             hash: "#about",
-            state: {toAbout: true}
+            // state: {toAbout: true},
           }}
         >
           <MenuItemTypography variant="body1">About</MenuItemTypography>

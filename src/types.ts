@@ -1,5 +1,5 @@
-import { MemoryHistory } from "history/createMemoryHistory";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import {MemoryHistory} from "history/createMemoryHistory";
+import {ChangeEvent, Dispatch, SetStateAction} from "react";
 
 // export enum County {
 //   SanFrancisco = "San Francisco",
