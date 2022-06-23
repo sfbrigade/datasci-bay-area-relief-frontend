@@ -12,8 +12,8 @@ import {
   ResultsList,
   ResultsMatched,
   ResultsPage,
-  RightSide,
-  StyledUL,
+  RightSide, SearchBar, SearchButton, SearchGroup,
+  StyledUL
 } from "./Results.styles";
 import sortListBy from "./sort/sortListBy";
 import SortDropdown from "./sort/SortDropdown";
@@ -27,6 +27,7 @@ const Results: React.FC = () => {
   } = useContext(GlobalStateContext);
 
   const [loading, setLoading] = useState(true);
+  const [searchText, setSearchText] = useState("SBA");
   const location = useLocation();
 
   useEffect(() => {
@@ -73,12 +74,22 @@ const Results: React.FC = () => {
     );
   };
 
+  const search = () => {
+    //searchText = "SBA"
+    const searchResults = filteredResults.filter((result: Result) => result.name.includes(searchText) );
+    setFilteredResults(searchResults);
+  };
+
   return (
     <ResultsPage>
       {!loading && (
         <>
           <FilterBar />
           <RightSide onClick={() => setIsFilterOpen(false)}>
+            <SearchGroup>
+              <SearchBar variant="outlined"/>
+              <SearchButton variant="contained" onClick={() => search()}>Search</SearchButton>
+            </SearchGroup>
             <MatchSortContainer>
               <ResultsMatched>{`${filteredResults.length} matches:`}</ResultsMatched>
                 <SortDropdown setSortOption={setSortOption} />

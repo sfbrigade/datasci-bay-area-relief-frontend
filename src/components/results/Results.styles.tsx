@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Typography from "@mui/material/Typography";
 import { colors } from "../../theme";
+import { TextField } from "@mui/material";
+import Button from "@mui/material/Button";
 
 export const ResultsPage = styled.div`
   display: flex;
@@ -36,3 +38,21 @@ export const StyledUL = styled.ul`
 export const ListItem = styled.li`
   list-style-type: none;
 `;
+
+export const SearchBar = styled(TextField)`
+  min-width: 300px;
+  min-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+export const SearchButton = styled(Button)`
+  margin-left: 1rem;
+  width: 85px;
+  height: 60px;
+`;
+
+export const SearchGroup = styled.div`
+  margin-bottom: -100px;
+`;
+

@@ -13,6 +13,8 @@ import {getResults} from "./api/getResults";
 import {applyFilters, applyFilterChanges} from "./components/results/filterHelpers";
 import {CurrentFilters, GlobalStateContextType, Result} from "./types";
 import {setValues} from "./context/globalStates";
+import { SearchBar, SearchButton, SearchGroup } from "./components/results/Results.styles";
+import Button from "@mui/material/Button";
 
 
 const history = createBrowserHistory();
