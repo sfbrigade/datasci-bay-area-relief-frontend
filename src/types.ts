@@ -146,7 +146,7 @@ export interface ResultResponse {
 }
 
 export interface ResultWrapperType {
-  history: MemoryHistory;
+  initialEntries?: Array<string>;
   initialResults: Result[];
 }
 
