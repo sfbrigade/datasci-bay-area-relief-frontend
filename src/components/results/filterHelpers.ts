@@ -1,13 +1,19 @@
 import {CurrentFilters, Result} from "../../types";
 import {Dispatch, SetStateAction} from "react";
 
-const isEmpty = (currentFilters: CurrentFilters) =>
-  Object.keys(currentFilters).length === 0;
-
 type MatchGroupArgs = {
   result: Result;
   group: string;
   currentFilters: CurrentFilters;
+};
+
+type FilterGroup = {
+  groupName: string;
+  groupLabel: string;
+  filters: {
+    name: string;
+    label: string;
+  }[];
 };
 
 export const matchGroup = ({result, group, currentFilters}: MatchGroupArgs) => {
@@ -18,6 +24,9 @@ export const matchGroup = ({result, group, currentFilters}: MatchGroupArgs) => {
   }
   return false;
 };
+
+const isEmpty = (currentFilters: CurrentFilters) =>
+  Object.keys(currentFilters).length === 0;
 
 export const applyFilters = (
   results: Result[],
@@ -57,55 +66,6 @@ export const applyFilterChanges =
     }
     setCurrentFilters(newFilters);
   };
-
-export const allFilters = [
-  "smallBusiness",
-  "nonProfit",
-  "sfCounty",
-  "alamedaCounty",
-  "sanMateoCounty",
-  "contraCostaCounty",
-  "santaClaraCounty",
-  "employs100OrFewer",
-  "employs500OrFewer",
-  "employs750OrFewer",
-  "employs750More",
-  "hasInterest",
-  "doesNotHaveInterest",
-  "covid19",
-  "protestDamage",
-  "blackOwned",
-  "lgbtq",
-  "public",
-  "private",
-  "spanish",
-  "chinese"
-];
-
-const defaultMatchCounts = () => {
-  const matchCounts = {} as {[key: string]: number};
-  for (const filter of allFilters) matchCounts[filter] = 0;
-  return matchCounts;
-};
-
-export const getMatchCounts = (filteredResults: Result[]) =>
-  filteredResults.reduce((matchCounts, result) => {
-    for (const filter of allFilters) {
-      if (result[filter as keyof Result]) {
-        matchCounts[filter]++;
-      }
-    }
-    return matchCounts;
-  }, defaultMatchCounts());
-
-type FilterGroup = {
-  groupName: string;
-  groupLabel: string;
-  filters: {
-    name: string;
-    label: string;
-  }[];
-};
 
 export const filterGroups: FilterGroup[] = [
   {
@@ -192,26 +152,6 @@ export const getFilterNameFromGroupAndTargetName = (
       (filter) => filter.name === name
     );
     if (foundFilter) {
-      return foundFilter.name;
-    }
-  }
-  return undefined;
-};
-
-
-export const getFilterNameFromGroupAndLabel = (
-  groupName: string,
-  label: string
-): string | undefined => {
-  const foundGroup = filterGroups.find(
-    (group) => group.groupName === groupName
-  );
-  if (foundGroup) {
-    const foundFilter = foundGroup.filters.find(
-      (filter) => filter.label === label
-    );
-    if (foundFilter) {
-
       return foundFilter.name;
     }
   }
