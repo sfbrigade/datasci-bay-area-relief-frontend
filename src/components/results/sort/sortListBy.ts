@@ -12,41 +12,20 @@ export default (list: Result[], option: SortOptionType): Result[] => {
   let sortedList = [...list];
   switch (+option) {
     case SortOptionType.AwardAmountHighToLow:
-      console.log("High to Low!");
       sortedList = _.orderBy(sortedList, [(element) => {
-        return element.maxAwardAmount;
-      }], ['desc']);
-      /*
-      sortedList.sort((a, b) => {
-        if (a.maxAwardAmount !== null && b.maxAwardAmount !== null) {
-          return b.maxAwardAmount - a.maxAwardAmount;
-        } else if (a.maxAwardAmount !== null && b.maxAwardAmount === null) {
-          return -1;
-        } else if (a.maxAwardAmount === null && b.maxAwardAmount !== null) {
-          return 1;
-        } else {
+        if (element.maxAwardAmount === null) {
           return 0;
         }
-      });
-       */
+        return element.maxAwardAmount;
+      }], ['desc']);
       break;
     case SortOptionType.AwardAmountLowToHigh:
       sortedList = _.orderBy(sortedList, [(element) => {
-        return element.maxAwardAmount;
-      }], ['asc']);
-      /*
-      sortedList.sort((a, b) => {
-        if (a.maxAwardAmount !== null && b.maxAwardAmount !== null) {
-          return a.maxAwardAmount - b.maxAwardAmount;
-        } else if (a.maxAwardAmount !== null && b.maxAwardAmount === null) {
-          return -1;
-        } else if (a.maxAwardAmount === null && b.maxAwardAmount !== null) {
-          return 1;
-        } else {
+        if (element.maxAwardAmount === null) {
           return 0;
         }
-      });
-       */
+        return element.maxAwardAmount;
+      }], ['asc']);
       break;
     case SortOptionType.InterestLowToHigh:
       sortedList.sort((a, b) => {
@@ -109,83 +88,20 @@ export default (list: Result[], option: SortOptionType): Result[] => {
       });
       break;
     case SortOptionType.DueDateOldToNew:
-      sortedList.sort((a, b) => {
-        if (a.deadline === null && b.deadline !== null) {
-          return 1;
+      sortedList = _.orderBy(sortedList, [(element) => {
+        if (!element.deadline) {
+          return Moment().toDate();
         }
-        if (a.deadline !== null && b.deadline === null) {
-          return -1;
-        }
-        if (a.deadline === null && b.deadline === null) {
-          return 0;
-        }
-        return Moment(a.deadline).diff(Moment(b.deadline));
-      });
+        return Moment(element.deadline).toDate();
+      }], ['asc']);
       break;
     case SortOptionType.DueDateNewToOld:
       sortedList = _.orderBy(sortedList, [(element) => {
-        return element.deadline;
+        if (!element.deadline) {
+          return Moment().toDate();
+        }
+        return Moment(element.deadline).toDate();
       }], ['desc']);
-      /*
-      sortedList.sort((a, b) => {
-        const aMoment = Moment(a.deadline);
-        const bMoment = Moment(b.deadline);
-        console.log("SORTING NEW TO OLD!!!");
-        if ((a.deadlineApplicable === 'No' || a.deadlineApplicable === 'Ongoing' || a.deadlineApplicable === 'Unknown')
-            && b.deadlineApplicable === 'Yes') {
-          //a is greater unless b is not expired.
-          if (bMoment.isValid() && bMoment.isAfter(Moment())) {
-            return 1;
-          } else {
-            return -1;
-          }
-        }
-        if (a.deadlineApplicable === 'Yes' &&
-          (b.deadlineApplicable === 'No' || b.deadlineApplicable === 'Ongoing' || b.deadlineApplicable === 'Unknown')) {
-          //b is greater unless a is not expired.
-          if (aMoment.isValid() && aMoment.isAfter(Moment())) {
-            return -1;
-          } else {
-            return 1;
-          }
-        }
-        if ((a.deadlineApplicable === 'No' || a.deadlineApplicable === 'Ongoing' || a.deadlineApplicable === 'Unknown') &&
-          (b.deadlineApplicable === 'No' || b.deadlineApplicable === 'Ongoing' || b.deadlineApplicable === 'Unknown')) {
-          return 0;
-        }
-
-        if (a.deadlineApplicable === 'Yes' && b.deadlineApplicable === 'Yes') {
-          if (!aMoment.isValid() && bMoment.isValid()) {
-            if (Moment().diff(bMoment) < 0) {
-              console.log("We think this is expired:", Moment(b.deadline).format("mmddyy"));
-            }
-          }
-          // if(aMoment.isValid() && !bMoment.isValid()) {
-          //
-          // }
-          // if (!aMoment.isValid() && !bMoment.isValid()) {
-          //
-          // }
-          //both are valid
-          //is either one expired? rank them lower
-
-
-          // if (a.deadline === null && b.deadline !== null) {
-          //   if (Moment().diff(Moment(b.deadline)) < 0) {
-          //     console.log("We think this is expired:", Moment(b.deadline).format("mmddyy"));
-          //   }
-          //   return 1;
-          // }
-          // if (a.deadline !== null && b.deadline === null) {
-          //   return -1;
-          // }
-          // if (a.deadline === null && b.deadline === null) {
-          //   return 0;
-          // }
-          return Moment(b.deadline).diff(Moment(a.deadline));
-        }
-      });
-       */
       break;
     case SortOptionType.None:
     default:

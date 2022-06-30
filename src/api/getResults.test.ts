@@ -1,16 +1,18 @@
 import {getResults} from "./getResults";
-import {ReliefType, Result, ResultResponse, SupportType} from "../types";
+import { ReliefType, Result, ResultResponse, SortOptionType, SupportType } from "../types";
 import {standardizeFormat} from "./responseFormatter";
+import sortListBy from "../components/results/sort/sortListBy";
 
-const data = require("../assets/data/new_results.json");
+const data = require("../assets/data/results.json");
 
 describe("getResults", () => {
   it("fetches data successfully from the API", async () => {
+    const sortedResults = sortListBy(data.results, SortOptionType.DueDateNewToOld);
     const expectedResults = [
       {
-        name: data.results[0].name,
-        supportType: data.results[0].supportType,
-        interestRate: data.results[0].interestRate,
+        name: sortedResults[0].name,
+        supportType: sortedResults[0].supportType,
+        interestRate: sortedResults[0].interestRate,
       },
     ];
 
