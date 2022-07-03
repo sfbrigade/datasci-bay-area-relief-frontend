@@ -3,7 +3,7 @@ import {act, fireEvent, render, screen} from "@testing-library/react";
 import {SearchForm} from "./SearchForm";
 import {idleForIO} from "../../testUtils";
 import {createMemoryHistory} from "history";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Search} from "@mui/icons-material";
 
 const history = createMemoryHistory();
@@ -14,9 +14,11 @@ describe("SearchForm selections", () => {
     await act(async () => {
       await render(
         <BrowserRouter>
-          <Route>
-            <SearchForm />
-          </Route>
+          <Routes>
+            <Route>
+              <SearchForm />
+            </Route>
+          </Routes>
         </BrowserRouter>
       );
     });
