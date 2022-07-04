@@ -134,8 +134,8 @@ const Header: React.FC = () => {
               pathname: "/",
               search: "",
               hash: "#about",
-              // state: {toAbout: true},
             }}
+            state={{toAbout: true}}
           >
             About
           </Link>
@@ -178,8 +178,8 @@ const Header: React.FC = () => {
             pathname: "/",
             search: "",
             hash: "",
-            // state: {toHome: true},
           }}
+          state={{toHome: true}}
         >
           <MenuItemTypography variant="body1">Home</MenuItemTypography>
         </MenuItem>
@@ -191,10 +191,10 @@ const Header: React.FC = () => {
             pathname: "/",
             search: "",
             hash: "#about",
-            // state: {toAbout: true},
           }}
+          state={{toAbout: true}}
         >
-          <MenuItemTypography variant="body1">About</MenuItemTypography>
+          <MenuItemTypography variant="body1">About Desk</MenuItemTypography>
         </MenuItem>
         <MenuItem to="/donate">
           <MenuItemTypography variant="body1">Donate</MenuItemTypography>

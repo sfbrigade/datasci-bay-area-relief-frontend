@@ -65,15 +65,9 @@ const App = () => {
           <BrowserRouter>
             <Header />
             <Routes>
-              <Route path="/">
-                <Home />
-              </Route>
-              <Route path="/results">
-                <Results />
-              </Route>
-              <Route path="/donate">
-                <Donate />
-              </Route>
+              <Route path="/" element={<Home />} />
+              <Route path="/results" element={<Results />} />
+              <Route path="/donate" element={<Donate />} />
             </Routes>
           </BrowserRouter>
         </div>
