@@ -3,7 +3,7 @@ import Moment from "moment";
 import _ from "lodash";
 
 /**
- * TODO use lodash
+ * TODO use lodash interest rate sorting
  * Sorts a copy of the given list with the given option and returns the copy.
  * @param {Result[]} list - filteredResults from ../Results.tsx
  * @param {SortOptionType} option - Sort order
