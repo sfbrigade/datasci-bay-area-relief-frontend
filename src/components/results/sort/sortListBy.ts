@@ -1,40 +1,31 @@
 import {SortOptionType, Result, SupportType} from "../../../types";
 import Moment from "moment";
+import _ from "lodash";
 
 /**
- * TODO use lodash
+ * TODO use lodash interest rate sorting
  * Sorts a copy of the given list with the given option and returns the copy.
  * @param {Result[]} list - filteredResults from ../Results.tsx
  * @param {SortOptionType} option - Sort order
  */
 export default (list: Result[], option: SortOptionType): Result[] => {
-  const sortedList = [...list];
+  let sortedList = [...list];
   switch (+option) {
     case SortOptionType.AwardAmountHighToLow:
-      sortedList.sort((a, b) => {
-        if (a.maxAwardAmount !== null && b.maxAwardAmount !== null) {
-          return b.maxAwardAmount - a.maxAwardAmount;
-        } else if (a.maxAwardAmount !== null && b.maxAwardAmount === null) {
-          return -1;
-        } else if (a.maxAwardAmount === null && b.maxAwardAmount !== null) {
-          return 1;
-        } else {
+      sortedList = _.orderBy(sortedList, [(element) => {
+        if (element.maxAwardAmount === null) {
           return 0;
         }
-      });
+        return element.maxAwardAmount;
+      }], ['desc']);
       break;
     case SortOptionType.AwardAmountLowToHigh:
-      sortedList.sort((a, b) => {
-        if (a.maxAwardAmount !== null && b.maxAwardAmount !== null) {
-          return a.maxAwardAmount - b.maxAwardAmount;
-        } else if (a.maxAwardAmount !== null && b.maxAwardAmount === null) {
-          return -1;
-        } else if (a.maxAwardAmount === null && b.maxAwardAmount !== null) {
-          return 1;
-        } else {
+      sortedList = _.orderBy(sortedList, [(element) => {
+        if (element.maxAwardAmount === null) {
           return 0;
         }
-      });
+        return element.maxAwardAmount;
+      }], ['asc']);
       break;
     case SortOptionType.InterestLowToHigh:
       sortedList.sort((a, b) => {
@@ -97,32 +88,20 @@ export default (list: Result[], option: SortOptionType): Result[] => {
       });
       break;
     case SortOptionType.DueDateOldToNew:
-      sortedList.sort((a, b) => {
-        if (a.deadline === null && b.deadline !== null) {
-          return 1;
+      sortedList = _.orderBy(sortedList, [(element) => {
+        if (!element.deadline) {
+          return Moment().toDate();
         }
-        if (a.deadline !== null && b.deadline === null) {
-          return -1;
-        }
-        if (a.deadline === null && b.deadline === null) {
-          return 0;
-        }
-        return Moment(a.deadline).diff(Moment(b.deadline));
-      });
+        return Moment(element.deadline).toDate();
+      }], ['asc']);
       break;
     case SortOptionType.DueDateNewToOld:
-      sortedList.sort((a, b) => {
-        if (a.deadline === null && b.deadline !== null) {
-          return 1;
+      sortedList = _.orderBy(sortedList, [(element) => {
+        if (!element.deadline) {
+          return Moment().toDate();
         }
-        if (a.deadline !== null && b.deadline === null) {
-          return -1;
-        }
-        if (a.deadline === null && b.deadline === null) {
-          return 0;
-        }
-        return Moment(b.deadline).diff(Moment(a.deadline));
-      });
+        return Moment(element.deadline).toDate();
+      }], ['desc']);
       break;
     case SortOptionType.None:
     default:

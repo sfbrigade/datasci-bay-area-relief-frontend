@@ -82,3 +82,11 @@ export const Tag = styled(Typography).attrs({variant: 'body2' })`
   padding-right: 12px;
   color: ${colors.text};
 `;
+
+export const ExpiredTag = styled(Typography).attrs({variant: 'body2' })`
+  background: ${colors.primaryRed};
+  border-radius: 16px;
+  padding-left: 12px;
+  padding-right: 12px; 
+  color: ${colors.white};
+`;
