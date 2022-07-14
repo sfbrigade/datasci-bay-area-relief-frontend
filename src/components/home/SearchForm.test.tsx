@@ -15,9 +15,7 @@ describe("SearchForm selections", () => {
       await render(
         <BrowserRouter>
           <Routes>
-            <Route>
-              <SearchForm />
-            </Route>
+            <Route element={<SearchForm />} />
           </Routes>
         </BrowserRouter>
       );
