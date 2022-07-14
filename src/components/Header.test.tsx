@@ -35,7 +35,7 @@ describe("Header", () => {
     expect(screen.getByRole("logo")).toBeVisible();
   });
 
-  it("renders a menu with 3 links", () => {
+  it("renders a menu with 4 links", () => {
     expect(screen.getByRole("link", {name: "Home"})).toBeVisible();
     expect(screen.getByRole("link", {name: "Search"})).toBeVisible();
     expect(screen.getByRole("link", {name: "About"})).toBeVisible();
