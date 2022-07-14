@@ -1,14 +1,12 @@
 import React, {useState} from "react";
 import {render, screen} from "@testing-library/react";
 import Header from "./Header";
-import {BrowserRouter, useLocation} from "react-router-dom";
-import {createMemoryHistory} from "history";
+import {BrowserRouter} from "react-router-dom";
 import {act} from "react-dom/test-utils";
 import {CurrentFilters} from "../types";
 import {setValues} from "../context/globalStates";
 
 describe("Header", () => {
-  const history = createMemoryHistory;
   const HeaderWrapper = () => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [currentFilters, setCurrentFilters] = useState<CurrentFilters>({});
