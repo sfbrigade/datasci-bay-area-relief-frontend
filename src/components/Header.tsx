@@ -194,7 +194,7 @@ const Header: React.FC = () => {
           }}
           state={{toAbout: true}}
         >
-          <MenuItemTypography variant="body1">About Desk</MenuItemTypography>
+          <MenuItemTypography variant="body1">About</MenuItemTypography>
         </MenuItem>
         <MenuItem to="/donate">
           <MenuItemTypography variant="body1">Donate</MenuItemTypography>
