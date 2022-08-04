@@ -70,10 +70,7 @@ const ResultCard: React.FC<Result> = ({
 
         <Tags>
           {lgbtq && <Tag>LGBTQ</Tag>}
-<<<<<<< Updated upstream
-=======
           {blackOwned && <Tag>Black-owned</Tag>}
->>>>>>> Stashed changes
           {isExpired && <ExpiredTag>Possibly Closed</ExpiredTag>}
         </Tags>
       </CardBottom>
