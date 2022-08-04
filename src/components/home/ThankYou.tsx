@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import RedTriangle from "../../assets/RedTriangle.svg";
 import TealSquare from "../../assets/TealSquare.svg";
 
-/* 
+/*
   Note: "justify-content: space-around" causes html elements to overflow on left
         when screen view is mobile size
 */
@@ -49,7 +49,7 @@ const TextAndLogos = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
-  width: 100%;
+  width: 100%; 
   height: auto;
   margin: 0 5% 0 5%;
   @media screen and (min-width: 720px) {

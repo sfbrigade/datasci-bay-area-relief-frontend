@@ -1,4 +1,6 @@
 import React from "react";
+import Moment from "moment";
+
 import {Result} from "../../types";
 import {
   formatAwardAmount,
@@ -14,7 +16,7 @@ import {
   StyledName,
   StyledReliefType,
   SupportTypeContainer,
-  SupportTypeItem, Tag, Tags
+  SupportTypeItem, Tag, Tags, ExpiredTag
 } from "./ResultCard.styles";
 
 const onApply = (url: string) => {
@@ -33,19 +35,18 @@ const ResultCard: React.FC<Result> = ({
   lgbtq,
   websiteUrl,
 }) => {
-  const deadlineString = (): string => {
-    let deadlineLabelText = "";
-    if (deadlineApplicable === "Yes" || deadlineApplicable === "Unknown") {
-      if (!deadline) {
-        deadlineLabelText = "Unknown";
-      } else {
-        deadlineLabelText = formatDate(deadline);
-      }
-    } else if (deadlineApplicable === "No") {
-      deadlineLabelText = "Ongoing";
+  let isExpired = false;
+  let deadlineLabelText = "";
+  if (deadlineApplicable === "Yes" || deadlineApplicable === "Unknown") {
+    if (!deadline) {
+      deadlineLabelText = "Unknown";
+    } else {
+      deadlineLabelText = formatDate(deadline);
+      isExpired = Moment().isAfter(Moment(deadline));
     }
-    return deadlineLabelText;
-  };
+  } else if (deadlineApplicable === "No") {
+    deadlineLabelText = "Ongoing";
+  }
 
   return (
     <StyledCard>
@@ -54,7 +55,7 @@ const ResultCard: React.FC<Result> = ({
           <span data-testid='support-type-header'>{`${supportType} • ${formatInterestRate(
             interestRate,
             supportType
-          )} • ${deadlineString()}`}</span>
+          )} • ${deadlineLabelText}`}</span>
         </SupportTypeItem>
       </SupportTypeContainer>
       <StyledAwardAmount>{formatAwardAmount(maxAwardAmount)}</StyledAwardAmount>
@@ -68,8 +69,12 @@ const ResultCard: React.FC<Result> = ({
         )}
 
         <Tags>
-          {blackOwned && <Tag>Black-owned</Tag>}
           {lgbtq && <Tag>LGBTQ</Tag>}
+<<<<<<< Updated upstream
+=======
+          {blackOwned && <Tag>Black-owned</Tag>}
+>>>>>>> Stashed changes
+          {isExpired && <ExpiredTag>Possibly Closed</ExpiredTag>}
         </Tags>
       </CardBottom>
     </StyledCard>

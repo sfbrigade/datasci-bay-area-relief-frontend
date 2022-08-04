@@ -54,7 +54,7 @@ export const StyledReliefType = styled(Typography).attrs({variant: 'body2' })`
   text-align: left;
   position: absolute;
   left: 16px;
-  top: 100px;
+  top: 62%;
   color: rgba(0, 0, 0, 0.38);
 `;
 
@@ -69,10 +69,18 @@ export const CardBottom = styled.div`
 `;
 
 export const Tags = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  flex-wrap: wrap;
   width: 60%;
   display: flex;
   justify-content: flex-end;
-  padding-right: 10px
+  align-items: center;
+  padding-right: 10px;
+  @media (min-width: 752px) {
+    width: 70%;
+  }
 `;
 
 export const Tag = styled(Typography).attrs({variant: 'body2' })`
@@ -80,5 +88,17 @@ export const Tag = styled(Typography).attrs({variant: 'body2' })`
   border-radius: 16px;
   padding-left: 12px;
   padding-right: 12px;
+  margin: 2px;
+  white-space: nowrap; 
   color: ${colors.text};
+`;
+
+export const ExpiredTag = styled(Typography).attrs({variant: 'body2' })`
+  background: ${colors.primaryRed};
+  border-radius: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin: 2px; 
+  white-space: nowrap; 
+  color: ${colors.white};
 `;

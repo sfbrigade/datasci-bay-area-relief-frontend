@@ -22,19 +22,19 @@ beforeEach(() => {
     handleClearFilters: jest.fn(),
   });
   render(
-    <Router history={history}>
-      <Route component={Home} />
-    </Router>
+      <Router history={history}>
+        <Route component={Home} />
+      </Router>
   );
 });
 
 describe("Home", () => {
   it("renders a homepage title with description", () => {
     expect(
-      screen.getByRole("heading", {name: "Find Loans & Grants"})
+        screen.getByRole("heading", {name: "Find Loans & Grants"})
     ).toBeVisible();
     expect(
-      screen.getByText(/Search our database for Bay Area loans/i)
+        screen.getByText(/Search our database for Bay Area loans/i)
     ).toBeVisible();
   });
 
@@ -58,21 +58,21 @@ describe("Home", () => {
       expect(screen.getByText("Help us look")).toBeVisible();
 
       expect(
-        screen.getByText(
-          "We search across government websites, social media, and fundraising platforms to look for financial aid. We then help categorize them so it’s easy for you to find."
-        )
+          screen.getByText(
+              "We search across government websites, social media, and fundraising platforms to look for financial aid. We then help categorize them so it’s easy for you to find."
+          )
       ).toBeVisible();
 
       expect(
-        screen.getByText(
-          "We search across government websites, social media, and fundraising platforms to look for financial aid. We then help categorize them so it’s easy for you to find."
-        )
+          screen.getByText(
+              "We search across government websites, social media, and fundraising platforms to look for financial aid. We then help categorize them so it’s easy for you to find."
+          )
       ).toBeVisible();
 
       expect(
-        screen.getByText(
-          "Found a fund that isn’t on our website? Help the community by letting us know, so we can add it to our database."
-        )
+          screen.getByText(
+              "Found a fund that isn’t on our website? Help the community by letting us know, so we can add it to our database."
+          )
       ).toBeVisible();
 
       expect(screen.getByAltText("We scrape the internet")).toBeVisible();
@@ -85,15 +85,15 @@ describe("Home", () => {
     it("renders heading and description", () => {
       expect(screen.getByRole("heading", {name: "About"})).toBeVisible();
       expect(
-        screen.getByText(
-          "We are a group of volunteers invested in working together to improve the City and County of San Francisco, often using technology to support our efforts. By connecting people, organizations, resources, tools, and networks to build for San Francisco, we will all thrive."
-        )
+          screen.getByText(
+              "We are a group of volunteers invested in working together to improve the City and County of San Francisco, often using technology to support our efforts. By connecting people, organizations, resources, tools, and networks to build for San Francisco, we will all thrive."
+          )
       ).toBeInTheDocument();
 
       expect(
-        screen.getByText(
-          "The Data Science Working Group’s primary purpose is to efficiently assess, inspire, and tackle Code for San Francisco’s data science needs, as well as to help the City and other brigades with their data science needs whenever appropriate."
-        )
+          screen.getByText(
+              "The Data Science Working Group’s primary purpose is to efficiently assess, inspire, and tackle Code for San Francisco’s data science needs, as well as to help the City and other brigades with their data science needs whenever appropriate."
+          )
       ).toBeInTheDocument();
     });
     it("renders a yellow half circle svg", () => {
@@ -105,9 +105,9 @@ describe("Home", () => {
     it("renders heading and description", () => {
       expect(screen.getByRole("heading", {name: "Thank you"})).toBeVisible();
       expect(
-        screen.getByText(
-          "This project couldn’t have happened without the generosity of the friends and family of Sanat Moningi. Thank you also to our sponsors, who provided us the tools to make this portal possible."
-        )
+          screen.getByText(
+              "This project couldn’t have happened without the generosity of the friends and family of Sanat Moningi. Thank you also to our sponsors, who provided us the tools to make this portal possible."
+          )
       ).toBeVisible();
     });
 
@@ -115,19 +115,19 @@ describe("Home", () => {
       expect(screen.getByAltText("Thank you image")).toBeVisible();
       expect(screen.getByAltText("Code for SF Logo")).toBeVisible();
       expect(
-        screen.getByAltText("Code for SF Logo").closest("a")
+          screen.getByAltText("Code for SF Logo").closest("a")
       ).toHaveAttribute("href", "https://www.codeforsanfrancisco.org/");
 
       expect(screen.getByAltText("GitHub Logo")).toBeVisible();
       expect(screen.getByAltText("GitHub Logo").closest("a")).toHaveAttribute(
-        "href",
-        "https://github.com/"
+          "href",
+          "https://github.com/"
       );
 
       expect(screen.getByAltText("React Logo")).toBeVisible();
       expect(screen.getByAltText("React Logo").closest("a")).toHaveAttribute(
-        "href",
-        "https://reactjs.org/"
+          "href",
+          "https://reactjs.org/"
       );
     });
 

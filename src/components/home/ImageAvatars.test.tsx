@@ -25,11 +25,52 @@ describe("<ImageAvatars>", () => {
     expect(screen.getByText("Data Jam Lead")).toBeVisible();
   });
 
+  it("displays adams name and photo and title", () => {
+    render(<ImageAvatars />);
+
+    expect(screen.getByText("Adam Cobb")).toBeVisible();
+    expect(screen.getByAltText("Adam")).toHaveAttribute("src", "adam.jpg");
+    expect(screen.getByText("Engineer Lead")).toBeVisible();
+  });
+
+  it('displays 5 engineer labels', () => {
+    render(<ImageAvatars />);
+    const results = screen.getAllByText("Engineer");
+    expect(results.length).toEqual(5);
+  });
+
   it("displays alexs name and photo and title", () => {
     render(<ImageAvatars />);
 
     expect(screen.getByAltText("Alex")).toHaveAttribute("src", "alexkerr.jpg");
     expect(screen.getByText("Alex Kerr")).toBeVisible();
-    expect(screen.getByText("Engineer")).toBeVisible();
+  });
+  
+  it("displays chuhuis name and photo and title", () => {
+    render(<ImageAvatars />);
+
+    expect(screen.getByAltText("ChuHui")).toHaveAttribute("src", "chuhui.jpg");
+    expect(screen.getByText("ChuHui Fu")).toBeVisible();
+  });
+  
+  it("displays davids name and photo and title", () => {
+    render(<ImageAvatars />);
+
+    expect(screen.getByAltText("David")).toHaveAttribute("src", "david.jpg");
+    expect(screen.getByText("David Hay")).toBeVisible();
+  });
+
+  it("displays hermans name and photo and title", () => {
+    render(<ImageAvatars />);
+
+    expect(screen.getByAltText("Herman")).toHaveAttribute("src", "herman.jpg");
+    expect(screen.getByText("Herman Chiu")).toBeVisible();
+  });
+
+  it("displays joels name and photo and title", () => {
+    render(<ImageAvatars />);
+
+    expect(screen.getByAltText("Joel")).toHaveAttribute("src", "joel.png");
+    expect(screen.getByText("Joel Reinecke")).toBeVisible();
   });
 });
