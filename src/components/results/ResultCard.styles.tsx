@@ -88,8 +88,6 @@ export const Tag = styled(Typography).attrs({variant: 'body2' })`
   border-radius: 16px;
   padding-left: 12px;
   padding-right: 12px;
-  margin: 2px;
-  white-space: nowrap; 
   color: ${colors.text};
 `;
 
@@ -98,7 +96,7 @@ export const ExpiredTag = styled(Typography).attrs({variant: 'body2' })`
   border-radius: 16px;
   padding-left: 12px;
   padding-right: 12px;
-  margin: 2px; 
+  margin: 2px;
   white-space: nowrap; 
   color: ${colors.white};
 `;
