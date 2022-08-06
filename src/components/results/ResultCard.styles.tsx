@@ -11,7 +11,7 @@ export const StyledCard = styled(Card)`
   background: #ffffff;
   border-radius: 4px;
   width: 300px;
-  height: 172px;
+  height: 12rem;
   margin: 1.5em;
 
   @media (min-width: 752px) {
@@ -48,14 +48,17 @@ export const StyledName = styled(Typography).attrs({variant: 'body2' })`
   left: 16px;
   top: 68px;
   color: rgba(0, 0, 0, 0.6);
+  line-height: normal;
+  margin-top: 0.5rem;
 `;
 
 export const StyledReliefType = styled(Typography).attrs({variant: 'body2' })`
   text-align: left;
   position: absolute;
   left: 16px;
-  top: 62%;
+  top: 7.5rem;
   color: rgba(0, 0, 0, 0.38);
+  margin-bottom: 0.2rem;
 `;
 
 export const CardBottom = styled.div`
@@ -63,7 +66,7 @@ export const CardBottom = styled.div`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  bottom: 12px;
+  bottom: 5px;
   width: 95%;
   left: 12px;
 `;
@@ -80,6 +83,7 @@ export const Tags = styled.div`
   padding-right: 10px;
   @media (min-width: 752px) {
     width: 70%;
+    height: 36.5px;
   }
 `;
 
