@@ -13,6 +13,7 @@ import {getResults} from "./api/getResults";
 import {applyFilters, applyFilterChanges} from "./components/results/filterHelpers";
 import {CurrentFilters, GlobalStateContextType, Result} from "./types";
 import {setValues} from "./context/globalStates";
+import { AddPage } from "./components/addResources/AddPage";
 
 
 const history = createBrowserHistory();
@@ -69,6 +70,7 @@ const App = () => {
               <Route exact path="/" component={Home}/>
               <Route exact path="/results" component={Results}/>
               <Route exact path="/donate" component={Donate}/>
+              <Route exact path="/add" component={AddPage}/>
             </Switch>
           </Router>
         </div>

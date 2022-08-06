@@ -60,8 +60,10 @@
     "@commitlint/config-conventional": "^14.1.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.19",
+    "formik": "^2.2.9",
     "husky": "^7.0.0",
-    "react-test-renderer": "^17.0.1"
+    "react-test-renderer": "^17.0.1",
+    "yup": "^0.32.11"
   },
   "engines": {
     "node": ">=v14.17.5"

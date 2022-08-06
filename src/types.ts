@@ -169,3 +169,45 @@ export interface GlobalStateContextType {
   setFilteredResults?: Dispatch<SetStateAction<Result[]>>;
   handleClearFilters?: () => void;
 }
+
+export interface DonorInfo {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  county: County;
+  orgType: OrgType;
+  comments: string;
+  dateAdded: string;
+  reliefType: ReliefType;
+  supportType: SupportType;
+  websiteUrl: string;
+}
+
+export interface AddReliefBody {
+  firstName?: string;
+  lastName?: string;
+  email: string;
+  phoneNumber?: string;
+  url: string;
+  county?: string;
+  orgType?: string;
+  reliefType?: string;
+  comments?: string;
+}
+
+export interface AddResourceProps {
+  currentFilters: CurrentFilters;
+  setDonorInfo: Dispatch<SetStateAction<DonorInfo[]>>;
+  donorInfo: DonorInfo[];
+}
+
+export interface AddTipData {
+  message: string;
+}
+
+export interface AddTipResponse {
+  status: number;
+  data?: AddTipData;
+}
