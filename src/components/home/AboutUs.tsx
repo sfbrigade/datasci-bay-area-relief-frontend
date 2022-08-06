@@ -24,9 +24,13 @@ const AboutDescription = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   text-align: left;
-  width: 433px;
+  width: auto;
   z-index: 1;
   margin-left: 12%;
+  margin-right: 12%;
+  @media (max-width: 752px) {
+    margin: 0 12% 0 12%;
+  }
 `;
 
 const AboutUs: React.FC = () => {
@@ -51,7 +55,6 @@ const AboutUs: React.FC = () => {
           data science needs whenever appropriate.
         </Typography>
         <ImageAvatars />
-
       </AboutDescription>
     </Container>
   );

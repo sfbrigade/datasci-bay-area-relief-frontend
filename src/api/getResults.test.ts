@@ -1,30 +1,25 @@
-import axios from "axios";
-import {getResults} from "./axiosApi";
-import {ReliefType, Result, ResultResponse, SupportType} from "../types";
+import {getResults} from "./getResults";
+import { ReliefType, Result, ResultResponse, SortOptionType, SupportType } from "../types";
 import {standardizeFormat} from "./responseFormatter";
-import { apiResponse } from "../testUtils";
+import sortListBy from "../components/results/sort/sortListBy";
 
-jest.mock("axios");
+const data = require("../assets/data/results.json");
 
 describe("getResults", () => {
   it("fetches data successfully from the API", async () => {
-    (axios.get as jest.Mock).mockImplementationOnce(() =>
-      Promise.resolve(apiResponse)
-    );
-
+    const sortedResults = sortListBy(data.results, SortOptionType.DueDateNewToOld);
     const expectedResults = [
       {
-        name: apiResponse.data.results[0].name,
-        supportType: apiResponse.data.results[0].supportType,
-        interestRate: apiResponse.data.results[0].interestRate,
+        name: sortedResults[0].name,
+        supportType: sortedResults[0].supportType,
+        interestRate: sortedResults[0].interestRate,
       },
     ];
 
     const actualResults: Result[] = await getResults();
-
-    actualResults.forEach((result, index) => {
-      expect(result).toEqual(expect.objectContaining(expectedResults[index]));
-    });
+    expect(actualResults[0].name).toEqual(expectedResults[0].name);
+    expect(actualResults[0].supportType).toEqual(expectedResults[0].supportType);
+    expect(actualResults[0].interestRate).toEqual(expectedResults[0].interestRate);
   });
 });
 

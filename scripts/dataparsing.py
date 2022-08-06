@@ -1,5 +1,5 @@
 import pandas as pd
-  
+
 def parse(path):
 
     df = pd.read_csv(path, delimiter=',')
@@ -11,3 +11,4 @@ def parse(path):
 
     df_filtered_subset.to_csv('scripts/filteredSubsets.csv', index=False , encoding="utf-8-sig")
     # print("file has been parse")
+

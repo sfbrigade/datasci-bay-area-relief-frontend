@@ -39,13 +39,16 @@ export const HiddenContainer = styled.header`
 `;
 
 export const LogoWrapper = styled.div`
-  margin-left: 56px;
+  padding-left: 4%;
+  @media screen and (max-width: 752px) {
+    padding-left: 6.9%;
+  }
 `;
 
 export const Menu = styled.div`
   height: 100%;
   display: flex;
-  padding-right: 88px;
+  padding-right: 6.9%;
   align-items: center;
   justify-content: flex-end;
 `;

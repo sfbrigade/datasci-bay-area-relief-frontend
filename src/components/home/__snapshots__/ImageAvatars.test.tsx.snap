@@ -20,6 +20,7 @@ exports[`<ImageAvatars> renders correctly 1`] = `
     >
       <ForwardRef(Grid)
         item={true}
+        md={3}
         xs={6}
       >
         <ForwardRef(Box)
@@ -45,6 +46,7 @@ exports[`<ImageAvatars> renders correctly 1`] = `
       </ForwardRef(Grid)>
       <ForwardRef(Grid)
         item={true}
+        md={3}
         xs={6}
       >
         <ForwardRef(Box)
@@ -70,6 +72,33 @@ exports[`<ImageAvatars> renders correctly 1`] = `
       </ForwardRef(Grid)>
       <ForwardRef(Grid)
         item={true}
+        md={3}
+        xs={6}
+      >
+        <ForwardRef(Box)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <ForwardRef(Avatar)
+            alt="Adam"
+            className="ImageAvatars-large"
+            src="adam.jpg"
+          />
+          <ForwardRef(Typography)>
+            Adam Cobb
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
+            variant="body2"
+          >
+            Engineer Lead
+          </ForwardRef(Typography)>
+        </ForwardRef(Box)>
+      </ForwardRef(Grid)>
+      <ForwardRef(Grid)
+        item={true}
+        md={3}
         xs={6}
       >
         <ForwardRef(Box)
@@ -85,6 +114,110 @@ exports[`<ImageAvatars> renders correctly 1`] = `
           />
           <ForwardRef(Typography)>
             Alex Kerr
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
+            variant="body2"
+          >
+            Engineer
+          </ForwardRef(Typography)>
+        </ForwardRef(Box)>
+      </ForwardRef(Grid)>
+      <ForwardRef(Grid)
+        item={true}
+        md={3}
+        xs={6}
+      >
+        <ForwardRef(Box)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <ForwardRef(Avatar)
+            alt="ChuHui"
+            className="ImageAvatars-large"
+            src="chuhui.jpg"
+          />
+          <ForwardRef(Typography)>
+            ChuHui Fu
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
+            variant="body2"
+          >
+            Engineer
+          </ForwardRef(Typography)>
+        </ForwardRef(Box)>
+      </ForwardRef(Grid)>
+      <ForwardRef(Grid)
+        item={true}
+        md={3}
+        xs={6}
+      >
+        <ForwardRef(Box)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <ForwardRef(Avatar)
+            alt="David"
+            className="ImageAvatars-large"
+            src="david.jpg"
+          />
+          <ForwardRef(Typography)>
+            David Hay
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
+            variant="body2"
+          >
+            Engineer
+          </ForwardRef(Typography)>
+        </ForwardRef(Box)>
+      </ForwardRef(Grid)>
+      <ForwardRef(Grid)
+        item={true}
+        md={3}
+        xs={6}
+      >
+        <ForwardRef(Box)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <ForwardRef(Avatar)
+            alt="Herman"
+            className="ImageAvatars-large"
+            src="herman.jpg"
+          />
+          <ForwardRef(Typography)>
+            Herman Chiu
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
+            variant="body2"
+          >
+            Engineer
+          </ForwardRef(Typography)>
+        </ForwardRef(Box)>
+      </ForwardRef(Grid)>
+      <ForwardRef(Grid)
+        item={true}
+        md={3}
+        xs={6}
+      >
+        <ForwardRef(Box)
+          alignItems="center"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <ForwardRef(Avatar)
+            alt="Joel"
+            className="ImageAvatars-large"
+            src="joel.png"
+          />
+          <ForwardRef(Typography)>
+            Joel Reinecke
           </ForwardRef(Typography)>
           <ForwardRef(Typography)
             variant="body2"
