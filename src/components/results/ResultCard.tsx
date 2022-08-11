@@ -69,8 +69,8 @@ const ResultCard: React.FC<Result> = ({
         )}
 
         <Tags>
-          {blackOwned && <Tag>Black-owned</Tag>}
           {lgbtq && <Tag>LGBTQ</Tag>}
+          {blackOwned && <Tag>Black-owned</Tag>}
           {isExpired && <ExpiredTag>Possibly Closed</ExpiredTag>}
         </Tags>
       </CardBottom>

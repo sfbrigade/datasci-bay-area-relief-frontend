@@ -89,34 +89,34 @@ const ReactLogoImg = styled.img`
 
 const ThankYou: React.FC = () => {
   return (
-      <Container>
-        <ImageSection>
-          <ThankYouImg alt="Thank you image" src={ThankImg} />
-          <NewStyledRedTriangle alt="red triangle" src={RedTriangle} />
-          <NewStyledTealSquare alt="teal square" src={TealSquare} />
-        </ImageSection>
-        <TextAndLogos>
-          <Typography variant="h3">Thank you</Typography>
-          <br />
-          <Typography>
-            This project couldn’t have happened without the generosity of the
-            friends and family of Sanat Moningi. Thank you also to our sponsors,
-            who provided us the tools to make this portal possible.
-          </Typography>
-          <br />
-          <Logos>
-            <a href="https://www.codeforsanfrancisco.org/">
-              <CodeForSFLogoImg alt="Code for SF Logo" src={CodeForSFLogo} />
-            </a>
-            <a href="https://github.com/">
-              <GitHubLogoImg alt="GitHub Logo" src={GitHubLogo} />
-            </a>
-            <a href="https://reactjs.org/">
-              <ReactLogoImg alt="React Logo" src={ReactLogo} />
-            </a>
-          </Logos>
-        </TextAndLogos>
-      </Container>
+    <Container>
+      <ImageSection>
+        <ThankYouImg alt="Thank you image" src={ThankImg} />
+        <NewStyledRedTriangle alt="red triangle" src={RedTriangle} />
+        <NewStyledTealSquare alt="teal square" src={TealSquare} />
+      </ImageSection>
+      <TextAndLogos>
+        <Typography variant="h3">Thank you</Typography>
+        <br />
+        <Typography>
+          This project couldn’t have happened without the generosity of the
+          friends and family of Sanat Moningi. Thank you also to our sponsors,
+          who provided us the tools to make this portal possible.
+        </Typography>
+        <br />
+        <Logos>
+          <a href="https://www.codeforsanfrancisco.org/">
+            <CodeForSFLogoImg alt="Code for SF Logo" src={CodeForSFLogo} />
+          </a>
+          <a href="https://github.com/">
+            <GitHubLogoImg alt="GitHub Logo" src={GitHubLogo} />
+          </a>
+          <a href="https://reactjs.org/">
+            <ReactLogoImg alt="React Logo" src={ReactLogo} />
+          </a>
+        </Logos>
+      </TextAndLogos>
+    </Container>
   );
 };
 
