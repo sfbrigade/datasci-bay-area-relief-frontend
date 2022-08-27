@@ -18,7 +18,7 @@ def parse(path):
 @main.command()
 @click.argument('csv')
 @click.argument('json')
-def injest(csv, json):
+def ingest(csv, json):
     """run ingestion script"""
     seed.csvToJson(csv, json)
 
