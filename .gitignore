@@ -26,7 +26,9 @@ yarn-error.log*
 #editor-config
 .idea
 
-# ignore venv files 
+# ignore venv files
 /scripts/__pycache__/
 /scripts/bar.egg-info/
 /scripts/venv/
+
+.python-version

@@ -1,6 +1,7 @@
 import csv
 import json
 
+
 def formatMoney(money: str) -> int:
     temp = money.strip('$')
     temp = temp.replace(',', '')
@@ -8,10 +9,12 @@ def formatMoney(money: str) -> int:
         return int(temp)
     return 0
 
+
 def formatInterestRate(interest: str) -> float:
     if interest != '':
         return float(interest)
     return 0.0
+
 
 def csvToJson(csvPath: str, jsonPath: str) -> None:
     """
@@ -50,7 +53,7 @@ def csvToJson(csvPath: str, jsonPath: str) -> None:
                 "awardAmountSpecified": row[18],
                 "maxAwardAmount": formatMoney(row[19]),
                 "interestRateApplicable": row[20],
-                "interestRate": row[21],
+                "interestRate": formatInterestRate(row[21]),
                 "supportType": row[22],
                 "sectorType": row[23],
                 "supportedEntity": row[24],
