@@ -1,6 +1,17 @@
 import csv
 import json
 
+def formatMoney(money: str) -> int:
+    temp = money.strip('$')
+    temp = temp.replace(',', '')
+    if temp != '':
+        return int(temp)
+    return 0
+
+def formatInterestRate(interest: str) -> float:
+    if interest != '':
+        return float(interest)
+    return 0.0
 
 def csvToJson(csvPath: str, jsonPath: str) -> None:
     """
@@ -15,41 +26,46 @@ def csvToJson(csvPath: str, jsonPath: str) -> None:
         csvReader = csv.reader(csvf, delimiter=',')
 
         for id, row in enumerate(csvReader):
+            if id == 0:
+                continue
             idk = {
-                "Name": row[0],
-                "SanFranciscoCounty": row[1],
-                "AlamedaCounty": row[2],
-                "SanMateoCounty": row[3],
-                "ContraCostaCounty": row[4],
-                "SantaClaraCounty": row[5],
-                "County": row[6],
-                "Category": row[7],
-                "BlackOwned": row[8],
-                "LGBTQ": row[9],
-                "Women": row[10],
-                "WhoApplies": row[11],
-                "100OrFewerEmployees": row[12],
-                "500OrFewerEmployees": row[13],
-                "750OrFewerEmployees": row[14],
-                "750OrMore": row[15],
-                "TypeOfRelief": row[16],
-                "AwardType": row[17],
-                "AwardAmountSpecified": row[18],
-                "MaxAwardAmount": row[19],
-                "InterestRateApplicable": row[20],
-                "InterestRate": row[21],
-                "TypeOfSupport": row[22],
-                "PublicOrPrivate": row[23],
-                "TypeEntityOfferingSupport": row[24],
-                "NameOfEntity": row[25],
-                "IsThereADeadline": row[26],
-                "Deadline": row[27],
-                "English": row[28],
-                "Spanish": row[29],
-                "Chinese": row[30],
-                "Website": row[31],
-                "OtherDetails": row[32],
-                "DateAdded": row[33],
+                "name": row[0],
+                "sfCounty": row[1],
+                "alamedaCounty": row[2],
+                "sanMateoCounty": row[3],
+                "contraCostaCounty": row[4],
+                "santaClaraCounty": row[5],
+                "county": row[6],
+                "category": row[7],
+                "blackOwned": row[8],
+                "lgbtq": row[9],
+                "womenOwned": row[10],
+                "nonProfit": row[11],
+                "lte100": row[12],
+                "lte500": row[13],
+                "lte750": row[14],
+                "gt750": row[15],
+                "reliefType": row[16],
+                "awardType": row[17],
+                "awardAmountSpecified": row[18],
+                "maxAwardAmount": formatMoney(row[19]),
+                "interestRateApplicable": row[20],
+                "interestRate": row[21],
+                "supportType": row[22],
+                "sectorType": row[23],
+                "supportedEntity": row[24],
+                "entityName": row[25],
+                "deadlineApplicable": row[26],
+                "deadline": row[27],
+                "additionalStage": row[28],
+                "english": row[29],
+                "spanish": row[30],
+                "chinese": row[31],
+                "websiteUrl": row[32],
+                "description": row[33],
+                "dateAdded": row[34],
+                "expired": row[39],
+                "archived": row[40],
                 "id": id,
             }
             data['results'].append(idk)
