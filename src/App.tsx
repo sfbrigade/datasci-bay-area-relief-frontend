@@ -7,13 +7,16 @@ import Home from "./components/home/Home";
 import Header from "./components/Header";
 import Results from "./components/results/Results";
 import Donate from "./components/donate/Donate";
-import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import Search from "./components/Search";
+import {ThemeProvider, StyledEngineProvider} from "@mui/material/styles";
 import {theme} from "./theme";
 import {getResults} from "./api/getResults";
-import {applyFilters, applyFilterChanges} from "./components/results/filterHelpers";
+import {
+  applyFilters,
+  applyFilterChanges,
+} from "./components/results/filterHelpers";
 import {CurrentFilters, GlobalStateContextType, Result} from "./types";
 import {setValues} from "./context/globalStates";
-
 
 const history = createBrowserHistory();
 
@@ -25,15 +28,16 @@ const App = () => {
 
   const handleClearFilters = () => setCurrentFilters({});
 
-  const handleFilterChange = (group: keyof CurrentFilters) => (event: ChangeEvent<HTMLInputElement>) => {
-    applyFilterChanges(
-      event.target.checked,
-      event.target.name,
-      group,
-      currentFilters,
-      setCurrentFilters
-    );
-  };
+  const handleFilterChange =
+    (group: keyof CurrentFilters) => (event: ChangeEvent<HTMLInputElement>) => {
+      applyFilterChanges(
+        event.target.checked,
+        event.target.name,
+        group,
+        currentFilters,
+        setCurrentFilters
+      );
+    };
 
   useMemo(
     () => setFilteredResults(applyFilters(data, currentFilters)),
@@ -50,13 +54,12 @@ const App = () => {
     initialData: data,
     filteredResults: filteredResults,
     setFilteredResults: setFilteredResults,
-    handleClearFilters: handleClearFilters
+    handleClearFilters: handleClearFilters,
   } as GlobalStateContextType;
   setValues(definedStateValues);
 
   useEffect(() => {
-    getResults()
-      .then(setData);
+    getResults().then(setData);
   }, []);
 
   return (
@@ -64,11 +67,12 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <div className="App">
           <Router history={history}>
-            <Header/>
+            <Header />
             <Switch>
-              <Route exact path="/" component={Home}/>
-              <Route exact path="/results" component={Results}/>
-              <Route exact path="/donate" component={Donate}/>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/results" component={Results} />
+              <Route exact path="/donate" component={Donate} />
+              <Route exact path="/search" component={Search} />
             </Switch>
           </Router>
         </div>
