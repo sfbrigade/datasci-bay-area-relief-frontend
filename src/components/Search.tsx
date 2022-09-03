@@ -17,6 +17,8 @@ const searchClient = algoliasearch(
   "LI2F5EP7NE",
   "26ab6944e75f2cdbca51e0dbf46a133b"
 );
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Hit({hit}: {hit: any}): JSX.Element {
   return (
     <article>
@@ -47,6 +49,8 @@ const Search: React.FC = () => {
                 <RefinementList attribute="500 or fewer employees" />
                 <h3>Black Owned</h3>
                 <RefinementList attribute="Black Owned" />
+                <h3>San Francisco County</h3>
+                <RefinementList attribute="San Francisco County" />
               </div>
             </Grid>
             <Grid item xs={8}>
