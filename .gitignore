@@ -30,3 +30,4 @@ yarn-error.log*
 /scripts/__pycache__/
 /scripts/bar.egg-info/
 /scripts/venv/
+/scripts/seed/

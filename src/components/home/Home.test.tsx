@@ -121,7 +121,7 @@ describe("Home", () => {
       expect(screen.getByAltText("GitHub Logo")).toBeVisible();
       expect(screen.getByAltText("GitHub Logo").closest("a")).toHaveAttribute(
           "href",
-          "https://github.com/"
+          "https://github.com/sfbrigade/datasci-bay-area-relief-frontend"
       );
 
       expect(screen.getByAltText("React Logo")).toBeVisible();

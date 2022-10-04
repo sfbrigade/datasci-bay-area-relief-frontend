@@ -108,7 +108,7 @@ const ThankYou: React.FC = () => {
             <a href="https://www.codeforsanfrancisco.org/">
               <CodeForSFLogoImg alt="Code for SF Logo" src={CodeForSFLogo} />
             </a>
-            <a href="https://github.com/">
+            <a href="https://github.com/sfbrigade/datasci-bay-area-relief-frontend">
               <GitHubLogoImg alt="GitHub Logo" src={GitHubLogo} />
             </a>
             <a href="https://reactjs.org/">
