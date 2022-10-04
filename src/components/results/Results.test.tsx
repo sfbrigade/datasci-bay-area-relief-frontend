@@ -265,9 +265,9 @@ describe("Results", () => {
             getByText(formatAwardAmount(currentResult.maxAwardAmount))
           ).toBeVisible();
 
-          expect(
-            getByText(formatReliefType(currentResult.reliefType))
-          ).toBeVisible();
+          // expect(
+          //   getByText(formatReliefType(currentResult.reliefType))
+          // ).toBeVisible();
 
           if (currentResult.websiteUrl === "None") {
             expect(queryByText("Apply")).toBeNull();

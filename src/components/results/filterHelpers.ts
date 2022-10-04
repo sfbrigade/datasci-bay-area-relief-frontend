@@ -105,14 +105,14 @@ export const filterGroups: FilterGroup[] = [
       {name: "doesNotHaveInterest", label: "No"}
     ]
   },
-  {
-    groupName: "reliefType",
-    groupLabel: "Relief Type",
-    filters: [
-      {name: "covid19", label: "COVID-19"},
-      {name: "protestDamage", label: "Protest damage"}
-    ]
-  },
+  // {
+  //   groupName: "reliefType",
+  //   groupLabel: "Relief Type",
+  //   filters: [
+  //     {name: "covid19", label: "COVID-19"},
+  //     {name: "protestDamage", label: "Protest damage"}
+  //   ]
+  // },
   {
     groupName: "category",
     groupLabel: "Category",

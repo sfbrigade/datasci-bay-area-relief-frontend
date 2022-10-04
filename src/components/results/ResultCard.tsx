@@ -60,7 +60,6 @@ const ResultCard: React.FC<Result> = ({
       </SupportTypeContainer>
       <StyledAwardAmount>{formatAwardAmount(maxAwardAmount)}</StyledAwardAmount>
       <StyledName>{name}</StyledName>
-      <StyledReliefType>{formatReliefType(reliefType)}</StyledReliefType>
       <CardBottom>
         {websiteUrl !== "None" && (
           <Button color="secondary" onClick={() => onApply(websiteUrl)}>

@@ -11,7 +11,7 @@ export const StyledCard = styled(Card)`
   background: #ffffff;
   border-radius: 4px;
   width: 300px;
-  height: 172px;
+  height: 150px;
   margin: 1.5em;
 
   @media (min-width: 752px) {
